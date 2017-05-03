@@ -1,0 +1,6 @@
+framework module Pods_flyve_mdm_ios {
+  umbrella header "Pods-flyve-mdm-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}
