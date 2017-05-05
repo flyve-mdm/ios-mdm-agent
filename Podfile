@@ -8,6 +8,7 @@ target 'flyve-mdm-ios' do
   # Pods for flyve-mdm-ios
 
   pod 'CocoaMQTT'
+  pod 'Alamofire', '~> 4.4'
 
   target 'flyve-mdm-iosTests' do
     inherit! :search_paths
