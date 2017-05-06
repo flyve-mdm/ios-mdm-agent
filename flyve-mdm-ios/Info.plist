@@ -19,6 +19,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.flyve-mdm.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>flyve</string>
