@@ -8,8 +8,7 @@ target 'flyve-mdm-ios' do
   # Pods for flyve-mdm-ios
 
   pod 'Alamofire', '~> 4.4'
-  pod 'Moscapsule', :git => 'https://github.com/flightonary/Moscapsule.git'
-  pod 'OpenSSL-Universal'
+  pod 'CocoaMQTT'
 
   target 'flyve-mdm-iosTests' do
     inherit! :search_paths

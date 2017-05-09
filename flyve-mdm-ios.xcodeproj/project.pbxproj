@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */; };
+		0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB0491EC20D590018E2EF /* HttpRequest.swift */; };
+		0ABBB04D1EC22BE10018E2EF /* String+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */; };
 		0AD842781EBA5BF70093AC74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842771EBA5BF70093AC74 /* AppDelegate.swift */; };
 		0AD8427F1EBA5BF70093AC74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */; };
 		0AD8428D1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */; };
@@ -36,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlyveRouter.swift; sourceTree = "<group>"; };
+		0ABBB0491EC20D590018E2EF /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helper.swift"; sourceTree = "<group>"; };
 		0AD842741EBA5BF70093AC74 /* flyve-mdm-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "flyve-mdm-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD842771EBA5BF70093AC74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,10 +116,13 @@
 		0AD842761EBA5BF70093AC74 /* flyve-mdm-ios */ = {
 			isa = PBXGroup;
 			children = (
-				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
+				0ABBB0491EC20D590018E2EF /* HttpRequest.swift */,
+				0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */,
 				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
+				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
 				0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
+				0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */,
 			);
 			path = "flyve-mdm-ios";
 			sourceTree = "<group>";
@@ -441,8 +450,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */,
+				0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */,
 				0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */,
 				0AD842781EBA5BF70093AC74 /* AppDelegate.swift in Sources */,
+				0ABBB04D1EC22BE10018E2EF /* String+Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,10 +35,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        var invitation = [String: AnyObject]()
+        
+        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoiY3VjaDNmcW9taDBjN2NzZ2lpeHdpdTVhN2oyMTZ2anhzcDN3ZzZjaSIsImludml0YXRpb25fdG9rZW4iOiJhZGU5NTg3Yjc2MmMzOTMyOGJlMDU0MGMzYjhhMGIwOGFiMGViYWFiMDQ1ZmE2NWUwNTA0NDU0ZDc0MTlhNzc2In0=")
+        
+        guard let query = url?.query else {
+            
+            loadMainView(userToken: "", invitationToken: "")
+            return true
+        }
+        
+        if let data = query.base64Decoded()?.data(using: .utf8) {
+            do {
+                invitation =  try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        guard let url_invitation: String = invitation["url"] as? String, let user_token: String = invitation["user_token"] as? String, let invitation_token: String = invitation["invitation_token"] as? String else {
+            
+            loadMainView(userToken: "", invitationToken: "")
+            return true
+        }
+        
+        baseURL = url_invitation
+        
+        
+        loadMainView(userToken: user_token, invitationToken: invitation_token)
+        
+        return true
+    }
+    
+    func loadMainView(userToken: String, invitationToken: String) {
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        window?.rootViewController = ViewController()
+        window?.rootViewController = ViewController(userToken: userToken, invitationToken: invitationToken)
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        
         
         return true
     }
