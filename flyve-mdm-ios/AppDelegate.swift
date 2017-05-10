@@ -35,11 +35,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        loadMainView(userToken: "", invitationToken: "")
+        
+        return true
+    }
+
+    func loadMainView(userToken: String, invitationToken: String) {
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        window?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: userToken, invitationToken: invitationToken))
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
         var invitation = [String: AnyObject]()
         
-        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoiY3VjaDNmcW9taDBjN2NzZ2lpeHdpdTVhN2oyMTZ2anhzcDN3ZzZjaSIsImludml0YXRpb25fdG9rZW4iOiJhZGU5NTg3Yjc2MmMzOTMyOGJlMDU0MGMzYjhhMGIwOGFiMGViYWFiMDQ1ZmE2NWUwNTA0NDU0ZDc0MTlhNzc2In0=")
+//        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoieXVqOWVzOGE5MjVrNm04MnI1ZXpvMXRqdzN6ZjFxZTl4djJseWtuMiIsImludml0YXRpb25fdG9rZW4iOiI2Mjk1NWQyYzEzOTk2NDM1ZGIwMjYyNzBiNWQyMzUxNzNiZTY3NWQ3MTJlMDg4MmMyMmU4MjEzNDM3ZGQ1NDQ4In0=")
         
-        guard let query = url?.query else {
+        guard let query = url.query else {
             
             loadMainView(userToken: "", invitationToken: "")
             return true
@@ -58,26 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             loadMainView(userToken: "", invitationToken: "")
             return true
         }
-        
+
         baseURL = url_invitation
-        
-        
+
         loadMainView(userToken: user_token, invitationToken: invitation_token)
-        
-        return true
-    }
-    
-    func loadMainView(userToken: String, invitationToken: String) {
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        
-        window?.rootViewController = ViewController(userToken: userToken, invitationToken: invitationToken)
-    }
-    
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        
-        
         
         return true
     }

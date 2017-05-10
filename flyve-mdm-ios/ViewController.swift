@@ -36,8 +36,9 @@ class ViewController: UIViewController {
     
     var userToken: String?
     var invitationToken: String?
+    var topic:String?
     
-    init(userToken: String, invitationToken: String) {
+    init(userToken: String, invitationToken: String?) {
         self.userToken = userToken
         self.invitationToken = invitationToken
         
@@ -51,15 +52,113 @@ class ViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        if let _userToken = self.userToken {
+        let notificationData = NotificationCenter.default
+        notificationData.addObserver(self, selector: #selector(self.sendDataEnroll), name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil)
+        
+        if let _userToken = self.userToken, !self.userToken!.isEmpty {
+            
+            self.setupViews()
             
             self.httpRequest = HttpRequest()
             self.httpRequest?.requestInitSession(userToken: _userToken)
             self.httpRequest?.delegate = self
+            
+            self.messageLabel.text = "Request init session..."
+            self.loadingIndicatorView.startAnimating()
+            
+        } else {
+            
+            self.setupViewsEmpty()
+            
         }
+    }
+    
+    func setupViews() {
+        
+        self.view.backgroundColor = .white
+        
+        self.view.addSubview(self.messageLabel)
+        self.view.addSubview(self.logoImageView)
+        self.view.addSubview(self.loadingIndicatorView)
+        
+        self.addConstraints()
+    }
+    
+    func addConstraints() {
+        
+        
+        self.logoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.logoImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        
+        self.messageLabel.bottomAnchor.constraint(equalTo: self.logoImageView.topAnchor, constant: -16).isActive = true
+        self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
+        self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
+        
+        self.loadingIndicatorView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.loadingIndicatorView.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 16).isActive = true
+        
+    }
+    
+    func setupViewsEmpty() {
+        
+        self.view.backgroundColor = .white
+        
+        self.messageLabel.text = "FLYVE MDM\n\nOPEN SOURCE\nMOBILE DEVICE MANAGEMENT SOLUTION\n\nFor more information visit\nhttps://flyve-mdm.com/"
+        
+        self.view.addSubview(self.messageLabel)
+        self.view.addSubview(self.logoImageView)
+        
+        self.addConstraintsEmpty()
         
         
     }
+
+    func addConstraintsEmpty() {
+        
+        self.logoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.logoImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        
+        self.messageLabel.bottomAnchor.constraint(equalTo: self.logoImageView.topAnchor, constant: -16).isActive = true
+        self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
+        self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
+        
+    }
+    
+    let logoImageView: UIImageView = {
+    
+        let imageView = UIImageView(image: UIImage(named: "icon"))
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
+    let messageLabel: UILabel = {
+        
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.sizeToFit()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.textColor = .gray
+        
+        return label
+    }()
+    
+    let loadingIndicatorView: UIActivityIndicatorView = {
+        
+        let loading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.hidesWhenStopped = true
+        
+        return loading
+    }()
 }
 
 extension ViewController: HttpRequestDelegate {
@@ -71,12 +170,15 @@ extension ViewController: HttpRequestDelegate {
             sessionToken = session_token
             
             self.httpRequest?.requestGetFullSession()
+            
+            self.messageLabel.text = "Request full session..."
         }
     }
     
     func errorInitSession(error: [String: AnyObject]) {
         
-        print(error["message"] as? String ?? "")
+        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.loadingIndicatorView.stopAnimating()
     }
     
     func responseGetFullSession(data: [String: AnyObject]) {
@@ -86,52 +188,64 @@ extension ViewController: HttpRequestDelegate {
             if profiles_id == guest_profiles_id {
                 
                 self.httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
+                
+                self.messageLabel.text = "Request change active profile..."
             }
+        } else {
+            
+            self.messageLabel.text = "Error: The device needs to change its profile"
         }
     }
     
     func errorGetFullSession(error: [String: AnyObject]) {
         
-        print(error["message"] as? String ?? "")
+        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.loadingIndicatorView.stopAnimating()
     }
     
     func responseChangeActiveProfile() {
         
+        self.present(EnrollFormController(), animated: true, completion: nil)
+    }
+    
+    func sendDataEnroll(notification:NSNotification) {
+        
         var jsonDictionary = [String: AnyObject]()
         var inputDictionary = [String: String]()
-        
-        inputDictionary["_email"] = "hector@apps42.mobi"
+
+        inputDictionary["_email"] = notification.userInfo?["_email"] as? String ?? ""
         inputDictionary["_invitation_token"] = self.invitationToken
-        inputDictionary["_serial"] = "0123456ATDJ-045"
+        inputDictionary["_serial"] = String(ProcessInfo().processIdentifier)
         inputDictionary["csr"] = ""
-        inputDictionary["firstname"] = "Hector"
-        inputDictionary["lastname"] = "Rondon"
+        inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
+        inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
         inputDictionary["version"] = "0.99.0"
         
         jsonDictionary["input"] = inputDictionary as AnyObject
-        
-        
+
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
             // here "jsonData" is the dictionary encoded in JSON data
-            
+
             let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
             // here "decoded" is of type `Any`, decoded from JSON data
-            
+
             // you can now cast it with the right type
             if let dictFromJSON = decoded as? [String : AnyObject] {
                 // use dictFromJSON
-                
+
                 self.httpRequest?.requestPluginFlyvemdmAgent(parameters: dictFromJSON)
             }
         } catch {
             debugPrint(error.localizedDescription)
+            self.loadingIndicatorView.stopAnimating()
         }
     }
     
     func errorChangeActiveProfile(error: [String: AnyObject]) {
         
-        print(error["message"] as? String ?? "")
+        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.loadingIndicatorView.stopAnimating()
     }
     
     func responsePluginFlyvemdmAgent(data: [String: AnyObject]) {
@@ -140,39 +254,45 @@ extension ViewController: HttpRequestDelegate {
             
             self.httpRequest?.requestGetPluginFlyvemdmAgent(agentID: "\(id)")
         }
-
     }
     
     func errorPluginFlyvemdmAgent(error: [String: AnyObject]) {
         
-        print(error["message"] as? String ?? "")
+        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
         
-        if let msg = error["message"] as? String {
-            
-            if msg == "[\"ERROR_GLPI_ADD\",\"Invitation is not pending\"]" {
-                
-                self.httpRequest?.requestGetPluginFlyvemdmAgent(agentID: "38")
-            }
-        }
-
+        self.loadingIndicatorView.stopAnimating()
+        
+//        if let msg = error["message"] as? String {
+//            
+//            self.messageLabel.text = "Error: The device needs to change its profile"
+//            
+//            if msg == "[\"ERROR_GLPI_ADD\",\"Invitation is not pending\"]" {
+//                
+//                self.messageLabel.text = "Error: The device needs to change its profile"
+//                self.httpRequest?.requestGetPluginFlyvemdmAgent(agentID: "38")
+//            }
+//        }
     }
     
     func responseGetPluginFlyvemdmAgent(data: [String: AnyObject]) {
-
-        self.connectServer()
+        
+        self.topic = data["topic"] as? String ?? ""
+        
+        self.connectServer(host: data["broker"] as? String ?? "", port: data["broker"] as? UInt16 ?? 0)
     }
     
     func errorGetPluginFlyvemdmAgent(error: [String: AnyObject]) {
         
-        print(error["message"] as? String ?? "")
+        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.loadingIndicatorView.stopAnimating()
     }
 }
 
 extension ViewController: CocoaMQTTDelegate {
     
-    func connectServer() {
+    func connectServer(host: String, port: UInt16) {
         
-        self.mqttSetting(host: "demo.flyve.org", port: 1883, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
+        self.mqttSetting(host: host, port: port, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
         
         self.mqtt!.connect()
     }
@@ -180,9 +300,9 @@ extension ViewController: CocoaMQTTDelegate {
     func mqttSetting(host: String, port: UInt16, username: String, password: String) {
         
         let clientID = String(ProcessInfo().processIdentifier)
-        mqtt = CocoaMQTT(clientID: clientID, host: "demo.flyve.org", port: 1883)
-        mqtt!.username = "rafa"
-        mqtt!.password = "azlknvjkfbsdklfdsgfd"
+        mqtt = CocoaMQTT(clientID: clientID, host: "demo.flyve.org", port: port)
+        mqtt!.username = username
+        mqtt!.password = password
         mqtt!.willMessage = CocoaMQTTWill(topic: "/offline", message: "offline")
         mqtt!.keepAlive = 60
         mqtt!.delegate = self
@@ -190,19 +310,18 @@ extension ViewController: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
         print("didConnect \(host):\(port)")
+        self.messageLabel.text = "Connect \(host):\(port)"
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         print("didConnectAck: \(ack)，rawValue: \(ack.rawValue)")
         
         if ack == .accept {
-            mqtt.subscribe("/test", qos: CocoaMQTTQOS.qos0)
+            mqtt.subscribe(self.topic!, qos: CocoaMQTTQOS.qos0)
             
-//            let chatViewController = storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController
-//            chatViewController?.mqtt = mqtt
-//            navigationController!.pushViewController(chatViewController!, animated: true)
+            self.messageLabel.text = "Subscribed to topic \(String(describing: self.topic))"
+            self.loadingIndicatorView.stopAnimating()
         }
-        
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
@@ -215,9 +334,7 @@ extension ViewController: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
         print("didReceivedMessage: \(String(describing: message.string)) with id \(id)")
-        
-//        let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + animal!)
-//        NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
+
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
