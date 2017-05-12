@@ -35,24 +35,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        loadMainView(userToken: "", invitationToken: "")
+        var mdmAgentData = [String: AnyObject]()
         
+        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
+            
+            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+            
+            loadMainView(userToken: "", invitationToken: "", mdmAgent: mdmAgentData)
+        
+        } else {
+            loadMainView(userToken: "", invitationToken: "")
+        }
+    
         return true
     }
 
-    func loadMainView(userToken: String, invitationToken: String) {
+    func loadMainView(userToken: String, invitationToken: String, mdmAgent: [String: Any] = [String: Any]()) {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        window?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: userToken, invitationToken: invitationToken))
+        if mdmAgent.count > 0 {
+            window?.rootViewController = UINavigationController(rootViewController: ViewController(mdmAgent: mdmAgent))
+        } else {
+            window?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: userToken, invitationToken: invitationToken))
+        }
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    
+        var mdmAgentData = [String: AnyObject]()
+        
+        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
+            
+            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+            
+            loadMainView(userToken: "", invitationToken: "", mdmAgent: mdmAgentData)
+            
+        }
         
         var invitation = [String: AnyObject]()
         
-//        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoieXVqOWVzOGE5MjVrNm04MnI1ZXpvMXRqdzN6ZjFxZTl4djJseWtuMiIsImludml0YXRpb25fdG9rZW4iOiI2Mjk1NWQyYzEzOTk2NDM1ZGIwMjYyNzBiNWQyMzUxNzNiZTY3NWQ3MTJlMDg4MmMyMmU4MjEzNDM3ZGQ1NDQ4In0=")
+//        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoieXF3ZHMzc2twbWQwYmpudzRicXk1dzF2a3RmbG0wNDIxZWZmd2xwaSIsImludml0YXRpb25fdG9rZW4iOiI3ZGI0NGNmM2YzMGJhYmIwZDIzMDRhMmRlZTY3YTEyY2IxZTAyYjZmOTI1ZWQwMzE3ZDI4NzcxZTM0NTgzZjUyIn0=")!
         
         guard let query = url.query else {
             
@@ -75,7 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         baseURL = url_invitation
-
+        
+        
+        
         loadMainView(userToken: user_token, invitationToken: invitation_token)
         
         return true

@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     var mqtt: CocoaMQTT?
     var httpRequest: HttpRequest?
     
+    var mdmAgent = [String: Any]()
     var userToken: String?
     var invitationToken: String?
     var topic:String?
@@ -41,6 +42,13 @@ class ViewController: UIViewController {
     init(userToken: String, invitationToken: String?) {
         self.userToken = userToken
         self.invitationToken = invitationToken
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(mdmAgent: [String: Any]) {
+        
+        self.mdmAgent = mdmAgent
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -68,8 +76,15 @@ class ViewController: UIViewController {
             
         } else {
             
-            self.setupViewsEmpty()
+            if self.mdmAgent.count > 0 {
+                
+                self.mqttSetting(host: "demo.flyve.org", port: 1883, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
+                
+                self.mqtt!.connect()
             
+            }
+            
+            self.setupViewsEmpty()
         }
     }
     
@@ -219,7 +234,10 @@ extension ViewController: HttpRequestDelegate {
         inputDictionary["csr"] = ""
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
-        inputDictionary["version"] = "0.99.0"
+        
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            inputDictionary["version"] = version
+        }
         
         jsonDictionary["input"] = inputDictionary as AnyObject
 
@@ -261,24 +279,23 @@ extension ViewController: HttpRequestDelegate {
         self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
         
         self.loadingIndicatorView.stopAnimating()
-        
-//        if let msg = error["message"] as? String {
-//            
-//            self.messageLabel.text = "Error: The device needs to change its profile"
-//            
-//            if msg == "[\"ERROR_GLPI_ADD\",\"Invitation is not pending\"]" {
-//                
-//                self.messageLabel.text = "Error: The device needs to change its profile"
-//                self.httpRequest?.requestGetPluginFlyvemdmAgent(agentID: "38")
-//            }
-//        }
     }
     
     func responseGetPluginFlyvemdmAgent(data: [String: AnyObject]) {
         
-        self.topic = data["topic"] as? String ?? ""
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: data)
+        UserDefaults.standard.set(encodedData, forKey: "mdmAgent")
         
-        self.connectServer(host: data["broker"] as? String ?? "", port: data["broker"] as? UInt16 ?? 0)
+        var mdmAgentData = [String: AnyObject]()
+        
+        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
+            
+            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+        }
+        
+        self.topic = mdmAgentData["topic"] as? String ?? ""
+        
+        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0)
     }
     
     func errorGetPluginFlyvemdmAgent(error: [String: AnyObject]) {
@@ -300,7 +317,7 @@ extension ViewController: CocoaMQTTDelegate {
     func mqttSetting(host: String, port: UInt16, username: String, password: String) {
         
         let clientID = String(ProcessInfo().processIdentifier)
-        mqtt = CocoaMQTT(clientID: clientID, host: "demo.flyve.org", port: port)
+        mqtt = CocoaMQTT(clientID: clientID, host: host, port: port)
         mqtt!.username = username
         mqtt!.password = password
         mqtt!.willMessage = CocoaMQTTWill(topic: "/offline", message: "offline")
@@ -318,9 +335,10 @@ extension ViewController: CocoaMQTTDelegate {
         
         if ack == .accept {
             mqtt.subscribe(self.topic!, qos: CocoaMQTTQOS.qos0)
-            
             self.messageLabel.text = "Subscribed to topic \(String(describing: self.topic))"
             self.loadingIndicatorView.stopAnimating()
+            
+            self.navigationController?.pushViewController(TopicLogController(), animated: true)
         }
     }
     
@@ -333,7 +351,11 @@ extension ViewController: CocoaMQTTDelegate {
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
-        print("didReceivedMessage: \(String(describing: message.string)) with id \(id)")
+        
+        let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
+        NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
+        
+        mqtt.publish(message.topic, withString: "!")
 
     }
     
