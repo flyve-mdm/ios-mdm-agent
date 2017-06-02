@@ -3,7 +3,7 @@ PODS:
   - CocoaAsyncSocket (7.5.1):
     - CocoaAsyncSocket/GCD (= 7.5.1)
   - CocoaAsyncSocket/GCD (7.5.1)
-  - CocoaMQTT (1.0.16):
+  - CocoaMQTT (1.0.17):
     - CocoaAsyncSocket (~> 7.5.1)
     - SwiftyTimer (~> 2.0.0)
   - SwiftyTimer (2.0.0)
@@ -15,9 +15,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
-  CocoaMQTT: c6a4df11a9a660842c5c39d741e9a6caa53444f8
+  CocoaMQTT: 6ea72a4f3075fed604c30e688586461a76da02f1
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
 PODFILE CHECKSUM: bea3f89ecc1f4db9a72abe2f2b9a23c693e03102
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
