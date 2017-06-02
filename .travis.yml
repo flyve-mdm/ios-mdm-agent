@@ -3,3 +3,5 @@ osx_image: xcode8.3
 xcode_workspace: flyve-mdm-ios.xcworkspace
 xcode_scheme: flyve-mdm-ios
 xcode_sdk: iphonesimulator10.3
+script:
+- xcodebuild -scheme flyve-mdm-ios -workspace flyve-mdm-ios.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=10.3' build test
