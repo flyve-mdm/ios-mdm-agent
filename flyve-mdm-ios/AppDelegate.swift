@@ -18,10 +18,10 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      03/05/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
- * @link      http://www.glpi-project.org/
+ * @link      https://.flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
