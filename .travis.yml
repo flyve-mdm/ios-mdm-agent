@@ -5,3 +5,5 @@ xcode_scheme: flyve-mdm-ios
 xcode_sdk: iphonesimulator10.3
 script:
 - xcodebuild -scheme flyve-mdm-ios -workspace flyve-mdm-ios.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=10.3' build test
+notifications:
+  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
