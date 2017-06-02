@@ -1,2 +1,3 @@
-# flyve-mdm-ios
+# Flyve MDM
+
 Flyve MDM iOS application 
