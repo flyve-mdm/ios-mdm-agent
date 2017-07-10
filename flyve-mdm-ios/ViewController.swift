@@ -93,6 +93,7 @@ class ViewController: UIViewController {
     func setupViews() {
         
         self.view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
         
         self.view.addSubview(self.messageLabel)
         self.view.addSubview(self.logoImageView)
@@ -102,17 +103,16 @@ class ViewController: UIViewController {
     }
     
     func addConstraints() {
-        
-        
+
+        self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
         self.logoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.logoImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        
-        self.messageLabel.bottomAnchor.constraint(equalTo: self.logoImageView.topAnchor, constant: -16).isActive = true
+
+        self.messageLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 16).isActive = true
         self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
         self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
-        
+
         self.loadingIndicatorView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.loadingIndicatorView.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 16).isActive = true
+        self.loadingIndicatorView.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 24).isActive = true
         
     }
     
@@ -120,7 +120,9 @@ class ViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
-        self.messageLabel.text = "FLYVE MDM\n\nOPEN SOURCE\nMOBILE DEVICE MANAGEMENT SOLUTION\n\nFor more information visit\nhttps://flyve-mdm.com/"
+        self.navigationController?.isNavigationBarHidden = true
+        
+        self.messageLabel.text = "FLYVE MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console\n\n\n\nhttp://flyve-mdm.com"
         
         self.view.addSubview(self.messageLabel)
         self.view.addSubview(self.logoImageView)
@@ -132,10 +134,10 @@ class ViewController: UIViewController {
     
     func addConstraintsEmpty() {
         
+        self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
         self.logoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.logoImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
-        self.messageLabel.bottomAnchor.constraint(equalTo: self.logoImageView.topAnchor, constant: -16).isActive = true
+        self.messageLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 16).isActive = true
         self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
         self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
         
@@ -143,7 +145,7 @@ class ViewController: UIViewController {
     
     let logoImageView: UIImageView = {
         
-        let imageView = UIImageView(image: UIImage(named: "icon"))
+        let imageView = UIImageView(image: UIImage(named: "logo"))
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
