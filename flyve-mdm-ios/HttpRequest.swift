@@ -30,19 +30,19 @@ import Alamofire
 
 @objc protocol HttpRequestDelegate {
     @objc optional func responseInitSession(data: [String: AnyObject])
-    @objc optional func errorInitSession(error: [String: AnyObject])
+    @objc optional func errorInitSession(error: [String: String])
     
     @objc optional func responseGetFullSession(data: [String: AnyObject])
-    @objc optional func errorGetFullSession(error: [String: AnyObject])
+    @objc optional func errorGetFullSession(error: [String: String])
     
     @objc optional func responseChangeActiveProfile()
-    @objc optional func errorChangeActiveProfile(error: [String: AnyObject])
+    @objc optional func errorChangeActiveProfile(error: [String: String])
     
     @objc optional func responsePluginFlyvemdmAgent(data: [String: AnyObject])
-    @objc optional func errorPluginFlyvemdmAgent(error: [String: AnyObject])
+    @objc optional func errorPluginFlyvemdmAgent(error: [String: String])
     
     @objc optional func responseGetPluginFlyvemdmAgent(data: [String: AnyObject])
-    @objc optional func errorGetPluginFlyvemdmAgent(error: [String: AnyObject])
+    @objc optional func errorGetPluginFlyvemdmAgent(error: [String: String])
 }
 
 class HttpRequest: NSObject {
@@ -103,7 +103,7 @@ class HttpRequest: NSObject {
                         errorDescription = String(data: data, encoding: String.Encoding.utf8) ?? ""
                     }
                     
-                    self.delegate?.errorChangeActiveProfile!(error: ["error": response.error! as AnyObject, "message": errorDescription as AnyObject])
+                    self.delegate?.errorChangeActiveProfile!(error: ["error": response.error as? String ?? "", "message": errorDescription as String])
                 }
         }
         debugPrint(request)
@@ -147,14 +147,24 @@ class HttpRequest: NSObject {
         debugPrint(request)
     }
     
-    func handlerError(_ response: DataResponse<Any>) -> [String: AnyObject] {
+    func handlerError(_ response: DataResponse<Any>) -> [String: String] {
         
-        var errorDescription = String()
+        var errorObj = [String]()
+        var errorDict = [String: String]()
         
         if let data = response.data {
-            errorDescription = String(data: data, encoding: String.Encoding.utf8) ?? ""
+            
+            errorObj = try! JSONSerialization.jsonObject(with: data) as? [String] ?? [String]()
         }
         
-        return ["error": response.error! as AnyObject, "message": errorDescription as AnyObject]
+        if errorObj.count == 2 {
+            errorDict["error"] = errorObj[0]
+            errorDict["message"] = errorObj[1]
+        } else {
+            errorDict["error"] = ""
+            errorDict["message"] = ""
+        }
+        
+        return errorDict
     }
 }
