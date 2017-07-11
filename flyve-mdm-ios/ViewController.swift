@@ -199,7 +199,7 @@ class ViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Enroll device"
-        label.font = UIFont(name: "Roboto-Light", size: 36.0)
+        label.font = UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightLight)
         label.sizeToFit()
         label.numberOfLines = 0
         label.textAlignment = .center
