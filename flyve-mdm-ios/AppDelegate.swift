@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var invitation = [String: AnyObject]()
         
-        //        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoiYTZuZzRxdW1hdWtnenprZXJ1MTUycmttN24xcW5jaDZhZXZjbnRleCIsImludml0YXRpb25fdG9rZW4iOiI4MzIyMGIyYTE3OTRmNDlkMDI2OGQ2MDRiMzRjYjNlMTE2ZDA3N2UwNDM5NWYyOGJkYjIwMTI2Mjg5N2VmNGQxIn0=")!
+//        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoiYTZuZzRxdW1hdWtnenprZXJ1MTUycmttN24xcW5jaDZhZXZjbnRleCIsImludml0YXRpb25fdG9rZW4iOiI4MzIyMGIyYTE3OTRmNDlkMDI2OGQ2MDRiMzRjYjNlMTE2ZDA3N2UwNDM5NWYyOGJkYjIwMTI2Mjg5N2VmNGQxIn0=")!
         
         guard let query = url.query else {
             
@@ -99,9 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         baseURL = url_invitation
-        
-        
-        
+
         loadMainView(userToken: user_token, invitationToken: invitation_token)
         
         return true
