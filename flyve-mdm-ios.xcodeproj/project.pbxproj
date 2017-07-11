@@ -48,7 +48,7 @@
 		0ABBB04E1EC38CC60018E2EF /* EnrollFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrollFormController.swift; sourceTree = "<group>"; };
 		0AD842741EBA5BF70093AC74 /* flyve-mdm-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "flyve-mdm-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD842771EBA5BF70093AC74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "flyve-mdm-ios/Assets.xcassets"; sourceTree = "<group>"; };
 		0AD842831EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842881EBA5BF70093AC74 /* flyve-mdm-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "flyve-mdm-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flyve_mdm_iosTests.swift; sourceTree = "<group>"; };
@@ -98,6 +98,7 @@
 		0AD8426B1EBA5BF70093AC74 = {
 			isa = PBXGroup;
 			children = (
+				0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */,
 				0AD842761EBA5BF70093AC74 /* flyve-mdm-ios */,
 				0AD8428B1EBA5BF70093AC74 /* flyve-mdm-iosTests */,
 				0AD842961EBA5BF70093AC74 /* flyve-mdm-iosUITests */,
@@ -126,7 +127,6 @@
 				0ABBB04E1EC38CC60018E2EF /* EnrollFormController.swift */,
 				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
 				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
-				0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
 				0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */,
 			);
@@ -252,7 +252,7 @@
 					0AD842731EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = G3UM9C856M;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					0AD842871EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -597,12 +597,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = G3UM9C856M;
 				INFOPLIST_FILE = "flyve-mdm-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "29cf433f-f407-43ed-8b23-6e62f0d46ec7";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.teclib.flyve-mdm-ios";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -613,12 +616,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = G3UM9C856M;
 				INFOPLIST_FILE = "flyve-mdm-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "29cf433f-f407-43ed-8b23-6e62f0d46ec7";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.teclib.flyve-mdm-ios";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
