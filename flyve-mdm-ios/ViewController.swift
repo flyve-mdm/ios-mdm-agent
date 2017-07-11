@@ -29,6 +29,13 @@ import Foundation
 import UIKit
 import CocoaMQTT
 
+enum EnrollmentState {
+    case initial
+    case loading
+    case success
+    case fail
+}
+
 class ViewController: UIViewController {
     
     var mqtt: CocoaMQTT?
@@ -85,7 +92,7 @@ class ViewController: UIViewController {
     
     func setupViews() {
         
-        self.view.backgroundColor = UIColor.init(red: 239.0/255.0, green: 239.0/255.0, blue: 244.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor.background
         self.navigationController?.isNavigationBarHidden = true
         
         self.view.addSubview(self.messageLabel)
@@ -129,12 +136,14 @@ class ViewController: UIViewController {
         
         self.statusLabel.topAnchor.constraint(equalTo: self.enrollBotton.bottomAnchor, constant: 48).isActive = true
         self.statusLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        
+        self.statusLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
+        self.statusLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
+        self.statusLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8).isActive = true
     }
     
     func setupViewsEmpty() {
         
-        self.view.backgroundColor = UIColor.init(red: 239.0/255.0, green: 239.0/255.0, blue: 244.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor.background
         self.navigationController?.isNavigationBarHidden = true
         
         self.view.addSubview(self.logoImageView)
@@ -233,7 +242,7 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.clipsToBounds = true
         button.layer.cornerRadius = 45
-        button.backgroundColor = UIColor.init(red: 26/255, green: 138/255, blue: 133/255, alpha: 1.0)
+        button.backgroundColor = UIColor.main
         button.addTarget(self, action: #selector(self.enroll), for: .touchUpInside)
         
         return button
@@ -277,10 +286,43 @@ class ViewController: UIViewController {
         self.httpRequest?.requestInitSession(userToken: self.userToken!)
         self.httpRequest?.delegate = self
         
-        self.enrollBotton.backgroundColor = UIColor.init(red: 239/255, green: 62/255, blue: 54/255, alpha: 1)
-        self.playImageView.isHidden = true
-        self.loadingIndicatorView.startAnimating()
-        self.statusLabel.text = "PLEASE WAIT.."
+        self.enrollState(.loading)
+    }
+    
+    func enrollState(_ state: EnrollmentState) {
+        
+        switch state
+        {
+        case .initial:
+            self.titleLabel.text = "Enroll device"
+            self.enrollBotton.backgroundColor = UIColor.main
+            self.enrollBotton.isUserInteractionEnabled = true
+            self.playImageView.isHidden = false
+            self.loadingIndicatorView.stopAnimating()
+            self.statusLabel.text = ""
+            
+        case .loading:
+            self.enrollBotton.backgroundColor = UIColor.loading
+            self.enrollBotton.isUserInteractionEnabled = false
+            self.playImageView.isHidden = true
+            self.loadingIndicatorView.startAnimating()
+            self.statusLabel.text = "PLEASE WAIT.."
+            
+        case .success:
+            self.enrollBotton.backgroundColor = UIColor.main
+            self.enrollBotton.isUserInteractionEnabled = false
+            self.playImageView.isHidden = true
+            self.loadingIndicatorView.stopAnimating()
+            self.statusLabel.text = "SUCCESS"
+        
+        case .fail:
+            self.enrollBotton.backgroundColor = UIColor.fail
+            self.enrollBotton.isUserInteractionEnabled = false
+            self.playImageView.isHidden = true
+            self.loadingIndicatorView.stopAnimating()
+            self.statusLabel.text = ""
+            self.titleLabel.text = "Enrollment fail"
+        }
     }
 }
 
@@ -293,15 +335,17 @@ extension ViewController: HttpRequestDelegate {
             sessionToken = session_token
             
             self.httpRequest?.requestGetFullSession()
-            
-//            self.messageLabel.text = "Request full session..."
         }
     }
     
     func errorInitSession(error: [String: AnyObject]) {
         
-        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
-        self.loadingIndicatorView.stopAnimating()
+        print(error)
+        
+//        let arrError: [String] = error["message"] as? [String] ?? [String]()
+        
+        self.enrollState(.fail)
+        self.statusLabel.text = "\(error["message"] as? String ?? "")"
     }
     
     func responseGetFullSession(data: [String: AnyObject]) {
