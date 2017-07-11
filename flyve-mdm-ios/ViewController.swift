@@ -63,16 +63,9 @@ class ViewController: UIViewController {
         let notificationData = NotificationCenter.default
         notificationData.addObserver(self, selector: #selector(self.sendDataEnroll), name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil)
         
-        if let _userToken = self.userToken, !self.userToken!.isEmpty {
+        if let _ = self.userToken, !self.userToken!.isEmpty {
             
             self.setupViews()
-            
-            self.httpRequest = HttpRequest()
-            self.httpRequest?.requestInitSession(userToken: _userToken)
-            self.httpRequest?.delegate = self
-            
-            self.messageLabel.text = "Request init session..."
-            self.loadingIndicatorView.startAnimating()
             
         } else {
             
@@ -92,58 +85,82 @@ class ViewController: UIViewController {
     
     func setupViews() {
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.init(red: 239.0/255.0, green: 239.0/255.0, blue: 244.0/255.0, alpha: 1.0)
+        self.navigationController?.isNavigationBarHidden = true
         
         self.view.addSubview(self.messageLabel)
         self.view.addSubview(self.logoImageView)
-        self.view.addSubview(self.loadingIndicatorView)
+        self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.enrollBotton)
+        self.enrollBotton.addSubview(self.playImageView)
+        self.enrollBotton.addSubview(self.loadingIndicatorView)
+        self.view.addSubview(self.statusLabel)
+        
+//        self.playImageView.isHidden = true
+//        self.loadingIndicatorView.startAnimating()
         
         self.addConstraints()
     }
     
     func addConstraints() {
-        
-        
+
+        self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
         self.logoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.logoImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        
-        self.messageLabel.bottomAnchor.constraint(equalTo: self.logoImageView.topAnchor, constant: -16).isActive = true
+
+        self.messageLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 24).isActive = true
         self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
         self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
+
+        self.titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.titleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 24).isActive = true
         
-        self.loadingIndicatorView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.loadingIndicatorView.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 16).isActive = true
+        self.enrollBotton.widthAnchor.constraint(equalToConstant: 90.0).isActive = true
+        self.enrollBotton.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
+        self.enrollBotton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.enrollBotton.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 24).isActive = true
+        
+        self.playImageView.widthAnchor.constraint(equalToConstant: 50.0).isActive = true
+        self.playImageView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        self.playImageView.centerXAnchor.constraint(equalTo: self.enrollBotton.centerXAnchor).isActive = true
+        self.playImageView.centerYAnchor.constraint(equalTo: self.enrollBotton.centerYAnchor).isActive = true
+        
+        self.loadingIndicatorView.centerXAnchor.constraint(equalTo: self.enrollBotton.centerXAnchor).isActive = true
+        self.loadingIndicatorView.centerYAnchor.constraint(equalTo: self.enrollBotton.centerYAnchor).isActive = true
+        
+        self.statusLabel.topAnchor.constraint(equalTo: self.enrollBotton.bottomAnchor, constant: 48).isActive = true
+        self.statusLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
     }
     
     func setupViewsEmpty() {
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.init(red: 239.0/255.0, green: 239.0/255.0, blue: 244.0/255.0, alpha: 1.0)
+        self.navigationController?.isNavigationBarHidden = true
         
-        self.messageLabel.text = "FLYVE MDM\n\nOPEN SOURCE\nMOBILE DEVICE MANAGEMENT SOLUTION\n\nFor more information visit\nhttps://flyve-mdm.com/"
-        
-        self.view.addSubview(self.messageLabel)
         self.view.addSubview(self.logoImageView)
+        self.view.addSubview(self.messageLabel)
+        self.view.addSubview(self.urlBotton)
         
         self.addConstraintsEmpty()
-        
-        
     }
     
     func addConstraintsEmpty() {
         
+        self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
         self.logoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.logoImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
-        self.messageLabel.bottomAnchor.constraint(equalTo: self.logoImageView.topAnchor, constant: -16).isActive = true
+        self.messageLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 24).isActive = true
         self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
         self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
+        
+        self.urlBotton.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 48).isActive = true
+        self.urlBotton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
     }
     
     let logoImageView: UIImageView = {
         
-        let imageView = UIImageView(image: UIImage(named: "icon"))
+        let imageView = UIImageView(image: UIImage(named: "logo"))
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
@@ -153,6 +170,37 @@ class ViewController: UIViewController {
     }()
     
     let messageLabel: UILabel = {
+        
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "FLYVE MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console"
+        label.sizeToFit()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.textColor = .gray
+        
+        return label
+    }()
+    
+    let titleLabel: UILabel = {
+        
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Enroll device"
+        label.font = UIFont(name: "Roboto-Light", size: 36.0)
+        label.sizeToFit()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    let statusLabel: UILabel = {
         
         let label = UILabel()
         
@@ -167,15 +215,73 @@ class ViewController: UIViewController {
         return label
     }()
     
+    lazy var urlBotton: UIButton = {
+        
+        let button = UIButton(type: UIButtonType.system)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("http://flyve-mdm.com", for: .normal)
+        button.addTarget(self, action: #selector(self.openURL), for: .touchUpInside)
+
+        return button
+    }()
+    
+    lazy var enrollBotton: UIButton = {
+        
+        let button = UIButton(type: UIButtonType.custom)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 45
+        button.backgroundColor = UIColor.init(red: 26/255, green: 138/255, blue: 133/255, alpha: 1.0)
+        button.addTarget(self, action: #selector(self.enroll), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    let playImageView: UIImageView = {
+        
+        let imageView = UIImageView(image: UIImage(named: "play"))
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
     let loadingIndicatorView: UIActivityIndicatorView = {
         
-        let loading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        
+        let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+
         loading.translatesAutoresizingMaskIntoConstraints = false
         loading.hidesWhenStopped = true
         
         return loading
     }()
+    
+    func openURL() {
+        
+        guard let url = URL(string: "http://flyve-mdm.com") else { return }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    func enroll() {
+        
+        self.httpRequest = HttpRequest()
+        self.httpRequest?.requestInitSession(userToken: self.userToken!)
+        self.httpRequest?.delegate = self
+        
+        self.enrollBotton.backgroundColor = UIColor.init(red: 239/255, green: 62/255, blue: 54/255, alpha: 1)
+        self.playImageView.isHidden = true
+        self.loadingIndicatorView.startAnimating()
+        self.statusLabel.text = "PLEASE WAIT.."
+    }
 }
 
 extension ViewController: HttpRequestDelegate {
@@ -188,13 +294,13 @@ extension ViewController: HttpRequestDelegate {
             
             self.httpRequest?.requestGetFullSession()
             
-            self.messageLabel.text = "Request full session..."
+//            self.messageLabel.text = "Request full session..."
         }
     }
     
     func errorInitSession(error: [String: AnyObject]) {
         
-        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
         self.loadingIndicatorView.stopAnimating()
     }
     
@@ -208,19 +314,19 @@ extension ViewController: HttpRequestDelegate {
                 
                 self.httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
                 
-                self.messageLabel.text = "Request change active profile..."
+                self.statusLabel.text = "Request change active profile..."
             } else {
-                self.messageLabel.text = "Error: The device needs to change its profile"
+                self.statusLabel.text = "Error: The device needs to change its profile"
             }
         } else {
             
-            self.messageLabel.text = "Error: The device needs to change its profile"
+            self.statusLabel.text = "Error: The device needs to change its profile"
         }
     }
     
     func errorGetFullSession(error: [String: AnyObject]) {
         
-        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
         self.loadingIndicatorView.stopAnimating()
     }
     
@@ -268,7 +374,7 @@ extension ViewController: HttpRequestDelegate {
     
     func errorChangeActiveProfile(error: [String: AnyObject]) {
         
-        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
         self.loadingIndicatorView.stopAnimating()
     }
     
@@ -282,7 +388,7 @@ extension ViewController: HttpRequestDelegate {
     
     func errorPluginFlyvemdmAgent(error: [String: AnyObject]) {
         
-        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
         
         self.loadingIndicatorView.stopAnimating()
     }
@@ -306,7 +412,7 @@ extension ViewController: HttpRequestDelegate {
     
     func errorGetPluginFlyvemdmAgent(error: [String: AnyObject]) {
         
-        self.messageLabel.text = "Error: \(error["message"] as? String ?? "")"
+        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
         self.loadingIndicatorView.stopAnimating()
     }
 }
