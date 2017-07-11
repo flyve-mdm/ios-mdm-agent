@@ -122,14 +122,13 @@ class ViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         
-        self.messageLabel.text = "FLYVE MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console\n\n\n\nhttp://flyve-mdm.com"
+        self.messageLabel.text = "FLYVE MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console"
         
-        self.view.addSubview(self.messageLabel)
         self.view.addSubview(self.logoImageView)
+        self.view.addSubview(self.messageLabel)
+        self.view.addSubview(self.urlBotton)
         
         self.addConstraintsEmpty()
-        
-        
     }
     
     func addConstraintsEmpty() {
@@ -140,6 +139,9 @@ class ViewController: UIViewController {
         self.messageLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 24).isActive = true
         self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
         self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
+        
+        self.urlBotton.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 48).isActive = true
+        self.urlBotton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
     }
     
@@ -169,6 +171,17 @@ class ViewController: UIViewController {
         return label
     }()
     
+    lazy var urlBotton: UIButton = {
+        
+        let button = UIButton(type: UIButtonType.system)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("http://flyve-mdm.com", for: .normal)
+        button.addTarget(self, action: #selector(self.openURL), for: .touchUpInside)
+
+        return button
+    }()
+    
     let loadingIndicatorView: UIActivityIndicatorView = {
         
         let loading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -178,6 +191,17 @@ class ViewController: UIViewController {
         
         return loading
     }()
+    
+    func openURL() {
+        
+        guard let url = URL(string: "http://flyve-mdm.com") else { return }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
 }
 
 extension ViewController: HttpRequestDelegate {
