@@ -302,6 +302,7 @@ class ViewController: UIViewController {
             self.statusLabel.text = ""
             
         case .loading:
+            self.titleLabel.text = "Enroll device"
             self.enrollBotton.backgroundColor = UIColor.loading
             self.enrollBotton.isUserInteractionEnabled = false
             self.playImageView.isHidden = true
@@ -311,17 +312,18 @@ class ViewController: UIViewController {
         case .success:
             self.enrollBotton.backgroundColor = UIColor.main
             self.enrollBotton.isUserInteractionEnabled = false
+            self.playImageView.image = UIImage(named: "")
             self.playImageView.isHidden = true
             self.loadingIndicatorView.stopAnimating()
-            self.statusLabel.text = "SUCCESS"
+            self.statusLabel.text = "Success!"
         
         case .fail:
+            self.titleLabel.text = "Enrollment fail"
             self.enrollBotton.backgroundColor = UIColor.fail
             self.enrollBotton.isUserInteractionEnabled = false
             self.playImageView.isHidden = true
             self.loadingIndicatorView.stopAnimating()
             self.statusLabel.text = ""
-            self.titleLabel.text = "Enrollment fail"
         }
     }
 }
@@ -338,14 +340,10 @@ extension ViewController: HttpRequestDelegate {
         }
     }
     
-    func errorInitSession(error: [String: AnyObject]) {
-        
-        print(error)
-        
-//        let arrError: [String] = error["message"] as? [String] ?? [String]()
+    func errorInitSession(error: [String: String]) {
         
         self.enrollState(.fail)
-        self.statusLabel.text = "\(error["message"] as? String ?? "")"
+        self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
     func responseGetFullSession(data: [String: AnyObject]) {
@@ -368,10 +366,10 @@ extension ViewController: HttpRequestDelegate {
         }
     }
     
-    func errorGetFullSession(error: [String: AnyObject]) {
+    func errorGetFullSession(error: [String: String]) {
         
-        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
-        self.loadingIndicatorView.stopAnimating()
+        self.enrollState(.fail)
+        self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
     func responseChangeActiveProfile() {
@@ -416,10 +414,10 @@ extension ViewController: HttpRequestDelegate {
         }
     }
     
-    func errorChangeActiveProfile(error: [String: AnyObject]) {
+    func errorChangeActiveProfile(error: [String: String]) {
         
-        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
-        self.loadingIndicatorView.stopAnimating()
+        self.enrollState(.fail)
+        self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
     func responsePluginFlyvemdmAgent(data: [String: AnyObject]) {
@@ -430,11 +428,10 @@ extension ViewController: HttpRequestDelegate {
         }
     }
     
-    func errorPluginFlyvemdmAgent(error: [String: AnyObject]) {
+    func errorPluginFlyvemdmAgent(error: [String: String]) {
         
-        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
-        
-        self.loadingIndicatorView.stopAnimating()
+        self.enrollState(.fail)
+        self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
     func responseGetPluginFlyvemdmAgent(data: [String: AnyObject]) {
@@ -449,15 +446,17 @@ extension ViewController: HttpRequestDelegate {
             mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
         }
         
+        self.enrollState(.success)
+        
         self.topic = mdmAgentData["topic"] as? String ?? ""
         
         self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0)
     }
     
-    func errorGetPluginFlyvemdmAgent(error: [String: AnyObject]) {
+    func errorGetPluginFlyvemdmAgent(error: [String: String]) {
         
-        self.statusLabel.text = "Error: \(error["message"] as? String ?? "")"
-        self.loadingIndicatorView.stopAnimating()
+        self.enrollState(.fail)
+        self.statusLabel.text = "\(error["message"] ?? "")"
     }
 }
 
@@ -483,7 +482,7 @@ extension ViewController: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
         print("didConnect \(host):\(port)")
-        self.messageLabel.text = "Connect \(host):\(port)"
+        self.statusLabel.text = "Connect \(host):\(port)"
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
@@ -491,7 +490,7 @@ extension ViewController: CocoaMQTTDelegate {
         
         if ack == .accept {
             mqtt.subscribe("\(self.topic!)/#", qos: CocoaMQTTQOS.qos0)
-            self.messageLabel.text = "Subscribed to topic \(String(describing: self.topic))/#"
+            self.statusLabel.text = "Subscribed to topic \(String(describing: self.topic))/#"
             self.loadingIndicatorView.stopAnimating()
             
             self.navigationController?.pushViewController(TopicLogController(), animated: true)

@@ -76,9 +76,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var invitation = [String: AnyObject]()
         
-//        let url = URL(string: "flyve://register?eyJ1cmwiOiJodHRwczovL2RlbW8uZmx5dmUub3JnL2dscGkvYXBpcmVzdC5waHAiLCJ1c2VyX3Rva2VuIjoiYTZuZzRxdW1hdWtnenprZXJ1MTUycmttN24xcW5jaDZhZXZjbnRleCIsImludml0YXRpb25fdG9rZW4iOiI4MzIyMGIyYTE3OTRmNDlkMDI2OGQ2MDRiMzRjYjNlMTE2ZDA3N2UwNDM5NWYyOGJkYjIwMTI2Mjg5N2VmNGQxIn0=")!
+        let url = URL(string: "flyve://register?data=eyJ1cmwiOiJodHRwczovL2Rldi5mbHl2ZS5vcmcvZ2xwaS9hcGlyZXN0LnBocCIsInVzZXJfdG9rZW4iOiJlYXljMDkxejludXN3cGhmMmVzMGc0cWZnbmdmbDR3cXYxcmk4Mm96IiwiaW52aXRhdGlvbl90b2tlbiI6Ijk1ZThkMzM2OWM2NjJiMmM2MzNlZDNjYjk4OWIyNjdkNWI2MDRhZDg5YzQwZjU1NWJiZjljZjIzNjllYzQzZjIifQ==")!
         
-        guard let query = url.query else {
+        guard let urlEnroll = URLComponents(string: url.absoluteString) else {
+            loadMainView(userToken: "", invitationToken: "")
+            return true
+        }
+    
+        guard let query = urlEnroll.queryItems?.first(where: { $0.name == "data" })?.value else {
             
             loadMainView(userToken: "", invitationToken: "")
             return true
