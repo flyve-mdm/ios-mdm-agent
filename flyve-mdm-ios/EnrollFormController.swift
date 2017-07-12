@@ -41,8 +41,16 @@ class EnrollFormController: UIViewController {
     
     func setupViews() {
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .background
+
+        self.navigationController?.isNavigationBarHidden = false
         
+        let saveButton = UIBarButtonItem(title: "Done",
+                                         style: UIBarButtonItemStyle.plain,
+                                         target: self,
+                                         action: #selector(self.enroll))
+
+        self.navigationItem.rightBarButtonItem = saveButton
         self.view.addSubview(self.emailTextField)
         self.view.addSubview(self.firstNameTextField)
         self.view.addSubview(self.lastNameTextField)
