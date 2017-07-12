@@ -373,8 +373,8 @@ extension ViewController: HttpRequestDelegate {
     }
     
     func responseChangeActiveProfile() {
-        
-        self.present(EnrollFormController(), animated: true, completion: nil)
+
+        self.present(UINavigationController(rootViewController: EnrollFormController()), animated: true, completion: nil)
     }
     
     func sendDataEnroll(notification:NSNotification) {
