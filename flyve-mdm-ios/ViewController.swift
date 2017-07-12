@@ -126,8 +126,8 @@ class ViewController: UIViewController {
         self.enrollBotton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         self.enrollBotton.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 24).isActive = true
         
-        self.playImageView.widthAnchor.constraint(equalToConstant: 50.0).isActive = true
-        self.playImageView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        self.playImageView.widthAnchor.constraint(equalToConstant: 80.0).isActive = true
+        self.playImageView.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
         self.playImageView.centerXAnchor.constraint(equalTo: self.enrollBotton.centerXAnchor).isActive = true
         self.playImageView.centerYAnchor.constraint(equalTo: self.enrollBotton.centerYAnchor).isActive = true
         
