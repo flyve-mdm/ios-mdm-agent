@@ -49,7 +49,8 @@ class EnrollFormController: UIViewController {
                                          style: UIBarButtonItemStyle.plain,
                                          target: self,
                                          action: #selector(self.enroll))
-
+        
+        self.navigationItem.title = "Enrollment"
         self.navigationItem.rightBarButtonItem = saveButton
         self.view.addSubview(self.emailTextField)
         self.view.addSubview(self.firstNameTextField)
