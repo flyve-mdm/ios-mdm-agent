@@ -29,6 +29,8 @@ import UIKit
 
 class EnrollFormController: UIViewController {
     
+    let cellId = "cellIdEnroll"
+    
     override func loadView() {
         super.loadView()
         
@@ -79,6 +81,24 @@ class EnrollFormController: UIViewController {
         
         self.enrollButton.heightAnchor.constraint(equalToConstant: 50)
     }
+    
+    lazy var enrollTableView: UITableView = {
+        
+        let table = UITableView(frame: .zero, style: .plain)
+        
+        table.delegate = self
+        table.dataSource = self
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .white
+        table.tableFooterView = UIView()
+        table.rowHeight = UITableViewAutomaticDimension
+        table.estimatedRowHeight = 50
+        
+        table.register(UITableViewCell.self, forCellReuseIdentifier: self.cellId)
+        
+        return table
+        
+    }()
     
     let emailTextField: UITextField = {
         
@@ -149,5 +169,26 @@ class EnrollFormController: UIViewController {
     
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension EnrollFormController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
+    }
+}
+
+extension EnrollFormController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) 
+        
+        return cell
     }
 }
