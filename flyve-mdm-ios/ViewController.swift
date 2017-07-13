@@ -64,6 +64,10 @@ class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     override func loadView() {
         super.loadView()
         
@@ -103,9 +107,6 @@ class ViewController: UIViewController {
         self.enrollBotton.addSubview(self.loadingIndicatorView)
         self.view.addSubview(self.statusLabel)
         
-//        self.playImageView.isHidden = true
-//        self.loadingIndicatorView.startAnimating()
-        
         self.addConstraints()
     }
     
@@ -126,8 +127,8 @@ class ViewController: UIViewController {
         self.enrollBotton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         self.enrollBotton.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 24).isActive = true
         
-        self.playImageView.widthAnchor.constraint(equalToConstant: 50.0).isActive = true
-        self.playImageView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        self.playImageView.widthAnchor.constraint(equalToConstant: 80.0).isActive = true
+        self.playImageView.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
         self.playImageView.centerXAnchor.constraint(equalTo: self.enrollBotton.centerXAnchor).isActive = true
         self.playImageView.centerYAnchor.constraint(equalTo: self.enrollBotton.centerYAnchor).isActive = true
         
@@ -355,8 +356,7 @@ extension ViewController: HttpRequestDelegate {
             if profiles_id == guest_profiles_id {
                 
                 self.httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
-                
-                self.statusLabel.text = "Request change active profile..."
+
             } else {
                 self.statusLabel.text = "Error: The device needs to change its profile"
             }
@@ -373,8 +373,8 @@ extension ViewController: HttpRequestDelegate {
     }
     
     func responseChangeActiveProfile() {
-        
-        self.present(EnrollFormController(), animated: true, completion: nil)
+
+        self.present(UINavigationController(rootViewController: EnrollFormController()), animated: true, completion: nil)
     }
     
     func sendDataEnroll(notification:NSNotification) {
@@ -482,7 +482,6 @@ extension ViewController: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
         print("didConnect \(host):\(port)")
-        self.statusLabel.text = "Connect \(host):\(port)"
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
@@ -490,9 +489,8 @@ extension ViewController: CocoaMQTTDelegate {
         
         if ack == .accept {
             mqtt.subscribe("\(self.topic!)/#", qos: CocoaMQTTQOS.qos0)
-            self.statusLabel.text = "Subscribed to topic \(String(describing: self.topic))/#"
-            self.loadingIndicatorView.stopAnimating()
             
+            print("Subscribed to topic \(String(describing: self.topic))/#")
             self.navigationController?.pushViewController(TopicLogController(), animated: true)
         }
     }
