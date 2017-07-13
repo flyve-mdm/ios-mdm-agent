@@ -116,8 +116,6 @@ class EnrollFormController: UIViewController {
         
         let dataUser: [String: String] = ["_email": email, "firstname": first, "lastname": last]
         
-        setStorage(value: dataUser as AnyObject, key: "dataUser")
-        
         let notificationData = NotificationCenter.default
         
         notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: dataUser)

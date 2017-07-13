@@ -31,6 +31,8 @@ public func getStorage(key: String) -> AnyObject? {
     
     if let obj = UserDefaults.standard.object(forKey: key) {
         
+        print(NSKeyedUnarchiver.unarchiveObject(with: obj as! Data) as AnyObject)
+        
         return NSKeyedUnarchiver.unarchiveObject(with: obj as! Data) as AnyObject
         
     } else {

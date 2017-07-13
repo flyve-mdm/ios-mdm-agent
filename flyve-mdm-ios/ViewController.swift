@@ -399,6 +399,8 @@ extension ViewController: HttpRequestDelegate {
         
         jsonDictionary["input"] = inputDictionary as AnyObject
         
+        setStorage(value: inputDictionary as AnyObject, key: "dataUser")
+        
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
             // here "jsonData" is the dictionary encoded in JSON data
@@ -444,11 +446,11 @@ extension ViewController: HttpRequestDelegate {
         
         setStorage(value: data as AnyObject, key: "mdmAgent")
         
-        var mdmAgentData = [String: AnyObject]()
-        
-        if let dataAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {
-            mdmAgentData = dataAgentObject
-        }
+//        var mdmAgentData = [String: AnyObject]()
+//        
+//        if let dataAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {
+//            mdmAgentData = dataAgentObject
+//        }
         
         self.enrollState(.success)
         
@@ -456,9 +458,9 @@ extension ViewController: HttpRequestDelegate {
             self.goMainController()
         }
 
-        self.topic = mdmAgentData["topic"] as? String ?? ""
-        
-        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0, password: mdmAgentData["mqttpasswd"] as? String ?? "")
+//        self.topic = mdmAgentData["topic"] as? String ?? ""
+//        
+//        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0, password: mdmAgentData["mqttpasswd"] as? String ?? "")
     }
     
     func errorGetPluginFlyvemdmAgent(error: [String: String]) {
