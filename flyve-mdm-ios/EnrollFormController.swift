@@ -32,6 +32,7 @@ class EnrollFormController: UIViewController {
     var userInfo = ["firstName": "","lastName": "", "phone": "", "email": ""]
     
     let cellIdMain = "cellIdMain"
+    let cellIdTitle = "cellIdTitle"
     
     var countPhone = 0
     var countEmail = 0
@@ -87,6 +88,7 @@ class EnrollFormController: UIViewController {
         table.isScrollEnabled = false
         
         table.register(MainInfoCell.self, forCellReuseIdentifier: self.cellIdMain)
+        table.register(TitleInfoCell.self, forCellReuseIdentifier: self.cellIdTitle)
         
         return table
         
@@ -137,16 +139,60 @@ extension EnrollFormController: UITableViewDelegate {
 extension EnrollFormController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return countPhone
+        } else if section == 2 {
+            return 1
+        } else if section == 3 {
+            return countEmail
+        } else if section == 4 {
+            return 1
+        } else {
+            return 0
+        }
+        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdMain, for: indexPath) as! MainInfoCell
-        cell.firstNameTextField.tag = 0
-        cell.lastNameTextField.tag = 1
-        return cell
         
+        
+        if indexPath.row == 0 && indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdMain, for: indexPath) as! MainInfoCell
+            cell.firstNameTextField.tag = 0
+            cell.lastNameTextField.tag = 1
+            return cell
+            
+            
+        } else {
+            
+            if indexPath.section == 2 || indexPath.section == 4 {
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdTitle, for: indexPath) as! TitleInfoCell
+                
+                if indexPath.section == 2 {
+                    cell.titleLabel.text = "add phone"
+                    
+                } else {
+                    cell.titleLabel.text = "add email"
+                    
+                }
+                
+                return cell
+                
+            } else {
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdTitle, for: indexPath) as! TitleInfoCell
+                return cell
+            }
+        }
     }
 }
 
@@ -270,4 +316,68 @@ class MainInfoCell: UITableViewCell {
     func selectPhoto() {
         
     }
+}
+
+class TitleInfoCell: UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.contentView.backgroundColor = .clear
+        self.setupView()
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
+    func setupView() {
+        
+        backgroundColor = .white
+        
+        contentView.addSubview(self.titleLabel)
+        contentView.addSubview(self.lineView)
+        
+        
+        addConstraints()
+    }
+    
+    func addConstraints() {
+        
+        self.lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        self.lineView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
+        self.lineView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
+        
+        self.titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
+        self.titleLabel.bottomAnchor.constraint(equalTo: self.lineView.topAnchor, constant: -8).isActive = true
+        self.titleLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 8).isActive = true
+        self.titleLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -8).isActive = true
+    }
+    
+    let lineView: UIView = {
+        
+        let line = UIView()
+        
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .gray
+        
+        return line
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .gray
+        
+        return label
+    }()
 }
