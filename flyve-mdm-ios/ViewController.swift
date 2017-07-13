@@ -65,6 +65,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -82,11 +83,11 @@ class ViewController: UIViewController {
             
             if self.mdmAgent.count > 0 {
                 
-                self.topic = self.mdmAgent["topic"] as? String ?? ""
-                
-                self.mqttSetting(host: "demo.flyve.org", port: 1883, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
-                
-                self.mqtt!.connect()
+//                self.topic = self.mdmAgent["topic"] as? String ?? ""
+//                
+//                self.mqttSetting(host: "demo.flyve.org", port: 1883, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
+//                
+//                self.mqtt!.connect()
                 
             }
             
@@ -454,6 +455,8 @@ extension ViewController: HttpRequestDelegate {
         
         self.enrollState(.success)
         
+        goMainController()
+        
         self.topic = mdmAgentData["topic"] as? String ?? ""
         
         self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0, password: mdmAgentData["mqttpasswd"] as? String ?? "")
@@ -463,6 +466,27 @@ extension ViewController: HttpRequestDelegate {
         
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
+    }
+    
+    
+    func goMainController() {
+        
+        var window: UIWindow?
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        var mdmAgentData = [String: AnyObject]()
+        
+        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
+            
+            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+            
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.makeKeyAndVisible()
+            window?.rootViewController = UINavigationController(rootViewController: MainController(mdmAgent: mdmAgentData))
+            
+        }
     }
 }
 

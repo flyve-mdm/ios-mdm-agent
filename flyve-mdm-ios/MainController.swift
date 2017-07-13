@@ -58,6 +58,7 @@ class MainController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -109,6 +110,10 @@ class MainController: UIViewController {
         return table
         
     }()
+    
+    func goLogController() {
+        navigationController?.pushViewController(TopicLogController(), animated: true)
+    }
 }
 
 extension MainController: UITableViewDelegate {
@@ -119,7 +124,7 @@ extension MainController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return 4
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -136,6 +141,10 @@ extension MainController: UITableViewDataSource {
             
         } else if indexPath.row == 2 {
             cell.titleLabel.text = "agent resources".uppercased()
+            
+        } else if indexPath.row == 3 {
+            cell.titleLabel.text = "log report".uppercased()
+            cell.openBotton.addTarget(self, action: #selector(self.goLogController), for: .touchUpInside)
             
         }
 
