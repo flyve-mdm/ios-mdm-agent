@@ -76,8 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var invitation = [String: AnyObject]()
         
-        let url = URL(string: "flyve://register?data=eyJ1cmwiOiJodHRwczovL2Rldi5mbHl2ZS5vcmcvZ2xwaS9hcGlyZXN0LnBocCIsInVzZXJfdG9rZW4iOiJpYXA3Y3ZjNW5tOXJiMndoMDFqdm94NGt2ZDVxamF5NWx5djE5dzY2IiwiaW52aXRhdGlvbl90b2tlbiI6IjAwOGVlNTE3OTU4MGRlM2E2YzdkOTU2YjhmOGQwNjVlM2Q1NGQ2MzZlNmI1NWE0YzI5YzRkMjQwMWJiNzI5ZTEifQ==")!
-        
         guard let urlEnroll = URLComponents(string: url.absoluteString) else {
             loadMainView(userToken: "", invitationToken: "")
             return true
