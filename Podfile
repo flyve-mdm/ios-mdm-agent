@@ -7,7 +7,8 @@ target 'flyve-mdm-ios' do
 
   # Pods for flyve-mdm-ios
 
-  pod 'Alamofire', '~> 4.4'
+  pod 'Alamofire', '~> 4.5'
+  pod 'FlyveMDMInventory', '~> 1.2'
   pod 'CocoaMQTT'
 
   target 'flyve-mdm-iosTests' do

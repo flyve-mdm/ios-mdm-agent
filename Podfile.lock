@@ -1,23 +1,26 @@
 PODS:
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.0)
   - CocoaAsyncSocket (7.5.1):
     - CocoaAsyncSocket/GCD (= 7.5.1)
   - CocoaAsyncSocket/GCD (7.5.1)
-  - CocoaMQTT (1.0.17):
+  - CocoaMQTT (1.0.18):
     - CocoaAsyncSocket (~> 7.5.1)
     - SwiftyTimer (~> 2.0.0)
+  - FlyveMDMInventory (1.2.0)
   - SwiftyTimer (2.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.4)
+  - Alamofire (~> 4.5)
   - CocoaMQTT
+  - FlyveMDMInventory (~> 1.2)
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
-  CocoaMQTT: 6ea72a4f3075fed604c30e688586461a76da02f1
+  CocoaMQTT: 9ad6fe9c4dae8c8a3269a8dfc098f6576fb8306c
+  FlyveMDMInventory: d3a8e0391d8f2996d8aa9ab79ea03f211637aab7
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
-PODFILE CHECKSUM: bea3f89ecc1f4db9a72abe2f2b9a23c693e03102
+PODFILE CHECKSUM: 74f1efb546a0f7f6f4729ac2b1c67cc73433218e
 
 COCOAPODS: 1.2.1
