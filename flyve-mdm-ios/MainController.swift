@@ -18,11 +18,64 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      13/07/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+import UIKit
+
+class MainController: UIViewController {
+    
+    var mdmAgent = [String: Any]()
+    
+    init(mdmAgent: [String: Any]) {
+        
+        self.mdmAgent = mdmAgent
+        
+        print(self.mdmAgent)
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        super.loadView()
+        
+        setupViews()
+        addConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    func setupViews() {
+        
+        view.backgroundColor = .background
+        view.addSubview(logoImageView)
+
+    }
+    
+    func addConstraints() {
+        
+        logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 72).isActive = true
+        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    let logoImageView: UIImageView = {
+        
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+}
