@@ -30,6 +30,7 @@ import UIKit
 class MainController: UIViewController {
     
     var mdmAgent = [String: Any]()
+    let cellId = "cellId"
     
     init(mdmAgent: [String: Any]) {
         
@@ -78,4 +79,42 @@ class MainController: UIViewController {
         
         return imageView
     }()
+    
+    lazy var mainTableView: UITableView = {
+        
+        let table = UITableView(frame: .zero, style: .plain)
+        
+        table.delegate = self
+        table.dataSource = self
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .clear
+        table.separatorStyle = .none
+        table.tableFooterView = UIView()
+        table.rowHeight = UITableViewAutomaticDimension
+        table.estimatedRowHeight = 100
+        
+//        table.register(MainCell.self, forCellReuseIdentifier: self.cellId)
+        
+        return table
+        
+    }()
+}
+
+extension MainController: UITableViewDelegate {
+
+}
+
+extension MainController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath)
+
+        return cell
+    }
 }
