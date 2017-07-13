@@ -60,6 +60,7 @@ class MainController: UIViewController {
         
         view.backgroundColor = .background
         view.addSubview(logoImageView)
+        view.addSubview(mainTableView)
 
     }
     
@@ -67,6 +68,11 @@ class MainController: UIViewController {
         
         logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 72).isActive = true
         logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        mainTableView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48).isActive = true
+        mainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        mainTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        mainTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
     
     let logoImageView: UIImageView = {
@@ -93,7 +99,7 @@ class MainController: UIViewController {
         table.rowHeight = UITableViewAutomaticDimension
         table.estimatedRowHeight = 100
         
-//        table.register(MainCell.self, forCellReuseIdentifier: self.cellId)
+        table.register(MainCell.self, forCellReuseIdentifier: self.cellId)
         
         return table
         
@@ -108,13 +114,124 @@ extension MainController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 0
+        return 3
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! MainCell
+        
+        if indexPath.row == 0 {
+            cell.titleLabel.text = "Device supervised by".uppercased()
+            
+        } else if indexPath.row == 1 {
+            cell.titleLabel.text = "user information".uppercased()
+            
+        } else if indexPath.row == 2 {
+            cell.titleLabel.text = "agent resources".uppercased()
+            
+        }
 
         return cell
     }
 }
+
+class MainCell: UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = UITableViewCellSelectionStyle.none
+        backgroundColor = .clear
+        setupView()
+        addConstraints()
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
+    func setupView() {
+        
+        contentView.addSubview(lineView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(photoImageView)
+        contentView.addSubview(openBotton)
+    }
+    
+    func addConstraints() {
+        
+        lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        lineView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        lineView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        lineView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+        
+        photoImageView.widthAnchor.constraint(equalToConstant: 80.0).isActive = true
+        photoImageView.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
+        photoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
+        photoImageView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: -16).isActive = true
+        photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32).isActive = true
+        
+        openBotton.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor).isActive = true
+        openBotton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+    }
+    
+    let lineView: UIView = {
+        
+        let line = UIView()
+        
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .gray
+        
+        return line
+    }()
+    
+    let photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .white
+        imageView.autoresizingMask = [.flexibleWidth,
+                                      .flexibleHeight]
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.cornerRadius = 10
+        imageView.layer.borderColor = UIColor.gray.cgColor
+        
+        return imageView
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .gray
+        
+        return label
+    }()
+    
+    lazy var openBotton: UIButton = {
+        
+        let button = UIButton(type: UIButtonType.system)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("OPEN", for: .normal)
+        
+        return button
+    }()
+}
+
+
