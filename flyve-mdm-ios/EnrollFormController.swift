@@ -116,8 +116,7 @@ class EnrollFormController: UIViewController {
         
         let dataUser: [String: String] = ["_email": email, "firstname": first, "lastname": last]
         
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: dataUser)
-        UserDefaults.standard.set(encodedData, forKey: "dataUser")
+        setStorage(value: dataUser as AnyObject, key: "dataUser")
         
         let notificationData = NotificationCenter.default
         

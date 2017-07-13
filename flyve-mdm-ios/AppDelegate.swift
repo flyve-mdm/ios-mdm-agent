@@ -35,11 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        var mdmAgentData = [String: AnyObject]()
-        
-        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
-            
-            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+        if let mdmAgentData = getStorage(key: "mdmAgent") as? [String: AnyObject] {
             
             loadMainView(userToken: "", invitationToken: "", mdmAgent: mdmAgentData)
             
@@ -64,11 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
-        var mdmAgentData = [String: AnyObject]()
-        
-        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
-            
-            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+        if let mdmAgentData = getStorage(key: "mdmAgent") as? [String: AnyObject] {
             
             loadMainView(userToken: "", invitationToken: "", mdmAgent: mdmAgentData)
             

@@ -443,14 +443,12 @@ extension ViewController: HttpRequestDelegate {
     
     func responseGetPluginFlyvemdmAgent(data: [String: AnyObject]) {
         
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: data)
-        UserDefaults.standard.set(encodedData, forKey: "mdmAgent")
+        setStorage(value: data as AnyObject, key: "mdmAgent")
         
         var mdmAgentData = [String: AnyObject]()
         
-        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
-            
-            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+        if let dataAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {
+            mdmAgentData = dataAgentObject
         }
         
         self.enrollState(.success)

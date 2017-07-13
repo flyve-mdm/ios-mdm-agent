@@ -49,10 +49,10 @@ class MainController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        if let dataUserObject = UserDefaults.standard.object(forKey: "dataUser") {
-            
-            userInfo = NSKeyedUnarchiver.unarchiveObject(with: dataUserObject as! Data) as! [String: String]
+        if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
+            userInfo = dataUserObject
         }
+
         setupViews()
         addConstraints()
     }
