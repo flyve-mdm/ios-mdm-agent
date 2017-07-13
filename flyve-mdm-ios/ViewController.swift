@@ -325,6 +325,10 @@ class ViewController: UIViewController {
             self.playImageView.isHidden = true
             self.loadingIndicatorView.stopAnimating()
             self.statusLabel.text = ""
+            
+            delay {
+                self.enrollState(.initial)
+            }
         }
     }
 }

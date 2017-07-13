@@ -29,6 +29,7 @@ import UIKit
 
 class MainController: UIViewController {
     
+    var userInfo = [String: String]()
     var mdmAgent = [String: Any]()
     let cellId = "cellId"
     
@@ -48,6 +49,11 @@ class MainController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        if let dataUserObject = UserDefaults.standard.object(forKey: "dataUser") {
+            
+            userInfo = NSKeyedUnarchiver.unarchiveObject(with: dataUserObject as! Data) as! [String: String]
+            print(userInfo)
+        }
         setupViews()
         addConstraints()
     }
@@ -126,6 +132,8 @@ extension MainController: UITableViewDataSource {
             
         } else if indexPath.row == 1 {
             cell.titleLabel.text = "user information".uppercased()
+            cell.descriptionLabel.text = "\(userInfo["firstname"] ?? "") \(userInfo["lastname"] ?? "")"
+            cell.detailLabel.text = "\(userInfo["_email"] ?? "Email")"
             
         } else if indexPath.row == 2 {
             cell.titleLabel.text = "agent resources".uppercased()
@@ -163,6 +171,8 @@ class MainCell: UITableViewCell {
         contentView.addSubview(lineView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(photoImageView)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(detailLabel)
         contentView.addSubview(openBotton)
     }
     
@@ -182,6 +192,12 @@ class MainCell: UITableViewCell {
         photoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
         photoImageView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: -16).isActive = true
         photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32).isActive = true
+        
+        descriptionLabel.bottomAnchor.constraint(equalTo: photoImageView.centerYAnchor).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: 16).isActive = true
+        
+        detailLabel.topAnchor.constraint(equalTo: photoImageView.centerYAnchor).isActive = true
+        detailLabel.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: 16).isActive = true
         
         openBotton.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor).isActive = true
         openBotton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
@@ -219,6 +235,27 @@ class MainCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightRegular)
+        
+        return label
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)
+        
+        return label
+    }()
+    
+    let detailLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightThin)
         
         return label
     }()
