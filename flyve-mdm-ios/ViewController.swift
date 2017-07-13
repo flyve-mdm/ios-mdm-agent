@@ -389,7 +389,7 @@ extension ViewController: HttpRequestDelegate {
         
         inputDictionary["_email"] = notification.userInfo?["_email"] as? String ?? ""
         inputDictionary["_invitation_token"] = self.invitationToken
-        inputDictionary["_serial"] = String(ProcessInfo().processIdentifier)
+        inputDictionary["_serial"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
         inputDictionary["csr"] = ""
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
@@ -494,7 +494,7 @@ extension ViewController: CocoaMQTTDelegate {
     
     func connectServer(host: String, port: UInt16, password: String) {
         
-        self.mqttSetting(host: host, port: port, username: "rafa", password: "\(password)")
+        self.mqttSetting(host: host, port: port, username: UIDevice.current.identifierForVendor?.uuidString ?? "", password: "\(password)")
         
         self.mqtt!.connect()
     }
