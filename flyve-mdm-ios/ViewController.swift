@@ -65,6 +65,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -82,11 +83,11 @@ class ViewController: UIViewController {
             
             if self.mdmAgent.count > 0 {
                 
-                self.topic = self.mdmAgent["topic"] as? String ?? ""
-                
-                self.mqttSetting(host: "demo.flyve.org", port: 1883, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
-                
-                self.mqtt!.connect()
+//                self.topic = self.mdmAgent["topic"] as? String ?? ""
+//                
+//                self.mqttSetting(host: "demo.flyve.org", port: 1883, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
+//                
+//                self.mqtt!.connect()
                 
             }
             
@@ -271,7 +272,6 @@ class ViewController: UIViewController {
     }()
     
     func openURL() {
-        
         guard let url = URL(string: "http://flyve-mdm.com") else { return }
         
         if #available(iOS 10.0, *) {
@@ -325,6 +325,10 @@ class ViewController: UIViewController {
             self.playImageView.isHidden = true
             self.loadingIndicatorView.stopAnimating()
             self.statusLabel.text = ""
+            
+            delay {
+                self.enrollState(.initial)
+            }
         }
     }
 }
@@ -384,7 +388,7 @@ extension ViewController: HttpRequestDelegate {
         
         inputDictionary["_email"] = notification.userInfo?["_email"] as? String ?? ""
         inputDictionary["_invitation_token"] = self.invitationToken
-        inputDictionary["_serial"] = String(ProcessInfo().processIdentifier)
+        inputDictionary["_serial"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
         inputDictionary["csr"] = ""
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
@@ -394,6 +398,8 @@ extension ViewController: HttpRequestDelegate {
         }
         
         jsonDictionary["input"] = inputDictionary as AnyObject
+        
+        setStorage(value: inputDictionary as AnyObject, key: "dataUser")
         
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
@@ -416,6 +422,8 @@ extension ViewController: HttpRequestDelegate {
     
     func errorChangeActiveProfile(error: [String: String]) {
         
+        UserDefaults.standard.set(nil, forKey: "dataUser")
+        
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
@@ -436,21 +444,23 @@ extension ViewController: HttpRequestDelegate {
     
     func responseGetPluginFlyvemdmAgent(data: [String: AnyObject]) {
         
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: data)
-        UserDefaults.standard.set(encodedData, forKey: "mdmAgent")
+        setStorage(value: data as AnyObject, key: "mdmAgent")
         
-        var mdmAgentData = [String: AnyObject]()
-        
-        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
-            
-            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
-        }
+//        var mdmAgentData = [String: AnyObject]()
+//        
+//        if let dataAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {
+//            mdmAgentData = dataAgentObject
+//        }
         
         self.enrollState(.success)
         
-        self.topic = mdmAgentData["topic"] as? String ?? ""
-        
-        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0)
+        delay {
+            self.goMainController()
+        }
+
+//        self.topic = mdmAgentData["topic"] as? String ?? ""
+//        
+//        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0, password: mdmAgentData["mqttpasswd"] as? String ?? "")
     }
     
     func errorGetPluginFlyvemdmAgent(error: [String: String]) {
@@ -458,13 +468,22 @@ extension ViewController: HttpRequestDelegate {
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
+    
+    
+    func goMainController() {
+
+        if let mdmAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {
+            
+            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainController(mdmAgent: mdmAgentObject))
+        }
+    }
 }
 
 extension ViewController: CocoaMQTTDelegate {
     
-    func connectServer(host: String, port: UInt16) {
+    func connectServer(host: String, port: UInt16, password: String) {
         
-        self.mqttSetting(host: host, port: port, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
+        self.mqttSetting(host: host, port: port, username: UIDevice.current.identifierForVendor?.uuidString ?? "", password: "\(password)")
         
         self.mqtt!.connect()
     }

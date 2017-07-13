@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
+		0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */; };
+		0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */; };
 		0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F8001EC3A840006397EC /* TopicLogController.swift */; };
 		0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */; };
 		0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */; };
@@ -42,6 +45,9 @@
 
 /* Begin PBXFileReference section */
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Delay+Helper.swift"; sourceTree = "<group>"; };
+		0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalStorage+Helper.swift"; sourceTree = "<group>"; };
 		0A92F8001EC3A840006397EC /* TopicLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicLogController.swift; sourceTree = "<group>"; };
 		0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Helper.swift"; sourceTree = "<group>"; };
 		0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlyveRouter.swift; sourceTree = "<group>"; };
@@ -97,6 +103,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A87B6F01F1817D50038E5C3 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */,
+				0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */,
+				0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */,
+				0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
 		0AD8426B1EBA5BF70093AC74 = {
 			isa = PBXGroup;
 			children = (
@@ -123,14 +140,14 @@
 		0AD842761EBA5BF70093AC74 /* flyve-mdm-ios */ = {
 			isa = PBXGroup;
 			children = (
+				0A87B6F01F1817D50038E5C3 /* extensions */,
 				0ABBB0491EC20D590018E2EF /* HttpRequest.swift */,
 				0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */,
-				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
 				0ABBB04E1EC38CC60018E2EF /* EnrollFormController.swift */,
 				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
+				0A87B6EC1F17CDD50038E5C3 /* MainController.swift */,
+				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
 				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
-				0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */,
-				0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
 			);
 			path = "flyve-mdm-ios";
@@ -296,8 +313,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AAD05A91F15210B00EB7372 /* Roboto-Regular.ttf in Resources */,
-				0AAD05A81F15210B00EB7372 /* Roboto-Light.ttf in Resources */,
 				0AD8427F1EBA5BF70093AC74 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,12 +476,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */,
 				0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */,
 				0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */,
 				0ABBB04F1EC38CC60018E2EF /* EnrollFormController.swift in Sources */,
 				0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */,
+				0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */,
 				0AD842781EBA5BF70093AC74 /* AppDelegate.swift in Sources */,
 				0ABBB04D1EC22BE10018E2EF /* String+Helper.swift in Sources */,
+				0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */,
 				0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */,
 				0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */,
 			);

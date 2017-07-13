@@ -35,18 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        var mdmAgentData = [String: AnyObject]()
-        
-        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
-            
-            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+        if let mdmAgentData = getStorage(key: "mdmAgent") as? [String: AnyObject] {
             
             loadMainView(userToken: "", invitationToken: "", mdmAgent: mdmAgentData)
             
         } else {
             loadMainView(userToken: "", invitationToken: "")
         }
-        
+    
         return true
     }
     
@@ -56,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         if mdmAgent.count > 0 {
-            window?.rootViewController = UINavigationController(rootViewController: ViewController(mdmAgent: mdmAgent))
+            window?.rootViewController = UINavigationController(rootViewController: MainController(mdmAgent: mdmAgent))
         } else {
             window?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: userToken, invitationToken: invitationToken))
         }
@@ -64,11 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
-        var mdmAgentData = [String: AnyObject]()
-        
-        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
-            
-            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
+        if let mdmAgentData = getStorage(key: "mdmAgent") as? [String: AnyObject] {
             
             loadMainView(userToken: "", invitationToken: "", mdmAgent: mdmAgentData)
             
