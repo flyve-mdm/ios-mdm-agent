@@ -33,6 +33,7 @@ class EnrollFormController: UIViewController {
     
     let cellIdMain = "cellIdMain"
     let cellIdTitle = "cellIdTitle"
+    let cellIdField = "cellIdField"
     
     var countPhone = 0
     var countEmail = 0
@@ -89,6 +90,7 @@ class EnrollFormController: UIViewController {
         
         table.register(MainInfoCell.self, forCellReuseIdentifier: self.cellIdMain)
         table.register(TitleInfoCell.self, forCellReuseIdentifier: self.cellIdTitle)
+        table.register(FieldInfoCell.self, forCellReuseIdentifier: self.cellIdField)
         
         return table
         
@@ -189,7 +191,21 @@ extension EnrollFormController: UITableViewDataSource {
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdTitle, for: indexPath) as! TitleInfoCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdField, for: indexPath) as! FieldInfoCell
+                
+                if indexPath.section == 1 {
+                    cell.textField.text = ""
+                    cell.textField.placeholder = "Phone"
+                    cell.textField.tag = 2
+                    cell.textField.keyboardType = .phonePad
+                    
+                } else {
+                    cell.textField.text = ""
+                    cell.textField.placeholder = "Email"
+                    cell.textField.tag = 3
+                    cell.textField.keyboardType = .emailAddress
+                }
+                
                 return cell
             }
         }
@@ -379,5 +395,56 @@ class TitleInfoCell: UITableViewCell {
         label.textColor = .gray
         
         return label
+    }()
+}
+
+class FieldInfoCell: UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.contentView.backgroundColor = .clear
+        self.setupView()
+        self.addConstraints()
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
+    func setupView() {
+        
+        backgroundColor = .white
+        
+        contentView.addSubview(self.textField)
+    }
+    
+    func addConstraints() {
+        
+        self.textField.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
+        self.textField.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
+        self.textField.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8).isActive = true
+        self.textField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8).isActive = true
+    }
+    
+    let textField: UITextField = {
+        let text = UITextField()
+        
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.placeholder = ""
+        text.clearButtonMode = UITextFieldViewMode.whileEditing
+        text.textColor = .gray
+        text.keyboardType = .default
+        text.borderStyle = .none
+        
+        return text
     }()
 }
