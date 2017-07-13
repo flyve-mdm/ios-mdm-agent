@@ -59,7 +59,7 @@ class EnrollFormController: UIViewController {
         
         self.navigationItem.title = "Enrollment"
         self.navigationItem.rightBarButtonItem = saveButton
-
+        
         self.view.addSubview(self.enrollTableView)
         
     }
@@ -121,10 +121,25 @@ class EnrollFormController: UIViewController {
         notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: dataUser)
         
         self.dismiss(animated: true, completion: nil)
-    
+        
     }
     
     func done() {
+        
+        dismissKeyboard()
+        
+        let indexPathName: NSIndexPath = NSIndexPath(row: 0, section: 0)
+        let indexPathPhone: NSIndexPath = NSIndexPath(row: 0, section: 1)
+        let indexPathEmail: NSIndexPath = NSIndexPath(row: 0, section: 3)
+        
+        let cellName  = enrollTableView.cellForRow(at: indexPathName as IndexPath) as! MainInfoCell
+        let cellPhone  = enrollTableView.cellForRow(at: indexPathPhone as IndexPath) as? FieldInfoCell
+        let cellEmail  = enrollTableView.cellForRow(at: indexPathEmail as IndexPath) as? FieldInfoCell
+        
+        self.userInfo["firstName"] = cellName.firstNameTextField.text
+        self.userInfo["lastName"] = cellName.lastNameTextField.text
+        self.userInfo["phone"] = cellPhone?.textField.text ?? ""
+        self.userInfo["email"] = cellEmail?.textField.text ?? ""
         
         self.enroll()
     }
