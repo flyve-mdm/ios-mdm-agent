@@ -29,57 +29,45 @@ import UIKit
 
 class EnrollFormController: UIViewController {
     
-    let cellId = "cellIdEnroll"
+    var userInfo = ["firstName": "","lastName": "", "phone": "", "email": ""]
+    
+    let cellIdMain = "cellIdMain"
+    
+    var countPhone = 0
+    var countEmail = 0
     
     override func loadView() {
         super.loadView()
         
         self.setupViews()
         self.addConstraints()
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        view.addGestureRecognizer(tap)
     }
     
     func setupViews() {
         
-        self.view.backgroundColor = .background
-
+        self.view.backgroundColor = .white
+        
         self.navigationController?.isNavigationBarHidden = false
+        
         
         let saveButton = UIBarButtonItem(title: "Done",
                                          style: UIBarButtonItemStyle.plain,
                                          target: self,
-                                         action: #selector(self.enroll))
+                                         action: #selector(self.done))
         
         self.navigationItem.title = "Enrollment"
         self.navigationItem.rightBarButtonItem = saveButton
-        self.view.addSubview(self.emailTextField)
-        self.view.addSubview(self.firstNameTextField)
-        self.view.addSubview(self.lastNameTextField)
-        self.view.addSubview(self.enrollButton)
+
+        self.view.addSubview(self.enrollTableView)
         
     }
     
     func addConstraints() {
         
-        self.emailTextField.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 64).isActive = true
-        self.emailTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
-        self.emailTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
-        
-        self.firstNameTextField.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 8).isActive = true
-        self.firstNameTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
-        self.firstNameTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
-        
-        self.lastNameTextField.topAnchor.constraint(equalTo: self.firstNameTextField.bottomAnchor, constant: 8).isActive = true
-        self.lastNameTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
-        self.lastNameTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
-        
-        self.enrollButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -24).isActive = true
-        self.enrollButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
-        self.enrollButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
-        
-        self.enrollButton.heightAnchor.constraint(equalToConstant: 50)
+        self.enrollTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.enrollTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.enrollTableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        self.enrollTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
     }
     
     lazy var enrollTableView: UITableView = {
@@ -89,54 +77,17 @@ class EnrollFormController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.backgroundColor = .white
+        table.backgroundColor = .clear
+        table.separatorStyle = .none
         table.tableFooterView = UIView()
         table.rowHeight = UITableViewAutomaticDimension
-        table.estimatedRowHeight = 50
-        
-        table.register(UITableViewCell.self, forCellReuseIdentifier: self.cellId)
+        table.estimatedRowHeight = 100
+        table.isEditing = true
+        table.allowsSelectionDuringEditing = true
+        table.isScrollEnabled = false
         
         return table
         
-    }()
-    
-    let emailTextField: UITextField = {
-        
-        let text = UITextField()
-        
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "Email"
-        text.textColor = .gray
-        text.borderStyle = .roundedRect
-        text.keyboardType = .emailAddress
-        
-        return text
-    }()
-    
-    let firstNameTextField: UITextField = {
-        
-        let text = UITextField()
-        
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "First name"
-        text.textColor = .gray
-        text.borderStyle = .roundedRect
-        text.keyboardType = .default
-        
-        return text
-    }()
-    
-    let lastNameTextField: UITextField = {
-        
-        let text = UITextField()
-        
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "Last name"
-        text.textColor = .gray
-        text.borderStyle = .roundedRect
-        text.keyboardType = .default
-        
-        return text
     }()
     
     lazy var enrollButton: UIButton = {
@@ -153,7 +104,7 @@ class EnrollFormController: UIViewController {
     
     func enroll() {
         
-        guard let email = self.emailTextField.text, let first = self.firstNameTextField.text, let last = self.lastNameTextField.text, !email.isEmpty, !first.isEmpty, !last.isEmpty else {
+        guard let email = self.userInfo["email"], let phone = self.userInfo["phone"], let first = self.userInfo["firstName"], let last = self.userInfo["lastName"], !email.isEmpty, !phone.isEmpty, !first.isEmpty, !last.isEmpty else {
             return
         }
         
@@ -167,6 +118,11 @@ class EnrollFormController: UIViewController {
     
     }
     
+    func done() {
+        
+        self.enroll()
+    }
+    
     func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -174,9 +130,6 @@ class EnrollFormController: UIViewController {
 
 extension EnrollFormController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        view.endEditing(true)
-    }
 }
 
 extension EnrollFormController: UITableViewDataSource {
@@ -187,8 +140,13 @@ extension EnrollFormController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) 
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
         return cell
+        
     }
 }
+
+
+
+
+
