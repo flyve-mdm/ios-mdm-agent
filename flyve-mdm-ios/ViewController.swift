@@ -272,7 +272,6 @@ class ViewController: UIViewController {
     }()
     
     func openURL() {
-        
         guard let url = URL(string: "http://flyve-mdm.com") else { return }
         
         if #available(iOS 10.0, *) {
@@ -453,8 +452,10 @@ extension ViewController: HttpRequestDelegate {
         
         self.enrollState(.success)
         
-        goMainController()
-        
+        delay {
+            self.goMainController()
+        }
+
         self.topic = mdmAgentData["topic"] as? String ?? ""
         
         self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0, password: mdmAgentData["mqttpasswd"] as? String ?? "")
@@ -468,22 +469,10 @@ extension ViewController: HttpRequestDelegate {
     
     
     func goMainController() {
-        
-        var window: UIWindow?
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        
-        var mdmAgentData = [String: AnyObject]()
-        
-        if let mdmAgentObject = UserDefaults.standard.object(forKey: "mdmAgent") {
+
+        if let mdmAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {
             
-            mdmAgentData = NSKeyedUnarchiver.unarchiveObject(with: mdmAgentObject as! Data) as! [String: AnyObject]
-            
-            window = UIWindow(frame: UIScreen.main.bounds)
-            window?.makeKeyAndVisible()
-            window?.rootViewController = UINavigationController(rootViewController: MainController(mdmAgent: mdmAgentData))
-            
+            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainController(mdmAgent: mdmAgentObject))
         }
     }
 }

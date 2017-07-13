@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             loadMainView(userToken: "", invitationToken: "")
         }
-        
+    
         return true
     }
     

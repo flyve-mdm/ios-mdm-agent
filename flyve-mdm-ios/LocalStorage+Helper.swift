@@ -42,5 +42,5 @@ public func getStorage(key: String) -> AnyObject? {
 public func setStorage(value: AnyObject, key: String) {
     
     let encodedData = NSKeyedArchiver.archivedData(withRootObject: value)
-    UserDefaults.standard.set(encodedData, forKey: "key")
+    UserDefaults.standard.set(encodedData, forKey: key)
 }
