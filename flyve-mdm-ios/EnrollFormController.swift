@@ -136,6 +136,93 @@ class EnrollFormController: UIViewController {
 
 extension EnrollFormController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 2 {
+            
+            if countPhone > 0 { return }
+            
+            countPhone += 1
+            
+            print(countPhone)
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: countPhone-1, section: 1)], with: .automatic)
+            tableView.endUpdates()
+            
+        } else if indexPath.section == 4 {
+            
+            if countEmail > 0 { return }
+            
+            countEmail += 1
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: countEmail-1, section: 3)], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle
+    {
+        if indexPath.section == 1 || indexPath.section == 3 {
+            return .delete
+            
+        } else if indexPath.section == 2 || indexPath.section == 4 {
+            return .insert
+            
+        } else {
+            return .none
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            if indexPath.section == 1 {
+                countPhone = 0
+            } else if indexPath.section == 3 {
+                countEmail = 0
+            }
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        } else if editingStyle == .insert {
+            
+            if indexPath.section == 2 {
+                
+                if countPhone > 0 { return }
+                
+                countPhone += 1
+                
+                print(countPhone)
+                
+                tableView.beginUpdates()
+                tableView.insertRows(at: [IndexPath(row: countPhone-1, section: 1)], with: .automatic)
+                tableView.endUpdates()
+                
+            } else if indexPath.section == 4 {
+                
+                if countEmail > 0 { return }
+                
+                countEmail += 1
+                
+                tableView.beginUpdates()
+                tableView.insertRows(at: [IndexPath(row: countEmail-1, section: 3)], with: .automatic)
+                tableView.endUpdates()
+            }
+            
+        }
+    }
+    
 }
 
 extension EnrollFormController: UITableViewDataSource {
