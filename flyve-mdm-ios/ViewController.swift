@@ -420,6 +420,8 @@ extension ViewController: HttpRequestDelegate {
     
     func errorChangeActiveProfile(error: [String: String]) {
         
+        UserDefaults.standard.set(nil, forKey: "dataUser")
+        
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
