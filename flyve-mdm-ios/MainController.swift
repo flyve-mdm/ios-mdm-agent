@@ -52,7 +52,6 @@ class MainController: UIViewController {
         if let dataUserObject = UserDefaults.standard.object(forKey: "dataUser") {
             
             userInfo = NSKeyedUnarchiver.unarchiveObject(with: dataUserObject as! Data) as! [String: String]
-            print(userInfo)
         }
         setupViews()
         addConstraints()

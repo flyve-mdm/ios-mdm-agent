@@ -456,7 +456,7 @@ extension ViewController: HttpRequestDelegate {
         
         self.topic = mdmAgentData["topic"] as? String ?? ""
         
-        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0)
+        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0, password: mdmAgentData["mqttpasswd"] as? String ?? "")
     }
     
     func errorGetPluginFlyvemdmAgent(error: [String: String]) {
@@ -468,9 +468,9 @@ extension ViewController: HttpRequestDelegate {
 
 extension ViewController: CocoaMQTTDelegate {
     
-    func connectServer(host: String, port: UInt16) {
+    func connectServer(host: String, port: UInt16, password: String) {
         
-        self.mqttSetting(host: host, port: port, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
+        self.mqttSetting(host: host, port: port, username: "rafa", password: "\(password)")
         
         self.mqtt!.connect()
     }
