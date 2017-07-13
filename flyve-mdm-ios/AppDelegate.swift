@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         if mdmAgent.count > 0 {
-            window?.rootViewController = UINavigationController(rootViewController: ViewController(mdmAgent: mdmAgent))
+            window?.rootViewController = UINavigationController(rootViewController: MainController(mdmAgent: mdmAgent))
         } else {
             window?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: userToken, invitationToken: invitationToken))
         }
