@@ -36,8 +36,7 @@ class MainController: UIViewController {
     var mdmAgent = [String: Any]()
     var topic = ""
     let cellId = "cellId"
-    
-    let locationManager = CLLocationManager()
+    var location:Location!
     
     init(mdmAgent: [String: Any]) {
         
@@ -135,32 +134,6 @@ class MainController: UIViewController {
     
     func goEnrollmentController() {
         UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: "", invitationToken: ""))
-    }
-}
-
-extension MainController: CLLocationManagerDelegate {
-    
-    func getCurrentLocation() {
-        
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        if let location = locations.first as? CLLocation {
-            // implement logic upon location change and stop updating location until it is subsequently updated
-            
-            print(location.coordinate.latitude)
-            print(location.coordinate.longitude)
-            
-            locationManager.stopUpdatingLocation()
-        }
     }
 }
 
@@ -268,7 +241,9 @@ extension MainController: CocoaMQTTDelegate {
                     replyPing()
 
                 } else if messageQuery == "Geolocate" {
-                    getCurrentLocation()
+                    location = Location()
+                    location.delegate = self
+                    location.getCurrentLocation()
                 }
             } else if let messageUnenroll: String = messageBroker?["unenroll"] {
                 if messageUnenroll == "now" {
@@ -292,9 +267,10 @@ extension MainController: CocoaMQTTDelegate {
         goEnrollmentController()
     }
     
-    func replyGeolocate() {
+    func replyGeolocate(latitude: Double, longitude: Double, datetime: Int) {
         let topicGeolocation = "\(topic)/Status/Geolocation"
-        mqtt?.publish(topicGeolocation, withString: "!")
+        let answer = "{\"latitude\":\(latitude),\"longitude\":\(longitude),\"datetime\":\(datetime)}"
+        mqtt?.publish(topicGeolocation, withString: answer)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
@@ -315,6 +291,17 @@ extension MainController: CocoaMQTTDelegate {
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("mqttDidDisconnect")
+    }
+}
+
+extension MainController: LocationDelegate {
+    
+    func currentLocation(coordinate: CLLocationCoordinate2D) {
+        
+        let date = Date()
+        let datetime = Int(date.timeIntervalSince1970/1000)
+        
+        replyGeolocate(latitude: coordinate.latitude, longitude: coordinate.longitude, datetime: datetime)
     }
 }
 
