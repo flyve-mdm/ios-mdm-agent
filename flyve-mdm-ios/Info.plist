@@ -46,5 +46,7 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App use Locations service mode Always</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App use Locations service mode In Use</string>
 </dict>
 </plist>
