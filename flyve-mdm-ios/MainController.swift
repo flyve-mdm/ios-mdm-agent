@@ -255,8 +255,8 @@ extension MainController: CocoaMQTTDelegate {
         let topicUnenroll = "\(topic)/Status/Unenroll"
         let answer = "{\"unenroll\": \"unenrolled\"}"
         mqtt?.publish(topicUnenroll, withString: answer)
-//        mqtt?.disconnect()
-//        removeAllStorage()
+        mqtt?.disconnect()
+        removeAllStorage()
         goEnrollmentController()
     }
     
