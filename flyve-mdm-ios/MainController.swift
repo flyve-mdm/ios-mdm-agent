@@ -242,6 +242,10 @@ extension MainController: CocoaMQTTDelegate {
                 if messageUnenroll == "now" {
                     replyUnenroll()
                 }
+            } else if let messageUnenroll: String = messageBroker?["query"] {
+                if messageUnenroll == "Geolocate" {
+                    
+                }
             }
         }
     }
