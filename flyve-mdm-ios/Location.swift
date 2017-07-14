@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * Location+Helper.swift is part of flyve-mdm-ios
+ * Location.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -26,19 +26,3 @@
  */
 
 import Foundation
-//import CoreLocation
-//
-//public let locationManager = CLLocationManager()
-//
-//public func getCurrentLocation() {
-//    
-//    locationManager.requestAlwaysAuthorization()
-//    locationManager.requestWhenInUseAuthorization()
-//    
-//    if CLLocationManager.locationServicesEnabled() {
-////        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//        locationManager.startUpdatingLocation()
-//    }
-//}
-

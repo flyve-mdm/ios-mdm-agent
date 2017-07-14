@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if CLLocationManager.locationServicesEnabled() {
             if CLLocationManager.authorizationStatus() == .notDetermined {
                 manager.requestAlwaysAuthorization()
+                manager.requestWhenInUseAuthorization()
             }
         }
         
