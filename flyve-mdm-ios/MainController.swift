@@ -27,6 +27,7 @@
 
 import UIKit
 import CocoaMQTT
+import CoreLocation
 
 class MainController: UIViewController {
     
@@ -35,6 +36,8 @@ class MainController: UIViewController {
     var mdmAgent = [String: Any]()
     var topic = ""
     let cellId = "cellId"
+    
+    let locationManager = CLLocationManager()
     
     init(mdmAgent: [String: Any]) {
         
@@ -132,6 +135,32 @@ class MainController: UIViewController {
     
     func goEnrollmentController() {
         UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: "", invitationToken: ""))
+    }
+}
+
+extension MainController: CLLocationManagerDelegate {
+    
+    func getCurrentLocation() {
+        
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        if let location = locations.first as? CLLocation {
+            // implement logic upon location change and stop updating location until it is subsequently updated
+            
+            print(location.coordinate.latitude)
+            print(location.coordinate.longitude)
+            
+            locationManager.stopUpdatingLocation()
+        }
     }
 }
 
@@ -234,17 +263,16 @@ extension MainController: CocoaMQTTDelegate {
                 print(error.localizedDescription)
             }
             print(messageBroker ?? "Empty")
-            if let messagePing: String = messageBroker?["query"] {
-                if messagePing == "Ping" {
+            if let messageQuery: String = messageBroker?["query"] {
+                if messageQuery == "Ping" {
                     replyPing()
+
+                } else if messageQuery == "Geolocate" {
+                    getCurrentLocation()
                 }
             } else if let messageUnenroll: String = messageBroker?["unenroll"] {
                 if messageUnenroll == "now" {
                     replyUnenroll()
-                }
-            } else if let messageUnenroll: String = messageBroker?["query"] {
-                if messageUnenroll == "Geolocate" {
-                    
                 }
             }
         }
@@ -262,6 +290,11 @@ extension MainController: CocoaMQTTDelegate {
         mqtt?.disconnect()
         removeAllStorage()
         goEnrollmentController()
+    }
+    
+    func replyGeolocate() {
+        let topicGeolocation = "\(topic)/Status/Geolocation"
+        mqtt?.publish(topicGeolocation, withString: "!")
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
