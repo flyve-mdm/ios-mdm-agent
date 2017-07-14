@@ -129,6 +129,10 @@ class MainController: UIViewController {
     func goLogController() {
         navigationController?.pushViewController(TopicLogController(), animated: true)
     }
+    
+    func goEnrollmentController() {
+        UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: "", invitationToken: ""))
+    }
 }
 
 extension MainController: UITableViewDelegate {
@@ -164,6 +168,116 @@ extension MainController: UITableViewDataSource {
         }
 
         return cell
+    }
+}
+
+extension MainController: CocoaMQTTDelegate {
+    
+    func connectBroker(host: String, port: UInt16, user: String, password: String) {
+        
+        self.mqttSetting(host: host, port: port, username: user, password: "\(password)")
+        
+        self.mqtt!.connect()
+    }
+    
+    func mqttSetting(host: String, port: UInt16, username: String, password: String) {
+
+        mqtt = CocoaMQTT(clientID: username, host: host, port: port)
+        mqtt!.username = username
+        mqtt!.password = password
+        mqtt!.willMessage = CocoaMQTTWill(topic: "/offline", message: "offline")
+        mqtt!.keepAlive = 60
+        mqtt!.delegate = self
+        mqtt!.enableSSL = true
+
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didReceive trust: SecTrust, completionHandler: @escaping (Bool) -> Void) {
+
+        completionHandler(true)
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
+        print("didConnect \(host):\(port)")
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
+        print("didConnectAck: \(ack)，rawValue: \(ack.rawValue)")
+        
+        if ack == .accept {
+            
+            mqtt.subscribe("\(topic)/#", qos: CocoaMQTTQOS.qos1)
+            print("Subscribed to topic \(String(describing: topic))/#")
+        }
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
+        print("didPublishMessage with message: \(String(describing: message.string!))")
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
+        print("didPublishAck with id: \(id)")
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
+        
+        let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
+        NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
+        
+        var messageBroker: [String: String]? = [String: String]()
+        
+        if let data = message.string?.data(using: .utf8) {
+            do {
+                messageBroker = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
+                //(with: data, options: []) as? [String: Any])
+            } catch {
+                print(error.localizedDescription)
+            }
+            print(messageBroker ?? "Empty")
+            if let messagePing: String = messageBroker?["query"] {
+                if messagePing == "Ping" {
+                    replyPing()
+                }
+            } else if let messageUnenroll: String = messageBroker?["unenroll"] {
+                if messageUnenroll == "now" {
+                    replyUnenroll()
+                }
+            }
+        }
+    }
+    
+    func replyPing() {
+        let topicPing = "\(topic)/Status/Ping"
+        mqtt?.publish(topicPing, withString: "!")
+    }
+    
+    func replyUnenroll() {
+        let topicUnenroll = "\(topic)/Status/Unenroll"
+        let answer = "{\"unenroll\": \"unenrolled\"}"
+        mqtt?.publish(topicUnenroll, withString: answer)
+        mqtt?.disconnect()
+        removeAllStorage()
+        goEnrollmentController()
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
+        print("didSubscribeTopic to \(topic)")
+    }
+    
+    func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
+        print("didUnsubscribeTopic to \(topic)")
+    }
+    
+    func mqttDidPing(_ mqtt: CocoaMQTT) {
+        print("didPing")
+    }
+    
+    func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
+        print("didReceivePong")
+    }
+    
+    func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
+        print("mqttDidDisconnect")
     }
 }
 
