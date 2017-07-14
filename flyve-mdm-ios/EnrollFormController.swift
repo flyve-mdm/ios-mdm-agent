@@ -159,8 +159,6 @@ extension EnrollFormController: UITableViewDelegate {
             
             countPhone += 1
             
-            print(countPhone)
-            
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath(row: countPhone-1, section: 1)], with: .automatic)
             tableView.endUpdates()
@@ -217,8 +215,6 @@ extension EnrollFormController: UITableViewDelegate {
                 if countPhone > 0 { return }
                 
                 countPhone += 1
-                
-                print(countPhone)
                 
                 tableView.beginUpdates()
                 tableView.insertRows(at: [IndexPath(row: countPhone-1, section: 1)], with: .automatic)
