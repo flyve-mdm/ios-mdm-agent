@@ -347,26 +347,30 @@ extension MainController: CocoaMQTTDelegate {
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
         NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
         
-        var messagePing: [String: String]? = [String: String]()
+        var messageBroker: [String: String]? = [String: String]()
         
         if let data = message.string?.data(using: .utf8) {
             do {
-                messagePing = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
+                messageBroker = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
                 //(with: data, options: []) as? [String: Any])
             } catch {
                 print(error.localizedDescription)
             }
-            
-            if let messageQuery: String = messagePing?["query"] {
-                
-                if messageQuery == "Ping" {
-                    
-                    let strMessege = "\(topic)/Status/Ping"
-                    mqtt.publish(strMessege, withString: "!")
+            print(messageBroker ?? "Empty")
+            if let messagePing: String = messageBroker?["query"] {
+                if messagePing == "Ping" {
+                    replyPing()
                 }
             }
         }
     }
+    
+    func replyPing() {
+        let topicPing = "\(topic)/Status/Ping"
+        mqtt?.publish(topicPing, withString: "!")
+    }
+    
+    
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
         print("didSubscribeTopic to \(topic)")
