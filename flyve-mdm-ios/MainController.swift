@@ -342,6 +342,32 @@ extension MainController: CocoaMQTTDelegate {
         print("didPublishAck with id: \(id)")
     }
     
+    func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
+        
+        let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
+        NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
+        
+        var messagePing: [String: String]? = [String: String]()
+        
+        if let data = message.string?.data(using: .utf8) {
+            do {
+                messagePing = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
+                //(with: data, options: []) as? [String: Any])
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            if let messageQuery: String = messagePing?["query"] {
+                
+                if messageQuery == "Ping" {
+                    
+                    let strMessege = "\(topic)/Status/Ping"
+                    mqtt.publish(strMessege, withString: "!")
+                }
+            }
+        }
+    }
+    
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
         print("didSubscribeTopic to \(topic)")
     }
