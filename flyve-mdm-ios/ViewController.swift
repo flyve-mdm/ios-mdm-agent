@@ -27,7 +27,6 @@
 
 import Foundation
 import UIKit
-import CocoaMQTT
 
 enum EnrollmentState {
     case initial
@@ -37,8 +36,7 @@ enum EnrollmentState {
 }
 
 class ViewController: UIViewController {
-    
-    var mqtt: CocoaMQTT?
+
     var httpRequest: HttpRequest?
     
     var mdmAgent = [String: Any]()
@@ -80,16 +78,6 @@ class ViewController: UIViewController {
             self.setupViews()
             
         } else {
-            
-            if self.mdmAgent.count > 0 {
-                
-//                self.topic = self.mdmAgent["topic"] as? String ?? ""
-//                
-//                self.mqttSetting(host: "demo.flyve.org", port: 1883, username: "rafa", password: "azlknvjkfbsdklfdsgfd")
-//                
-//                self.mqtt!.connect()
-                
-            }
             
             self.setupViewsEmpty()
         }
@@ -353,8 +341,6 @@ extension ViewController: HttpRequestDelegate {
     
     func responseGetFullSession(data: [String: AnyObject]) {
         
-        print(data)
-        
         if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
             
             if profiles_id == guest_profiles_id {
@@ -446,21 +432,11 @@ extension ViewController: HttpRequestDelegate {
         
         setStorage(value: data as AnyObject, key: "mdmAgent")
         
-//        var mdmAgentData = [String: AnyObject]()
-//        
-//        if let dataAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {
-//            mdmAgentData = dataAgentObject
-//        }
-        
         self.enrollState(.success)
         
         delay {
             self.goMainController()
         }
-
-//        self.topic = mdmAgentData["topic"] as? String ?? ""
-//        
-//        self.connectServer(host: mdmAgentData["broker"] as? String ?? "", port: mdmAgentData["port"] as? UInt16 ?? 0, password: mdmAgentData["mqttpasswd"] as? String ?? "")
     }
     
     func errorGetPluginFlyvemdmAgent(error: [String: String]) {
@@ -476,95 +452,5 @@ extension ViewController: HttpRequestDelegate {
             
             UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainController(mdmAgent: mdmAgentObject))
         }
-    }
-}
-
-extension ViewController: CocoaMQTTDelegate {
-    
-    func connectServer(host: String, port: UInt16, password: String) {
-        
-        self.mqttSetting(host: host, port: port, username: UIDevice.current.identifierForVendor?.uuidString ?? "", password: "\(password)")
-        
-        self.mqtt!.connect()
-    }
-    
-    func mqttSetting(host: String, port: UInt16, username: String, password: String) {
-        
-        let clientID = String(ProcessInfo().processIdentifier)
-        mqtt = CocoaMQTT(clientID: clientID, host: host, port: port)
-        mqtt!.username = username
-        mqtt!.password = password
-        mqtt!.willMessage = CocoaMQTTWill(topic: "/offline", message: "offline")
-        mqtt!.keepAlive = 60
-        mqtt!.delegate = self
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
-        print("didConnect \(host):\(port)")
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        print("didConnectAck: \(ack)，rawValue: \(ack.rawValue)")
-        
-        if ack == .accept {
-            mqtt.subscribe("\(self.topic!)/#", qos: CocoaMQTTQOS.qos0)
-            
-            print("Subscribed to topic \(String(describing: self.topic))/#")
-            self.navigationController?.pushViewController(TopicLogController(), animated: true)
-        }
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
-        print("didPublishMessage with message: \(String(describing: message.string!))")
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
-        print("didPublishAck with id: \(id)")
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
-        
-        let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
-        NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
-        
-        var messagePing: [String: String]? = [String: String]()
-        
-        if let data = message.string?.data(using: .utf8) {
-            do {
-                messagePing = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
-                //(with: data, options: []) as? [String: Any])
-            } catch {
-                print(error.localizedDescription)
-            }
-            
-            if let messageQuery: String = messagePing?["query"] {
-                
-                if messageQuery == "Ping" {
-                    
-                    let strMessege = "\(self.topic!)/Status/Ping"
-                    mqtt.publish(strMessege, withString: "!")
-                }
-            }
-        }
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
-        print("didSubscribeTopic to \(topic)")
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
-        print("didUnsubscribeTopic to \(topic)")
-    }
-    
-    func mqttDidPing(_ mqtt: CocoaMQTT) {
-        print("didPing")
-    }
-    
-    func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
-        print("didReceivePong")
-    }
-    
-    func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        print("mqttDidDisconnect")
     }
 }
