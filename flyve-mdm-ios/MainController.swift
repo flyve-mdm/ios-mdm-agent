@@ -27,6 +27,7 @@
 
 import UIKit
 import CocoaMQTT
+import CoreLocation
 
 class MainController: UIViewController {
     
@@ -35,6 +36,7 @@ class MainController: UIViewController {
     var mdmAgent = [String: Any]()
     var topic = ""
     let cellId = "cellId"
+    var location:Location!
     
     init(mdmAgent: [String: Any]) {
         
@@ -234,9 +236,14 @@ extension MainController: CocoaMQTTDelegate {
                 print(error.localizedDescription)
             }
             print(messageBroker ?? "Empty")
-            if let messagePing: String = messageBroker?["query"] {
-                if messagePing == "Ping" {
+            if let messageQuery: String = messageBroker?["query"] {
+                if messageQuery == "Ping" {
                     replyPing()
+
+                } else if messageQuery == "Geolocate" {
+                    location = Location()
+                    location.delegate = self
+                    location.getCurrentLocation()
                 }
             } else if let messageUnenroll: String = messageBroker?["unenroll"] {
                 if messageUnenroll == "now" {
@@ -260,6 +267,12 @@ extension MainController: CocoaMQTTDelegate {
         goEnrollmentController()
     }
     
+    func replyGeolocate(latitude: Double, longitude: Double, datetime: Int) {
+        let topicGeolocation = "\(topic)/Status/Geolocation"
+        let answer = "{\"latitude\":\(latitude),\"longitude\":\(longitude),\"datetime\":\(datetime)}"
+        mqtt?.publish(topicGeolocation, withString: answer)
+    }
+    
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
         print("didSubscribeTopic to \(topic)")
     }
@@ -278,6 +291,17 @@ extension MainController: CocoaMQTTDelegate {
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("mqttDidDisconnect")
+    }
+}
+
+extension MainController: LocationDelegate {
+    
+    func currentLocation(coordinate: CLLocationCoordinate2D) {
+        
+        let date = Date()
+        let datetime = Int(date.timeIntervalSince1970/1000)
+        
+        replyGeolocate(latitude: coordinate.latitude, longitude: coordinate.longitude, datetime: datetime)
     }
 }
 

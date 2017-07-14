@@ -26,14 +26,22 @@
  */
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
+    let manager = CLLocationManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        if CLLocationManager.locationServicesEnabled() {
+            if CLLocationManager.authorizationStatus() == .notDetermined {
+                manager.requestAlwaysAuthorization()
+                manager.requestWhenInUseAuthorization()
+            }
+        }
         
         if let mdmAgentData = getStorage(key: "mdmAgent") as? [String: AnyObject] {
             
