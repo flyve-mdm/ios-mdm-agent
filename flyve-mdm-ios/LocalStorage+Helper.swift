@@ -43,4 +43,11 @@ public func setStorage(value: AnyObject, key: String) {
     
     let encodedData = NSKeyedArchiver.archivedData(withRootObject: value)
     UserDefaults.standard.set(encodedData, forKey: key)
+    UserDefaults.standard.synchronize()
+}
+
+public func removeAllStorage() {
+    
+    UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+    UserDefaults.standard.synchronize()
 }
