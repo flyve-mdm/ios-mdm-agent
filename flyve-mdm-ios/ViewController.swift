@@ -286,6 +286,7 @@ class ViewController: UIViewController {
             self.titleLabel.text = "Enroll device"
             self.enrollBotton.backgroundColor = UIColor.main
             self.enrollBotton.isUserInteractionEnabled = true
+            self.playImageView.image = UIImage(named: "play")
             self.playImageView.isHidden = false
             self.loadingIndicatorView.stopAnimating()
             self.statusLabel.text = ""
@@ -302,7 +303,8 @@ class ViewController: UIViewController {
             self.enrollBotton.backgroundColor = UIColor.main
             self.enrollBotton.isUserInteractionEnabled = false
             self.playImageView.image = UIImage(named: "")
-            self.playImageView.isHidden = true
+            self.playImageView.image = UIImage(named: "success")
+            self.playImageView.isHidden = false
             self.loadingIndicatorView.stopAnimating()
             self.statusLabel.text = "Success!"
         
