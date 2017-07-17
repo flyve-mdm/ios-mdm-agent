@@ -632,8 +632,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29cf433f-f407-43ed-8b23-6e62f0d46ec7";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.teclib.flyve-mdm-ios";
+				PROVISIONING_PROFILE = "2d111f2e-76ac-40dd-b24b-9e6b05d6d5b5";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent.example";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -651,8 +651,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29cf433f-f407-43ed-8b23-6e62f0d46ec7";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.teclib.flyve-mdm-ios";
+				PROVISIONING_PROFILE = "2d111f2e-76ac-40dd-b24b-9e6b05d6d5b5";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent.example";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
