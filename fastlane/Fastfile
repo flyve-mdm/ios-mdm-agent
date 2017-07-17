@@ -24,7 +24,11 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
-    scan
+    scan(
+      workspace: "flyve-mdm-ios.xcworkspace",
+      scheme: "flyve-mdm-ios",
+      clean: true
+    )
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
