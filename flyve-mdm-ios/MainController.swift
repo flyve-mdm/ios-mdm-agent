@@ -153,18 +153,18 @@ extension MainController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! MainCell
         
         if indexPath.row == 0 {
-            cell.titleLabel.text = "Device supervised by".uppercased()
+            cell.titleLabel.text = "title_ supervised".localized.uppercased()
             
         } else if indexPath.row == 1 {
-            cell.titleLabel.text = "user information".uppercased()
+            cell.titleLabel.text = "title_user".localized.uppercased()
             cell.descriptionLabel.text = "\(userInfo["firstname"] ?? "") \(userInfo["lastname"] ?? "")"
             cell.detailLabel.text = "\(userInfo["_email"] ?? "Email")"
             
         } else if indexPath.row == 2 {
-            cell.titleLabel.text = "agent resources".uppercased()
+            cell.titleLabel.text = "title_resources".uppercased()
             
         } else if indexPath.row == 3 {
-            cell.titleLabel.text = "log report".uppercased()
+            cell.titleLabel.text = "log_report".localized.uppercased()
             cell.openBotton.addTarget(self, action: #selector(self.goLogController), for: .touchUpInside)
             
         }
@@ -426,7 +426,7 @@ class MainCell: UITableViewCell {
         let button = UIButton(type: UIButtonType.system)
         
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("OPEN", for: .normal)
+        button.setTitle("open".localized.uppercased(), for: .normal)
         
         return button
     }()

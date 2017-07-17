@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */; };
+		0A7F4DB21F1D43FF00976EF4 /* Localizable.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */; };
 		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
 		0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */; };
 		0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizator.swift; sourceTree = "<group>"; };
+		0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Localizable.plist; sourceTree = "<group>"; };
 		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Delay+Helper.swift"; sourceTree = "<group>"; };
 		0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalStorage+Helper.swift"; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
 				0A87B6EC1F17CDD50038E5C3 /* MainController.swift */,
 				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
+				0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */,
+				0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */,
 				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
 			);
@@ -318,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AD8427F1EBA5BF70093AC74 /* Assets.xcassets in Resources */,
+				0A7F4DB21F1D43FF00976EF4 /* Localizable.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +511,7 @@
 				0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */,
 				0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */,
 				0AC7632B1F1961C20050F17B /* Location.swift in Sources */,
+				0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */,
 				0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

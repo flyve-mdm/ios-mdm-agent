@@ -102,7 +102,7 @@ class EnrollFormController: UIViewController {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.backgroundColor = UIColor.init(red: 64.0/255.0, green: 186.0/255.0, blue: 179.0/255.0, alpha: 1.0).cgColor
-        button.setTitle("Enroll", for: .normal)
+        button.setTitle("enroll".localized, for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.addTarget(self, action: #selector(self.enroll), for: .touchUpInside)
         return button
@@ -278,10 +278,10 @@ extension EnrollFormController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdTitle, for: indexPath) as! TitleInfoCell
                 
                 if indexPath.section == 2 {
-                    cell.titleLabel.text = "add phone"
+                    cell.titleLabel.text = "add_phone".localized
                     
                 } else {
-                    cell.titleLabel.text = "add email"
+                    cell.titleLabel.text = "add_email".localized
                     
                 }
                 
@@ -293,13 +293,13 @@ extension EnrollFormController: UITableViewDataSource {
                 
                 if indexPath.section == 1 {
                     cell.textField.text = ""
-                    cell.textField.placeholder = "Phone"
+                    cell.textField.placeholder = "phone".localized
                     cell.textField.tag = 2
                     cell.textField.keyboardType = .phonePad
                     
                 } else {
                     cell.textField.text = ""
-                    cell.textField.placeholder = "Email"
+                    cell.textField.placeholder = "Email".localized
                     cell.textField.tag = 3
                     cell.textField.keyboardType = .emailAddress
                 }
@@ -389,7 +389,7 @@ class MainInfoCell: UITableViewCell {
         let text = UITextField()
         
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "First name"
+        text.placeholder = "first_name".localized
         text.clearButtonMode = UITextFieldViewMode.whileEditing
         text.textColor = .gray
         text.keyboardType = .default
@@ -410,7 +410,7 @@ class MainInfoCell: UITableViewCell {
         let text = UITextField()
         
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "Last name"
+        text.placeholder = "last_name".localized
         text.clearButtonMode = UITextFieldViewMode.whileEditing
         text.textColor = .gray
         text.keyboardType = .default
