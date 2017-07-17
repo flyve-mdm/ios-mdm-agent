@@ -219,7 +219,7 @@ class ViewController: UIViewController {
         let button = UIButton(type: UIButtonType.system)
         
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("http://flyve-mdm.com", for: .normal)
+        button.setTitle("https://flyve-mdm.com", for: .normal)
         button.addTarget(self, action: #selector(self.openURL), for: .touchUpInside)
 
         return button
@@ -260,7 +260,7 @@ class ViewController: UIViewController {
     }()
     
     func openURL() {
-        guard let url = URL(string: "http://flyve-mdm.com") else { return }
+        guard let url = URL(string: "https://flyve-mdm.com") else { return }
         
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)

@@ -20,7 +20,7 @@
     "agent",
     "teclib"
   ],
-  "author": "Hector Rondon <apple@teclib.com> (http://flyve-mdm.com)",
+  "author": "Hector Rondon <apple@teclib.com> (https://flyve-mdm.com)",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/flyve-mdm/flyve-mdm-ios/issues"
