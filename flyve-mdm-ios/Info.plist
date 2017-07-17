@@ -31,6 +31,15 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App use Locations service mode Always</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App use Locations service mode In Use</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-Light.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -39,14 +48,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Roboto-Light.ttf</string>
-		<string>Roboto-Regular.ttf</string>
-	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>App use Locations service mode Always</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App use Locations service mode In Use</string>
 </dict>
 </plist>
