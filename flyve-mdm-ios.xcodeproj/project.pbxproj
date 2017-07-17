@@ -210,6 +210,7 @@
 				0AD842721EBA5BF70093AC74 /* Resources */,
 				3FC687D26254588C072242A5 /* [CP] Embed Pods Frameworks */,
 				D64A07C3C30A258797E27EB4 /* [CP] Copy Pods Resources */,
+				0A7959FA1F1CFE0700FB9724 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -337,6 +338,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A7959FA1F1CFE0700FB9724 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
 		3BF0081A4AFAC5856E808A44 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -632,8 +646,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29cf433f-f407-43ed-8b23-6e62f0d46ec7";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.teclib.flyve-mdm-ios";
+				PROVISIONING_PROFILE = "a2718c8e-8201-4536-a3d5-b76b6634e350";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent.example";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -651,8 +665,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "29cf433f-f407-43ed-8b23-6e62f0d46ec7";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.teclib.flyve-mdm-ios";
+				PROVISIONING_PROFILE = "a2718c8e-8201-4536-a3d5-b76b6634e350";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent.example";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

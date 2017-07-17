@@ -1,0 +1,104 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.46.1"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan(
+      workspace: "flyve-mdm-ios.xcworkspace",
+      scheme: "flyve-mdm-ios",
+      clean: true
+    )
+  end
+
+  desc "Submit a new Beta Build to Apple TestFlight"
+  desc "This will also make sure the profile is up to date"
+  lane :beta do
+    # Fetch provisioning profile
+    # sigh
+    sigh(
+      adhoc: false, 
+      username: "info@s42.com.ve",
+      team_id: "G3UM9C856M",
+      provisioning_name: "XC iOS: org.flyve.mdm.agent.example",
+      cert_id: "G3UM9C856M"
+    )
+  
+    # Build
+    gym(
+      scheme: "flyve-mdm-ios",
+      configuration: "Release",
+      sdk: "iphoneos10.3",
+      clean: true,
+      include_bitcode: true,
+      include_symbols: true,
+      export_method: "app-store",
+      buildlog_path: 'fastlane/logs'
+    )
+
+    # TestFlight upload
+    pilot(
+      app_identifier: "org.flyve.mdm.agent.example",
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    # Fetch provisioning profile
+    # sigh
+    sigh(
+      adhoc: false, 
+      username: "info@s42.com.ve",
+      team_id: "G3UM9C856M",
+      provisioning_name: "XC iOS: org.flyve.mdm.agent.example",
+      cert_id: "G3UM9C856M"
+    )
+    snapshot
+    gym(scheme: "flyve-mdm-ios") # Build your app - more options available
+    # deliver(force: true)
+    # frameit
+  end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded. 
+# Learn more at https://github.com/fastlane/fastlane#metrics

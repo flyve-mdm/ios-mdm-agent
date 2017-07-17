@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+  platform :ios, '9.3'
 
 target 'flyve-mdm-ios' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -8,7 +8,6 @@ target 'flyve-mdm-ios' do
   # Pods for flyve-mdm-ios
 
   pod 'Alamofire', '~> 4.5'
-  pod 'FlyveMDMInventory', '~> 1.2'
   pod 'CocoaMQTT'
 
   target 'flyve-mdm-iosTests' do
