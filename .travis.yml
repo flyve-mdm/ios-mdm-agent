@@ -2,8 +2,31 @@ language: objective-c
 osx_image: xcode8.3
 xcode_workspace: flyve-mdm-ios.xcworkspace
 xcode_scheme: flyve-mdm-ios
-xcode_sdk: iphonesimulator10.3
+podfile: Podfile
+before_install:
+- chmod a+x scripts/add-key.sh
+- chmod a+x scripts/run-build.sh
+- chmod a+x scripts/remove-key.sh
+- gem update --system
+- gem install fastlane --no-rdoc --no-ri --no-document --quiet
+install: true
+before_script:
+- "./scripts/add-key.sh"
+- echo FASTLANE_PASSWORD=$FASTLANE_PASSWORD >> .env
 script:
-- xcodebuild clean build -workspace flyve-mdm-ios.xcworkspace -scheme flyve-mdm-ios build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+- xcodebuild clean build -workspace flyve-mdm-ios.xcworkspace -scheme flyve-mdm-ios
+- "./scripts/run-build.sh"
+after_script:
+- "./scripts/remove-key.sh"
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
+env:
+  global:
+  - APPNAME="flyve-mdm-ios"
+  - PROFILE_UUID=XC_iOS_orgflyvemdmagentexample
+  - KEYCHAIN_NAME="ios-app.keychain"
+  - SCRIPT_PATH=./scripts
+  - CERTIFICATES_PATH=./scripts/cert
+  - PROFILE_PATH=./scripts/profile
+  - secure: Vn21cMydUAl07tGO3Knrnap87rJrOXKNS6z3CJph0y9wDCUa771xCDQ978RPWFn3HvTFoQzVY9Di/6vgHSyPb1CFh7g544zDUxIJfD34GV7RNln7RCTUhF9VgRhnIafNg30x8MWNytt0mQCsMQRc0X/TiWzuqSe9oo7sqUw/uPcBFAnUq+GUocxVoW6SNj2U3jCFXOgHtdbJKoD+sIC2/OieU6Y+mUtxrngOg8cPNHaEIlxdvCj93kV8/2qgtlg2DrxbkYD2HKVVsLrDEczLLI5zQgTrBwCH/JMCwtIL98AkXC82R65XaK8ZNSKMM5aHeyWW7ReXbQ/VTTryjX4KAhDjCFAAWaZW8SwqPYjaRGWTtpGPibjLOGuI4Em4gmxJ8WKXBE7DLW499x/tZu0CRBBtI8AxvbWnXVuK66TBoZOIrD5dpnccziKjFhHtSfcYyb6bflZlZbO+2ZReg7IkQz4uX0qwvcVPnncx0/+8ZBjIosknTYiqZr7vdEKboUTW13arv4Q60PegdwHLjmWijOoDr+ExdcQr/bt1V6tQcnO4LiUwxQHXSn7CC2eHUBJTiVAGP0ZeSfVSPFfMJo9F8CbHnR5yo8OozCSjGbc3bha/4fvA33/9Za8i/gBSaE1NzZxjgU9NYpwdi3igd0hNRw2PdnU0Hd/HbSk8bYRyvgk=
+  - secure: QXegoOMTK4MFdQ+Bm1j6by1VATjON6LQh4I5qcTabk/jgM6HNIhhnBD6qqFoZTyG6KkOUMkXiEi0YzA4bGF62lU5T2C6bhGmL6j9cpKvbVoaDgQoRYKldv6BpOqOs2bYOMWyyJlIr6sv4uRNcuvOESMiujn1kjRtQno+mNNkEqPkvmtvTDgzc5uMJb0E/Mpk8RSQHfSRa655ap5K25KAeMtJyAQQllGHOMmIq75Vi3vqrzZrGRmbbBHzympYodVeerNJTXrvxfR0Fs+cRLVNC7/u28Er1AuqO0adA0QNmReoTrvS0xikre4u56cZ/PYZweOlzCsu8e/sFRWRydvQGdqCMoPXZ42RFCVKS9mgJ9sTXyn9945EfwSyPkwodcpiz7hKgFforAg3pzGA4VzPy+0XFSs4p+bcNUGHOzR0p4hSzwR0zhKoJ/zrB6W3ldCjf2Wjx51s9hP+WpkWk15o+Hu4IvjGrBb04v+uzm/TXQqbNinGTegSCZjScCgqC/QHgcJvq4YrI6hoQ6e5LHmgpa+mYAVjItCGh9o9Wx4v/Dt1jUMOeIfaJcVezvkKbofEpdnf0RN9mD7S37cWP6opyB4k9+S/RxdAEd4HcambNHzvutgIhmgOr4HXqFe5Y0tJrjxYIuKoBcmHCI+xKtgdbeOA4IEwydZk2GsSEK7CBBQ=
