@@ -37,11 +37,6 @@
 	<string>App use Locations service mode Always</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App use Locations service mode In Use</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Roboto-Light.ttf</string>
-		<string>Roboto-Regular.ttf</string>
-	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
