@@ -173,7 +173,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "FLYVE MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console"
+        label.text = "message_init".localized
         label.sizeToFit()
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -188,7 +188,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Enroll device"
+        label.text = "enroll_device".localized
         label.font = UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightLight)
         label.sizeToFit()
         label.numberOfLines = 0
@@ -283,7 +283,7 @@ class ViewController: UIViewController {
         switch state
         {
         case .initial:
-            self.titleLabel.text = "Enroll device"
+            self.titleLabel.text = "enroll_device".localized
             self.enrollBotton.backgroundColor = UIColor.main
             self.enrollBotton.isUserInteractionEnabled = true
             self.playImageView.image = UIImage(named: "play")
@@ -292,12 +292,12 @@ class ViewController: UIViewController {
             self.statusLabel.text = ""
             
         case .loading:
-            self.titleLabel.text = "Enroll device"
+            self.titleLabel.text = "enroll_device".localized
             self.enrollBotton.backgroundColor = UIColor.loading
             self.enrollBotton.isUserInteractionEnabled = false
             self.playImageView.isHidden = true
             self.loadingIndicatorView.startAnimating()
-            self.statusLabel.text = "PLEASE WAIT.."
+            self.statusLabel.text = "loading".localized
             
         case .success:
             self.enrollBotton.backgroundColor = UIColor.main
@@ -306,10 +306,10 @@ class ViewController: UIViewController {
             self.playImageView.image = UIImage(named: "success")
             self.playImageView.isHidden = false
             self.loadingIndicatorView.stopAnimating()
-            self.statusLabel.text = "Success!"
+            self.statusLabel.text = "success".localized
         
         case .fail:
-            self.titleLabel.text = "Enrollment fail"
+            self.titleLabel.text = "enroll_fail".localized
             self.enrollBotton.backgroundColor = UIColor.fail
             self.enrollBotton.isUserInteractionEnabled = false
             self.playImageView.isHidden = true
@@ -350,11 +350,11 @@ extension ViewController: HttpRequestDelegate {
                 self.httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
 
             } else {
-                self.statusLabel.text = "Error: The device needs to change its profile"
+                self.statusLabel.text = "error_profile".localized
             }
         } else {
             
-            self.statusLabel.text = "Error: The device needs to change its profile"
+            self.statusLabel.text = "error_profile".localized
         }
     }
     
