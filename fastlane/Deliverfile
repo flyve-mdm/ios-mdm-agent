@@ -6,8 +6,8 @@
 ###################### Automatically generated ######################
 # Feel free to remove the following line if you use fastlane (which you should)
 
-app_identifier "org.flyve.mdm.agent.example" # The bundle identifier of your app
-username "info@s42.com.ve" # your Apple ID user
+app_identifier "org.flyve.mdm.agent" # The bundle identifier of your app
+username "hrondon@teclib.com" # your Apple ID user
 
 submission_information({
    add_id_info_serves_ads: "false",
