@@ -36,10 +36,10 @@ platform :ios do
     # sigh
     sigh(
       adhoc: false, 
-      username: "info@s42.com.ve",
-      team_id: "G3UM9C856M",
-      provisioning_name: "XC iOS: org.flyve.mdm.agent.example",
-      cert_id: "G3UM9C856M"
+      username: "hrondon@teclib.com",
+      team_id: "H7XJV96LX2",
+      provisioning_name: "XC iOS: org.flyve.mdm.agent",
+      cert_id: "H7XJV96LX2"
     )
   
     # Build
@@ -56,7 +56,7 @@ platform :ios do
 
     # TestFlight upload
     pilot(
-      app_identifier: "org.flyve.mdm.agent.example",
+      app_identifier: "org.flyve.mdm.agent",
       skip_waiting_for_build_processing: true
     )
   end
@@ -67,10 +67,10 @@ platform :ios do
     # sigh
     sigh(
       adhoc: false, 
-      username: "info@s42.com.ve",
-      team_id: "G3UM9C856M",
-      provisioning_name: "XC iOS: org.flyve.mdm.agent.example",
-      cert_id: "G3UM9C856M"
+      username: "hrondon@teclib.com",
+      team_id: "H7XJV96LX2",
+      provisioning_name: "XC iOS: org.flyve.mdm.agent",
+      cert_id: "H7XJV96LX2"
     )
     snapshot
     gym(scheme: "flyve-mdm-ios") # Build your app - more options available
