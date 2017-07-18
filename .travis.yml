@@ -23,7 +23,7 @@ notifications:
 env:
   global:
   - APPNAME="flyve-mdm-ios"
-  - PROFILE_UUID=XC_iOS_orgflyvemdmagentexample
+  - PROFILE_UUID=XC_iOS_orgflyvemdmagent
   - KEYCHAIN_NAME="ios-app.keychain"
   - SCRIPT_PATH=./scripts
   - CERTIFICATES_PATH=./scripts/cert
