@@ -282,7 +282,7 @@
 					0AD842731EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = H7XJV96LX2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					0AD842871EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -654,8 +654,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6117aea9-cc5b-46ac-8230-7530fe7df381";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -673,8 +673,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6117aea9-cc5b-46ac-8230-7530fe7df381";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
