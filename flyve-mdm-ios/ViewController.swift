@@ -104,12 +104,14 @@ class ViewController: UIViewController {
         self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
         self.logoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
 
-        self.messageLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 24).isActive = true
+        self.messageLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 16).isActive = true
         self.messageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
         self.messageLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24).isActive = true
 
         self.titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         self.titleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 24).isActive = true
+        
+        self.messageLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.titleLabel.topAnchor, constant: -16).isActive = true
         
         self.enrollBotton.widthAnchor.constraint(equalToConstant: 90.0).isActive = true
         self.enrollBotton.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
@@ -176,6 +178,7 @@ class ViewController: UIViewController {
         label.text = "message_init".localized
         label.sizeToFit()
         label.numberOfLines = 0
+        label.minimumScaleFactor = 14.0
         label.textAlignment = .center
         label.backgroundColor = .clear
         label.textColor = .gray
