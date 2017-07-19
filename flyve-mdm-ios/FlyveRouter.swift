@@ -35,15 +35,15 @@ enum FlyveRouter: URLRequestConvertible {
     
     case initSession(String)                        //  GET    /initSession
     case getFullSession()                           //  GET    /getFullSession
-    case changeActiveProfile(String)                //  GET    /changeActiveProfile
+    case changeActiveProfile(String)                //  POST   /changeActiveProfile
     case pluginFlyvemdmAgent([String : AnyObject])  //  POST   /pluginFlyvemdmAgent
     case getPluginFlyvemdmAgent(String)             //  GET    /getPluginFlyvemdmAgent
 
     var method: Alamofire.HTTPMethod {
         switch self {
-        case .initSession, .getFullSession, .changeActiveProfile, .getPluginFlyvemdmAgent:
+        case .initSession, .getFullSession, .getPluginFlyvemdmAgent:
             return .get
-        case .pluginFlyvemdmAgent:
+        case .pluginFlyvemdmAgent, .changeActiveProfile:
             return .post
         }
     }

@@ -286,13 +286,12 @@
 					};
 					0AD842871EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = G3UM9C856M;
+						DevelopmentTeam = H7XJV96LX2;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0AD842731EBA5BF70093AC74;
 					};
 					0AD842921EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = G3UM9C856M;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0AD842731EBA5BF70093AC74;
 					};
@@ -685,7 +684,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				DEVELOPMENT_TEAM = H7XJV96LX2;
 				INFOPLIST_FILE = "flyve-mdm-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosTests";
@@ -701,7 +700,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				DEVELOPMENT_TEAM = H7XJV96LX2;
 				INFOPLIST_FILE = "flyve-mdm-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosTests";
@@ -716,11 +715,13 @@
 			baseConfigurationReference = F27C92C9D703B90352CB27C8 /* Pods-flyve-mdm-iosUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "flyve-mdm-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "flyve-mdm-ios";
 			};
@@ -731,11 +732,13 @@
 			baseConfigurationReference = 2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "flyve-mdm-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "flyve-mdm-ios";
 			};
