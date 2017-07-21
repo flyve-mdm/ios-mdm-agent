@@ -80,14 +80,14 @@ platform :ios do
 
   after_all do |lane|
     telegram(
-        url_horn: "$TELEGRAM_WEBHOOKS",
+        url_horn: ENV["TELEGRAM_WEBHOOKS"],
         message: "Fastlane is OK"
     )
   end
 
   error do |lane, exception|
     telegram(
-        url_horn: "$TELEGRAM_WEBHOOKS",
+        url_horn: ENV["TELEGRAM_WEBHOOKS"],
         message: "`ERROR` Fastlane FAIL"
     )
   end
