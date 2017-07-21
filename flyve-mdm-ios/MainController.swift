@@ -212,6 +212,9 @@ extension MainController: CocoaMQTTDelegate {
         self.mqttSetting(host: host, port: port, username: user, password: "\(password)")
         
         self.mqtt!.connect()
+        
+        loadingIndicatorView.startAnimating()
+        statusView.backgroundColor = .clear
     }
     
     func mqttSetting(host: String, port: UInt16, username: String, password: String) {
@@ -242,6 +245,16 @@ extension MainController: CocoaMQTTDelegate {
             
             mqtt.subscribe("\(topic)/#", qos: CocoaMQTTQOS.qos1)
             print("Subscribed to topic \(String(describing: topic))/#")
+        }
+        
+        loadingIndicatorView.stopAnimating()
+        
+        if mqtt.connState == .connected {
+            
+            statusView.backgroundColor = .green
+            
+        } else {
+            statusView.backgroundColor = .red
         }
     }
     
@@ -323,6 +336,7 @@ extension MainController: CocoaMQTTDelegate {
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("mqttDidDisconnect")
+        statusView.backgroundColor = .red
     }
 }
 
