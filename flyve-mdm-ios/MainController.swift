@@ -70,7 +70,6 @@ class MainController: UIViewController {
             !broker.isEmpty, !user.isEmpty, !password.isEmpty {
             
             connectBroker(host: broker, port: port, user: user, password: password)
-        
         }
     }
     
@@ -82,12 +81,24 @@ class MainController: UIViewController {
     func setupViews() {
         
         view.backgroundColor = .background
+        view.addSubview(statusView)
+        statusView.addSubview(loadingIndicatorView)
         view.addSubview(logoImageView)
         view.addSubview(mainTableView)
 
     }
     
     func addConstraints() {
+        
+        statusView.topAnchor.constraint(equalTo: view.topAnchor, constant: 22.0).isActive = true
+        statusView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -14.0).isActive = true
+        statusView.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        statusView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        
+        loadingIndicatorView.centerXAnchor.constraint(equalTo: statusView.centerXAnchor).isActive = true
+        loadingIndicatorView.centerYAnchor.constraint(equalTo: statusView.centerYAnchor).isActive = true
+        loadingIndicatorView.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        loadingIndicatorView.heightAnchor.constraint(equalToConstant: 10).isActive = true
         
         logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 72).isActive = true
         logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -125,6 +136,27 @@ class MainController: UIViewController {
         table.register(MainCell.self, forCellReuseIdentifier: self.cellId)
         
         return table
+        
+    }()
+    
+    let loadingIndicatorView: UIActivityIndicatorView = {
+        
+        let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.hidesWhenStopped = true
+        
+        return loading
+    }()
+    
+    let statusView: UIView = {
+        
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 5.0
+        view.backgroundColor = .clear
+        
+        return view
         
     }()
     
@@ -187,7 +219,7 @@ extension MainController: CocoaMQTTDelegate {
         mqtt = CocoaMQTT(clientID: username, host: host, port: port)
         mqtt!.username = username
         mqtt!.password = password
-        mqtt!.willMessage = CocoaMQTTWill(topic: "/offline", message: "offline")
+        mqtt!.willMessage = CocoaMQTTWill(topic: "\(topic)/Status/Offline", message: "offline")
         mqtt!.keepAlive = 60
         mqtt!.delegate = self
         mqtt!.enableSSL = true
