@@ -85,7 +85,6 @@ class MainController: UIViewController {
         statusView.addSubview(loadingIndicatorView)
         view.addSubview(logoImageView)
         view.addSubview(mainTableView)
-
     }
     
     func addConstraints() {
@@ -109,13 +108,18 @@ class MainController: UIViewController {
         mainTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
     
-    let logoImageView: UIImageView = {
+    lazy var logoImageView: UIImageView = {
         
         let imageView = UIImageView(image: UIImage(named: "logo"))
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        
+        let multiTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showLog))
+        multiTap.numberOfTapsRequired = 10
+        imageView.addGestureRecognizer(multiTap)
         
         return imageView
     }()
@@ -159,6 +163,10 @@ class MainController: UIViewController {
         return view
         
     }()
+    
+    func showLog() {
+
+    }
     
     func goLogController() {
         navigationController?.pushViewController(TopicLogController(), animated: true)
