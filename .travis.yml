@@ -15,7 +15,7 @@ before_script:
 - echo FASTLANE_PASSWORD=$FASTLANE_PASSWORD >> .env
 - echo TELEGRAM_WEBHOOKS=$TELEGRAM_WEBHOOKS >> .env
 script:
-- xcodebuild clean build -workspace flyve-mdm-ios.xcworkspace -scheme flyve-mdm-ios
+# - xcodebuild clean build -workspace flyve-mdm-ios.xcworkspace -scheme flyve-mdm-ios
 - "./scripts/run-build.sh"
 after_script:
 - "./scripts/remove-key.sh"
