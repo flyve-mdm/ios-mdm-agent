@@ -51,6 +51,8 @@ class MainController: UIViewController {
             userInfo = dataUserObject
         }
         
+        isAdmin = UserDefaults.standard.bool(forKey: "admin")
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -166,7 +168,10 @@ class MainController: UIViewController {
     }()
     
     func showLog() {
-
+        UserDefaults.standard.set(!isAdmin, forKey: "admin")
+        UserDefaults.standard.synchronize()
+        isAdmin = !isAdmin
+        mainTableView.reloadData()
     }
     
     func goLogController() {
