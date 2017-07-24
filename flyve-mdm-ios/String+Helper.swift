@@ -35,7 +35,7 @@ extension String {
         }
         return nil
     }
-    
+
     //: ### Base64 decoding a string
     func base64Decoded() -> String? {
         if let data = Data(base64Encoded: self) {

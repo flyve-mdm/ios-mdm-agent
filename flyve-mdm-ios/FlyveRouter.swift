@@ -32,7 +32,7 @@ public var baseURL = String()
 public var sessionToken = String()
 
 enum FlyveRouter: URLRequestConvertible {
-    
+
     case initSession(String)                        //  GET    /initSession
     case getFullSession()                           //  GET    /getFullSession
     case changeActiveProfile(String)                //  POST   /changeActiveProfile
@@ -47,11 +47,10 @@ enum FlyveRouter: URLRequestConvertible {
             return .post
         }
     }
-    
+
     var path: String {
         // build up and return the URL for each endpoint
         switch self {
-            
         case .initSession(_ ) :
             return "/initSession"
         case .getFullSession():
@@ -64,13 +63,11 @@ enum FlyveRouter: URLRequestConvertible {
             return "/PluginFlyvemdmAgent/\(agent_id)"
 
         }
-        
     }
-    
+
     var query: String {
         // build up and return the query for each endpoint
         switch self {
-            
         case .initSession(let user_token) :
             return "user_token=\(user_token)"
         case .getFullSession():
@@ -82,16 +79,14 @@ enum FlyveRouter: URLRequestConvertible {
         case .getPluginFlyvemdmAgent(_ ):
             return ""
         }
-        
     }
-    
+
     /// Returns a URL request or throws if an `Error` was encountered.
     ///
     /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
     ///
     /// - returns: A URL request.
     func asURLRequest() throws -> URLRequest {
-        
         var strURL = String()
 
         if query.isEmpty {
@@ -99,17 +94,16 @@ enum FlyveRouter: URLRequestConvertible {
         } else {
             strURL = "\(baseURL)\(path)?\(query)"
         }
-        
+
         let requestURL = URL(string:strURL)!
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = method.rawValue
-        
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         if !sessionToken.isEmpty {
             urlRequest.setValue("\(sessionToken)", forHTTPHeaderField: "Session-Token")
         }
-        
+
         switch self {
         case .pluginFlyvemdmAgent(let parameters):
             return try Alamofire.JSONEncoding.default.encode(urlRequest, with: parameters)

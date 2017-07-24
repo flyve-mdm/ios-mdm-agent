@@ -28,24 +28,19 @@
 import Foundation
 import CoreLocation
 
-protocol LocationDelegate {
-    
+protocol LocationDelegate: class {
     func currentLocation(coordinate: CLLocationCoordinate2D)
 }
 
 class Location: NSObject {
-    
-    var delegate: LocationDelegate?
+    weak var delegate: LocationDelegate?
     let locationManager = CLLocationManager()
-
 }
 
 extension Location: CLLocationManagerDelegate {
-    
+
     func getCurrentLocation() {
-        
         if CLLocationManager.locationServicesEnabled() {
-            
             locationManager.delegate = self
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
@@ -53,14 +48,14 @@ extension Location: CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations.first?.coordinate.latitude ?? "")
         print(locations.first?.coordinate.longitude ?? "")
-        
+
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
-        
+
         if let coordinate = locations.first?.coordinate {
             delegate?.currentLocation(coordinate: coordinate)
         }
