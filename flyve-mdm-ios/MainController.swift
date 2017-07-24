@@ -37,6 +37,7 @@ class MainController: UIViewController {
     var topic = ""
     let cellId = "cellId"
     var location:Location!
+    var isAdmin = false
     
     init(mdmAgent: [String: Any]) {
         
@@ -185,7 +186,11 @@ extension MainController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 4
+        if isAdmin {
+            return 4
+        } else {
+            return 3
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
