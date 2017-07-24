@@ -211,7 +211,7 @@ extension MainController: UITableViewDataSource {
             cell.detailLabel.text = "\(userInfo["_email"] ?? "Email")"
             
         } else if indexPath.row == 2 {
-            cell.titleLabel.text = "title_resources".uppercased()
+            cell.titleLabel.text = "title_resources".localized.uppercased()
             
         } else if indexPath.row == 3 {
             cell.titleLabel.text = "log_report".localized.uppercased()
