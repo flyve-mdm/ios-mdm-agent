@@ -11,6 +11,7 @@
 		0A5CFDE61F265F0700DAB2A1 /* MainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */; };
 		0A5CFDE81F265F2F00DAB2A1 /* TitleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */; };
 		0A5CFDEA1F265F5C00DAB2A1 /* FieldInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */; };
+		0A5CFDEE1F266F9C00DAB2A1 /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */; };
 		0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */; };
 		0A7F4DB21F1D43FF00976EF4 /* Localizable.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */; };
 		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
@@ -56,6 +57,7 @@
 		0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInfoCell.swift; sourceTree = "<group>"; };
 		0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleInfoCell.swift; sourceTree = "<group>"; };
 		0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldInfoCell.swift; sourceTree = "<group>"; };
+		0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
 		0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizator.swift; sourceTree = "<group>"; };
 		0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Localizable.plist; sourceTree = "<group>"; };
 		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				0AD8428C1EBA5BF70093AC74 /* FlyveMDMAgentTests.swift */,
+				0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */,
 				0AD8428E1EBA5BF70093AC74 /* Info.plist */,
 			);
 			path = "flyve-mdm-iosTests";
@@ -549,6 +552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5CFDEE1F266F9C00DAB2A1 /* StringHelperTests.swift in Sources */,
 				0AD8428D1EBA5BF70093AC74 /* FlyveMDMAgentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
