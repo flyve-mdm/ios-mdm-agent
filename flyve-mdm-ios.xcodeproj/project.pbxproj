@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */; };
+		0A5CFDE61F265F0700DAB2A1 /* MainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */; };
+		0A5CFDE81F265F2F00DAB2A1 /* TitleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */; };
+		0A5CFDEA1F265F5C00DAB2A1 /* FieldInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */; };
 		0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */; };
 		0A7F4DB21F1D43FF00976EF4 /* Localizable.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */; };
 		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
@@ -21,8 +25,8 @@
 		0AC7632B1F1961C20050F17B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC7632A1F1961C20050F17B /* Location.swift */; };
 		0AD842781EBA5BF70093AC74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842771EBA5BF70093AC74 /* AppDelegate.swift */; };
 		0AD8427F1EBA5BF70093AC74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */; };
-		0AD8428D1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */; };
-		0AD842981EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842971EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift */; };
+		0AD8428D1EBA5BF70093AC74 /* FlyveMDMAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD8428C1EBA5BF70093AC74 /* FlyveMDMAgentTests.swift */; };
+		0AD842981EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */; };
 		0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842A51EBA5D810093AC74 /* ViewController.swift */; };
 		7C32A180F0F5DFA060EAC1B1 /* Pods_flyve_mdm_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAC68FF736F900EF009264A /* Pods_flyve_mdm_ios.framework */; };
 		7CEAE2ACFFC6CCDECA155081 /* Pods_flyve_mdm_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */; };
@@ -48,6 +52,10 @@
 
 /* Begin PBXFileReference section */
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
+		0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInfoCell.swift; sourceTree = "<group>"; };
+		0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleInfoCell.swift; sourceTree = "<group>"; };
+		0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldInfoCell.swift; sourceTree = "<group>"; };
 		0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizator.swift; sourceTree = "<group>"; };
 		0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Localizable.plist; sourceTree = "<group>"; };
 		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -65,10 +73,10 @@
 		0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "flyve-mdm-ios/Assets.xcassets"; sourceTree = "<group>"; };
 		0AD842831EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842881EBA5BF70093AC74 /* flyve-mdm-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "flyve-mdm-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flyve_mdm_iosTests.swift; sourceTree = "<group>"; };
+		0AD8428C1EBA5BF70093AC74 /* FlyveMDMAgentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyveMDMAgentTests.swift; sourceTree = "<group>"; };
 		0AD8428E1EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842931EBA5BF70093AC74 /* flyve-mdm-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "flyve-mdm-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0AD842971EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flyve_mdm_iosUITests.swift; sourceTree = "<group>"; };
+		0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyveMDMAgentUITests.swift; sourceTree = "<group>"; };
 		0AD842991EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842A51EBA5D810093AC74 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosUITests/Pods-flyve-mdm-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -153,11 +161,15 @@
 				0ABBB04E1EC38CC60018E2EF /* EnrollFormController.swift */,
 				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
 				0A87B6EC1F17CDD50038E5C3 /* MainController.swift */,
+				0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */,
 				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
 				0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */,
 				0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */,
 				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
+				0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */,
+				0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */,
+				0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */,
 			);
 			path = "flyve-mdm-ios";
 			sourceTree = "<group>";
@@ -165,7 +177,7 @@
 		0AD8428B1EBA5BF70093AC74 /* flyve-mdm-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */,
+				0AD8428C1EBA5BF70093AC74 /* FlyveMDMAgentTests.swift */,
 				0AD8428E1EBA5BF70093AC74 /* Info.plist */,
 			);
 			path = "flyve-mdm-iosTests";
@@ -174,7 +186,7 @@
 		0AD842961EBA5BF70093AC74 /* flyve-mdm-iosUITests */ = {
 			isa = PBXGroup;
 			children = (
-				0AD842971EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift */,
+				0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */,
 				0AD842991EBA5BF70093AC74 /* Info.plist */,
 			);
 			path = "flyve-mdm-iosUITests";
@@ -515,14 +527,18 @@
 			files = (
 				0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */,
 				0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */,
+				0A5CFDE61F265F0700DAB2A1 /* MainInfoCell.swift in Sources */,
 				0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */,
 				0ABBB04F1EC38CC60018E2EF /* EnrollFormController.swift in Sources */,
 				0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */,
 				0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */,
 				0AD842781EBA5BF70093AC74 /* AppDelegate.swift in Sources */,
 				0ABBB04D1EC22BE10018E2EF /* String+Helper.swift in Sources */,
+				0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */,
 				0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */,
+				0A5CFDEA1F265F5C00DAB2A1 /* FieldInfoCell.swift in Sources */,
 				0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */,
+				0A5CFDE81F265F2F00DAB2A1 /* TitleInfoCell.swift in Sources */,
 				0AC7632B1F1961C20050F17B /* Location.swift in Sources */,
 				0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */,
 				0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */,
@@ -533,7 +549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AD8428D1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift in Sources */,
+				0AD8428D1EBA5BF70093AC74 /* FlyveMDMAgentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,7 +557,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AD842981EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift in Sources */,
+				0AD842981EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,19 +28,19 @@
 import UIKit
 
 extension UIColor {
-    
+
     static let main: UIColor = {
         return UIColor.init(red: 26.0/255.0, green: 138.0/255.0, blue: 133.0/255.0, alpha: 1.0)
     }()
-    
+
     static let background: UIColor = {
         return UIColor.init(red: 239.0/255.0, green: 239.0/255.0, blue: 244.0/255.0, alpha: 1.0)
     }()
-    
+
     static let loading: UIColor = {
         return UIColor.init(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
     }()
-    
+
     static let fail: UIColor = {
         return UIColor.init(red: 111.0/255.0, green: 111.0/255.0, blue: 116.0/255.0, alpha: 1.0)
     }()

@@ -28,26 +28,23 @@
 import Foundation
 
 public func getStorage(key: String) -> AnyObject? {
-    
+
     if let obj = UserDefaults.standard.object(forKey: key) {
-        
-        return NSKeyedUnarchiver.unarchiveObject(with: obj as! Data) as AnyObject
-        
+        return NSKeyedUnarchiver.unarchiveObject(with: obj as? Data ?? Data()) as AnyObject
+
     } else {
-        
         return nil
     }
 }
 
 public func setStorage(value: AnyObject, key: String) {
-    
+
     let encodedData = NSKeyedArchiver.archivedData(withRootObject: value)
     UserDefaults.standard.set(encodedData, forKey: key)
     UserDefaults.standard.synchronize()
 }
 
 public func removeAllStorage() {
-    
     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
     UserDefaults.standard.synchronize()
 }
