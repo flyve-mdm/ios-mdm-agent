@@ -5,7 +5,7 @@
 	<key>app_name</key>
 	<string>Flyve MDM Agent</string>
 	<key>message_init</key>
-	<string>FLYVE MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console</string>
+	<string>Flyve MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console</string>
 	<key>enroll</key>
 	<string>Enroll</string>
 	<key>enroll_device</key>
