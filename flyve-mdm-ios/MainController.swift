@@ -28,6 +28,7 @@
 import UIKit
 import CocoaMQTT
 import CoreLocation
+import FlyveMDMInventory
 
 class MainController: UIViewController {
 
@@ -331,7 +332,12 @@ extension MainController: CocoaMQTTDelegate {
     }
     
     func replyInventory() {
-    
+        let inventory = InventoryTask()
+        inventory.execute(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "") { result in
+            
+            let topicInventory = "\(topic)/Status/Inventory"
+            mqtt?.publish(topicInventory, withString: result)
+        }
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
