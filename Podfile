@@ -9,6 +9,7 @@ target 'flyve-mdm-ios' do
 
   pod 'Alamofire', '~> 4.5'
   pod 'CocoaMQTT'
+  pod 'FlyveMDMInventory', '~> 1.2'
 
   target 'flyve-mdm-iosTests' do
     inherit! :search_paths
