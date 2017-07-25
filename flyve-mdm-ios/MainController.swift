@@ -297,6 +297,9 @@ extension MainController: CocoaMQTTDelegate {
                     location = Location()
                     location.delegate = self
                     location.getCurrentLocation()
+                    
+                } else if messageQuery == "Inventory" {
+                    replyInventory()
                 }
             } else if let messageUnenroll: String = messageBroker?["unenroll"] {
                 if messageUnenroll == "now" {
@@ -324,6 +327,10 @@ extension MainController: CocoaMQTTDelegate {
         let topicGeolocation = "\(topic)/Status/Geolocation"
         let answer = "{\"latitude\":\(latitude),\"longitude\":\(longitude),\"datetime\":\(datetime)}"
         mqtt?.publish(topicGeolocation, withString: answer)
+    }
+    
+    func replyInventory() {
+    
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
