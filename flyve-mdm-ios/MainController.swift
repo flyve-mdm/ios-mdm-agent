@@ -237,6 +237,7 @@ extension MainController: CocoaMQTTDelegate {
         mqtt!.keepAlive = 60
         mqtt!.delegate = self
         mqtt!.enableSSL = true
+        mqtt!.autoReconnect = true
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didReceive trust: SecTrust, completionHandler: @escaping (Bool) -> Void) {
