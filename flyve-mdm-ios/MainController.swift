@@ -176,6 +176,10 @@ class MainController: UIViewController {
     func goEnrollmentController() {
         UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: "", invitationToken: ""))
     }
+    
+    func goFileExplorerController() {
+        navigationController?.pushViewController(FileExplorerController(), animated: true)
+    }
 }
 
 extension MainController: UITableViewDelegate {
@@ -207,6 +211,7 @@ extension MainController: UITableViewDataSource {
 
         } else if indexPath.row == 2 {
             cell?.titleLabel.text = "title_resources".localized.uppercased()
+            cell?.openBotton.addTarget(self, action: #selector(self.goFileExplorerController), for: .touchUpInside)
 
         } else if indexPath.row == 3 {
             cell?.titleLabel.text = "log_report".localized.uppercased()
