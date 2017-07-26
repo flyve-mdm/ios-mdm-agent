@@ -44,6 +44,8 @@
 	<string>App use Locations service mode Always</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App use Locations service mode In Use</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
