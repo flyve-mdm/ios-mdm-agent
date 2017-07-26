@@ -282,7 +282,7 @@ extension MainController: CocoaMQTTDelegate {
 
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
         
-        print(message.string ?? "Empty Message")
+//        print(message.string ?? "Empty Message")
 
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
         NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
@@ -318,6 +318,11 @@ extension MainController: CocoaMQTTDelegate {
                     if let fleet = messageSubscribe[0]["topic"] as? String {
                         subscribeFleet(fleet)
                     }
+                }
+            } else if let messageFile: [AnyObject] = messageBroker?["file"] as? [AnyObject] {
+                
+                if messageFile.count > 0 {
+                    fileManage(messageFile)
                 }
             }
         }
@@ -355,6 +360,10 @@ extension MainController: CocoaMQTTDelegate {
     func subscribeFleet(_ fleet: String) {
         mqtt!.subscribe("\(fleet)/#", qos: CocoaMQTTQOS.qos1)
         print("Subscribed to topic \(String(describing: fleet))/#")
+    }
+    
+    func fileManage(_ files: [AnyObject]) {
+        print(files)
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
