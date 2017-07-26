@@ -25,4 +25,45 @@
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+import UIKit
+
+class FileExplorerController: UIViewController {
+    
+//    let fileManager = FileManager.default
+    var tmpDir = NSTemporaryDirectory()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func loadView() {
+        super.loadView()
+        setupViews()
+        addConstraints()
+        listDirectory()
+    }
+    
+    func setupViews() {
+        
+        view.backgroundColor = .background
+        self.navigationItem.title = "File explorer"
+    }
+    
+    func addConstraints() {
+    }
+    
+    func listDirectory() {
+        
+        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+
+        do {
+            // Get the directory contents urls (including subfolders urls)
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
+            print(directoryContents)
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
+}
