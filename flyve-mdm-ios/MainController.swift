@@ -211,7 +211,6 @@ extension MainController: UITableViewDataSource {
         } else if indexPath.row == 3 {
             cell?.titleLabel.text = "log_report".localized.uppercased()
             cell?.openBotton.addTarget(self, action: #selector(self.goLogController), for: .touchUpInside)
-
         }
 
         return cell!
@@ -277,21 +276,22 @@ extension MainController: CocoaMQTTDelegate {
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
+        
+        print(message.string ?? "Empty Message")
 
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
         NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
 
-        var messageBroker: [String: String]? = [String: String]()
+        var messageBroker: [String: AnyObject]? = [String: AnyObject]()
 
         if let data = message.string?.data(using: .utf8) {
             do {
-                messageBroker = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
-                //(with: data, options: []) as? [String: Any])
+                messageBroker = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
             } catch {
                 print(error.localizedDescription)
             }
-            print(messageBroker ?? "Empty")
-            if let messageQuery: String = messageBroker?["query"] {
+
+            if let messageQuery: String = messageBroker?["query"] as? String {
                 if messageQuery == "Ping" {
                     replyPing()
 
@@ -303,9 +303,16 @@ extension MainController: CocoaMQTTDelegate {
                 } else if messageQuery == "Inventory" {
                     replyInventory()
                 }
-            } else if let messageUnenroll: String = messageBroker?["unenroll"] {
+            } else if let messageUnenroll: String = messageBroker?["unenroll"] as? String {
                 if messageUnenroll == "now" {
                     replyUnenroll()
+                }
+            } else if let messageSubscribe: [AnyObject] = messageBroker?["subscribe"] as? [AnyObject] {
+                
+                if messageSubscribe.count > 0 {
+                    if let fleet = messageSubscribe[0]["topic"] as? String {
+                        subscribeFleet(fleet)
+                    }
                 }
             }
         }
@@ -338,6 +345,11 @@ extension MainController: CocoaMQTTDelegate {
             let topicInventory = "\(topic)/Status/Inventory"
             mqtt?.publish(topicInventory, withString: result)
         }
+    }
+    
+    func subscribeFleet(_ fleet: String) {
+        mqtt!.subscribe("\(fleet)/#", qos: CocoaMQTTQOS.qos1)
+        print("Subscribed to topic \(String(describing: fleet))/#")
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
