@@ -91,12 +91,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        guard let url_invitation: String = invitation["url"] as? String, let user_token: String = invitation["user_token"] as? String, let invitation_token: String = invitation["invitation_token"] as? String else {
+        guard invitation["url"] != nil, let user_token: String = invitation["user_token"] as? String, let invitation_token: String = invitation["invitation_token"] as? String else {
             loadMainView(userToken: "", invitationToken: "")
             return true
         }
 
-        baseURL = url_invitation
+        setStorage(value: invitation as AnyObject, key: "deeplink")
         loadMainView(userToken: user_token, invitationToken: invitation_token)
 
         return true

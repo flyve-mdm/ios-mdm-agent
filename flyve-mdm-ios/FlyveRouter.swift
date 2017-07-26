@@ -28,7 +28,6 @@
 import Foundation
 import Alamofire
 
-public var baseURL = String()
 public var sessionToken = String()
 
 enum FlyveRouter: URLRequestConvertible {
@@ -88,11 +87,14 @@ enum FlyveRouter: URLRequestConvertible {
     /// - returns: A URL request.
     func asURLRequest() throws -> URLRequest {
         var strURL = String()
-
-        if query.isEmpty {
-            strURL = "\(baseURL)\(path)"
-        } else {
-            strURL = "\(baseURL)\(path)?\(query)"
+        
+        if let deeplink = getStorage(key: "deeplink") as? [String: String], !deeplink.isEmpty {
+            
+            if query.isEmpty {
+                strURL = "\(String(describing: deeplink["url"]))\(path)"
+            } else {
+                strURL = "\(String(describing: deeplink["url"]))\(path)?\(query)"
+            }
         }
 
         let requestURL = URL(string:strURL)!
