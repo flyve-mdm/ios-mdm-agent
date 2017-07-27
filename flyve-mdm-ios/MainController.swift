@@ -39,6 +39,8 @@ class MainController: UIViewController {
     let cellId = "cellId"
     var location: Location!
     var isAdmin = false
+    var deployFile = [AnyObject]()
+    var removeFile = [AnyObject]()
 
     init(mdmAgent: [String: Any]) {
 
@@ -363,7 +365,46 @@ extension MainController: CocoaMQTTDelegate {
     }
     
     func fileManage(_ files: [AnyObject]) {
-        print(files)
+        
+        deployFile = files.filter {
+            if (($0 as? [String: String] ?? [String: String]())["deployFile"]) != nil {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        removeFile = files.filter {
+            if (($0 as? [String: String] ?? [String: String]())["removeFile"]) != nil {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        for file in removeFile {
+            removeFileFleet(file as? [String : String])
+        }
+    }
+    
+    func removeFileFleet(_ file: [String: String]?) {
+        
+        guard let fileName = file?["removeFile"]?.replacingOccurrences(of: "%DOCUMENTS%/", with: "") else {
+            return
+        }
+        
+        let fileManager = FileManager.default
+        
+        if let documentsPath =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
+            
+            do {
+                let filePathName = "\(documentsPath)/\(fileName)"
+                try fileManager.removeItem(atPath: filePathName)
+                
+            } catch {
+                print("Could not delete file: \(error)")
+            }
+        }
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
