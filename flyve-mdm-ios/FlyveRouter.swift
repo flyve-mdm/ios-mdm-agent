@@ -37,10 +37,11 @@ enum FlyveRouter: URLRequestConvertible {
     case changeActiveProfile(String)                //  POST   /changeActiveProfile
     case pluginFlyvemdmAgent([String : AnyObject])  //  POST   /pluginFlyvemdmAgent
     case getPluginFlyvemdmAgent(String)             //  GET    /getPluginFlyvemdmAgent
+    case pluginFlyvemdmFile(String)         //  GET    /PluginFlyvemdmFile
 
     var method: Alamofire.HTTPMethod {
         switch self {
-        case .initSession, .getFullSession, .getPluginFlyvemdmAgent:
+        case .initSession, .getFullSession, .getPluginFlyvemdmAgent, .pluginFlyvemdmFile:
             return .get
         case .pluginFlyvemdmAgent, .changeActiveProfile:
             return .post
@@ -60,6 +61,8 @@ enum FlyveRouter: URLRequestConvertible {
             return "/PluginFlyvemdmAgent"
         case .getPluginFlyvemdmAgent(let agent_id):
             return "/PluginFlyvemdmAgent/\(agent_id)"
+        case .pluginFlyvemdmFile(let file_id):
+            return "/PluginFlyvemdmFile/\(file_id)"
 
         }
     }
@@ -77,6 +80,8 @@ enum FlyveRouter: URLRequestConvertible {
             return ""
         case .getPluginFlyvemdmAgent(_ ):
             return ""
+        case .pluginFlyvemdmFile(_ ):
+            return ""
         }
     }
 
@@ -89,11 +94,10 @@ enum FlyveRouter: URLRequestConvertible {
         var strURL = String()
         
         if let deeplink = getStorage(key: "deeplink") as? [String: String], !deeplink.isEmpty {
-            
             if query.isEmpty {
-                strURL = "\(String(describing: deeplink["url"]))\(path)"
+                strURL = "\(deeplink["url"] ?? "")\(path)"
             } else {
-                strURL = "\(String(describing: deeplink["url"]))\(path)?\(query)"
+                strURL = "\(deeplink["url"] ?? "")\(path)?\(query)"
             }
         }
 
@@ -104,6 +108,13 @@ enum FlyveRouter: URLRequestConvertible {
 
         if !sessionToken.isEmpty {
             urlRequest.setValue("\(sessionToken)", forHTTPHeaderField: "Session-Token")
+        }
+        
+        switch self {
+        case .pluginFlyvemdmFile(_ ):
+            urlRequest.setValue("application/octet-stream", forHTTPHeaderField: "Accept")
+        default:
+            break
         }
 
         switch self {
