@@ -359,6 +359,7 @@ extension ViewController: HttpRequestDelegate {
         inputDictionary["_email"] = notification.userInfo?["_email"] as? String ?? ""
         inputDictionary["_invitation_token"] = self.invitationToken
         inputDictionary["_serial"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        inputDictionary["_uuid"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
         inputDictionary["csr"] = ""
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
