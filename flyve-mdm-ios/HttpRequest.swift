@@ -140,6 +140,20 @@ class HttpRequest: NSObject {
         }
         debugPrint(request)
     }
+    
+    func requestPluginFlyvemdmFile(fileID: String) {
+        
+        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        
+        let request = Alamofire.download(FlyveRouter.pluginFlyvemdmFile(fileID), to: destination)
+            .response { response in
+                
+                if let error = response.error {
+                    print(error)
+                }
+        }
+        debugPrint(request)
+    }
 
     func handlerError(_ response: DataResponse<Any>) -> [String: String] {
 
