@@ -33,6 +33,7 @@ import FlyveMDMInventory
 class MainController: UIViewController {
 
     var mqtt: CocoaMQTT?
+    var httpRequest: HttpRequest?
     var userInfo = [String: String]()
     var mdmAgent = [String: Any]()
     var topic = ""
@@ -382,6 +383,15 @@ extension MainController: CocoaMQTTDelegate {
             }
         }
         
+        if deployFile.count > 0 {
+            if let deeplink = getStorage(key: "deeplink") as? [String: String] {
+                print(deeplink["user_token"] ?? "")
+                httpRequest = HttpRequest()
+                httpRequest?.requestInitSession(userToken: deeplink["user_token"] ?? "")
+                httpRequest?.delegate = self
+            }
+        }
+
         for file in removeFile {
             removeFileFleet(file as? [String : String])
         }
@@ -426,6 +436,56 @@ extension MainController: CocoaMQTTDelegate {
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("mqttDidDisconnect")
         statusView.backgroundColor = .red
+    }
+}
+
+extension MainController: HttpRequestDelegate {
+    
+    func responseInitSession(data: [String: AnyObject]) {
+        
+        if let session_token = data["session_token"] as? String {
+            sessionToken = session_token
+            httpRequest?.requestGetFullSession()
+        }
+    }
+    
+    func errorInitSession(error: [String: String]) {
+        
+    }
+    
+    func responseGetFullSession(data: [String: AnyObject]) {
+        
+        if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
+            
+            if profiles_id == guest_profiles_id {
+                httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
+                
+            } else {
+                print("Error: Change active profile")
+            }
+        } else {
+            print("Error: Change active profile")
+        }
+    }
+    
+    func errorGetFullSession(error: [String: String]) {
+        
+    }
+    
+    func responseChangeActiveProfile() {
+        
+        for files in deployFile {
+            
+            if let fileID = files["id"] as? String {
+                DispatchQueue.global(qos: .background).async { [weak self] () -> Void in
+                    self?.httpRequest?.requestPluginFlyvemdmFile(fileID: fileID)
+                }
+            }
+        }
+    }
+    
+    func errorChangeActiveProfile(error: [String: String]) {
+        
     }
 }
 
