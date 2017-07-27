@@ -13,7 +13,6 @@
 		0A5CFDEA1F265F5C00DAB2A1 /* FieldInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */; };
 		0A5CFDEE1F266F9C00DAB2A1 /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */; };
 		0A5CFDF01F26743500DAB2A1 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */; };
-		0A6E9E6D1F28E65D00CCCB0B /* FileExplorerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E9E6C1F28E65D00CCCB0B /* FileExplorerController.swift */; };
 		0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */; };
 		0A7F4DB21F1D43FF00976EF4 /* Localizable.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */; };
 		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
@@ -60,7 +59,6 @@
 		0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldInfoCell.swift; sourceTree = "<group>"; };
 		0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
 		0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
-		0A6E9E6C1F28E65D00CCCB0B /* FileExplorerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileExplorerController.swift; sourceTree = "<group>"; };
 		0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizator.swift; sourceTree = "<group>"; };
 		0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Localizable.plist; sourceTree = "<group>"; };
 		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 				0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */,
 				0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */,
 				0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */,
-				0A6E9E6C1F28E65D00CCCB0B /* FileExplorerController.swift */,
 			);
 			path = "flyve-mdm-ios";
 			sourceTree = "<group>";
@@ -535,7 +532,6 @@
 				0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */,
 				0A5CFDE61F265F0700DAB2A1 /* MainInfoCell.swift in Sources */,
 				0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */,
-				0A6E9E6D1F28E65D00CCCB0B /* FileExplorerController.swift in Sources */,
 				0ABBB04F1EC38CC60018E2EF /* EnrollFormController.swift in Sources */,
 				0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */,
 				0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */,

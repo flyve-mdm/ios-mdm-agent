@@ -29,6 +29,7 @@ import UIKit
 import CocoaMQTT
 import CoreLocation
 import FlyveMDMInventory
+import FileExplorer
 
 class MainController: UIViewController {
 
@@ -181,7 +182,11 @@ class MainController: UIViewController {
     }
     
     func goFileExplorerController() {
-        navigationController?.pushViewController(FileExplorerController(), animated: true)
+        let fileExplorer = FileExplorerViewController()
+        fileExplorer.canRemoveFiles = false
+        fileExplorer.canRemoveDirectories = false
+        
+        self.present(fileExplorer, animated: true, completion: nil)
     }
 }
 
