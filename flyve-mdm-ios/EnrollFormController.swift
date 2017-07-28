@@ -29,8 +29,8 @@ import UIKit
 
 class EnrollFormController: UIViewController {
 
-    var userInfo = ["firstName": "", "lastName": "", "phone": "", "email": ""]
-
+    var userInfo = ["firstname": "", "lastname": "", "phone": "", "_email": ""]
+    var edit = false
     let cellIdMain = "cellIdMain"
     let cellIdTitle = "cellIdTitle"
     let cellIdField = "cellIdField"
@@ -40,7 +40,8 @@ class EnrollFormController: UIViewController {
 
     override func loadView() {
         super.loadView()
-
+        print(userInfo)
+        print(edit)
         self.setupViews()
         self.addConstraints()
     }
@@ -53,8 +54,20 @@ class EnrollFormController: UIViewController {
                                          style: UIBarButtonItemStyle.plain,
                                          target: self,
                                          action: #selector(self.done))
-
-        self.navigationItem.title = "Enrollment"
+        if edit {
+            let cancelButton = UIBarButtonItem(title: "Cancel",
+                                             style: UIBarButtonItemStyle.plain,
+                                             target: self,
+                                             action: #selector(self.cancel))
+            
+            self.navigationItem.leftBarButtonItem = cancelButton
+            self.navigationItem.title = "Edit user"
+            
+            
+        } else {
+            self.navigationItem.title = "Enrollment"
+        }
+        
         self.navigationItem.rightBarButtonItem = saveButton
 
         self.view.addSubview(self.enrollTableView)
@@ -102,13 +115,21 @@ class EnrollFormController: UIViewController {
 
     func enroll() {
 
-        guard let email = self.userInfo["email"], let phone = self.userInfo["phone"], let first = self.userInfo["firstName"], let last = self.userInfo["lastName"], !email.isEmpty, !phone.isEmpty, !first.isEmpty, !last.isEmpty else {
+        guard let email = self.userInfo["_email"], let phone = self.userInfo["phone"], let first = self.userInfo["firstname"], let last = self.userInfo["lastname"], !email.isEmpty, !phone.isEmpty, !first.isEmpty, !last.isEmpty else {
             return
         }
+        
+        if edit {
+            setStorage(value: self.userInfo as AnyObject, key: "dataUser")
+            let notificationData = NotificationCenter.default
+            notificationData.post(name: NSNotification.Name(rawValue: "editUser"), object: nil, userInfo: nil)
+        } else {
+            
+            let dataUser: [String: String] = ["_email": email, "phone": phone, "firstname": first, "lastname": last]
+            let notificationData = NotificationCenter.default
+            notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: dataUser)
+        }
 
-        let dataUser: [String: String] = ["_email": email, "firstname": first, "lastname": last]
-        let notificationData = NotificationCenter.default
-        notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: dataUser)
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -124,12 +145,17 @@ class EnrollFormController: UIViewController {
         let cellPhone  = enrollTableView.cellForRow(at: indexPathPhone as IndexPath) as? FieldInfoCell
         let cellEmail  = enrollTableView.cellForRow(at: indexPathEmail as IndexPath) as? FieldInfoCell
 
-        self.userInfo["firstName"] = cellName?.firstNameTextField.text
-        self.userInfo["lastName"] = cellName?.lastNameTextField.text
+        self.userInfo["firstname"] = cellName?.firstNameTextField.text
+        self.userInfo["lastname"] = cellName?.lastNameTextField.text
         self.userInfo["phone"] = cellPhone?.textField.text ?? ""
-        self.userInfo["email"] = cellEmail?.textField.text ?? ""
-
-        self.enroll()
+        self.userInfo["_email"] = cellEmail?.textField.text ?? ""
+        
+        enroll()
+    }
+    
+    func cancel() {
+        dismissKeyboard()
+        self.dismiss(animated: true, completion: nil)
     }
 
     func dismissKeyboard() {
@@ -186,13 +212,18 @@ extension EnrollFormController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
         if editingStyle == .delete {
-            if indexPath.section == 1 {
-                countPhone = 0
-            } else if indexPath.section == 3 {
-                countEmail = 0
-            }
+            
+            if !edit {
 
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+                if indexPath.section == 1 {
+                    countPhone = 0
+                } else if indexPath.section == 3 {
+                    countEmail = 0
+                }
+            
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
         } else if editingStyle == .insert {
 
             if indexPath.section == 2 {
@@ -247,7 +278,17 @@ extension EnrollFormController: UITableViewDataSource {
         if indexPath.row == 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdMain, for: indexPath) as? MainInfoCell
             cell?.firstNameTextField.tag = 0
+            
+            if userInfo["firstname"] != "" {
+                cell?.firstNameTextField.text = userInfo["firstname"]
+            }
+
             cell?.lastNameTextField.tag = 1
+            
+            if userInfo["lastname"] != "" {
+                cell?.lastNameTextField.text = userInfo["lastname"]
+            }
+
             return cell!
 
         } else {
@@ -271,13 +312,16 @@ extension EnrollFormController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdField, for: indexPath) as? FieldInfoCell
 
                 if indexPath.section == 1 {
-                    cell?.textField.text = ""
+                    cell?.textField.text = userInfo["phone"] ?? ""
                     cell?.textField.placeholder = "phone".localized
                     cell?.textField.tag = 2
                     cell?.textField.keyboardType = .phonePad
 
                 } else {
-                    cell?.textField.text = ""
+                    if edit {
+                        cell?.textField.isEnabled = false
+                    }
+                    cell?.textField.text = userInfo["_email"] ?? ""
                     cell?.textField.placeholder = "Email".localized
                     cell?.textField.tag = 3
                     cell?.textField.keyboardType = .emailAddress
