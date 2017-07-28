@@ -363,6 +363,7 @@ extension ViewController: HttpRequestDelegate {
         inputDictionary["csr"] = ""
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
+        inputDictionary["phone"] = notification.userInfo?["phone"] as? String ?? ""
 
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             inputDictionary["version"] = version
