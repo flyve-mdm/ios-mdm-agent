@@ -121,6 +121,7 @@ class MainCell: UITableViewCell {
     let descriptionLabel: UILabel = {
 
         let label = UILabel()
+        label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)
@@ -131,9 +132,10 @@ class MainCell: UITableViewCell {
     let detailLabel: UILabel = {
 
         let label = UILabel()
+        label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightThin)
+        label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightThin)
 
         return label
     }()
