@@ -51,11 +51,11 @@ class MainController: UIViewController {
         if let topic = mdmAgent["topic"] as? String {
             self.topic = topic
         }
-
+        
         if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
             userInfo = dataUserObject
         }
-
+        
         isAdmin = UserDefaults.standard.bool(forKey: "admin")
 
         super.init(nibName: nil, bundle: nil)
@@ -67,6 +67,9 @@ class MainController: UIViewController {
 
     override func loadView() {
         super.loadView()
+        
+        let notificationData = NotificationCenter.default
+        notificationData.addObserver(self, selector: #selector(self.editUser), name: NSNotification.Name(rawValue: "editUser"), object: nil)
 
         setupViews()
         addConstraints()
@@ -188,6 +191,30 @@ class MainController: UIViewController {
         
         self.present(fileExplorer, animated: true, completion: nil)
     }
+    
+    func goUserController() {
+        let userCntroller = EnrollFormController()
+        userCntroller.edit = true
+        userCntroller.userInfo = userInfo
+        if userInfo["_email"] != nil {
+            userCntroller.countEmail = 1
+        }
+        if userInfo["phone"] != nil {
+            userCntroller.countPhone = 1
+        }
+        self.present(UINavigationController(rootViewController: userCntroller), animated: true, completion: nil)
+    }
+    
+    func editUser() {
+        
+        if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
+            userInfo = dataUserObject
+            
+            mainTableView.beginUpdates()
+            mainTableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            mainTableView.endUpdates()
+        }
+    }
 }
 
 extension MainController: UITableViewDelegate {
@@ -216,6 +243,7 @@ extension MainController: UITableViewDataSource {
             cell?.titleLabel.text = "title_user".localized.uppercased()
             cell?.descriptionLabel.text = "\(userInfo["firstname"] ?? "") \(userInfo["lastname"] ?? "")"
             cell?.detailLabel.text = "\(userInfo["_email"] ?? "Email")"
+            cell?.openBotton.addTarget(self, action: #selector(self.goUserController), for: .touchUpInside)
 
         } else if indexPath.row == 2 {
             cell?.titleLabel.text = "title_resources".localized.uppercased()
