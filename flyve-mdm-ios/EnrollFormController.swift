@@ -50,21 +50,21 @@ class EnrollFormController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = false
 
-        let saveButton = UIBarButtonItem(title: "Done",
+        let saveButton = UIBarButtonItem(title: "done".localized,
                                          style: UIBarButtonItemStyle.plain,
                                          target: self,
                                          action: #selector(self.done))
         if edit {
-            let cancelButton = UIBarButtonItem(title: "Cancel",
+            let cancelButton = UIBarButtonItem(title: "cancel".localized,
                                              style: UIBarButtonItemStyle.plain,
                                              target: self,
                                              action: #selector(self.cancel))
             
             self.navigationItem.leftBarButtonItem = cancelButton
-            self.navigationItem.title = "Edit user"
+            self.navigationItem.title = "edit_user".localized
 
         } else {
-            self.navigationItem.title = "Enrollment"
+            self.navigationItem.title = "enrollment".localized
         }
         
         self.navigationItem.rightBarButtonItem = saveButton

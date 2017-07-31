@@ -44,5 +44,13 @@
 	<string>First name</string>
 	<key>last_name</key>
 	<string>Last name</string>
+	<key>done</key>
+	<string>Done</string>
+	<key>cancel</key>
+	<string>Cancel</string>
+	<key>edit_user</key>
+	<string>Edit user</string>
+	<key>enrollment</key>
+	<string>Enrollment</string>
 </dict>
 </plist>
