@@ -33,6 +33,8 @@ class SupervisorController: UIViewController {
     let cellIdMain = "cellIdMain"
     let cellIdInfo = "cellIdInfo"
     var supervisor = [String: AnyObject]()
+    var httpRequest: HttpRequest?
+    var entity = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,6 +45,13 @@ class SupervisorController: UIViewController {
         
         if let supervisorObject = getStorage(key: "supervisor") as? [String: AnyObject] {
             supervisor = supervisorObject
+        }
+        
+        if let deeplink = getStorage(key: "deeplink") as? [String: String] {
+            print(deeplink["user_token"] ?? "")
+            httpRequest = HttpRequest()
+            httpRequest?.requestInitSession(userToken: deeplink["user_token"] ?? "")
+            httpRequest?.delegate = self
         }
         
         super.loadView()
@@ -142,6 +151,62 @@ class SupervisorController: UIViewController {
                 present(composer, animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension SupervisorController: HttpRequestDelegate {
+    
+    func responseInitSession(data: [String: AnyObject]) {
+        
+        if let session_token = data["session_token"] as? String {
+            sessionToken = session_token
+            httpRequest?.requestGetFullSession()
+        }
+    }
+    
+    func errorInitSession(error: [String: String]) {
+        
+    }
+    
+    func responseGetFullSession(data: [String: AnyObject]) {
+        
+        if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
+            
+            if profiles_id == guest_profiles_id {
+                httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
+                
+                if let entity = data["session"]?["glpiactive_entity"] as? Int {
+                    self.entity = "\(entity)"
+                }
+                
+            } else {
+                print("Error: Change active profile")
+            }
+        } else {
+            print("Error: Change active profile")
+        }
+    }
+    
+    func errorGetFullSession(error: [String: String]) {
+        
+    }
+    
+    func responseChangeActiveProfile() {
+        
+        self.httpRequest?.requestPluginFlyvemdmEntityConfig(entityID: entity)
+    }
+    
+    func errorChangeActiveProfile(error: [String: String]) {
+        
+    }
+    
+    func responsePluginFlyvemdmEntityConfig(data: [String : AnyObject]) {
+
+        setStorage(value: data as AnyObject, key: "supervisor")
+    }
+    
+    func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
+        
     }
 }
 

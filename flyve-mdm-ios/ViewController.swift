@@ -333,8 +333,8 @@ extension ViewController: HttpRequestDelegate {
             if profiles_id == guest_profiles_id {
                 self.httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
                 
-                if let entity = data["session"]?["glpiactive_entity"] as? String {
-                    self.httpRequest?.requestPluginFlyvemdmEntityConfig(entityID: entity)
+                if let entity = data["session"]?["glpiactive_entity"] as? Int {
+                    self.httpRequest?.requestPluginFlyvemdmEntityConfig(entityID: "\(entity)")
                 }
 
             } else {
