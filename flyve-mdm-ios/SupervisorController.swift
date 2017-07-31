@@ -107,7 +107,13 @@ class SupervisorController: UIViewController {
     }
     
     func call() {
-        print("call")
+        guard let number = URL(string: "tel://" + "\(supervisor["support_phone"] as? String ?? "")") else { return }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(number)
+        } else {
+            UIApplication.shared.openURL(number)
+        }
     }
     
     func message() {
