@@ -220,6 +220,10 @@ class MainController: UIViewController {
             mainTableView.endUpdates()
         }
     }
+    
+    func goSupervisorController() {
+        self.present(UINavigationController(rootViewController: SupervisorController()), animated: true, completion: nil)
+    }
 }
 
 extension MainController: UITableViewDelegate {
@@ -243,8 +247,9 @@ extension MainController: UITableViewDataSource {
 
         if indexPath.row == 0 {
             cell?.titleLabel.text = "title_ supervised".localized.uppercased()
-            cell?.descriptionLabel.text = "\(supervisor["support_name"] as? String ?? "Company name")"
+            cell?.descriptionLabel.text = "\(supervisor["support_name"] as? String ?? "Support name")"
             cell?.detailLabel.text = "\(supervisor["support_email"] as? String ?? "Email")"
+            cell?.openBotton.addTarget(self, action: #selector(self.goSupervisorController), for: .touchUpInside)
 
         } else if indexPath.row == 1 {
             cell?.titleLabel.text = "title_user".localized.uppercased()

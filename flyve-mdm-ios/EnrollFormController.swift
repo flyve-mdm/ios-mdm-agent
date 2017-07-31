@@ -40,8 +40,6 @@ class EnrollFormController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        print(userInfo)
-        print(edit)
         self.setupViews()
         self.addConstraints()
     }
