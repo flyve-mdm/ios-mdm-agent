@@ -37,11 +37,12 @@ enum FlyveRouter: URLRequestConvertible {
     case changeActiveProfile(String)                //  POST   /changeActiveProfile
     case pluginFlyvemdmAgent([String : AnyObject])  //  POST   /pluginFlyvemdmAgent
     case getPluginFlyvemdmAgent(String)             //  GET    /getPluginFlyvemdmAgent
-    case pluginFlyvemdmFile(String)         //  GET    /PluginFlyvemdmFile
+    case pluginFlyvemdmFile(String)                 //  GET    /PluginFlyvemdmFile
+    case pluginFlyvemdmEntityConfig(String)         //  GET    /PluginFlyvemdmEntityConfig
 
     var method: Alamofire.HTTPMethod {
         switch self {
-        case .initSession, .getFullSession, .getPluginFlyvemdmAgent, .pluginFlyvemdmFile:
+        case .initSession, .getFullSession, .getPluginFlyvemdmAgent, .pluginFlyvemdmFile, .pluginFlyvemdmEntityConfig:
             return .get
         case .pluginFlyvemdmAgent, .changeActiveProfile:
             return .post
@@ -63,7 +64,8 @@ enum FlyveRouter: URLRequestConvertible {
             return "/PluginFlyvemdmAgent/\(agent_id)"
         case .pluginFlyvemdmFile(let file_id):
             return "/PluginFlyvemdmFile/\(file_id)"
-
+        case .pluginFlyvemdmEntityConfig(let entity_id):
+            return "/PluginFlyvemdmFile/\(entity_id)"
         }
     }
 
@@ -81,6 +83,8 @@ enum FlyveRouter: URLRequestConvertible {
         case .getPluginFlyvemdmAgent(_ ):
             return ""
         case .pluginFlyvemdmFile(_ ):
+            return ""
+        case .pluginFlyvemdmEntityConfig(_ ):
             return ""
         }
     }

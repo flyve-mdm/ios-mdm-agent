@@ -43,6 +43,9 @@ import Alamofire
 
     @objc optional func responseGetPluginFlyvemdmAgent(data: [String: AnyObject])
     @objc optional func errorGetPluginFlyvemdmAgent(error: [String: String])
+    
+    @objc optional func responsePluginFlyvemdmEntityConfig(data: [String: AnyObject])
+    @objc optional func errorPluginFlyvemdmEntityConfig(error: [String: String])
 }
 
 class HttpRequest: NSObject {
@@ -150,6 +153,22 @@ class HttpRequest: NSObject {
                 
                 if let error = response.error {
                     print(error)
+                }
+        }
+        debugPrint(request)
+    }
+    
+    func requestPluginFlyvemdmEntityConfig(entityID: String) {
+        let request = Alamofire.request(FlyveRouter.pluginFlyvemdmEntityConfig(entityID))
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let result = response.result.value {
+                        self.delegate?.responsePluginFlyvemdmEntityConfig!(data: result as? [String: AnyObject] ?? [String: AnyObject]())
+                    }
+                case .failure(_ ):
+                    self.delegate?.errorPluginFlyvemdmEntityConfig!(error: self.handlerError(response))
                 }
         }
         debugPrint(request)
