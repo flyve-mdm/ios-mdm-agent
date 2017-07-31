@@ -111,7 +111,17 @@ class SupervisorController: UIViewController {
     }
     
     func message() {
-        print("message")
+
+        if let phoneNumber = supervisor["support_phone"] as? String {
+            
+            let composer = MFMessageComposeViewController()
+            
+            if MFMessageComposeViewController.canSendText() {
+                composer.messageComposeDelegate = self
+                composer.recipients = [phoneNumber]
+                present(composer, animated: true, completion: nil)
+            }
+        }
     }
     
     func email() {
@@ -132,6 +142,13 @@ class SupervisorController: UIViewController {
 extension SupervisorController: MFMailComposeViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SupervisorController: MFMessageComposeViewControllerDelegate {
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
     }
 }
