@@ -26,6 +26,7 @@
  */
 
 import UIKit
+import MessageUI
 
 class SupervisorController: UIViewController {
     
@@ -114,7 +115,24 @@ class SupervisorController: UIViewController {
     }
     
     func email() {
-        print("email")
+        
+        if let email = supervisor["support_email"] as? String {
+            
+            let composer = MFMailComposeViewController()
+            
+            if MFMailComposeViewController.canSendMail() {
+                composer.mailComposeDelegate = self
+                composer.setToRecipients([email])
+                present(composer, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+extension SupervisorController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
