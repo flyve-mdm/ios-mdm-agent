@@ -37,6 +37,7 @@ class MainController: UIViewController {
     var httpRequest: HttpRequest?
     var userInfo = [String: String]()
     var mdmAgent = [String: Any]()
+    var supervisor = [String: AnyObject]()
     var topic = ""
     let cellId = "cellId"
     var location: Location!
@@ -54,6 +55,10 @@ class MainController: UIViewController {
         
         if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
             userInfo = dataUserObject
+        }
+        
+        if let supervisorObject = getStorage(key: "supervisor") as? [String: AnyObject] {
+            supervisor = supervisorObject
         }
         
         isAdmin = UserDefaults.standard.bool(forKey: "admin")
@@ -238,6 +243,8 @@ extension MainController: UITableViewDataSource {
 
         if indexPath.row == 0 {
             cell?.titleLabel.text = "title_ supervised".localized.uppercased()
+            cell?.descriptionLabel.text = "\(supervisor["support_name"] as? String ?? "Company name")"
+            cell?.detailLabel.text = "\(supervisor["support_email"] as? String ?? "Email")"
 
         } else if indexPath.row == 1 {
             cell?.titleLabel.text = "title_user".localized.uppercased()
