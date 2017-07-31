@@ -52,5 +52,7 @@
 	<string>Edit user</string>
 	<key>enrollment</key>
 	<string>Enrollment</string>
+	<key>share</key>
+	<string>Share</string>
 </dict>
 </plist>
