@@ -198,16 +198,8 @@ class MainController: UIViewController {
     }
     
     func goUserController() {
-        let userCntroller = EnrollFormController()
-        userCntroller.edit = true
-        userCntroller.userInfo = userInfo
-        if userInfo["_email"] != nil {
-            userCntroller.countEmail = 1
-        }
-        if userInfo["phone"] != nil {
-            userCntroller.countPhone = 1
-        }
-        self.present(UINavigationController(rootViewController: userCntroller), animated: true, completion: nil)
+
+        self.present(UINavigationController(rootViewController: UserController()), animated: true, completion: nil)
     }
     
     func editUser() {
