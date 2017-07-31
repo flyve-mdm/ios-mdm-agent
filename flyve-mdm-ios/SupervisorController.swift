@@ -98,7 +98,11 @@ class SupervisorController: UIViewController {
     }
     
     func share() {
-        print("share")
+        
+        let shareText = "\(supervisor["support_name"] as? String ?? "support name")\n\(supervisor["support_email"] as? String ?? "support email")\n\(supervisor["support_phone"] as? String ?? "support phone")"
+        
+        let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
+        present(vc, animated: true)
     }
     
     func call() {
