@@ -18,6 +18,7 @@
 		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
 		0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */; };
 		0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */; };
+		0A884CA51F2F7EC0009B5925 /* SupervisorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */; };
 		0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F8001EC3A840006397EC /* TopicLogController.swift */; };
 		0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */; };
 		0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */; };
@@ -64,6 +65,7 @@
 		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Delay+Helper.swift"; sourceTree = "<group>"; };
 		0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalStorage+Helper.swift"; sourceTree = "<group>"; };
+		0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupervisorController.swift; sourceTree = "<group>"; };
 		0A92F8001EC3A840006397EC /* TopicLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicLogController.swift; sourceTree = "<group>"; };
 		0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Helper.swift"; sourceTree = "<group>"; };
 		0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlyveRouter.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */,
 				0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */,
 				0A5CFDE91F265F5C00DAB2A1 /* FieldInfoCell.swift */,
+				0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */,
 			);
 			path = "flyve-mdm-ios";
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */,
+				0A884CA51F2F7EC0009B5925 /* SupervisorController.swift in Sources */,
 				0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */,
 				0A5CFDE61F265F0700DAB2A1 /* MainInfoCell.swift in Sources */,
 				0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */,
