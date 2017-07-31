@@ -62,8 +62,7 @@ class EnrollFormController: UIViewController {
             
             self.navigationItem.leftBarButtonItem = cancelButton
             self.navigationItem.title = "Edit user"
-            
-            
+
         } else {
             self.navigationItem.title = "Enrollment"
         }
