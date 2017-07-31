@@ -332,6 +332,10 @@ extension ViewController: HttpRequestDelegate {
 
             if profiles_id == guest_profiles_id {
                 self.httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
+                
+                if let entity = data["session"]?["glpiactive_entity"] as? String {
+                    self.httpRequest?.requestPluginFlyvemdmEntityConfig(entityID: entity)
+                }
 
             } else {
                 self.statusLabel.text = "error_profile".localized
@@ -345,6 +349,14 @@ extension ViewController: HttpRequestDelegate {
 
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
+    }
+    
+    func responsePluginFlyvemdmEntityConfig(data: [String : AnyObject]) {
+        setStorage(value: data as AnyObject, key: "supervisor")
+    }
+    
+    func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
+
     }
 
     func responseChangeActiveProfile() {
