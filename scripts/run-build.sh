@@ -5,7 +5,8 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
 elif [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "true" ]]; then
   fastlane test
 elif [[ "$TRAVIS_BRANCH" == "master" ]]; then
-  fastlane test
-else
-  fastlane test
+  if GIT_DIR=$PWD/.git git rev-parse "$1^{tag}" >/dev/null 2>&1 
+  then
+    fastlane release
+  fi
 fi
