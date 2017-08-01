@@ -73,9 +73,19 @@ platform :ios do
       cert_id: "H7XJV96LX2"
     )
     snapshot
-    gym(scheme: "flyve-mdm-ios") # Build your app - more options available
-    # deliver(force: true)
-    # frameit
+    # Build
+    gym(
+      scheme: "flyve-mdm-ios",
+      configuration: "Release",
+      sdk: "iphoneos10.3",
+      clean: true,
+      include_bitcode: true,
+      include_symbols: true,
+      export_method: "app-store",
+      buildlog_path: 'fastlane/logs'
+    )
+    deliver(force: true)
+    frameit
   end
 
   after_all do |lane|
