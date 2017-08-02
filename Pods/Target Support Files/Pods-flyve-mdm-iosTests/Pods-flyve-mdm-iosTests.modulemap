@@ -1,6 +1,0 @@
-framework module Pods_flyve_mdm_iosTests {
-  umbrella header "Pods-flyve-mdm-iosTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
