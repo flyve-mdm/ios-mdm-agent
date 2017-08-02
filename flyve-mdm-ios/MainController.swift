@@ -299,6 +299,7 @@ extension MainController: CocoaMQTTDelegate {
 
         if ack == .accept {
             mqtt.subscribe("\(topic)/#", qos: CocoaMQTTQOS.qos1)
+            mqtt.subscribe("/FlyvemdmManifest/Status/Version", qos: CocoaMQTTQOS.qos1)
             print("Subscribed to topic \(String(describing: topic))/#")
         }
 
@@ -321,11 +322,14 @@ extension MainController: CocoaMQTTDelegate {
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
-        
 //        print(message.string ?? "Empty Message")
 
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
         NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
+        
+        if message.topic == "/FlyvemdmManifest/Status/Version" {
+            setStorage(value: message.string as AnyObject, key: "manifest")
+        }
 
         var messageBroker: [String: AnyObject]? = [String: AnyObject]()
 
@@ -422,7 +426,6 @@ extension MainController: CocoaMQTTDelegate {
         
         if deployFile.count > 0 {
             if let deeplink = getStorage(key: "deeplink") as? [String: String] {
-                print(deeplink["user_token"] ?? "")
                 httpRequest = HttpRequest()
                 httpRequest?.requestInitSession(userToken: deeplink["user_token"] ?? "")
                 httpRequest?.delegate = self
