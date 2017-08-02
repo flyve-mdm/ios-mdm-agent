@@ -50,8 +50,6 @@ extension Location: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations.first?.coordinate.latitude ?? "")
-        print(locations.first?.coordinate.longitude ?? "")
 
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
