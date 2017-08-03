@@ -198,7 +198,6 @@ class MainController: UIViewController {
     }
     
     func goUserController() {
-
         self.present(UINavigationController(rootViewController: UserController()), animated: true, completion: nil)
     }
     
