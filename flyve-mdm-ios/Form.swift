@@ -18,11 +18,60 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      03/08/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+import UIKit
+
+class Form {
+    
+    // MARK: Properties
+    
+    var title: String
+    var sections: [FormSection] = []
+    
+    // MARK: Init
+    
+    init() {
+        self.title = ""
+    }
+    
+    init(title: String) {
+        self.title = title
+    }
+    
+    // MARK: Public
+    
+    func formValues() -> [String : AnyObject] {
+        
+        var formValues: [String : AnyObject] = [:]
+        
+        for section in sections {
+            for row in section.rows {
+                if row.type != .button {
+                    if let value = row.value {
+                        formValues[row.tag] = value
+                    } else {
+                        formValues[row.tag] = NSNull()
+                    }
+                }
+            }
+        }
+        return formValues
+    }
+    
+    func validateForm() -> FormRow? {
+        for section in sections {
+            for row in section.rows {
+                if row.configuration.cell.required && row.value == nil {
+                    return row
+                }
+            }
+        }
+        return nil
+    }
+}
