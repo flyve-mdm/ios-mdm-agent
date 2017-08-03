@@ -87,7 +87,7 @@ class UserController: UIViewController {
         table.tableFooterView = UIView()
         table.rowHeight = UITableViewAutomaticDimension
         table.estimatedRowHeight = 100
-        table.isScrollEnabled = false
+        table.isScrollEnabled = true
         table.register(SupervisorMainCell.self, forCellReuseIdentifier: self.cellIdMain)
         table.register(SupervisorInfoCell.self, forCellReuseIdentifier: self.cellIdInfo)
         
@@ -105,7 +105,8 @@ class UserController: UIViewController {
             userCntroller.countPhone = 1
         }
         
-        navigationController?.pushViewController(userCntroller, animated: true)
+        navigationController?.pushViewController(UserFormController(style: .grouped), animated: true)
+//        navigationController?.pushViewController(userCntroller, animated: true)
     }
     
     func cancel() {
