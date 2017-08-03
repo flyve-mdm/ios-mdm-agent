@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * UIColor+Helper.swift is part of flyve-mdm-ios
+ * FormBaseCell.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -17,31 +17,12 @@
  * GNU General Public License for more details.
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
- * @date      11/07/17
- * @copyright Copyright © 2017 Teclib. All rights reserved.
+ * @date      03/08/17
+ * @copyright   Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
- * @link      https://.flyve-mdm.com
+ * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
-import UIKit
-
-extension UIColor {
-
-    static let main: UIColor = {
-        return UIColor.init(red: 26.0/255.0, green: 138.0/255.0, blue: 133.0/255.0, alpha: 1.0)
-    }()
-
-    static let background: UIColor = {
-        return .groupTableViewBackground
-    }()
-
-    static let loading: UIColor = {
-        return UIColor.init(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
-    }()
-
-    static let fail: UIColor = {
-        return UIColor.init(red: 111.0/255.0, green: 111.0/255.0, blue: 116.0/255.0, alpha: 1.0)
-    }()
-}
+import Foundation
