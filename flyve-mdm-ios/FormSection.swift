@@ -18,11 +18,34 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      03/08/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+import UIKit
+
+class FormSection {
+    
+    // MARK: Properties
+    
+    var rows: [FormRow] = []
+    
+    var headerTitle: String?
+    var footerTitle: String?
+    
+    var headerView: UIView?
+    var footerView: UIView?
+    
+    var headerViewHeight: CGFloat = UITableViewAutomaticDimension
+    var footerViewHeight: CGFloat = UITableViewAutomaticDimension
+    
+    // MARK: Init
+    
+    public init(headerTitle: String?, footerTitle: String?) {
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+    }
+}
