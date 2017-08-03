@@ -25,4 +25,45 @@
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+import UIKit
+
+class FormTitleCell: FormBaseCell {
+    
+    // MARK: Cell views
+    
+    lazy var titleLabel: UILabel = {
+        
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        label.textColor = self.contentView.tintColor
+        
+        return label
+    }()
+    
+    // MARK: FormBaseCell
+    
+    override func configure() {
+        super.configure()
+
+        contentView.addSubview(titleLabel)
+        
+        titleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    }
+    
+    override func update() {
+        super.update()
+        
+        titleLabel.text = row?.title
+    }
+    
+    override func constraintsViews() -> [String : UIView] {
+        return ["titleLabel": titleLabel]
+    }
+    
+    override func defaultVisualConstraints() -> [String] {
+        return ["H:|-16-[titleLabel]-16-|"]
+    }
+}
