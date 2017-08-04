@@ -47,6 +47,7 @@ class FormInfoCell: FormBaseCell {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.placeholder = "first_name".localized
+        text.tag = 0
         text.clearButtonMode = UITextFieldViewMode.whileEditing
         text.textColor = .gray
         text.keyboardType = .default
@@ -66,6 +67,7 @@ class FormInfoCell: FormBaseCell {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.placeholder = "last_name".localized
+        text.tag = 1
         text.clearButtonMode = UITextFieldViewMode.whileEditing
         text.textColor = .gray
         text.keyboardType = .default
@@ -80,13 +82,13 @@ class FormInfoCell: FormBaseCell {
         return text
     }()
     
-    override func configure() {
-        super.configure()
-        
+    func setupViews() {
         contentView.addSubview(photoBotton)
         contentView.addSubview(firstNameTextField)
         contentView.addSubview(lastNameTextField)
-        
+    }
+    
+    func addConstraints() {
         photoBotton.widthAnchor.constraint(equalToConstant: 60.0).isActive = true
         photoBotton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         photoBotton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
@@ -104,8 +106,58 @@ class FormInfoCell: FormBaseCell {
         lastNameTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
     }
     
+    override func configure() {
+        super.configure()
+        
+        setupViews()
+        addConstraints()
+        
+        firstNameTextField.addTarget(self, action: #selector(FormInfoCell.editingChanged(_:)), for: .editingChanged)
+        lastNameTextField.addTarget(self, action: #selector(FormInfoCell.editingChanged(_:)), for: .editingChanged)
+    }
+    
     override func update() {
         super.update()
-
+        
+        if let first = row?.value?["firstname"] as? String, !first.isEmpty {
+            firstNameTextField.text = first
+        }
+        
+        if let last = row?.value?["lastname"] as? String, !last.isEmpty {
+            lastNameTextField.text = last
+        }
+    }
+    
+    open override func firstResponderElement() -> UIResponder? {
+        return firstNameTextField
+    }
+    
+    open override class func formRowCanBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    // MARK: Actions
+    
+    internal func editingChanged(_ sender: UITextField) {
+        guard let text = sender.text, text.characters.count > 0 else { row?.value = nil; update(); return }
+        
+        if var rowValue = row?.value as? [String: String] {
+            
+            if sender.tag == 0 {
+                
+                if let first = rowValue["firstname"], !first.isEmpty {
+                    rowValue["firstname"] = text
+                    row?.value = rowValue as AnyObject
+                }
+            }
+            
+            if sender.tag == 1 {
+                
+                if let last = rowValue["lastname"], !last.isEmpty {
+                    rowValue["lastname"] = text
+                    row?.value = rowValue as AnyObject
+                }
+            }
+        }
     }
 }
