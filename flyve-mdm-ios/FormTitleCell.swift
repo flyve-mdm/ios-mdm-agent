@@ -18,7 +18,7 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      03/08/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
  * @link      https://flyve-mdm.com
@@ -29,41 +29,46 @@ import UIKit
 
 class FormTitleCell: FormBaseCell {
     
-    // MARK: Cell views
-    
     lazy var titleLabel: UILabel = {
         
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)
         label.textColor = self.contentView.tintColor
         
         return label
     }()
     
-    // MARK: FormBaseCell
+    let separatorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
+        
+        return view
+    }()
     
     override func configure() {
         super.configure()
 
         contentView.addSubview(titleLabel)
+        contentView.addSubview(separatorView)
         
-        titleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive =  true
+        titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive =  true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive =  true
+        titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
+        
+        separatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        separatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: -24).isActive =  true
+        separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive =  true
+        separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
     override func update() {
         super.update()
         
         titleLabel.text = row?.title
-    }
-    
-    override func constraintsViews() -> [String : UIView] {
-        return ["titleLabel": titleLabel]
-    }
-    
-    override func defaultVisualConstraints() -> [String] {
-        return ["H:|-16-[titleLabel]-16-|"]
     }
 }
