@@ -28,6 +28,19 @@
 import UIKit
 
 class UserFormController: FormViewController {
+    
+    var userInfo: [String: String]?
+    var edit: Bool?
+    
+    init(style: UITableViewStyle, userInfo: [String: String], edit: Bool) {
+        self.userInfo = userInfo
+        self.edit = edit
+        super.init(style: style)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func loadView() {
         super.loadView()
@@ -44,56 +57,105 @@ class UserFormController: FormViewController {
                                                                 style: UIBarButtonItemStyle.plain,
                                                                 target: self,
                                                                 action: #selector(self.cancel))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done".localized,
+                                         style: UIBarButtonItemStyle.plain,
+                                         target: self,
+                                         action: #selector(self.done))
     }
     
     func loadForm() {
+        // Section info user
+        let sectionInfo = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionInfo.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
+
+        let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
+        rowInfo.configuration.cell.appearance = ["firstNameTextField.text": (userInfo?["firstname"] ?? "") as AnyObject,
+                                                 "lastNameTextField.text": (userInfo?["lastname"] ?? "") as AnyObject]
+        sectionInfo.rows.append(rowInfo)
         
-        let sectionName = FormSection(headerTitle: nil, footerTitle: nil)
-        let rowName = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
-        
-        sectionName.rows.append(rowName)
-        
-        let sectionPhone = FormSection(headerTitle: nil, footerTitle: nil)
-        
+        // Section phone number
         let sectionTitlePhone = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionTitlePhone.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionTitlePhone.footerViewHeight = CGFloat.leastNormalMagnitude
+
         let rowTitlePhone = FormRow(tag: "titlePhone", type: .title, edit: .insert, title: "add_phone".localized)
         rowTitlePhone.configuration.button.didSelectClosure = { _ in
             self.addPhone()
         }
+        
         sectionTitlePhone.rows.append(rowTitlePhone)
         
-        let sectionEmail = FormSection(headerTitle: nil, footerTitle: nil)
+        let sectionPhone = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionPhone.headerViewHeight = 16.0
+        sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
         
+        if let phone: String = userInfo?["phone"] {
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
+            rowPhone.configuration.cell.placeholder = "phone".localized
+            rowPhone.configuration.cell.appearance = ["textField.placeholder": "phone".localized as AnyObject,
+                                                     "textField.text": phone as AnyObject]
+            sectionPhone.rows.append(rowPhone)
+        }
+        
+        // Section email address
         let sectionTitleEmail = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionTitleEmail.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionTitleEmail.footerViewHeight = CGFloat.leastNormalMagnitude
+        
         let rowTitleEmail = FormRow(tag: "titleEmail", type: .title, edit: .insert, title: "add_email".localized)
         rowTitleEmail.configuration.button.didSelectClosure = { _ in
             self.addEmail()
         }
+  
         sectionTitleEmail.rows.append(rowTitleEmail)
         
-        form.sections = [sectionName, sectionPhone, sectionTitlePhone, sectionEmail, sectionTitleEmail]
+        let sectionEmail = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionEmail.headerViewHeight = 16.0
+        sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        if let email: String = userInfo?["_email"] {
+            let rowEmail = FormRow(tag: "email", type: .phone, edit: .delete, title: "email".localized)
+            rowEmail.configuration.cell.placeholder = "phone".localized
+            rowEmail.configuration.cell.appearance = ["textField.placeholder": "email".localized as AnyObject,
+                                                     "textField.text": email as AnyObject]
+            sectionEmail.rows.append(rowEmail)
+        }
+        
+        // Add sections to form
+        form.sections = [sectionInfo, sectionPhone, sectionTitlePhone, sectionEmail, sectionTitleEmail]
     }
 
     func addPhone() {
         
-        let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
-        rowPhone.configuration.cell.placeholder = "phone".localized
-        form.sections[0].rows.append(rowPhone)
-        
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: form.sections[0].rows.count - 1, section: 0)], with: .automatic)
-        tableView.endUpdates()
+        if form.sections[1].rows.count < 1 {
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
+            rowPhone.configuration.cell.placeholder = "phone".localized
+            form.sections[1].rows.append(rowPhone)
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: form.sections[1].rows.count - 1, section: 1)], with: .automatic)
+            tableView.endUpdates()
+        }
     }
     
     func addEmail() {
         
-        let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
-        rowEmail.configuration.cell.placeholder = "email".localized
-        form.sections[2].rows.append(rowEmail)
+        if form.sections[3].rows.count < 1 {
+            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
+            rowEmail.configuration.cell.placeholder = "email".localized
+            form.sections[3].rows.append(rowEmail)
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: form.sections[3].rows.count - 1, section: 3)], with: .automatic)
+            tableView.endUpdates()
+        }
         
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: form.sections[2].rows.count - 1, section: 2)], with: .automatic)
-        tableView.endUpdates()
+    }
+    
+    func done() {
+    
     }
     
     func cancel() {
