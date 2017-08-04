@@ -72,7 +72,6 @@ class FormTextFieldCell: FormBaseCell {
         
         selectionStyle = .none
 
-        textField.addTarget(self, action: #selector(FormTextFieldCell.editingChanged(_:)), for: .editingChanged)
         contentView.addSubview(typeButton)
         contentView.addSubview(verticalView)
         contentView.addSubview(textField)
@@ -106,6 +105,8 @@ class FormTextFieldCell: FormBaseCell {
         super.configure()
         setupViews()
         addConstraints()
+        
+        textField.addTarget(self, action: #selector(FormTextFieldCell.editingChanged(_:)), for: .editingChanged)
     }
     
     override func update() {
