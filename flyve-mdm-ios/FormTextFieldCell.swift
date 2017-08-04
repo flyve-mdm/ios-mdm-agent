@@ -29,13 +29,24 @@ import UIKit
 
 class FormTextFieldCell: FormBaseCell {
     
+    // MARK: Properties
+    
+    fileprivate var customConstraints: [AnyObject] = []
+    
     // MARK: Cell views
     
     let typeButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("mobile", for: .normal)
         return button
+    }()
+    
+    let verticalView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
+        
+        return view
     }()
     
     let separatorView: UIView = {
@@ -49,16 +60,13 @@ class FormTextFieldCell: FormBaseCell {
     let textField: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-        
+        text.clearButtonMode = UITextFieldViewMode.whileEditing
+        text.textColor = .gray
+        text.keyboardType = .default
+        text.borderStyle = .none
+
         return text
     }()
-    
-    // MARK: Properties
-    
-    fileprivate var customConstraints: [AnyObject] = []
-    
-    // MARK: FormBaseCell
     
     func setupViews() {
         
@@ -66,23 +74,32 @@ class FormTextFieldCell: FormBaseCell {
 
         textField.addTarget(self, action: #selector(FormTextFieldCell.editingChanged(_:)), for: .editingChanged)
         contentView.addSubview(typeButton)
-        contentView.addSubview(separatorView)
+        contentView.addSubview(verticalView)
         contentView.addSubview(textField)
+        contentView.addSubview(separatorView)
     }
     
     func addConstraints() {
         
-        typeButton.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        typeButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        typeButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        typeButton.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        typeButton.topAnchor.constraint(equalTo: contentView.topAnchor).isActive =  true
+        typeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
         
-        separatorView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        separatorView.widthAnchor.constraint(equalToConstant: 0.5).isActive = true
-        separatorView.leftAnchor.constraint(equalTo: typeButton.rightAnchor, constant: 8.0).isActive = true
+        verticalView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        verticalView.widthAnchor.constraint(equalToConstant: 0.5).isActive = true
+        verticalView.leftAnchor.constraint(equalTo: typeButton.rightAnchor, constant: 8.0).isActive = true
         
-        textField.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        textField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        textField.leftAnchor.constraint(equalTo: separatorView.rightAnchor, constant: 8.0).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        textField.leftAnchor.constraint(equalTo: verticalView.rightAnchor, constant: 8).isActive =  true
+        textField.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive =  true
+        textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive =  true
+        textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
         
+        separatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        separatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: -24).isActive =  true
+        separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive =  true
+        separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
     override func configure() {
@@ -151,16 +168,6 @@ class FormTextFieldCell: FormBaseCell {
             }
         }
     }
-    
-//    open override func constraintsViews() -> [String : UIView] {
-//        var views = ["textField": textField]
-//
-//        return views
-//    }
-//
-//    open override func defaultVisualConstraints() -> [String] {
-//        return ["H:[imageView]-[titleLabel]-[textField]-16-|"]
-//    }
     
     open override func firstResponderElement() -> UIResponder? {
         return textField
