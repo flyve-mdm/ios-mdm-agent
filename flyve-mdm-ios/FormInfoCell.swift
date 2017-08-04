@@ -18,7 +18,7 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      03/08/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
  * @link      https://flyve-mdm.com
@@ -54,7 +54,7 @@ class FormInfoCell: FormBaseCell {
         text.layer.backgroundColor = UIColor.white.cgColor
         text.layer.masksToBounds = false
         text.layer.shadowColor = UIColor.lightGray.cgColor
-        text.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        text.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
         text.layer.shadowOpacity = 1.0
         text.layer.shadowRadius = 0.0
         
@@ -79,7 +79,6 @@ class FormInfoCell: FormBaseCell {
         
         return text
     }()
-    // MARK: FormBaseCell
     
     override func configure() {
         super.configure()
@@ -91,31 +90,22 @@ class FormInfoCell: FormBaseCell {
         photoBotton.widthAnchor.constraint(equalToConstant: 60.0).isActive = true
         photoBotton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         photoBotton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
-        photoBotton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -48).isActive = true
-        photoBotton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
+        photoBotton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
+        photoBotton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
         
         firstNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4).isActive = true
         firstNameTextField.bottomAnchor.constraint(equalTo: photoBotton.centerYAnchor, constant: -4).isActive = true
-        firstNameTextField.leadingAnchor.constraint(equalTo: photoBotton.trailingAnchor, constant: 8).isActive = true
-        firstNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        firstNameTextField.leftAnchor.constraint(equalTo: photoBotton.rightAnchor, constant: 8).isActive = true
+        firstNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         
         lastNameTextField.topAnchor.constraint(equalTo: photoBotton.centerYAnchor, constant: 4).isActive = true
-        lastNameTextField.leadingAnchor.constraint(equalTo: photoBotton.trailingAnchor, constant: 8).isActive = true
-        lastNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        lastNameTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -36).isActive = true
+        lastNameTextField.leftAnchor.constraint(equalTo: photoBotton.rightAnchor, constant: 8).isActive = true
+        lastNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        lastNameTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
     }
     
     override func update() {
         super.update()
-        
-//        titleLabel.text = row?.title
+
     }
-    
-//    override func constraintsViews() -> [String : UIView] {
-//        return ["titleLabel": titleLabel]
-//    }
-//    
-//    override func defaultVisualConstraints() -> [String] {
-//        return ["H:|-16-[titleLabel]-16-|"]
-//    }
 }
