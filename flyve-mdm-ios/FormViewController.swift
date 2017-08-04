@@ -34,17 +34,17 @@ class FormViewController: UITableViewController {
         FormViewController.defaultCellClasses[.info] = FormInfoCell.self
         FormViewController.defaultCellClasses[.phone] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.email] = FormTextFieldCell.self
-
         FormViewController.defaultCellClasses[.text] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.label] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.number] = FormTextFieldCell.self
+        FormViewController.defaultCellClasses[.password] = FormTextFieldCell.self
+        
+        FormViewController.defaultCellClasses[.label] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.numbersAndPunctuation] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.decimal] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.url] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.twitter] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.namePhone] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.asciiCapable] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.password] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.button] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.booleanSwitch] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.booleanCheck] = FormTextFieldCell.self
@@ -85,6 +85,7 @@ class FormViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        tableView.separatorStyle = .none
         tableView.isEditing = true
         tableView.allowsSelectionDuringEditing = true
     }
@@ -143,9 +144,9 @@ class FormViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let row = formRowDescriptorAtIndexPath(indexPath)
+        let row = formRowAtIndexPath(indexPath)
         
-        let formBaseCellClass = formBaseCellClassFromRowDescriptor(row)
+        let formBaseCellClass = formBaseCellClassFromRow(row)
         
         let reuseIdentifier = NSStringFromClass(formBaseCellClass!)
         
@@ -194,6 +195,7 @@ class FormViewController: UITableViewController {
         guard let footerView = form.sections[section].footerView, footerView.translatesAutoresizingMaskIntoConstraints else {
             return form.sections[section].footerViewHeight
         }
+        print("\(footerView.frame.size.height) - \(section)")
         return footerView.frame.size.height
     }
     
@@ -208,22 +210,34 @@ class FormViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        let row = formRowDescriptorAtIndexPath(indexPath)
+        let row = formRowAtIndexPath(indexPath)
         return row.edit
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            form.sections[indexPath.section].rows.remove(at: indexPath.row)
+
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let rowDescriptor = formRowDescriptorAtIndexPath(indexPath)
+        let row = formRowAtIndexPath(indexPath)
         
         if let selectedRow = tableView.cellForRow(at: indexPath) as? FormBaseCell {
-            if let formBaseCellClass = formBaseCellClassFromRowDescriptor(rowDescriptor) {
+            if let formBaseCellClass = formBaseCellClassFromRow(row) {
                 formBaseCellClass.formViewController(self, didSelectRow: selectedRow)
             }
         }
         
-        if let didSelectClosure = rowDescriptor.configuration.button.didSelectClosure {
-            didSelectClosure(rowDescriptor)
+        if let didSelectClosure = row.configuration.button.didSelectClosure {
+            didSelectClosure(row)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -234,21 +248,21 @@ class FormViewController: UITableViewController {
         return FormViewController.defaultCellClasses[rowType]!
     }
     
-    fileprivate func formRowDescriptorAtIndexPath(_ indexPath: IndexPath) -> FormRow {
+    fileprivate func formRowAtIndexPath(_ indexPath: IndexPath) -> FormRow {
         
         let section = form.sections[(indexPath as NSIndexPath).section]
-        let rowDescriptor = section.rows[(indexPath as NSIndexPath).row]
-        return rowDescriptor
+        let row = section.rows[(indexPath as NSIndexPath).row]
+        return row
     }
     
-    fileprivate func formBaseCellClassFromRowDescriptor(_ rowDescriptor: FormRow) -> FormBaseCell.Type! {
+    fileprivate func formBaseCellClassFromRow(_ row: FormRow) -> FormBaseCell.Type! {
         
         var formBaseCellClass: FormBaseCell.Type
         
-        if let cellClass = rowDescriptor.configuration.cell.cellClass as? FormBaseCell.Type {
+        if let cellClass = row.configuration.cell.cellClass as? FormBaseCell.Type {
             formBaseCellClass = cellClass
         } else {
-            formBaseCellClass = FormViewController.defaultCellClassForRowType(rowDescriptor.type)
+            formBaseCellClass = FormViewController.defaultCellClassForRowType(row.type)
         }
         return formBaseCellClass
     }
