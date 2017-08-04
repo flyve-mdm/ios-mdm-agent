@@ -71,8 +71,8 @@ class UserFormController: FormViewController {
         sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
 
         let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
-        rowInfo.configuration.cell.appearance = ["firstNameTextField.text": (userInfo?["firstname"] ?? "") as AnyObject,
-                                                 "lastNameTextField.text": (userInfo?["lastname"] ?? "") as AnyObject]
+        let info = ["firstname": userInfo?["firstname"] ?? "", "lastname": userInfo?["lastname"] ?? ""]
+        rowInfo.value = info as AnyObject
         sectionInfo.rows.append(rowInfo)
         
         // Section phone number
@@ -88,14 +88,14 @@ class UserFormController: FormViewController {
         sectionTitlePhone.rows.append(rowTitlePhone)
         
         let sectionPhone = FormSection(headerTitle: nil, footerTitle: nil)
-        sectionPhone.headerViewHeight = 16.0
+        sectionPhone.headerViewHeight = 32.0
         sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
         
         if let phone: String = userInfo?["phone"] {
             let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
             rowPhone.configuration.cell.placeholder = "phone".localized
-            rowPhone.configuration.cell.appearance = ["textField.placeholder": "phone".localized as AnyObject,
-                                                     "textField.text": phone as AnyObject]
+            rowPhone.value = phone as AnyObject
+            
             sectionPhone.rows.append(rowPhone)
         }
         
@@ -112,14 +112,14 @@ class UserFormController: FormViewController {
         sectionTitleEmail.rows.append(rowTitleEmail)
         
         let sectionEmail = FormSection(headerTitle: nil, footerTitle: nil)
-        sectionEmail.headerViewHeight = 16.0
+        sectionEmail.headerViewHeight = 32.0
         sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
         
         if let email: String = userInfo?["_email"] {
             let rowEmail = FormRow(tag: "email", type: .phone, edit: .delete, title: "email".localized)
-            rowEmail.configuration.cell.placeholder = "phone".localized
-            rowEmail.configuration.cell.appearance = ["textField.placeholder": "email".localized as AnyObject,
-                                                     "textField.text": email as AnyObject]
+            rowEmail.configuration.cell.placeholder = "email".localized
+            rowEmail.value = email as AnyObject
+            
             sectionEmail.rows.append(rowEmail)
         }
         
@@ -155,10 +155,46 @@ class UserFormController: FormViewController {
     }
     
     func done() {
-    
+        dismissKeyboard()
+        
+        if form.sections[0].rows.count > 0 {
+            
+            if let info = form.sections[0].rows[0].value {
+                
+                if let first = info["firstname"] as? String {
+                    userInfo?["firstname"] = first
+                }
+                
+                if let last = info["lastname"] as? String {
+                    userInfo?["lastname"] = last
+                }
+            }
+        }
+        
+        if form.sections[1].rows.count > 0 {
+            
+            if let phone: String = form.sections[1].rows[0].value as? String {
+                userInfo?["phone"] = phone
+            }
+        }
+        
+        if form.sections[3].rows.count > 0 {
+            
+            if let email: String = form.sections[3].rows[0].value as? String {
+                userInfo?["_email"] = email
+            }
+        }
+        
+        setStorage(value: self.userInfo! as AnyObject, key: "dataUser")
+        dismiss(animated: true, completion: nil)
     }
     
     func cancel() {
+        dismissKeyboard()
         dismiss(animated: true, completion: nil)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
