@@ -37,6 +37,7 @@ class FormViewController: UITableViewController {
         FormViewController.defaultCellClasses[.text] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.number] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.password] = FormTextFieldCell.self
+        FormViewController.defaultCellClasses[.multipleSelector] = FormSelectorCell.self
         
         FormViewController.defaultCellClasses[.label] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.numbersAndPunctuation] = FormTextFieldCell.self
@@ -55,7 +56,6 @@ class FormViewController: UITableViewController {
         FormViewController.defaultCellClasses[.dateAndTime] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.stepper] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.slider] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.multipleSelector] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.multilineText] = FormTextFieldCell.self
     }()
     

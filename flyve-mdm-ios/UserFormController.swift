@@ -171,8 +171,32 @@ class UserFormController: FormViewController {
             sectionEmail.rows.append(rowEmail)
         }
         
+        let sectionLanguage = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionLanguage.headerViewHeight = 32.0
+        sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
+        rowLanguage.option = 0 as AnyObject
+        rowLanguage.configuration.selection.options = ([0, 1, 2] as [Int]) as [AnyObject]
+        rowLanguage.configuration.selection.allowsMultipleSelection = false
+        rowLanguage.configuration.selection.optionTitleClosure = { value in
+            guard let option = value as? Int else { return "" }
+            switch option {
+            case 0:
+                return "English"
+            case 1:
+                return "French"
+            case 2:
+                return "Spanish"
+            default:
+                return ""
+            }
+        }
+        
+        sectionLanguage.rows.append(rowLanguage)
+        
         // Add sections to form
-        form.sections = [sectionInfo, sectionPhone, sectionTitlePhone, sectionEmail, sectionTitleEmail]
+        form.sections = [sectionInfo, sectionPhone, sectionTitlePhone, sectionEmail, sectionTitleEmail, sectionLanguage]
     }
 
     func addPhone() {
