@@ -95,7 +95,37 @@ class UserFormController: FormViewController {
             let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
             rowPhone.configuration.cell.placeholder = "phone".localized
             rowPhone.value = phone as AnyObject
-            
+            rowPhone.option = 3 as AnyObject
+            rowPhone.configuration.selection.options = ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as [Int]) as [AnyObject]
+            rowPhone.configuration.selection.allowsMultipleSelection = false
+            rowPhone.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? Int else { return "" }
+                switch option {
+                case 0:
+                    return "mobile"
+                case 1:
+                    return "iPhone"
+                case 2:
+                    return "home"
+                case 3:
+                    return "work"
+                case 4:
+                    return "main"
+                case 5:
+                    return "home fax"
+                case 6:
+                    return "work fax"
+                case 7:
+                    return "other fax"
+                case 8:
+                    return "pager"
+                case 9:
+                    return "other"
+                default:
+                    return ""
+                }
+            }
+
             sectionPhone.rows.append(rowPhone)
         }
         
