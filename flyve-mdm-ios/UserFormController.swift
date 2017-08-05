@@ -149,6 +149,24 @@ class UserFormController: FormViewController {
             let rowEmail = FormRow(tag: "email", type: .phone, edit: .delete, title: "email".localized)
             rowEmail.configuration.cell.placeholder = "email".localized
             rowEmail.value = email as AnyObject
+            rowEmail.option = 1 as AnyObject
+            rowEmail.configuration.selection.options = ([0, 1, 2, 3] as [Int]) as [AnyObject]
+            rowEmail.configuration.selection.allowsMultipleSelection = false
+            rowEmail.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? Int else { return "" }
+                switch option {
+                case 0:
+                    return "home"
+                case 1:
+                    return "work"
+                case 2:
+                    return "iCloud"
+                case 3:
+                    return "other"
+                default:
+                    return ""
+                }
+            }
             
             sectionEmail.rows.append(rowEmail)
         }
