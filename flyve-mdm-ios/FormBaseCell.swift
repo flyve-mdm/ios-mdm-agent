@@ -27,7 +27,7 @@
 
 import UIKit
 
-class FormBaseCell: UITableViewCell {
+open class FormBaseCell: UITableViewCell {
     
     // MARK: Properties
     
@@ -37,7 +37,7 @@ class FormBaseCell: UITableViewCell {
         }
     }
     
-    open weak var formViewController: FormViewController?
+    weak var formViewController: FormViewController?
     
     fileprivate var customConstraints: [NSLayoutConstraint] = []
     
@@ -99,7 +99,7 @@ class FormBaseCell: UITableViewCell {
         return false
     }
     
-    open class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {
+    class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {
     }
     
     // MARK: Constraints

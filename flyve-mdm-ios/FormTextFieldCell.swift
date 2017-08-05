@@ -107,6 +107,7 @@ class FormTextFieldCell: FormBaseCell {
         addConstraints()
         
         textField.addTarget(self, action: #selector(FormTextFieldCell.editingChanged(_:)), for: .editingChanged)
+        typeButton.addTarget(self, action: #selector(showOptions(_:)), for: .touchUpInside)
     }
     
     override func update() {
@@ -116,7 +117,10 @@ class FormTextFieldCell: FormBaseCell {
             textField.inputAccessoryView = inputAccesoryView()
         }
         
-        typeButton.setTitle("work", for: .normal)
+        if let singleValue = row?.option {
+            typeButton.setTitle(row?.configuration.selection.optionTitleClosure?(singleValue), for: .normal)
+        }
+
         textField.text = row?.value as? String
         textField.placeholder = row?.configuration.cell.placeholder
         
@@ -183,5 +187,24 @@ class FormTextFieldCell: FormBaseCell {
     internal func editingChanged(_ sender: UITextField) {
         guard let text = sender.text, text.characters.count > 0 else { row?.value = nil; update(); return }
         row?.value = text as AnyObject
+    }
+    
+    func showOptions(_ sender: UIButton) {
+        
+        formViewController?.view.endEditing(true)
+        
+        var selectorControllerClass: UIViewController.Type
+        
+        if let controllerClass = row?.configuration.selection.controllerClass as? UIViewController.Type {
+            selectorControllerClass = controllerClass
+        } else { // fallback to default cell class
+            selectorControllerClass = FormOptionsSelectorController.self
+        }
+        
+        let selectorController = selectorControllerClass.init()
+        guard let formRowViewController = selectorController as? FormSelector else { return }
+        
+        formRowViewController.formCell = self
+        formViewController?.navigationController?.pushViewController(selectorController, animated: true)
     }
 }

@@ -27,7 +27,7 @@
 
 import UIKit
 
-class FormRow {
+public class FormRow {
     
     // MARK: Types
     
@@ -148,7 +148,17 @@ class FormRow {
     public let type: RowType
     public var edit: UITableViewCellEditingStyle
     public var title: String?
-    
+    public var option: AnyObject? {
+        willSet {
+            guard let willUpdateBlock = configuration.cell.willUpdateClosure else { return }
+            willUpdateBlock(self)
+        }
+        didSet {
+            guard let didUpdateBlock = configuration.cell.didUpdateClosure else { return }
+            didUpdateBlock(self)
+        }
+    }
+
     public var value: AnyObject? {
         willSet {
             guard let willUpdateBlock = configuration.cell.willUpdateClosure else { return }
