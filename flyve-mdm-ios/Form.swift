@@ -27,7 +27,7 @@
 
 import UIKit
 
-class Form {
+public class Form {
     
     // MARK: Properties
     

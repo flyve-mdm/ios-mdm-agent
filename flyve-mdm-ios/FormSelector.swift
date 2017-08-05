@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * FormSection.swift is part of flyve-mdm-ios
+ * FormSelector.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
- * @date      03/08/17
+ * @date      05/08/17
  * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
@@ -27,25 +27,6 @@
 
 import UIKit
 
-public class FormSection {
-    
-    // MARK: Properties
-    
-    var rows: [FormRow] = []
-    
-    var headerTitle: String?
-    var footerTitle: String?
-    
-    var headerView: UIView?
-    var footerView: UIView?
-    
-    var headerViewHeight: CGFloat = UITableViewAutomaticDimension
-    var footerViewHeight: CGFloat = UITableViewAutomaticDimension
-    
-    // MARK: Init
-    
-    public init(headerTitle: String?, footerTitle: String?) {
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-    }
+@objc public protocol FormSelector: NSObjectProtocol {
+    var formCell: FormBaseCell? { get set }
 }
