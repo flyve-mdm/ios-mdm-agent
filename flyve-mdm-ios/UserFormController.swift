@@ -259,6 +259,10 @@ class UserFormController: FormViewController {
         }
         
         setStorage(value: self.userInfo! as AnyObject, key: "dataUser")
+        
+        let notificationData = NotificationCenter.default
+        notificationData.post(name: NSNotification.Name(rawValue: "editUser"), object: nil, userInfo: nil)
+        
         dismiss(animated: true, completion: nil)
     }
     
