@@ -273,11 +273,14 @@ extension MainController: CocoaMQTTDelegate {
     }
 
     func mqttSetting(host: String, port: UInt16, username: String, password: String) {
-
+        
+        let message = "{ online: false }"
+        let willMessage = CocoaMQTTWill(topic: "\(topic)/Status/Online", message: message)
+        
         mqtt = CocoaMQTT(clientID: username, host: host, port: port)
         mqtt!.username = username
         mqtt!.password = password
-        mqtt!.willMessage = CocoaMQTTWill(topic: "\(topic)/Status/Offline", message: "offline")
+        mqtt!.willMessage = willMessage
         mqtt!.keepAlive = 60
         mqtt!.delegate = self
         mqtt!.enableSSL = true
