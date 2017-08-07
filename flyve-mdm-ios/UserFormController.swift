@@ -176,21 +176,14 @@ class UserFormController: FormViewController {
         sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
         
         let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
-        rowLanguage.option = 0 as AnyObject
-        rowLanguage.configuration.selection.options = ([0, 1, 2] as [Int]) as [AnyObject]
+        if let language: String = userInfo?["language"] {
+            rowLanguage.option = language as AnyObject
+        }
+        rowLanguage.configuration.selection.options = (["English", "French", "Spanish"] as [String]) as [AnyObject]
         rowLanguage.configuration.selection.allowsMultipleSelection = false
         rowLanguage.configuration.selection.optionTitleClosure = { value in
-            guard let option = value as? Int else { return "" }
-            switch option {
-            case 0:
-                return "English"
-            case 1:
-                return "French"
-            case 2:
-                return "Spanish"
-            default:
-                return ""
-            }
+            guard let option = value as? String else { return "" }
+            return option
         }
         
         sectionLanguage.rows.append(rowLanguage)
@@ -254,6 +247,14 @@ class UserFormController: FormViewController {
             
             if let email: String = form.sections[3].rows[0].value as? String {
                 userInfo?["_email"] = email
+            }
+        }
+        
+        if form.sections[5].rows.count > 0 {
+            
+            if let language: AnyObject = form.sections[5].rows[0].option {
+
+                userInfo?["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject)
             }
         }
         
