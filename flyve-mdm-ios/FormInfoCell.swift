@@ -98,11 +98,11 @@ class FormInfoCell: FormBaseCell {
         firstNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4).isActive = true
         firstNameTextField.bottomAnchor.constraint(equalTo: photoBotton.centerYAnchor, constant: -4).isActive = true
         firstNameTextField.leftAnchor.constraint(equalTo: photoBotton.rightAnchor, constant: 8).isActive = true
-        firstNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        firstNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive = true
         
         lastNameTextField.topAnchor.constraint(equalTo: photoBotton.centerYAnchor, constant: 4).isActive = true
         lastNameTextField.leftAnchor.constraint(equalTo: photoBotton.rightAnchor, constant: 8).isActive = true
-        lastNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        lastNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive = true
         lastNameTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
     }
     
