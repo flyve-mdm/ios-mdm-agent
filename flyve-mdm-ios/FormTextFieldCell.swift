@@ -97,7 +97,7 @@ class FormTextFieldCell: FormBaseCell {
         
         separatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         separatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: -24).isActive =  true
-        separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive =  true
+        separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive =  true
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
