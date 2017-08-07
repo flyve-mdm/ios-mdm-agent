@@ -81,7 +81,8 @@ open class FormOptionsSelectorController: UITableViewController, FormSelector {
         
         cell?.textLabel?.text = formCell?.row?.configuration.selection.optionTitleClosure?(optionValue)
         cell?.textLabel?.textColor = .gray
-
+        cell?.textLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+        
         if let selectedOptions = formCell?.row?.option as? [AnyObject] {
             if (selectedOptions.index(where: { $0 === optionValue })) != nil {
                 cell?.accessoryType = .checkmark

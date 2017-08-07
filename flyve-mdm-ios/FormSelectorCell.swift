@@ -44,7 +44,7 @@ class FormSelectorCell: FormBaseCell {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
         label.textColor = .gray
         
         return label
@@ -60,8 +60,8 @@ class FormSelectorCell: FormBaseCell {
     
     override func configure() {
         super.configure()
-        
-        accessoryType = .disclosureIndicator
+
+        self.editingAccessoryType = .disclosureIndicator
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(valueLabel)
@@ -75,13 +75,12 @@ class FormSelectorCell: FormBaseCell {
         
         valueLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
         valueLabel.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive =  true
-        valueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive =  true
         valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive =  true
         valueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
         
         separatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        separatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive =  true
-        separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive =  true
+        separatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive =  true
+        separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 20).isActive =  true
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
