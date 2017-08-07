@@ -276,6 +276,7 @@ extension MainController: CocoaMQTTDelegate {
         
         let message = "{ online: false }"
         let willMessage = CocoaMQTTWill(topic: "\(topic)/Status/Online", message: message)
+        willMessage.qos = .qos0
         
         mqtt = CocoaMQTT(clientID: username, host: host, port: port)
         mqtt!.username = username
