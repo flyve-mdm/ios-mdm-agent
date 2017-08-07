@@ -46,7 +46,6 @@ class FormSelectorCell: FormBaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
         label.textColor = .gray
-        label.textAlignment = .right
         
         return label
     }()
