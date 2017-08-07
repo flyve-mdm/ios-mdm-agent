@@ -35,7 +35,6 @@ class FormSelectorCell: FormBaseCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)
-        label.textColor = self.contentView.tintColor
         
         return label
     }()
@@ -71,7 +70,7 @@ class FormSelectorCell: FormBaseCell {
         
         titleLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
         titleLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive =  true
+        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 46).isActive =  true
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive =  true
         titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
         
