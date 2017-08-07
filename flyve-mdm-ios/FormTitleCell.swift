@@ -35,7 +35,6 @@ class FormTitleCell: FormBaseCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)
-        label.textColor = self.contentView.tintColor
         
         return label
     }()
