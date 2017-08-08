@@ -32,34 +32,14 @@ public class FormRow {
     // MARK: Types
     
     public enum RowType {
-        case unknown
         case title
         case info
-        case label
-        case text
-        case url
-        case number
-        case numbersAndPunctuation
-        case decimal
-        case name
         case phone
-        case namePhone
         case email
-        case twitter
-        case asciiCapable
+        case text
+        case number
         case password
-        case button
-        case booleanSwitch
-        case booleanCheck
-        case segmentedControl
-        case picker
-        case date
-        case time
-        case dateAndTime
-        case stepper
-        case slider
         case multipleSelector
-        case multilineText
     }
     
     public struct CellConfiguration {

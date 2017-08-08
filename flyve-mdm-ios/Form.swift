@@ -52,12 +52,10 @@ public class Form {
         
         for section in sections {
             for row in section.rows {
-                if row.type != .button {
-                    if let value = row.value {
-                        formValues[row.tag] = value
-                    } else {
-                        formValues[row.tag] = NSNull()
-                    }
+                if let value = row.value {
+                    formValues[row.tag] = value
+                } else {
+                    formValues[row.tag] = NSNull()
                 }
             }
         }
