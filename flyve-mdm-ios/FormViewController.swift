@@ -32,31 +32,12 @@ class FormViewController: UITableViewController {
     private static var __once: () = {
         FormViewController.defaultCellClasses[.title] = FormTitleCell.self
         FormViewController.defaultCellClasses[.info] = FormInfoCell.self
-        FormViewController.defaultCellClasses[.phone] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.email] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.text] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.number] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.password] = FormTextFieldCell.self
+        FormViewController.defaultCellClasses[.phone] = FormTextFieldSelectCell.self
+        FormViewController.defaultCellClasses[.email] = FormTextFieldSelectCell.self
+        FormViewController.defaultCellClasses[.text] = FormTextFieldSelectCell.self
+        FormViewController.defaultCellClasses[.number] = FormTextFieldSelectCell.self
+        FormViewController.defaultCellClasses[.password] = FormTextFieldSelectCell.self
         FormViewController.defaultCellClasses[.multipleSelector] = FormSelectorCell.self
-        
-        FormViewController.defaultCellClasses[.label] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.numbersAndPunctuation] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.decimal] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.url] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.twitter] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.namePhone] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.asciiCapable] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.button] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.booleanSwitch] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.booleanCheck] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.segmentedControl] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.picker] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.date] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.time] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.dateAndTime] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.stepper] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.slider] = FormTextFieldCell.self
-        FormViewController.defaultCellClasses[.multilineText] = FormTextFieldCell.self
     }()
     
     // MARK: Class variables
@@ -109,10 +90,8 @@ class FormViewController: UITableViewController {
     
     func valueForTag(_ tag: String) -> AnyObject? {
         for section in form.sections {
-            for row in section.rows {
-                if row.tag == tag {
-                    return row.value
-                }
+            for row in section.rows.filter({ $0.tag == tag}) {
+                return row.value
             }
         }
         return nil
@@ -120,14 +99,12 @@ class FormViewController: UITableViewController {
     
     func setValue(_ value: AnyObject, forTag tag: String) {
         for (sectionIndex, section) in form.sections.enumerated() {
-            for (rowIndex, row) in section.rows.enumerated() {
-                if row.tag == tag {
-                    form.sections[sectionIndex].rows[rowIndex].value = value
-                    if let cell = self.tableView.cellForRow(at: IndexPath(row: rowIndex, section: sectionIndex)) as? FormBaseCell {
-                        cell.update()
-                    }
-                    return
+            for (rowIndex, row) in section.rows.enumerated() where row.tag == tag {
+                form.sections[sectionIndex].rows[rowIndex].value = value
+                if let cell = self.tableView.cellForRow(at: IndexPath(row: rowIndex, section: sectionIndex)) as? FormBaseCell {
+                    cell.update()
                 }
+                return
             }
         }
     }
