@@ -171,6 +171,7 @@ class UserFormController: FormViewController {
             sectionEmail.rows.append(rowEmail)
         }
         
+        // Section Language
         let sectionLanguage = FormSection(headerTitle: nil, footerTitle: nil)
         sectionLanguage.headerViewHeight = 32.0
         sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
@@ -188,8 +189,28 @@ class UserFormController: FormViewController {
         
         sectionLanguage.rows.append(rowLanguage)
         
+        // Section Password
+        let sectionPassword = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionPassword.headerViewHeight = 32.0
+        sectionPassword.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowCurrentPassword = FormRow(tag: "current_password", type: .password, edit: .none, title: "current_password".localized)
+        rowCurrentPassword.configuration.cell.placeholder = "Current password"
+        
+        sectionPassword.rows.append(rowCurrentPassword)
+        
+        let rowNewPassword = FormRow(tag: "new_password", type: .password, edit: .none, title: "new_password".localized)
+        rowNewPassword.configuration.cell.placeholder = "New password"
+        
+        sectionPassword.rows.append(rowNewPassword)
+        
+        let rowConfirmPassword = FormRow(tag: "confirm_password", type: .password, edit: .none, title: "confirm_password".localized)
+        rowConfirmPassword.configuration.cell.placeholder = "Confirm password"
+        
+        sectionPassword.rows.append(rowConfirmPassword)
+        
         // Add sections to form
-        form.sections = [sectionInfo, sectionPhone, sectionTitlePhone, sectionEmail, sectionTitleEmail, sectionLanguage]
+        form.sections = [sectionInfo, sectionPhone, sectionTitlePhone, sectionEmail, sectionTitleEmail, sectionLanguage, sectionPassword]
     }
 
     func addPhone() {

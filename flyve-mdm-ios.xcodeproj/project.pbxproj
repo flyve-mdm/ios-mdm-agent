@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A25A68D1F39FD9200EBAFDD /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */; };
 		0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */; };
 		0A5CFDE61F265F0700DAB2A1 /* MainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */; };
 		0A5CFDE81F265F2F00DAB2A1 /* TitleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldCell.swift; sourceTree = "<group>"; };
 		0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInfoCell.swift; sourceTree = "<group>"; };
 		0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleInfoCell.swift; sourceTree = "<group>"; };
@@ -245,8 +247,9 @@
 			children = (
 				0ADBC43F1F3399640076024A /* FormBaseCell.swift */,
 				0ADBC4451F33B56A0076024A /* FormTitleCell.swift */,
-				0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */,
 				0ADBC44C1F33E0980076024A /* FormInfoCell.swift */,
+				0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */,
+				0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */,
 				0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */,
 			);
 			name = cell;
@@ -625,6 +628,7 @@
 				0ADBC4441F33A14A0076024A /* Form.swift in Sources */,
 				0ADBC4461F33B56A0076024A /* FormTitleCell.swift in Sources */,
 				0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */,
+				0A25A68D1F39FD9200EBAFDD /* FormTextFieldCell.swift in Sources */,
 				0ABBB04F1EC38CC60018E2EF /* EnrollFormController.swift in Sources */,
 				0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */,
 				0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */,
