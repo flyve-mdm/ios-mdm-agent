@@ -32,7 +32,7 @@ class UserController: UIViewController {
     
     let cellIdMain = "cellIdMain"
     let cellIdInfo = "cellIdInfo"
-    var userInfo = [String: String]()
+    var userInfo = [String: AnyObject]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,7 +41,7 @@ class UserController: UIViewController {
     
     override func loadView() {
         
-        if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
+        if let dataUserObject = getStorage(key: "dataUser") as? [String: AnyObject] {
             userInfo = dataUserObject
         }
         
@@ -137,7 +137,7 @@ extension UserController: UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdMain, for: indexPath) as? SupervisorMainCell
             
-            cell?.nameLabel.text = "\(userInfo["firstname"] ?? "") \(userInfo["lastname"] ?? "")"
+            cell?.nameLabel.text = "\(userInfo["firstname"] as? String ?? "") \(userInfo["lastname"] as? String ?? "")"
             cell?.detailLabel.text = ""
             
             return cell!
@@ -147,12 +147,12 @@ extension UserController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdInfo, for: indexPath) as? SupervisorInfoCell
             
             if indexPath.row == 1 {
-                cell?.nameLabel.text = userInfo["phone"] ?? "Phone number"
+                cell?.nameLabel.text = userInfo["phone"] as? String ?? "Phone number"
                 cell?.firstBotton.image = UIImage(named: "call")?.withRenderingMode(.alwaysTemplate)
                 cell?.secondBotton.image = UIImage(named: "message")?.withRenderingMode(.alwaysTemplate)
                 
             } else if indexPath.row == 2 {
-                cell?.nameLabel.text = userInfo["_email"] ?? "Email"
+                cell?.nameLabel.text = userInfo["_email"] as? String ?? "Email"
                 cell?.firstBotton.image = UIImage(named: "email")?.withRenderingMode(.alwaysTemplate)
                 cell?.footerView.isHidden = true
             }
