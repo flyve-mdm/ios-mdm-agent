@@ -367,6 +367,7 @@ extension ViewController: HttpRequestDelegate {
 
         var jsonDictionary = [String: AnyObject]()
         var inputDictionary = [String: String]()
+        var storageDictionary = [String: AnyObject]()
 
         inputDictionary["_email"] = notification.userInfo?["_email"] as? String ?? ""
         inputDictionary["_invitation_token"] = self.invitationToken
@@ -382,8 +383,20 @@ extension ViewController: HttpRequestDelegate {
         }
 
         jsonDictionary["input"] = inputDictionary as AnyObject
+        
+        var arrEmail = [AnyObject]()
+        let emails = ["email": notification.userInfo?["_email"] as? String ?? "", "type": arrEmails[0]] as [String : AnyObject]
+        arrEmail.append(emails as AnyObject)
+        
+        var arrPhone = [AnyObject]()
+        let phones = ["phone": notification.userInfo?["phone"] as? String ?? "", "type": arrPhones[0]] as [String : AnyObject]
+        arrPhone.append(phones as AnyObject)
+        
+        storageDictionary = inputDictionary as [String: AnyObject]
+        storageDictionary["_email"] = arrEmail as AnyObject
+        storageDictionary["phone"] = arrPhone as AnyObject
 
-        setStorage(value: inputDictionary as AnyObject, key: "dataUser")
+        setStorage(value: storageDictionary as AnyObject, key: "dataUser")
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
