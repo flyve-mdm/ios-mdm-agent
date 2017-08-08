@@ -27,7 +27,7 @@
 
 import UIKit
 
-class FormTextFieldCell: FormBaseCell {
+class FormTextFieldSelectCell: FormBaseCell {
     
     // MARK: Properties
     
