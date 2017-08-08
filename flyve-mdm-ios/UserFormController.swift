@@ -126,30 +126,22 @@ class UserFormController: FormViewController {
         sectionEmail.headerViewHeight = 32.0
         sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        if let email: String = userInfo?["_email"] as? String {
-            let rowEmail = FormRow(tag: "email", type: .phone, edit: .delete, title: "email".localized)
-            rowEmail.configuration.cell.placeholder = "email".localized
-            rowEmail.value = email as AnyObject
-            rowEmail.option = 1 as AnyObject
-            rowEmail.configuration.selection.options = ([0, 1, 2, 3] as [Int]) as [AnyObject]
-            rowEmail.configuration.selection.allowsMultipleSelection = false
-            rowEmail.configuration.selection.optionTitleClosure = { value in
-                guard let option = value as? Int else { return "" }
-                switch option {
-                case 0:
-                    return "home"
-                case 1:
-                    return "work"
-                case 2:
-                    return "iCloud"
-                case 3:
-                    return "other"
-                default:
-                    return ""
-                }
-            }
+        if let emails: [AnyObject] = userInfo?["_email"] as? [AnyObject] {
             
-            sectionEmail.rows.append(rowEmail)
+            for email in emails {
+                let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
+                rowEmail.configuration.cell.placeholder = "email".localized
+                rowEmail.value = email["email"] as AnyObject
+                rowEmail.option = email["type"] as AnyObject
+                rowEmail.configuration.selection.options = (arrEmails as [String]) as [AnyObject]
+                rowEmail.configuration.selection.allowsMultipleSelection = false
+                rowEmail.configuration.selection.optionTitleClosure = { value in
+                    guard let option = value as? String else { return "" }
+                    return option
+                }
+                
+                sectionEmail.rows.append(rowEmail)
+            }
         }
         
         // Section Language
@@ -236,16 +228,22 @@ class UserFormController: FormViewController {
     
     func addEmail() {
         
-        if form.sections[3].rows.count < 1 {
-            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
-            rowEmail.configuration.cell.placeholder = "email".localized
-            form.sections[3].rows.append(rowEmail)
-            
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath(row: form.sections[3].rows.count - 1, section: 3)], with: .automatic)
-            tableView.endUpdates()
+        let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
+        rowEmail.configuration.cell.placeholder = "email".localized
+        rowEmail.configuration.cell.placeholder = "email".localized
+        rowEmail.option = arrEmails[0] as AnyObject
+        rowEmail.configuration.selection.options = (arrEmails as [String]) as [AnyObject]
+        rowEmail.configuration.selection.allowsMultipleSelection = false
+        rowEmail.configuration.selection.optionTitleClosure = { value in
+            guard let option = value as? String else { return "" }
+            return option
         }
         
+        form.sections[3].rows.append(rowEmail)
+        
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: form.sections[3].rows.count - 1, section: 3)], with: .automatic)
+        tableView.endUpdates()
     }
     
     func done() {
@@ -277,11 +275,20 @@ class UserFormController: FormViewController {
         
         userInfo?["phone"] = arrPhone as AnyObject
         
-        if form.sections[3].rows.count > 0 {
+        var arrEmail = [AnyObject]()
+        
+        for email in form.sections[3].rows where email.value != nil {
+            var modelEmail = [String: String]()
             
-            if let email: String = form.sections[3].rows[0].value as? String {
-                userInfo?["_email"] = email as AnyObject
-            }
+            modelEmail["type"] = email.option as? String ?? ""
+            modelEmail["email"] = email.value as? String ?? ""
+            arrEmail.append(modelEmail as AnyObject)
+        }
+        
+        if arrEmail.count > 0 {
+            userInfo?["_email"] = arrEmail as AnyObject
+        } else {
+            return
         }
         
         if form.sections[5].rows.count > 0 {
