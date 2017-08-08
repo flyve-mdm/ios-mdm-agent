@@ -158,9 +158,15 @@ extension UserController: UITableViewDataSource {
                 }
                 
             } else if indexPath.row == 2 {
-                cell?.nameLabel.text = userInfo["_email"] as? String ?? "Email"
-                cell?.firstBotton.image = UIImage(named: "email")?.withRenderingMode(.alwaysTemplate)
-                cell?.footerView.isHidden = true
+                
+                if let emails: [AnyObject] = userInfo["_email"] as? [AnyObject] {
+                    
+                    if emails.count > 0 {
+                        cell?.nameLabel.text = emails[0]["email"] as? String ?? "Email"
+                        cell?.firstBotton.image = UIImage(named: "email")?.withRenderingMode(.alwaysTemplate)
+                        cell?.footerView.isHidden = true
+                    }
+                }
             }
             return cell!
         }
