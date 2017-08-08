@@ -56,5 +56,13 @@
 	<string>Share</string>
 	<key>edit</key>
 	<string>Edit</string>
+	<key>admin_number</key>
+	<string>Administrative number</string>
+	<key>current_password</key>
+	<string>Current password</string>
+	<key>new_password</key>
+	<string>New password</string>
+	<key>confirm_password</key>
+	<string>Confirm password</string>
 </dict>
 </plist>
