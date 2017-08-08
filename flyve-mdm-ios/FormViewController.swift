@@ -34,9 +34,9 @@ class FormViewController: UITableViewController {
         FormViewController.defaultCellClasses[.info] = FormInfoCell.self
         FormViewController.defaultCellClasses[.phone] = FormTextFieldSelectCell.self
         FormViewController.defaultCellClasses[.email] = FormTextFieldSelectCell.self
-        FormViewController.defaultCellClasses[.text] = FormTextFieldSelectCell.self
-        FormViewController.defaultCellClasses[.number] = FormTextFieldSelectCell.self
-        FormViewController.defaultCellClasses[.password] = FormTextFieldSelectCell.self
+        FormViewController.defaultCellClasses[.text] = FormTextFieldCell.self
+        FormViewController.defaultCellClasses[.number] = FormTextFieldCell.self
+        FormViewController.defaultCellClasses[.password] = FormTextFieldCell.self
         FormViewController.defaultCellClasses[.multipleSelector] = FormSelectorCell.self
     }()
     
