@@ -51,7 +51,7 @@ class UserFormController: FormViewController {
     
     func setupViews() {
         
-        form.title = "User information"
+        form.title = "title_user".localized
         self.view.backgroundColor = .white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized,
                                                                 style: UIBarButtonItemStyle.plain,
@@ -195,22 +195,41 @@ class UserFormController: FormViewController {
         sectionPassword.footerViewHeight = CGFloat.leastNormalMagnitude
         
         let rowCurrentPassword = FormRow(tag: "current_password", type: .password, edit: .none, title: "current_password".localized)
-        rowCurrentPassword.configuration.cell.placeholder = "Current password"
+        rowCurrentPassword.configuration.cell.placeholder = "current_password".localized
         
         sectionPassword.rows.append(rowCurrentPassword)
         
         let rowNewPassword = FormRow(tag: "new_password", type: .password, edit: .none, title: "new_password".localized)
-        rowNewPassword.configuration.cell.placeholder = "New password"
+        rowNewPassword.configuration.cell.placeholder = "new_password".localized
         
         sectionPassword.rows.append(rowNewPassword)
         
         let rowConfirmPassword = FormRow(tag: "confirm_password", type: .password, edit: .none, title: "confirm_password".localized)
-        rowConfirmPassword.configuration.cell.placeholder = "Confirm password"
+        rowConfirmPassword.configuration.cell.placeholder = "confirm_password".localized
         
         sectionPassword.rows.append(rowConfirmPassword)
         
+        // Section Administrative number
+        let sectionAdminNumber = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionAdminNumber.headerViewHeight = 32.0
+        sectionAdminNumber.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowAdminNumber = FormRow(tag: "admin_number", type: .number, edit: .none, title: "admin_number".localized)
+        rowAdminNumber.configuration.cell.placeholder = "admin_number".localized
+        if let adminNumber: String = userInfo?["admin_number"] {
+            rowAdminNumber.value = adminNumber as AnyObject
+        }
+        sectionAdminNumber.rows.append(rowAdminNumber)
+        
         // Add sections to form
-        form.sections = [sectionInfo, sectionPhone, sectionTitlePhone, sectionEmail, sectionTitleEmail, sectionLanguage, sectionPassword]
+        form.sections = [sectionInfo,
+                         sectionPhone,
+                         sectionTitlePhone,
+                         sectionEmail,
+                         sectionTitleEmail,
+                         sectionLanguage,
+                         sectionPassword,
+                         sectionAdminNumber]
     }
 
     func addPhone() {
@@ -276,6 +295,16 @@ class UserFormController: FormViewController {
             if let language: AnyObject = form.sections[5].rows[0].option {
 
                 userInfo?["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject)
+            }
+        }
+        
+        if form.sections[7].rows.count > 0 {
+            
+            if let adminNumber: String = form.sections[7].rows[0].value as? String {
+                
+                userInfo?["admin_number"] = adminNumber
+            } else {
+                userInfo?["admin_number"] = ""
             }
         }
         
