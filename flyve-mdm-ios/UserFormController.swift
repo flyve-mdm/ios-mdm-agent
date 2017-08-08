@@ -29,10 +29,10 @@ import UIKit
 
 class UserFormController: FormViewController {
     
-    var userInfo: [String: String]?
+    var userInfo: [String: AnyObject]?
     var edit: Bool?
     
-    init(style: UITableViewStyle, userInfo: [String: String], edit: Bool) {
+    init(style: UITableViewStyle, userInfo: [String: AnyObject], edit: Bool) {
         self.userInfo = userInfo
         self.edit = edit
         super.init(style: style)
@@ -71,7 +71,7 @@ class UserFormController: FormViewController {
         sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
 
         let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
-        let info = ["firstname": userInfo?["firstname"] ?? "", "lastname": userInfo?["lastname"] ?? ""]
+        let info = ["firstname": userInfo?["firstname"] as? String ?? "", "lastname": userInfo?["lastname"] as? String ?? ""]
         rowInfo.value = info as AnyObject
         sectionInfo.rows.append(rowInfo)
         
@@ -91,42 +91,23 @@ class UserFormController: FormViewController {
         sectionPhone.headerViewHeight = 32.0
         sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        if let phone: String = userInfo?["phone"] {
-            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
-            rowPhone.configuration.cell.placeholder = "phone".localized
-            rowPhone.value = phone as AnyObject
-            rowPhone.option = 3 as AnyObject
-            rowPhone.configuration.selection.options = ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as [Int]) as [AnyObject]
-            rowPhone.configuration.selection.allowsMultipleSelection = false
-            rowPhone.configuration.selection.optionTitleClosure = { value in
-                guard let option = value as? Int else { return "" }
-                switch option {
-                case 0:
-                    return "mobile"
-                case 1:
-                    return "iPhone"
-                case 2:
-                    return "home"
-                case 3:
-                    return "work"
-                case 4:
-                    return "main"
-                case 5:
-                    return "home fax"
-                case 6:
-                    return "work fax"
-                case 7:
-                    return "other fax"
-                case 8:
-                    return "pager"
-                case 9:
-                    return "other"
-                default:
-                    return ""
+        if let phones: [AnyObject] = userInfo?["phone"] as? [AnyObject] {
+            
+            for phone in phones {
+                
+                let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
+                rowPhone.configuration.cell.placeholder = "phone".localized
+                rowPhone.value = phone["phone"] as AnyObject
+                rowPhone.option = phone["type"] as AnyObject
+                rowPhone.configuration.selection.options = (arrPhones as [String]) as [AnyObject]
+                rowPhone.configuration.selection.allowsMultipleSelection = false
+                rowPhone.configuration.selection.optionTitleClosure = { value in
+                    guard let option = value as? String else { return "" }
+                    return option
                 }
+                
+                sectionPhone.rows.append(rowPhone)
             }
-
-            sectionPhone.rows.append(rowPhone)
         }
         
         // Section email address
@@ -145,7 +126,7 @@ class UserFormController: FormViewController {
         sectionEmail.headerViewHeight = 32.0
         sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        if let email: String = userInfo?["_email"] {
+        if let email: String = userInfo?["_email"] as? String {
             let rowEmail = FormRow(tag: "email", type: .phone, edit: .delete, title: "email".localized)
             rowEmail.configuration.cell.placeholder = "email".localized
             rowEmail.value = email as AnyObject
@@ -177,7 +158,7 @@ class UserFormController: FormViewController {
         sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
         
         let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
-        if let language: String = userInfo?["language"] {
+        if let language: String = userInfo?["language"] as? String {
             rowLanguage.option = language as AnyObject
         }
         rowLanguage.configuration.selection.options = (["English", "French", "Spanish"] as [String]) as [AnyObject]
@@ -216,7 +197,7 @@ class UserFormController: FormViewController {
         
         let rowAdminNumber = FormRow(tag: "admin_number", type: .number, edit: .none, title: "admin_number".localized)
         rowAdminNumber.configuration.cell.placeholder = "admin_number".localized
-        if let adminNumber: String = userInfo?["admin_number"] {
+        if let adminNumber: String = userInfo?["admin_number"] as? String {
             rowAdminNumber.value = adminNumber as AnyObject
         }
         sectionAdminNumber.rows.append(rowAdminNumber)
@@ -234,9 +215,17 @@ class UserFormController: FormViewController {
 
     func addPhone() {
         
-        if form.sections[1].rows.count < 1 {
+        if form.sections[1].rows.count < 3 {
             let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
             rowPhone.configuration.cell.placeholder = "phone".localized
+            rowPhone.option = arrPhones[0] as AnyObject
+            rowPhone.configuration.selection.options = (arrPhones as [String]) as [AnyObject]
+            rowPhone.configuration.selection.allowsMultipleSelection = false
+            rowPhone.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? String else { return "" }
+                return option
+            }
+            
             form.sections[1].rows.append(rowPhone)
             
             tableView.beginUpdates()
@@ -267,26 +256,31 @@ class UserFormController: FormViewController {
             if let info = form.sections[0].rows[0].value {
                 
                 if let first = info["firstname"] as? String {
-                    userInfo?["firstname"] = first
+                    userInfo?["firstname"] = first as AnyObject
                 }
                 
                 if let last = info["lastname"] as? String {
-                    userInfo?["lastname"] = last
+                    userInfo?["lastname"] = last as AnyObject
                 }
             }
         }
         
-        if form.sections[1].rows.count > 0 {
+        var arrPhone = [AnyObject]()
+        
+        for phone in form.sections[1].rows where phone.value != nil {
+            var modelPhone = [String: String]()
             
-            if let phone: String = form.sections[1].rows[0].value as? String {
-                userInfo?["phone"] = phone
-            }
+            modelPhone["type"] = phone.option as? String ?? ""
+            modelPhone["phone"] = phone.value as? String ?? ""
+            arrPhone.append(modelPhone as AnyObject)
         }
+        
+        userInfo?["phone"] = arrPhone as AnyObject
         
         if form.sections[3].rows.count > 0 {
             
             if let email: String = form.sections[3].rows[0].value as? String {
-                userInfo?["_email"] = email
+                userInfo?["_email"] = email as AnyObject
             }
         }
         
@@ -294,7 +288,7 @@ class UserFormController: FormViewController {
             
             if let language: AnyObject = form.sections[5].rows[0].option {
 
-                userInfo?["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject)
+                userInfo?["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject) as AnyObject
             }
         }
         
@@ -302,9 +296,9 @@ class UserFormController: FormViewController {
             
             if let adminNumber: String = form.sections[7].rows[0].value as? String {
                 
-                userInfo?["admin_number"] = adminNumber
+                userInfo?["admin_number"] = adminNumber as AnyObject
             } else {
-                userInfo?["admin_number"] = ""
+                userInfo?["admin_number"] = "" as AnyObject
             }
         }
         

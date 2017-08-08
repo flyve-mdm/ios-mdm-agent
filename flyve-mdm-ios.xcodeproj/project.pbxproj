@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A25A68D1F39FD9200EBAFDD /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */; };
+		0A25A68F1F3A44F900EBAFDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25A68E1F3A44F900EBAFDD /* Constants.swift */; };
 		0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */; };
 		0A5CFDE61F265F0700DAB2A1 /* MainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */; };
 		0A5CFDE81F265F2F00DAB2A1 /* TitleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */; };
@@ -69,6 +70,7 @@
 /* Begin PBXFileReference section */
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldCell.swift; sourceTree = "<group>"; };
+		0A25A68E1F3A44F900EBAFDD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		0A5CFDE51F265F0700DAB2A1 /* MainInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInfoCell.swift; sourceTree = "<group>"; };
 		0A5CFDE71F265F2F00DAB2A1 /* TitleInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleInfoCell.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */,
 				0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */,
 				0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */,
+				0A25A68E1F3A44F900EBAFDD /* Constants.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				0AFF2A801F327D3C001F86BC /* FormViewController.swift in Sources */,
 				0ADBC44D1F33E0980076024A /* FormInfoCell.swift in Sources */,
 				0ABBB04D1EC22BE10018E2EF /* String+Helper.swift in Sources */,
+				0A25A68F1F3A44F900EBAFDD /* Constants.swift in Sources */,
 				0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */,
 				0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */,
 				0A5CFDEA1F265F5C00DAB2A1 /* FieldInfoCell.swift in Sources */,
