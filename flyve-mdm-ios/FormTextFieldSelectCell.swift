@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * FieldTextCell.swift is part of flyve-mdm-ios
+ * FormTextFieldSelectCell.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -106,7 +106,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         setupViews()
         addConstraints()
         
-        textField.addTarget(self, action: #selector(FormTextFieldCell.editingChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(FormTextFieldSelectCell.editingChanged(_:)), for: .editingChanged)
         typeButton.addTarget(self, action: #selector(showOptions(_:)), for: .touchUpInside)
     }
     
@@ -129,45 +129,12 @@ class FormTextFieldSelectCell: FormBaseCell {
         
         if let type = row?.type {
             switch type {
-            case .text:
-                textField.autocorrectionType = .default
-                textField.autocapitalizationType = .sentences
-                textField.keyboardType = .default
-            case .number:
-                textField.keyboardType = .numberPad
-            case .numbersAndPunctuation:
-                textField.keyboardType = .numbersAndPunctuation
-            case .decimal:
-                textField.keyboardType = .decimalPad
-            case .name:
-                textField.autocorrectionType = .no
-                textField.autocapitalizationType = .words
-                textField.keyboardType = .default
             case .phone:
                 textField.keyboardType = .phonePad
-            case .namePhone:
-                textField.autocorrectionType = .no
-                textField.autocapitalizationType = .words
-                textField.keyboardType = .namePhonePad
-            case .url:
-                textField.autocorrectionType = .no
-                textField.autocapitalizationType = .none
-                textField.keyboardType = .URL
-            case .twitter:
-                textField.autocorrectionType = .no
-                textField.autocapitalizationType = .none
-                textField.keyboardType = .twitter
             case .email:
                 textField.autocorrectionType = .no
                 textField.autocapitalizationType = .none
                 textField.keyboardType = .emailAddress
-            case .asciiCapable:
-                textField.autocorrectionType = .no
-                textField.autocapitalizationType = .none
-                textField.keyboardType = .asciiCapable
-            case .password:
-                textField.isSecureTextEntry = true
-                textField.clearsOnBeginEditing = false
             default:
                 break
             }
