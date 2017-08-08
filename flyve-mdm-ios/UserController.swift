@@ -147,9 +147,15 @@ extension UserController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdInfo, for: indexPath) as? SupervisorInfoCell
             
             if indexPath.row == 1 {
-                cell?.nameLabel.text = userInfo["phone"] as? String ?? "Phone number"
-                cell?.firstBotton.image = UIImage(named: "call")?.withRenderingMode(.alwaysTemplate)
-                cell?.secondBotton.image = UIImage(named: "message")?.withRenderingMode(.alwaysTemplate)
+                
+                if let phones: [AnyObject] = userInfo["phone"] as? [AnyObject] {
+                    
+                    if phones.count > 0 {
+                        cell?.nameLabel.text = phones[0]["phone"] as? String ?? "Phone number"
+                        cell?.firstBotton.image = UIImage(named: "call")?.withRenderingMode(.alwaysTemplate)
+                        cell?.secondBotton.image = UIImage(named: "message")?.withRenderingMode(.alwaysTemplate)
+                    }
+                }
                 
             } else if indexPath.row == 2 {
                 cell?.nameLabel.text = userInfo["_email"] as? String ?? "Email"
