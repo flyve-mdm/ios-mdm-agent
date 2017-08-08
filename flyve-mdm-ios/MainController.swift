@@ -35,7 +35,7 @@ class MainController: UIViewController {
 
     var mqtt: CocoaMQTT?
     var httpRequest: HttpRequest?
-    var userInfo = [String: String]()
+    var userInfo = [String: AnyObject]()
     var mdmAgent = [String: Any]()
     var supervisor = [String: AnyObject]()
     var topic = ""
@@ -53,7 +53,7 @@ class MainController: UIViewController {
             self.topic = topic
         }
         
-        if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
+        if let dataUserObject = getStorage(key: "dataUser") as? [String: AnyObject] {
             userInfo = dataUserObject
         }
         
@@ -81,7 +81,7 @@ class MainController: UIViewController {
 
         if let broker = mdmAgent["broker"] as? String,
             let port = mdmAgent["port"] as? UInt16,
-            let user = userInfo["_serial"],
+            let user = userInfo["_serial"] as? String,
             let password = mdmAgent["mqttpasswd"] as? String,
             !broker.isEmpty, !user.isEmpty, !password.isEmpty {
 
@@ -203,7 +203,7 @@ class MainController: UIViewController {
     
     func editUser() {
         
-        if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
+        if let dataUserObject = getStorage(key: "dataUser") as? [String: AnyObject] {
             userInfo = dataUserObject
             
             mainTableView.beginUpdates()
@@ -244,8 +244,12 @@ extension MainController: UITableViewDataSource {
 
         } else if indexPath.row == 1 {
             cell?.titleLabel.text = "title_user".localized.uppercased()
-            cell?.descriptionLabel.text = "\(userInfo["firstname"] ?? "") \(userInfo["lastname"] ?? "")"
-            cell?.detailLabel.text = "\(userInfo["_email"] ?? "Email")"
+            cell?.descriptionLabel.text = "\(userInfo["firstname"] as? String ?? "") \(userInfo["lastname"] as? String ?? "")"
+            
+            if let email = userInfo["_email"] as? [AnyObject], email.count > 0 {
+                cell?.detailLabel.text = email.first?["email"] as? String ?? "Email"
+            }
+
             cell?.openBotton.addTarget(self, action: #selector(self.goUserController), for: .touchUpInside)
 
         } else if indexPath.row == 2 {
