@@ -35,7 +35,7 @@
 		0ADBC43C1F33563C0076024A /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43B1F33563C0076024A /* FormRow.swift */; };
 		0ADBC43E1F3366010076024A /* UserFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43D1F3366010076024A /* UserFormController.swift */; };
 		0ADBC4401F3399640076024A /* FormBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43F1F3399640076024A /* FormBaseCell.swift */; };
-		0ADBC4421F339DEC0076024A /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4411F339DEC0076024A /* FormTextFieldCell.swift */; };
+		0ADBC4421F339DEC0076024A /* FormTextFieldSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */; };
 		0ADBC4441F33A14A0076024A /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4431F33A14A0076024A /* Form.swift */; };
 		0ADBC4461F33B56A0076024A /* FormTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4451F33B56A0076024A /* FormTitleCell.swift */; };
 		0ADBC44D1F33E0980076024A /* FormInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC44C1F33E0980076024A /* FormInfoCell.swift */; };
@@ -101,7 +101,7 @@
 		0ADBC43B1F33563C0076024A /* FormRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRow.swift; sourceTree = "<group>"; };
 		0ADBC43D1F3366010076024A /* UserFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFormController.swift; sourceTree = "<group>"; };
 		0ADBC43F1F3399640076024A /* FormBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormBaseCell.swift; sourceTree = "<group>"; };
-		0ADBC4411F339DEC0076024A /* FormTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldCell.swift; sourceTree = "<group>"; };
+		0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldSelectCell.swift; sourceTree = "<group>"; };
 		0ADBC4431F33A14A0076024A /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		0ADBC4451F33B56A0076024A /* FormTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTitleCell.swift; sourceTree = "<group>"; };
 		0ADBC44C1F33E0980076024A /* FormInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInfoCell.swift; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 			children = (
 				0ADBC43F1F3399640076024A /* FormBaseCell.swift */,
 				0ADBC4451F33B56A0076024A /* FormTitleCell.swift */,
-				0ADBC4411F339DEC0076024A /* FormTextFieldCell.swift */,
+				0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */,
 				0ADBC44C1F33E0980076024A /* FormInfoCell.swift */,
 				0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */,
 			);
@@ -610,7 +610,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ADBC4421F339DEC0076024A /* FormTextFieldCell.swift in Sources */,
+				0ADBC4421F339DEC0076024A /* FormTextFieldSelectCell.swift in Sources */,
 				0ADF289E1F3652760065F8F0 /* FormOptionsViewController.swift in Sources */,
 				0ADF289D1F3652760065F8F0 /* FormSelector.swift in Sources */,
 				0A884CA71F2FD628009B5925 /* UserController.swift in Sources */,
