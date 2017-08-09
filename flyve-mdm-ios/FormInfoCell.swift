@@ -144,19 +144,13 @@ class FormInfoCell: FormBaseCell {
         if var rowValue = row?.value as? [String: String] {
             
             if sender.tag == 0 {
-                
-                if let first = rowValue["firstname"], !first.isEmpty {
-                    rowValue["firstname"] = text
-                    row?.value = rowValue as AnyObject
-                }
+                rowValue["firstname"] = text
+                row?.value = rowValue as AnyObject
             }
             
             if sender.tag == 1 {
-                
-                if let last = rowValue["lastname"], !last.isEmpty {
-                    rowValue["lastname"] = text
-                    row?.value = rowValue as AnyObject
-                }
+                rowValue["lastname"] = text
+                row?.value = rowValue as AnyObject
             }
         }
     }
