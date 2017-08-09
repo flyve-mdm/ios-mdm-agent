@@ -71,7 +71,9 @@ class UserFormController: FormViewController {
         sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
 
         let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
-        let info = ["firstname": userInfo?["firstname"] as? String ?? "", "lastname": userInfo?["lastname"] as? String ?? ""]
+        let info: [String: AnyObject] = ["photo": userInfo?["photo"] as AnyObject,
+                    "firstname": userInfo?["firstname"] as AnyObject,
+                    "lastname": userInfo?["lastname"] as AnyObject]
         rowInfo.value = info as AnyObject
         sectionInfo.rows.append(rowInfo)
         
@@ -259,6 +261,10 @@ class UserFormController: FormViewController {
                 
                 if let last = info["lastname"] as? String {
                     userInfo?["lastname"] = last as AnyObject
+                }
+                
+                if let photo = info["photo"] as? UIImage {
+                    userInfo?["photo"] = photo as AnyObject
                 }
             }
         }
