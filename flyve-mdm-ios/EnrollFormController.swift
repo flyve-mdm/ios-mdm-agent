@@ -18,11 +18,213 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      09/08/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+import UIKit
+
+class EnrollFormController: FormViewController {
+    
+    var userInfo = [String: AnyObject]()
+    
+    override func loadView() {
+        super.loadView()
+        
+        setupViews()
+        loadForm()
+    }
+    
+    func setupViews() {
+        
+        form.title = "enrollment".localized
+        self.view.backgroundColor = .white
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done".localized,
+                                                                 style: UIBarButtonItemStyle.plain,
+                                                                 target: self,
+                                                                 action: #selector(self.done))
+    }
+    
+    func loadForm() {
+        // Section info user
+        let sectionInfo = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionInfo.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
+        let info = ["firstname": "", "lastname": ""]
+        rowInfo.value = info as AnyObject
+        sectionInfo.rows.append(rowInfo)
+        
+        // Section phone number
+        let sectionTitlePhone = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionTitlePhone.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionTitlePhone.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowTitlePhone = FormRow(tag: "titlePhone", type: .title, edit: .insert, title: "add_phone".localized)
+        rowTitlePhone.configuration.button.didSelectClosure = { _ in
+            self.addPhone()
+        }
+        
+        sectionTitlePhone.rows.append(rowTitlePhone)
+        
+        let sectionPhone = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionPhone.headerViewHeight = 32.0
+        sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        // Section email address
+        let sectionTitleEmail = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionTitleEmail.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionTitleEmail.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowTitleEmail = FormRow(tag: "titleEmail", type: .title, edit: .insert, title: "add_email".localized)
+        rowTitleEmail.configuration.button.didSelectClosure = { _ in
+            self.addEmail()
+        }
+        
+        sectionTitleEmail.rows.append(rowTitleEmail)
+        
+        let sectionEmail = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionEmail.headerViewHeight = 32.0
+        sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        // Section Language
+        let sectionLanguage = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionLanguage.headerViewHeight = 32.0
+        sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
+        if let firstLanguage = arrLaguages.first {
+            rowLanguage.option = firstLanguage as AnyObject
+        }
+        rowLanguage.configuration.selection.options = (arrLaguages as [String]) as [AnyObject]
+        rowLanguage.configuration.selection.allowsMultipleSelection = false
+        rowLanguage.configuration.selection.optionTitleClosure = { value in
+            guard let option = value as? String else { return "" }
+            return option
+        }
+        
+        sectionLanguage.rows.append(rowLanguage)
+        
+        // Add sections to form
+        form.sections = [sectionInfo,
+                         sectionPhone,
+                         sectionTitlePhone,
+                         sectionEmail,
+                         sectionTitleEmail,
+                         sectionLanguage]
+    }
+    
+    func addPhone() {
+        
+        if form.sections[1].rows.count < 1 {
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
+            rowPhone.configuration.cell.placeholder = "phone".localized
+            rowPhone.option = arrPhones[0] as AnyObject
+            rowPhone.configuration.selection.options = (arrPhones as [String]) as [AnyObject]
+            rowPhone.configuration.selection.allowsMultipleSelection = false
+            rowPhone.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? String else { return "" }
+                return option
+            }
+            
+            form.sections[1].rows.append(rowPhone)
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: form.sections[1].rows.count - 1, section: 1)], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
+    func addEmail() {
+        if form.sections[3].rows.count < 1 {
+            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
+            rowEmail.configuration.cell.placeholder = "email".localized
+            rowEmail.configuration.cell.placeholder = "email".localized
+            rowEmail.option = arrEmails[0] as AnyObject
+            rowEmail.configuration.selection.options = (arrEmails as [String]) as [AnyObject]
+            rowEmail.configuration.selection.allowsMultipleSelection = false
+            rowEmail.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? String else { return "" }
+                return option
+            }
+            
+            form.sections[3].rows.append(rowEmail)
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: form.sections[3].rows.count - 1, section: 3)], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
+    func done() {
+        dismissKeyboard()
+        
+        if form.sections[0].rows.count > 0 {
+            
+            if let info = form.sections[0].rows[0].value {
+                
+                if let first = info["firstname"] as? String {
+                    userInfo["firstname"] = first as AnyObject
+                }
+                
+                if let last = info["lastname"] as? String {
+                    userInfo["lastname"] = last as AnyObject
+                }
+            }
+        }
+        
+        var arrPhone = [AnyObject]()
+        
+        for phone in form.sections[1].rows where phone.value != nil {
+            var modelPhone = [String: String]()
+            
+            modelPhone["type"] = phone.option as? String ?? ""
+            modelPhone["phone"] = phone.value as? String ?? ""
+            arrPhone.append(modelPhone as AnyObject)
+        }
+        
+        if arrPhone.count > 0 {
+            userInfo["phone"] = arrPhone as AnyObject
+        } else {
+            return
+        }
+
+        var arrEmail = [AnyObject]()
+        
+        for email in form.sections[3].rows where email.value != nil {
+            var modelEmail = [String: String]()
+            
+            modelEmail["type"] = email.option as? String ?? ""
+            modelEmail["email"] = email.value as? String ?? ""
+            arrEmail.append(modelEmail as AnyObject)
+        }
+        
+        if arrEmail.count > 0 {
+            userInfo["_email"] = arrEmail as AnyObject
+        } else {
+            return
+        }
+        
+        if form.sections[5].rows.count > 0 {
+            
+            if let language: AnyObject = form.sections[5].rows[0].option {
+                
+                userInfo["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject) as AnyObject
+            }
+        }
+
+        let notificationData = NotificationCenter.default
+        notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: userInfo)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
