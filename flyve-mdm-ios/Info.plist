@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>59</string>
+	<string>62</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -40,10 +40,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>App use camera</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App use Locations service mode Always</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App use Locations service mode In Use</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App use a photo of profile</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
