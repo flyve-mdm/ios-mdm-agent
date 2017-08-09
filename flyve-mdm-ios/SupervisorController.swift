@@ -333,7 +333,7 @@ class SupervisorMainCell: UITableViewCell {
         
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.autoresizingMask = [.flexibleWidth,
                                       .flexibleHeight]
         imageView.clipsToBounds = true

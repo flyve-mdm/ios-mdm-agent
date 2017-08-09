@@ -96,7 +96,7 @@ class MainCell: UITableViewCell {
 
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .white
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.clipsToBounds = true
