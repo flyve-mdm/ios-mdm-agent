@@ -30,8 +30,9 @@ import UIKit
 class FormInfoCell: FormBaseCell {
     
     // MARK: Cell views
+    let imagePicker = UIImagePickerController()
     
-    lazy var photoBotton: UIButton = {
+    let photoBotton: UIButton = {
         
         let button = UIButton(type: UIButtonType.custom)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -112,6 +113,7 @@ class FormInfoCell: FormBaseCell {
         setupViews()
         addConstraints()
         
+        photoBotton.addTarget(self, action: #selector(FormInfoCell.loadPhoto(_:)), for: .touchUpInside)
         firstNameTextField.addTarget(self, action: #selector(FormInfoCell.editingChanged(_:)), for: .editingChanged)
         lastNameTextField.addTarget(self, action: #selector(FormInfoCell.editingChanged(_:)), for: .editingChanged)
     }
@@ -125,6 +127,10 @@ class FormInfoCell: FormBaseCell {
         
         if let last = row?.value?["lastname"] as? String, !last.isEmpty {
             lastNameTextField.text = last
+        }
+        
+        if let photo = row?.value?["photo"] as? UIImage {
+            photoBotton.setBackgroundImage(photo, for: .normal)
         }
     }
     
@@ -153,5 +159,61 @@ class FormInfoCell: FormBaseCell {
                 row?.value = rowValue as AnyObject
             }
         }
+    }
+    
+    internal func loadPhoto(_ sender: UIButton) {
+        
+        formViewController?.view.endEditing(true)
+        
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
+                self.openCamera()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Choose Photo", style: .default, handler: { _ in
+                self.openGallary()
+            }))
+            
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.formViewController?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func openCamera() {
+        imagePicker.delegate = self
+        if UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = true
+            formViewController?.present(imagePicker, animated: true, completion: nil)
+        } else {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            formViewController?.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func openGallary() {
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        formViewController?.present(imagePicker, animated: true, completion: nil)
+    }
+}
+
+extension FormInfoCell:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            if var rowValue = row?.value as? [String: AnyObject] {
+                rowValue["photo"] = chosenImage
+                row?.value = rowValue as AnyObject
+            }
+        }
+        
+        formViewController?.dismiss(animated: true, completion: nil)
+        self.update()
     }
 }
