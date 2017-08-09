@@ -243,6 +243,9 @@ extension MainController: UITableViewDataSource {
             cell?.openBotton.addTarget(self, action: #selector(self.goSupervisorController), for: .touchUpInside)
 
         } else if indexPath.row == 1 {
+            if let image = userInfo["photo"] as? UIImage {
+                cell?.photoImageView.image = image
+            }
             cell?.titleLabel.text = "title_user".localized.uppercased()
             cell?.descriptionLabel.text = "\(userInfo["firstname"] as? String ?? "") \(userInfo["lastname"] as? String ?? "")"
             
