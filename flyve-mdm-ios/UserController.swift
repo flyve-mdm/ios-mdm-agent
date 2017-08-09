@@ -137,6 +137,10 @@ extension UserController: UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdMain, for: indexPath) as? SupervisorMainCell
             
+            if let image = userInfo["photo"] as? UIImage {
+                cell?.photoImageView.image = image
+            }
+
             cell?.nameLabel.text = "\(userInfo["firstname"] as? String ?? "") \(userInfo["lastname"] as? String ?? "")"
             cell?.detailLabel.text = ""
             
