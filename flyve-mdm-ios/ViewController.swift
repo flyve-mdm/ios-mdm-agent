@@ -368,15 +368,21 @@ extension ViewController: HttpRequestDelegate {
         var jsonDictionary = [String: AnyObject]()
         var inputDictionary = [String: String]()
         var storageDictionary = [String: AnyObject]()
+        
+        if let email = (notification.userInfo?["_email"] as? [AnyObject])?.first?["email"] as? String, !email.isEmpty {
+            inputDictionary["_email"] = email
+        }
+        
+        if let phone = (notification.userInfo?["phone"] as? [AnyObject])?.first?["phone"] as? String, !phone.isEmpty {
+            inputDictionary["phone"] = phone
+        }
 
-        inputDictionary["_email"] = notification.userInfo?["_email"] as? String ?? ""
         inputDictionary["_invitation_token"] = self.invitationToken
         inputDictionary["_serial"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
         inputDictionary["_uuid"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
         inputDictionary["csr"] = ""
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
-        inputDictionary["phone"] = notification.userInfo?["phone"] as? String ?? ""
 
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             inputDictionary["version"] = version
@@ -384,17 +390,12 @@ extension ViewController: HttpRequestDelegate {
 
         jsonDictionary["input"] = inputDictionary as AnyObject
         
-        var arrEmail = [AnyObject]()
-        let emails = ["email": notification.userInfo?["_email"] as? String ?? "", "type": arrEmails[0]] as [String : AnyObject]
-        arrEmail.append(emails as AnyObject)
-        
-        var arrPhone = [AnyObject]()
-        let phones = ["phone": notification.userInfo?["phone"] as? String ?? "", "type": arrPhones[0]] as [String : AnyObject]
-        arrPhone.append(phones as AnyObject)
-        
-        storageDictionary = inputDictionary as [String: AnyObject]
-        storageDictionary["_email"] = arrEmail as AnyObject
-        storageDictionary["phone"] = arrPhone as AnyObject
+        if let userInfo = notification.userInfo as? [String : AnyObject] {
+            storageDictionary = userInfo
+            storageDictionary["_invitation_token"] = self.invitationToken as AnyObject
+            storageDictionary["_serial"] = UIDevice.current.identifierForVendor?.uuidString as AnyObject
+            storageDictionary["_uuid"] = UIDevice.current.identifierForVendor?.uuidString as AnyObject
+        }
 
         setStorage(value: storageDictionary as AnyObject, key: "dataUser")
 
