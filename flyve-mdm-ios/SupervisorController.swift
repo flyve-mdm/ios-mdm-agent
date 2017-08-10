@@ -28,19 +28,48 @@
 import UIKit
 import MessageUI
 
+/// SupervisorController class
 class SupervisorController: UIViewController {
     
+    // MARK: Properties
+    /// `cellIdMain`
     let cellIdMain = "cellIdMain"
+    /// `cellIdInfo`
     let cellIdInfo = "cellIdInfo"
+    /// `supervisor`
     var supervisor = [String: AnyObject]()
+    /// `httpRequest`
     var httpRequest: HttpRequest?
+    /// `cellIentitydMain`
     var entity = ""
     
+    /// supervisorTableView `UITableView`
+    lazy var supervisorTableView: UITableView = {
+        
+        let table = UITableView(frame: .zero, style: .plain)
+        table.delegate = self
+        table.dataSource = self
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .clear
+        table.separatorStyle = .none
+        table.tableFooterView = UIView()
+        table.rowHeight = UITableViewAutomaticDimension
+        table.estimatedRowHeight = 100
+        table.isScrollEnabled = false
+        table.register(SupervisorMainCell.self, forCellReuseIdentifier: self.cellIdMain)
+        table.register(SupervisorInfoCell.self, forCellReuseIdentifier: self.cellIdInfo)
+        
+        return table
+    }()
+    
+    // MARK: Init
+    /// `override viewWillAppear(_ animated: Bool)`
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
     
+    /// `override loadView()`
     override func loadView() {
         
         if let supervisorObject = getStorage(key: "supervisor") as? [String: AnyObject] {
@@ -58,6 +87,7 @@ class SupervisorController: UIViewController {
         self.addConstraints()
     }
     
+    /// `setupViews()`
     func setupViews() {
         self.view.backgroundColor = .white
         
@@ -77,6 +107,7 @@ class SupervisorController: UIViewController {
         self.view.addSubview(self.supervisorTableView)
     }
     
+    /// `addConstraints()`
     func addConstraints() {
         supervisorTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         supervisorTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -84,28 +115,12 @@ class SupervisorController: UIViewController {
         supervisorTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
     }
     
-    lazy var supervisorTableView: UITableView = {
-        
-        let table = UITableView(frame: .zero, style: .plain)
-        table.delegate = self
-        table.dataSource = self
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.backgroundColor = .clear
-        table.separatorStyle = .none
-        table.tableFooterView = UIView()
-        table.rowHeight = UITableViewAutomaticDimension
-        table.estimatedRowHeight = 100
-        table.isScrollEnabled = false
-        table.register(SupervisorMainCell.self, forCellReuseIdentifier: self.cellIdMain)
-        table.register(SupervisorInfoCell.self, forCellReuseIdentifier: self.cellIdInfo)
-        
-        return table
-    }()
-    
+    /// back main screen
     func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
     
+    /// share support information
     func share() {
         
         let shareText = "\(supervisor["support_name"] as? String ?? "support name")\n\(supervisor["support_email"] as? String ?? "support email")\n\(supervisor["support_phone"] as? String ?? "support phone")"
@@ -114,6 +129,7 @@ class SupervisorController: UIViewController {
         present(vc, animated: true)
     }
     
+    /// call support phone number
     func call() {
         guard let number = URL(string: "tel://" + "\(supervisor["support_phone"] as? String ?? "")") else { return }
         
@@ -124,6 +140,7 @@ class SupervisorController: UIViewController {
         }
     }
     
+    /// send sms message to support pnone number
     func message() {
 
         if let phoneNumber = supervisor["support_phone"] as? String {
@@ -138,6 +155,7 @@ class SupervisorController: UIViewController {
         }
     }
     
+    /// send email to support
     func email() {
         
         if let email = supervisor["support_email"] as? String {
@@ -153,20 +171,23 @@ class SupervisorController: UIViewController {
     }
 }
 
+// MARK: HttpRequestDelegate
 extension SupervisorController: HttpRequestDelegate {
     
+    /// `responseInitSession`
     func responseInitSession(data: [String: AnyObject]) {
         
         if let session_token = data["session_token"] as? String {
-            sessionToken = session_token
+            SESSION_TOKEN = session_token
             httpRequest?.requestGetFullSession()
         }
     }
     
+    /// `errorInitSession`
     func errorInitSession(error: [String: String]) {
         
     }
-    
+    /// `responseGetFullSession`
     func responseGetFullSession(data: [String: AnyObject]) {
         
         if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
@@ -186,56 +207,81 @@ extension SupervisorController: HttpRequestDelegate {
         }
     }
     
+    /// `errorGetFullSession`
     func errorGetFullSession(error: [String: String]) {
         
     }
     
+    /// `responseChangeActiveProfile`
     func responseChangeActiveProfile() {
         
         self.httpRequest?.requestPluginFlyvemdmEntityConfig(entityID: entity)
     }
     
+    /// `errorChangeActiveProfile`
     func errorChangeActiveProfile(error: [String: String]) {
         
     }
     
+    /// `responsePluginFlyvemdmEntityConfig`
     func responsePluginFlyvemdmEntityConfig(data: [String : AnyObject]) {
 
         setStorage(value: data as AnyObject, key: "supervisor")
     }
     
+    /// `errorPluginFlyvemdmEntityConfig`
     func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
         
     }
 }
 
+// MARK: MFMailComposeViewControllerDelegate
 extension SupervisorController: MFMailComposeViewControllerDelegate {
     
+    /// implemente delegate `didFinishWith`
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: MFMessageComposeViewControllerDelegate
 extension SupervisorController: MFMessageComposeViewControllerDelegate {
     
+    /// implemente delegate `didFinishWith`
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: UITableViewDelegate
 extension SupervisorController: UITableViewDelegate {
     
+    // MARK: UITableViewDelegate
+    /**
+     override `didSelectRowAt` from super class, tells the delegate that the specified row is now selected
+     */
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
 
+// MARK: UITableViewDataSource
 extension SupervisorController: UITableViewDataSource {
     
+    /**
+     override `numberOfRowsInSection` from super class, get number of row in sections
+     
+     - return: number of row in sections
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
+    /**
+     override `cellForRowAt` from super class, Asks the data source for a cell to insert in a particular location of the table view
+     
+     - return: `UITableViewCell`
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row == 0 {
@@ -283,8 +329,47 @@ extension SupervisorController: UITableViewDataSource {
     }
 }
 
+/// SupervisorMainCell class
 class SupervisorMainCell: UITableViewCell {
     
+    // MARK: Properties
+    /// photoImageView `UIImageView`
+    let photoImageView: UIImageView = {
+        
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.autoresizingMask = [.flexibleWidth,
+                                      .flexibleHeight]
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 30
+        imageView.backgroundColor = UIColor.background
+        
+        return imageView
+    }()
+    
+    /// nameLabel `UILabel`
+    let nameLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .gray
+        
+        return label
+    }()
+    
+    /// detailLabel `UILabel`
+    let detailLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .gray
+        
+        return label
+    }()
+    
+    // MARK: Init
+    /// `override init method`
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -293,14 +378,17 @@ class SupervisorMainCell: UITableViewCell {
         setupView()
     }
     
+    /// `override init method`
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// `override layoutSubviews()`
     override func layoutSubviews() {
         super.layoutSubviews()
     }
     
+    /// `setupView()`
     func setupView() {
         
         backgroundColor = .white
@@ -312,6 +400,7 @@ class SupervisorMainCell: UITableViewCell {
         addConstraints()
     }
     
+    /// `addConstraints()`
     func addConstraints() {
         
         photoImageView.widthAnchor.constraint(equalToConstant: 60.0).isActive = true
@@ -328,21 +417,43 @@ class SupervisorMainCell: UITableViewCell {
         detailLabel.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: 16).isActive = true
         detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
+}
+
+/// SupervisorInfoCell class
+class SupervisorInfoCell: UITableViewCell {
     
-    let photoImageView: UIImageView = {
+    // MARK: Properties
+    /// firstBotton `UIImageView`
+    lazy var firstBotton: UIImageView = {
         
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.autoresizingMask = [.flexibleWidth,
                                       .flexibleHeight]
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 30
-        imageView.backgroundColor = UIColor.background
-
+        imageView.tintColor = self.tintColor
+        imageView.isUserInteractionEnabled = true
+        
         return imageView
     }()
     
+    /// secondBotton `UIImageView`
+    lazy var secondBotton: UIImageView = {
+        
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.autoresizingMask = [.flexibleWidth,
+                                      .flexibleHeight]
+        imageView.clipsToBounds = true
+        imageView.tintColor = self.tintColor
+        imageView.isUserInteractionEnabled = true
+        
+        return imageView
+    }()
+    
+    /// nameLabel `UILabel`
     let nameLabel: UILabel = {
         
         let label = UILabel()
@@ -352,18 +463,18 @@ class SupervisorMainCell: UITableViewCell {
         return label
     }()
     
-    let detailLabel: UILabel = {
+    /// footerView `UIView`
+    let footerView: UIView = {
         
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .gray
         
-        return label
+        return view
     }()
-}
-
-class SupervisorInfoCell: UITableViewCell {
     
+    // MARK: Init
+    /// `override init`
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -372,14 +483,17 @@ class SupervisorInfoCell: UITableViewCell {
         setupView()
     }
     
+    /// `override init`
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// `override layoutSubviews()`
     override func layoutSubviews() {
         super.layoutSubviews()
     }
     
+    /// `setupView()`
     func setupView() {
         
         backgroundColor = .clear
@@ -392,6 +506,7 @@ class SupervisorInfoCell: UITableViewCell {
         addConstraints()
     }
     
+    /// `addConstraints()`
     func addConstraints() {
         
         nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
@@ -413,50 +528,4 @@ class SupervisorInfoCell: UITableViewCell {
         footerView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         footerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
-    
-    lazy var firstBotton: UIImageView = {
-        
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.autoresizingMask = [.flexibleWidth,
-                                      .flexibleHeight]
-        imageView.clipsToBounds = true
-        imageView.tintColor = self.tintColor
-        imageView.isUserInteractionEnabled = true
-        
-        return imageView
-    }()
-    
-    lazy var secondBotton: UIImageView = {
-        
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.autoresizingMask = [.flexibleWidth,
-                                      .flexibleHeight]
-        imageView.clipsToBounds = true
-        imageView.tintColor = self.tintColor
-        imageView.isUserInteractionEnabled = true
-        
-        return imageView
-    }()
-    
-    let nameLabel: UILabel = {
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
-        
-        return label
-    }()
-    
-    let footerView: UIView = {
-        
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .gray
-        
-        return view
-    }()
 }

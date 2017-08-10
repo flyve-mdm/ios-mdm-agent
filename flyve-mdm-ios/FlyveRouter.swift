@@ -28,18 +28,25 @@
 import Foundation
 import Alamofire
 
-public var sessionToken = String()
-
+/// enumerate endpoints methods
 enum FlyveRouter: URLRequestConvertible {
 
-    case initSession(String)                        //  GET    /initSession
-    case getFullSession()                           //  GET    /getFullSession
-    case changeActiveProfile(String)                //  POST   /changeActiveProfile
-    case pluginFlyvemdmAgent([String : AnyObject])  //  POST   /pluginFlyvemdmAgent
-    case getPluginFlyvemdmAgent(String)             //  GET    /getPluginFlyvemdmAgent
-    case pluginFlyvemdmFile(String)                 //  GET    /PluginFlyvemdmFile
-    case pluginFlyvemdmEntityConfig(String)         //  GET    /PluginFlyvemdmEntityConfig
-
+    ///  GET    /initSession
+    case initSession(String)
+    ///  GET    /getFullSession
+    case getFullSession()
+    ///  POST   /changeActiveProfile
+    case changeActiveProfile(String)
+    ///  POST   /pluginFlyvemdmAgent
+    case pluginFlyvemdmAgent([String : AnyObject])
+    ///  GET    /getPluginFlyvemdmAgent
+    case getPluginFlyvemdmAgent(String)
+    ///  GET    /PluginFlyvemdmFile
+    case pluginFlyvemdmFile(String)
+    ///  GET    /PluginFlyvemdmEntityConfig
+    case pluginFlyvemdmEntityConfig(String)
+    
+    /// get HTTP Method
     var method: Alamofire.HTTPMethod {
         switch self {
         case .initSession, .getFullSession, .getPluginFlyvemdmAgent, .pluginFlyvemdmFile, .pluginFlyvemdmEntityConfig:
@@ -49,8 +56,9 @@ enum FlyveRouter: URLRequestConvertible {
         }
     }
 
+    /// build up and return the URL for each endpoint
     var path: String {
-        // build up and return the URL for each endpoint
+        
         switch self {
         case .initSession(_ ) :
             return "/initSession"
@@ -68,9 +76,10 @@ enum FlyveRouter: URLRequestConvertible {
             return "/PluginFlyvemdmFile/\(entity_id)"
         }
     }
-
+    
+    /// build up and return the query for each endpoint
     var query: String {
-        // build up and return the query for each endpoint
+        
         switch self {
         case .initSession(let user_token) :
             return "user_token=\(user_token)"
@@ -88,12 +97,13 @@ enum FlyveRouter: URLRequestConvertible {
             return ""
         }
     }
-
-    /// Returns a URL request or throws if an `Error` was encountered.
-    ///
-    /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
-    ///
-    /// - returns: A URL request.
+    
+    /**
+     Returns a URL request or throws if an `Error` was encountered
+     
+     - throws: An `Error` if the underlying `URLRequest` is `nil`.
+     - returns: A URL request.
+     */
     func asURLRequest() throws -> URLRequest {
         var strURL = String()
         
@@ -110,8 +120,8 @@ enum FlyveRouter: URLRequestConvertible {
         urlRequest.httpMethod = method.rawValue
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        if !sessionToken.isEmpty {
-            urlRequest.setValue("\(sessionToken)", forHTTPHeaderField: "Session-Token")
+        if !SESSION_TOKEN.isEmpty {
+            urlRequest.setValue("\(SESSION_TOKEN)", forHTTPHeaderField: "Session-Token")
         }
         
         switch self {

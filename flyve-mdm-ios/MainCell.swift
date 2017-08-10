@@ -27,8 +27,11 @@
 
 import UIKit
 
+/// MainCell class
 class MainCell: UITableViewCell {
-
+    
+    // MARK: Init
+    /// `overrride init`
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -38,14 +41,17 @@ class MainCell: UITableViewCell {
         addConstraints()
     }
 
+    /// `overrride init`
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// `overrride layoutSubviews()`
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-
+    
+    /// `setupView()`
     func setupView() {
 
         contentView.addSubview(lineView)
@@ -56,6 +62,7 @@ class MainCell: UITableViewCell {
         contentView.addSubview(openBotton)
     }
 
+    /// `addConstraints()`
     func addConstraints() {
 
         lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
@@ -83,6 +90,8 @@ class MainCell: UITableViewCell {
         openBotton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
     }
 
+    // MARK: Properties
+    /// lineView `UIView`
     let lineView: UIView = {
 
         let line = UIView()
@@ -92,6 +101,7 @@ class MainCell: UITableViewCell {
         return line
     }()
 
+    /// photoImageView `UIImageView`
     let photoImageView: UIImageView = {
 
         let imageView = UIImageView()
@@ -108,6 +118,7 @@ class MainCell: UITableViewCell {
         return imageView
     }()
 
+    /// titleLabel `UILabel`
     let titleLabel: UILabel = {
 
         let label = UILabel()
@@ -118,6 +129,7 @@ class MainCell: UITableViewCell {
         return label
     }()
 
+    /// descriptionLabel `UILabel`
     let descriptionLabel: UILabel = {
 
         let label = UILabel()
@@ -128,7 +140,8 @@ class MainCell: UITableViewCell {
 
         return label
     }()
-
+    
+    /// detailLabel `UILabel`
     let detailLabel: UILabel = {
 
         let label = UILabel()
@@ -139,7 +152,8 @@ class MainCell: UITableViewCell {
 
         return label
     }()
-
+    
+    /// openBotton `UIButton`
     lazy var openBotton: UIButton = {
 
         let button = UIButton(type: UIButtonType.system)

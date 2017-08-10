@@ -27,46 +27,69 @@
 
 import UIKit
 
+/// FormOptionsSelectorController class
 open class FormOptionsSelectorController: UITableViewController, FormSelector {
     
     // MARK: FormSelector
-    
+    /// FormBaseCell
     open var formCell: FormBaseCell?
     
     // MARK: Init
-    
+    /// override method init from super class
     public init() {
         super.init(style: .grouped)
     }
     
+    /// override method init from super class
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
     
+    /// override method init from super class
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
+    /// override method `viewDidLoad()` from super class
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = formCell?.row?.title
     }
     
     // MARK: UITableViewDataSource
-    
+    /**
+     override `numberOfSections` from super class, get number of sections in UITableView
+     
+     - return: number of sections in UITableView
+     */
     open override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    /**
+     override `numberOfRowsInSection` from super class, get number of row in sections
+     
+     - return: number of row in sections
+     */
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let options = formCell?.row?.configuration.selection.options, !options.isEmpty else { return 0 }
         return options.count
     }
     
+    /**
+     override `heightForHeaderInSection` from super class, get number of row in sections
+     
+     - return: height for header in section
+     */
     open override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
     
+    /**
+     override `cellForRowAt` from super class, Asks the data source for a cell to insert in a particular location of the table view
+     
+     - return: `UITableViewCell`
+     */
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let reuseIdentifier = NSStringFromClass(type(of: self))
@@ -102,7 +125,9 @@ open class FormOptionsSelectorController: UITableViewController, FormSelector {
     }
     
     // MARK: UITableViewDelegate
-    
+    /**
+     override `didSelectRowAt` from super class, tells the delegate that the specified row is now selected
+     */
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)

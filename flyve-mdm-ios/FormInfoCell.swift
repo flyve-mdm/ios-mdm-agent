@@ -27,11 +27,14 @@
 
 import UIKit
 
+/// FormInfoCell class
 class FormInfoCell: FormBaseCell {
     
     // MARK: Cell views
+    /// UIImagePickerController
     let imagePicker = UIImagePickerController()
     
+    /// UIButton change profile photo
     let photoBotton: UIButton = {
         
         let button = UIButton(type: UIButtonType.custom)
@@ -43,6 +46,7 @@ class FormInfoCell: FormBaseCell {
         return button
     }()
     
+    /// UITextField first name
     let firstNameTextField: UITextField = {
         
         let text = UITextField()
@@ -63,6 +67,7 @@ class FormInfoCell: FormBaseCell {
         return text
     }()
     
+    /// UITextField last name
     let lastNameTextField: UITextField = {
         
         let text = UITextField()
@@ -83,12 +88,15 @@ class FormInfoCell: FormBaseCell {
         return text
     }()
     
+    /// setup initial configuration cell view
     func setupViews() {
         contentView.addSubview(photoBotton)
         contentView.addSubview(firstNameTextField)
         contentView.addSubview(lastNameTextField)
     }
     
+    // MARK: Constraints
+    /// configure constraints
     func addConstraints() {
         photoBotton.widthAnchor.constraint(equalToConstant: 60.0).isActive = true
         photoBotton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
@@ -107,6 +115,7 @@ class FormInfoCell: FormBaseCell {
         lastNameTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
     }
     
+    /// `override configure()`
     override func configure() {
         super.configure()
         
@@ -118,6 +127,7 @@ class FormInfoCell: FormBaseCell {
         lastNameTextField.addTarget(self, action: #selector(FormInfoCell.editingChanged(_:)), for: .editingChanged)
     }
     
+    /// `override update()`
     override func update() {
         super.update()
         
@@ -134,16 +144,18 @@ class FormInfoCell: FormBaseCell {
         }
     }
     
+    /// `override firstResponderElement()`
     open override func firstResponderElement() -> UIResponder? {
         return firstNameTextField
     }
     
+    /// `override formRowCanBecomeFirstResponder()`
     open override class func formRowCanBecomeFirstResponder() -> Bool {
         return true
     }
     
     // MARK: Actions
-    
+    /// update data when change UITextField
     internal func editingChanged(_ sender: UITextField) {
         guard let text = sender.text, text.characters.count > 0 else { row?.value = nil; update(); return }
         
@@ -161,6 +173,7 @@ class FormInfoCell: FormBaseCell {
         }
     }
     
+    /// Load user photo in profile
     internal func loadPhoto(_ sender: UIButton) {
         
         formViewController?.view.endEditing(true)
@@ -181,6 +194,7 @@ class FormInfoCell: FormBaseCell {
         }
     }
     
+    /// open camera for take photo of profile
     func openCamera() {
         imagePicker.delegate = self
         if UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
@@ -194,6 +208,7 @@ class FormInfoCell: FormBaseCell {
         }
     }
     
+    /// open photo library for set photo of profile
     func openGallary() {
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
@@ -202,8 +217,11 @@ class FormInfoCell: FormBaseCell {
     }
 }
 
+// MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
 extension FormInfoCell:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    /// get `UIImage` from `UIImagePickerController`
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             

@@ -26,7 +26,8 @@
  */
 
 import UIKit
-
+/// FormSelector protocol
 @objc public protocol FormSelector: NSObjectProtocol {
+    /// `FormBaseCell`
     var formCell: FormBaseCell? { get set }
 }

@@ -27,14 +27,15 @@
 
 import UIKit
 
+/// FormTextFieldCell class
 class FormTextFieldCell: FormBaseCell {
     
     // MARK: Properties
-    
+    /// `customConstraints`
     fileprivate var customConstraints: [AnyObject] = []
     
     // MARK: Cell views
-    
+    /// separatorView `UIView`
     let separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +44,7 @@ class FormTextFieldCell: FormBaseCell {
         return view
     }()
     
+    /// textField `UITextField`
     let textField: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +56,7 @@ class FormTextFieldCell: FormBaseCell {
         return text
     }()
     
+    /// `setupViews(0`
     func setupViews() {
         
         selectionStyle = .none
@@ -62,6 +65,7 @@ class FormTextFieldCell: FormBaseCell {
         contentView.addSubview(separatorView)
     }
     
+    /// `addConstraints()`
     func addConstraints() {
 
         textField.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -76,6 +80,7 @@ class FormTextFieldCell: FormBaseCell {
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
+    /// `override configure()`
     override func configure() {
         super.configure()
         setupViews()
@@ -85,6 +90,7 @@ class FormTextFieldCell: FormBaseCell {
 
     }
     
+    /// `override update()`
     override func update() {
         super.update()
         
@@ -109,16 +115,18 @@ class FormTextFieldCell: FormBaseCell {
         }
     }
     
+    /// `override firstResponderElement()`
     open override func firstResponderElement() -> UIResponder? {
         return textField
     }
     
+    /// `override formRowCanBecomeFirstResponder()`
     open override class func formRowCanBecomeFirstResponder() -> Bool {
         return true
     }
     
     // MARK: Actions
-    
+    /// `editingChanged(_ sender: UITextField)`
     internal func editingChanged(_ sender: UITextField) {
         guard let text = sender.text, text.characters.count > 0 else { row?.value = nil; update(); return }
         row?.value = text as AnyObject

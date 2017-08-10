@@ -28,28 +28,145 @@
 import Foundation
 import UIKit
 
+/// enumerate states enrollment
 enum EnrollmentState {
+    /// `initial`
     case initial
+    /// `loading`
     case loading
+    /// `success`
     case success
+    /// `fail`
     case fail
 }
 
+/// ViewController class
 class ViewController: UIViewController {
-
+    // MARK: Properties
+    /// `httpRequest`
     var httpRequest: HttpRequest?
+    /// ``
     var mdmAgent = [String: Any]()
+    /// `userToken`
     var userToken: String?
+    /// `invitationToken`
     var invitationToken: String?
+    /// `topic`
     var topic: String?
+    
+    /// logoImageView `UIImageView`
+    let logoImageView: UIImageView = {
+        
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
+    /// messageLabel `UILabel`
+    let messageLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "message_init".localized
+        label.sizeToFit()
+        label.numberOfLines = 0
+        label.minimumScaleFactor = 14.0
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.textColor = .gray
+        
+        return label
+    }()
+    
+    /// titleLabel `UILabel`
+    let titleLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "enroll_device".localized
+        label.font = UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightLight)
+        label.sizeToFit()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    /// statusLabel `UILabel`
+    let statusLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.sizeToFit()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.textColor = .gray
+        
+        return label
+    }()
+    
+    /// UIButton `UIButton`
+    lazy var urlBotton: UIButton = {
+        
+        let button = UIButton(type: UIButtonType.system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("https://flyve-mdm.com", for: .normal)
+        button.addTarget(self, action: #selector(self.openURL), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    /// enrollBotton `UIButton`
+    lazy var enrollBotton: UIButton = {
+        
+        let button = UIButton(type: UIButtonType.custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 45
+        button.backgroundColor = UIColor.main
+        button.addTarget(self, action: #selector(self.enroll), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    /// playImageView `UIImageView`
+    let playImageView: UIImageView = {
+        
+        let imageView = UIImageView(image: UIImage(named: "play"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
+    /// loadingIndicatorView `UIActivityIndicatorView`
+    let loadingIndicatorView: UIActivityIndicatorView = {
+        
+        let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.hidesWhenStopped = true
+        
+        return loading
+    }()
 
+    // MARK: Init
+    /// init method
     init(userToken: String, invitationToken: String?) {
         self.userToken = userToken
         self.invitationToken = invitationToken
 
         super.init(nibName: nil, bundle: nil)
     }
-
+    
+    /// init method
     init(mdmAgent: [String: Any]) {
 
         self.mdmAgent = mdmAgent
@@ -57,15 +174,18 @@ class ViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    /// init method
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// `override viewWillAppear(_ animated: Bool) `
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
-
+    
+    /// `override loadView()`
     override func loadView() {
         super.loadView()
 
@@ -80,6 +200,7 @@ class ViewController: UIViewController {
         }
     }
 
+    /// `setupViews()`
     func setupViews() {
 
         self.view.backgroundColor = UIColor.background
@@ -95,6 +216,7 @@ class ViewController: UIViewController {
         self.addConstraints()
     }
 
+    /// `addConstraints()`
     func addConstraints() {
 
         self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
@@ -129,6 +251,7 @@ class ViewController: UIViewController {
         self.statusLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8).isActive = true
     }
 
+    /// `setupViewsEmpty()`
     func setupViewsEmpty() {
 
         self.view.backgroundColor = UIColor.background
@@ -140,6 +263,7 @@ class ViewController: UIViewController {
         self.addConstraintsEmpty()
     }
 
+    /// `addConstraintsEmpty()`
     func addConstraintsEmpty() {
 
         self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
@@ -152,102 +276,8 @@ class ViewController: UIViewController {
         self.urlBotton.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 48).isActive = true
         self.urlBotton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     }
-
-    let logoImageView: UIImageView = {
-
-        let imageView = UIImageView(image: UIImage(named: "logo"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-
-        return imageView
-    }()
-
-    let messageLabel: UILabel = {
-
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "message_init".localized
-        label.sizeToFit()
-        label.numberOfLines = 0
-        label.minimumScaleFactor = 14.0
-        label.textAlignment = .center
-        label.backgroundColor = .clear
-        label.textColor = .gray
-
-        return label
-    }()
-
-    let titleLabel: UILabel = {
-
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "enroll_device".localized
-        label.font = UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightLight)
-        label.sizeToFit()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.backgroundColor = .clear
-        label.textColor = .black
-
-        return label
-    }()
-
-    let statusLabel: UILabel = {
-
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ""
-        label.sizeToFit()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.backgroundColor = .clear
-        label.textColor = .gray
-
-        return label
-    }()
-
-    lazy var urlBotton: UIButton = {
-
-        let button = UIButton(type: UIButtonType.system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("https://flyve-mdm.com", for: .normal)
-        button.addTarget(self, action: #selector(self.openURL), for: .touchUpInside)
-
-        return button
-    }()
-
-    lazy var enrollBotton: UIButton = {
-
-        let button = UIButton(type: UIButtonType.custom)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 45
-        button.backgroundColor = UIColor.main
-        button.addTarget(self, action: #selector(self.enroll), for: .touchUpInside)
-
-        return button
-    }()
-
-    let playImageView: UIImageView = {
-
-        let imageView = UIImageView(image: UIImage(named: "play"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-
-        return imageView
-    }()
-
-    let loadingIndicatorView: UIActivityIndicatorView = {
-
-        let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-        loading.translatesAutoresizingMaskIntoConstraints = false
-        loading.hidesWhenStopped = true
-
-        return loading
-    }()
-
+    
+    /// Open URL Flyve MDM
     func openURL() {
         guard let url = URL(string: "https://flyve-mdm.com") else { return }
 
@@ -257,7 +287,8 @@ class ViewController: UIViewController {
             UIApplication.shared.openURL(url)
         }
     }
-
+    
+    /// Start to enroll process
     func enroll() {
 
         self.httpRequest = HttpRequest()
@@ -266,6 +297,11 @@ class ViewController: UIViewController {
         self.enrollState(.loading)
     }
 
+    /**
+     Set enrollment states
+     
+     - parameter state: enumerate type EnrollmentState
+     */
     func enrollState(_ state: EnrollmentState) {
 
         switch state {
@@ -310,22 +346,26 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: HttpRequestDelegate
 extension ViewController: HttpRequestDelegate {
 
+    /// `responseInitSession`
     func responseInitSession(data: [String: AnyObject]) {
 
         if let session_token = data["session_token"] as? String {
-            sessionToken = session_token
+            SESSION_TOKEN = session_token
             self.httpRequest?.requestGetFullSession()
         }
     }
-
+    
+    /// `errorInitSession`
     func errorInitSession(error: [String: String]) {
 
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
 
+    /// `responseGetFullSession`
     func responseGetFullSession(data: [String: AnyObject]) {
 
         if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
@@ -345,24 +385,29 @@ extension ViewController: HttpRequestDelegate {
         }
     }
 
+    /// `errorGetFullSession`
     func errorGetFullSession(error: [String: String]) {
 
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
+    /// `responsePluginFlyvemdmEntityConfig`
     func responsePluginFlyvemdmEntityConfig(data: [String : AnyObject]) {
         setStorage(value: data as AnyObject, key: "supervisor")
     }
     
+    /// `errorPluginFlyvemdmEntityConfig`
     func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
 
     }
-
+    
+    /// `responseChangeActiveProfile`
     func responseChangeActiveProfile() {
         self.present(UINavigationController(rootViewController: EnrollFormController()), animated: true, completion: nil)
     }
-
+    
+    /// send data enrollment
     func sendDataEnroll(notification: NSNotification) {
 
         var jsonDictionary = [String: AnyObject]()
@@ -414,27 +459,31 @@ extension ViewController: HttpRequestDelegate {
             self.loadingIndicatorView.stopAnimating()
         }
     }
-
+    
+    /// `errorChangeActiveProfile`
     func errorChangeActiveProfile(error: [String: String]) {
 
         UserDefaults.standard.set(nil, forKey: "dataUser")
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
-
+    
+    /// `responsePluginFlyvemdmAgent`
     func responsePluginFlyvemdmAgent(data: [String: AnyObject]) {
 
         if let id = data["id"] as? Int {
             self.httpRequest?.requestGetPluginFlyvemdmAgent(agentID: "\(id)")
         }
     }
-
+    
+    /// `errorPluginFlyvemdmAgent`
     func errorPluginFlyvemdmAgent(error: [String: String]) {
 
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
 
+    /// `responseGetPluginFlyvemdmAgent`
     func responseGetPluginFlyvemdmAgent(data: [String: AnyObject]) {
 
         setStorage(value: data as AnyObject, key: "mdmAgent")
@@ -445,12 +494,14 @@ extension ViewController: HttpRequestDelegate {
         }
     }
 
+    /// `errorGetPluginFlyvemdmAgent`
     func errorGetPluginFlyvemdmAgent(error: [String: String]) {
 
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
 
+    /// go Main screen Controller
     func goMainController() {
 
         if let mdmAgentObject = getStorage(key: "mdmAgent") as? [String: AnyObject] {

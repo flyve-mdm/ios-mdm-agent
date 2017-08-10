@@ -27,6 +27,12 @@
 
 import Foundation
 
+/**
+ Get AnyObject from local storage
+ 
+ - parameter key: key value
+ - return: key value as AnyObject stored in UserDefaults
+ */
 public func getStorage(key: String) -> AnyObject? {
 
     if let obj = UserDefaults.standard.object(forKey: key) {
@@ -37,6 +43,11 @@ public func getStorage(key: String) -> AnyObject? {
     }
 }
 
+/**
+ Save AnyObject in local storage
+ 
+ - parameter key: key value
+ */
 public func setStorage(value: AnyObject, key: String) {
 
     let encodedData = NSKeyedArchiver.archivedData(withRootObject: value)
@@ -44,6 +55,9 @@ public func setStorage(value: AnyObject, key: String) {
     UserDefaults.standard.synchronize()
 }
 
+/**
+ Remove all objects in local storage
+ */
 public func removeAllStorage() {
     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
     UserDefaults.standard.synchronize()

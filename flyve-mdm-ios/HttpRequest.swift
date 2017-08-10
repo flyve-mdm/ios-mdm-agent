@@ -28,30 +28,48 @@
 import Foundation
 import Alamofire
 
+/// HttpRequestDelegate protocol
 @objc protocol HttpRequestDelegate {
+    /// `responseInitSession`
     @objc optional func responseInitSession(data: [String: AnyObject])
+    /// `errorInitSession`
     @objc optional func errorInitSession(error: [String: String])
 
+    /// `responseGetFullSession`
     @objc optional func responseGetFullSession(data: [String: AnyObject])
+    /// `errorGetFullSession`
     @objc optional func errorGetFullSession(error: [String: String])
 
+    /// `responseChangeActiveProfile`
     @objc optional func responseChangeActiveProfile()
+    /// `errorChangeActiveProfile`
     @objc optional func errorChangeActiveProfile(error: [String: String])
 
+    /// `responsePluginFlyvemdmAgent`
     @objc optional func responsePluginFlyvemdmAgent(data: [String: AnyObject])
+    /// `errorPluginFlyvemdmAgent`
     @objc optional func errorPluginFlyvemdmAgent(error: [String: String])
 
+    /// `responseGetPluginFlyvemdmAgent`
     @objc optional func responseGetPluginFlyvemdmAgent(data: [String: AnyObject])
+    /// `errorGetPluginFlyvemdmAgent`
     @objc optional func errorGetPluginFlyvemdmAgent(error: [String: String])
     
+    /// `responsePluginFlyvemdmEntityConfig`
     @objc optional func responsePluginFlyvemdmEntityConfig(data: [String: AnyObject])
+    /// `errorPluginFlyvemdmEntityConfig`
     @objc optional func errorPluginFlyvemdmEntityConfig(error: [String: String])
 }
 
+/// HttpRequest class
 class HttpRequest: NSObject {
 
     weak var delegate: HttpRequestDelegate?
-
+    
+    /**
+     Request a session token to uses other api endpoints.
+     - parameter: user token
+     */
     func requestInitSession(userToken: String) {
 
         let request = Alamofire.request(FlyveRouter.initSession(userToken))
@@ -70,6 +88,9 @@ class HttpRequest: NSObject {
         debugPrint(request)
     }
 
+    /**
+     Return the current php $_SESSION
+     */
     func requestGetFullSession() {
 
         let request = Alamofire.request(FlyveRouter.getFullSession())
@@ -87,6 +108,10 @@ class HttpRequest: NSObject {
         debugPrint(request)
     }
 
+    /**
+     Change active profile to the profiles_id one
+     - parameter: ID of the new active profile. Mandatory
+     */
     func requestChangeActiveProfile(profilesID: String) {
 
         let request = Alamofire.request(FlyveRouter.changeActiveProfile(profilesID))
@@ -109,6 +134,7 @@ class HttpRequest: NSObject {
         debugPrint(request)
     }
 
+    /// Enroll MDM Agent
     func requestPluginFlyvemdmAgent(parameters: [String : AnyObject]) {
 
         let request = Alamofire.request(FlyveRouter.pluginFlyvemdmAgent(parameters))
@@ -126,7 +152,8 @@ class HttpRequest: NSObject {
         }
         debugPrint(request)
     }
-
+    
+    /// Get MDM Agent profile
     func requestGetPluginFlyvemdmAgent(agentID: String) {
 
         let request = Alamofire.request(FlyveRouter.getPluginFlyvemdmAgent(agentID))
@@ -144,6 +171,7 @@ class HttpRequest: NSObject {
         debugPrint(request)
     }
     
+    /// Download files
     func requestPluginFlyvemdmFile(fileID: String) {
         
         let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
@@ -158,6 +186,7 @@ class HttpRequest: NSObject {
         debugPrint(request)
     }
     
+    /// Get Entity Config
     func requestPluginFlyvemdmEntityConfig(entityID: String) {
         let request = Alamofire.request(FlyveRouter.pluginFlyvemdmEntityConfig(entityID))
             .validate()
@@ -173,7 +202,11 @@ class HttpRequest: NSObject {
         }
         debugPrint(request)
     }
-
+    
+    /**
+     handler Error
+     - return: error message
+     */
     func handlerError(_ response: DataResponse<Any>) -> [String: String] {
 
         var errorObj = [String]()

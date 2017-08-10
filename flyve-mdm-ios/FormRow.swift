@@ -27,31 +27,51 @@
 
 import UIKit
 
+/// FormRow class
 public class FormRow {
     
     // MARK: Types
     
+    /// enumerate type row
     public enum RowType {
+        /// `title`
         case title
+        /// `info`
         case info
+        /// `phone`
         case phone
+        /// `email`
         case email
+        /// `text`
         case text
+        /// `number`
         case number
+        /// `password`
         case password
+        /// `multipleSelector`
         case multipleSelector
     }
     
+    /// structure cell configuration
     public struct CellConfiguration {
+        /// `cellClass`
         public var cellClass: AnyClass?
+        /// `appearance`
         public var appearance: [String: AnyObject]
+        /// `placeholder`
         public var placeholder: String?
+        /// `showsInputToolbar`
         public var showsInputToolbar: Bool
+        /// `required`
         public var required: Bool
+        /// `willUpdateClosure: ((FormRow) -> Void)?`
         public var willUpdateClosure: ((FormRow) -> Void)?
+        /// `didUpdateClosure: ((FormRow) -> Void)?`
         public var didUpdateClosure: ((FormRow) -> Void)?
+        /// `visualConstraintsClosure: ((FormBaseCell) -> [String])?`
         public var visualConstraintsClosure: ((FormBaseCell) -> [String])?
         
+        /// init method
         public init() {
             cellClass = nil
             appearance = [:]
@@ -64,12 +84,18 @@ public class FormRow {
         }
     }
     
+    /// structure selection configuration
     public struct SelectionConfiguration {
+        /// `controllerClass`
         public var controllerClass: AnyClass?
+        /// `options`
         public var options: [AnyObject]
+        /// `optionTitleClosure: ((AnyObject) -> String)?`
         public var optionTitleClosure: ((AnyObject) -> String)?
+        /// `allowsMultipleSelection`
         public var allowsMultipleSelection: Bool
         
+        /// init method
         public init() {
             controllerClass = nil
             options = []
@@ -78,20 +104,29 @@ public class FormRow {
         }
     }
     
+    /// structure button configuration
     public struct ButtonConfiguration {
+        /// `didSelectClosure: ((FormRow) -> Void)?`
         public var didSelectClosure: ((FormRow) -> Void)?
         
+        /// init method
         public init() {
             didSelectClosure = nil
         }
     }
     
+    /// structure stepper configuration
     public struct StepperConfiguration {
+        /// `maximumValue`
         public var maximumValue: Double
+        /// `minimumValue`
         public var minimumValue: Double
+        /// `steps`
         public var steps: Double
+        /// `continuous`
         public var continuous: Bool
         
+        /// init method
         public init() {
             maximumValue = 0.0
             minimumValue = 0.0
@@ -100,18 +135,28 @@ public class FormRow {
         }
     }
     
+    /// structure date configuration
     public struct DateConfiguration {
+        /// `dateFormatter`
         public var dateFormatter: DateFormatter?
     }
     
+    /// structure row configuration
     public struct RowConfiguration {
+        /// `cell`
         public var cell: CellConfiguration
+        /// `selection`
         public var selection: SelectionConfiguration
+        /// `button`
         public var button: ButtonConfiguration
+        /// `stepper`
         public var stepper: StepperConfiguration
+        /// `date`
         public var date: DateConfiguration
+        /// `userInfo`
         public var userInfo: [String : AnyObject]
         
+        /// init method
         init() {
             cell = CellConfiguration()
             selection = SelectionConfiguration()
@@ -123,11 +168,15 @@ public class FormRow {
     }
     
     // MARK: Properties
-    
+    /// `tag`
     public let tag: String
+    /// `type`
     public let type: RowType
+    /// `edit`
     public var edit: UITableViewCellEditingStyle
+    /// `title`
     public var title: String?
+    /// `option`
     public var option: AnyObject? {
         willSet {
             guard let willUpdateBlock = configuration.cell.willUpdateClosure else { return }
@@ -138,7 +187,7 @@ public class FormRow {
             didUpdateBlock(self)
         }
     }
-
+    /// `value`
     public var value: AnyObject? {
         willSet {
             guard let willUpdateBlock = configuration.cell.willUpdateClosure else { return }
@@ -150,10 +199,12 @@ public class FormRow {
         }
     }
     
+    /// configuration
     public var configuration: RowConfiguration
     
     // MARK: Init
     
+    /// init method
     public init(tag: String, type: RowType, edit: UITableViewCellEditingStyle, title: String, configuration: RowConfiguration) {
         self.tag = tag
         self.type = type
@@ -162,6 +213,7 @@ public class FormRow {
         self.configuration = configuration
     }
     
+    /// init method
     public init(tag: String, type: RowType, edit: UITableViewCellEditingStyle, title: String) {
         self.tag = tag
         self.type = type

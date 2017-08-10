@@ -27,10 +27,17 @@
 
 import UIKit
 
+/// EnrollFormController allow get user information for enrollment process
 class EnrollFormController: FormViewController {
     
+    // MARK: Properties
+    
+    /// user information storage
     var userInfo = [String: AnyObject]()
     
+    // MARK: Init
+    
+    /// override `loadView()` from `UIViewController`
     override func loadView() {
         super.loadView()
         
@@ -38,6 +45,7 @@ class EnrollFormController: FormViewController {
         loadForm()
     }
     
+    /// Setup initial configuration view
     func setupViews() {
         
         form.title = "enrollment".localized
@@ -49,6 +57,7 @@ class EnrollFormController: FormViewController {
                                                                  action: #selector(self.done))
     }
     
+    /// Load Form information
     func loadForm() {
         // Section info user
         let sectionInfo = FormSection(headerTitle: nil, footerTitle: nil)
@@ -119,8 +128,10 @@ class EnrollFormController: FormViewController {
                          sectionLanguage]
     }
     
+    // MARK: Methods
+    
+    /// Add new phone number to form
     func addPhone() {
-        
         if form.sections[1].rows.count < 1 {
             let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
             rowPhone.configuration.cell.placeholder = "phone".localized
@@ -140,6 +151,7 @@ class EnrollFormController: FormViewController {
         }
     }
     
+    /// Add new email number to form
     func addEmail() {
         if form.sections[3].rows.count < 1 {
             let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
@@ -161,9 +173,11 @@ class EnrollFormController: FormViewController {
         }
     }
     
+    /// Validate user information for after save it
     func done() {
         dismissKeyboard()
         
+        // get main user information
         if form.sections[0].rows.count > 0 {
             
             if let info = form.sections[0].rows[0].value {
@@ -178,6 +192,7 @@ class EnrollFormController: FormViewController {
             }
         }
         
+        // get phone numbers
         var arrPhone = [AnyObject]()
         
         for phone in form.sections[1].rows where phone.value != nil {
@@ -194,6 +209,7 @@ class EnrollFormController: FormViewController {
             return
         }
 
+        // get email address
         var arrEmail = [AnyObject]()
         
         for email in form.sections[3].rows where email.value != nil {
@@ -210,6 +226,7 @@ class EnrollFormController: FormViewController {
             return
         }
         
+        // get selected language
         if form.sections[5].rows.count > 0 {
             
             if let language: AnyObject = form.sections[5].rows[0].option {
@@ -217,13 +234,15 @@ class EnrollFormController: FormViewController {
                 userInfo["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject) as AnyObject
             }
         }
-
+        
+        // notify user modification to setDataEnroll
         let notificationData = NotificationCenter.default
         notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: userInfo)
         
         dismiss(animated: true, completion: nil)
     }
     
+    /// dismiss Keyboard when it's visible
     func dismissKeyboard() {
         view.endEditing(true)
     }
