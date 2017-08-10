@@ -27,20 +27,22 @@
 
 import UIKit
 
+/// FormTextFieldSelectCell class
 class FormTextFieldSelectCell: FormBaseCell {
     
     // MARK: Properties
-    
+    /// `customConstraints`
     fileprivate var customConstraints: [AnyObject] = []
     
     // MARK: Cell views
-    
+    /// typeButton `UIButton`
     let typeButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    /// verticalView `UIView`
     let verticalView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +51,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         return view
     }()
     
+    /// separatorView `UIView`
     let separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +60,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         return view
     }()
     
+    /// textField `UITextField`
     let textField: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +72,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         return text
     }()
     
+    /// `setupViews()`
     func setupViews() {
         
         selectionStyle = .none
@@ -78,6 +83,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         contentView.addSubview(separatorView)
     }
     
+    /// `addConstraints()`
     func addConstraints() {
         
         typeButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
@@ -101,6 +107,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
+    /// `override configure()`
     override func configure() {
         super.configure()
         setupViews()
@@ -110,6 +117,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         typeButton.addTarget(self, action: #selector(showOptions(_:)), for: .touchUpInside)
     }
     
+    /// `override update()`
     override func update() {
         super.update()
         
@@ -141,21 +149,24 @@ class FormTextFieldSelectCell: FormBaseCell {
         }
     }
     
+    /// `override firstResponderElement()`
     open override func firstResponderElement() -> UIResponder? {
         return textField
     }
     
+    /// `override formRowCanBecomeFirstResponder()`
     open override class func formRowCanBecomeFirstResponder() -> Bool {
         return true
     }
     
     // MARK: Actions
-    
+    /// `editingChanged(_ sender: UITextField)`
     internal func editingChanged(_ sender: UITextField) {
         guard let text = sender.text, text.characters.count > 0 else { row?.value = nil; update(); return }
         row?.value = text as AnyObject
     }
     
+    /// open option list controller
     func showOptions(_ sender: UIButton) {
         
         formViewController?.view.endEditing(true)

@@ -26,22 +26,27 @@
  */
 
 import UIKit
-
+/// UserFormController class
 class UserFormController: FormViewController {
-    
+    // MARK: Properties
+    /// `userInfo`
     var userInfo: [String: AnyObject]?
+    /// `edit`
     var edit: Bool?
     
+    /// init method
     init(style: UITableViewStyle, userInfo: [String: AnyObject], edit: Bool) {
         self.userInfo = userInfo
         self.edit = edit
         super.init(style: style)
     }
-
+    
+    // MARK: Init
+    /// init method
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    /// `override loadView()`
     override func loadView() {
         super.loadView()
         
@@ -49,6 +54,7 @@ class UserFormController: FormViewController {
         loadForm()
     }
     
+    /// `setupViews()`
     func setupViews() {
         
         form.title = "title_user".localized
@@ -64,6 +70,7 @@ class UserFormController: FormViewController {
                                          action: #selector(self.done))
     }
     
+    /// `loadForm()`
     func loadForm() {
         // Section info user
         let sectionInfo = FormSection(headerTitle: nil, footerTitle: nil)
@@ -206,7 +213,9 @@ class UserFormController: FormViewController {
                          sectionPassword,
                          sectionAdminNumber]
     }
-
+    
+    // MARK: Methods
+    /// Add new phone number to form
     func addPhone() {
         
         if form.sections[1].rows.count < 3 {
@@ -228,6 +237,7 @@ class UserFormController: FormViewController {
         }
     }
     
+    /// Add new email number to form
     func addEmail() {
         
         let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
@@ -248,9 +258,11 @@ class UserFormController: FormViewController {
         tableView.endUpdates()
     }
     
+    /// Validate user information for after save it
     func done() {
         dismissKeyboard()
         
+        // get main user information
         if form.sections[0].rows.count > 0 {
             
             if let info = form.sections[0].rows[0].value {
@@ -269,6 +281,7 @@ class UserFormController: FormViewController {
             }
         }
         
+        // get phone numbers
         var arrPhone = [AnyObject]()
         
         for phone in form.sections[1].rows where phone.value != nil {
@@ -281,6 +294,7 @@ class UserFormController: FormViewController {
         
         userInfo?["phone"] = arrPhone as AnyObject
         
+        // get email address
         var arrEmail = [AnyObject]()
         
         for email in form.sections[3].rows where email.value != nil {
@@ -297,6 +311,7 @@ class UserFormController: FormViewController {
             return
         }
         
+        // get selected language
         if form.sections[5].rows.count > 0 {
             
             if let language: AnyObject = form.sections[5].rows[0].option {
@@ -305,6 +320,7 @@ class UserFormController: FormViewController {
             }
         }
         
+        // get administrative number
         if form.sections[7].rows.count > 0 {
             
             if let adminNumber: String = form.sections[7].rows[0].value as? String {
@@ -315,19 +331,23 @@ class UserFormController: FormViewController {
             }
         }
         
+        // save userInfo in local storage
         setStorage(value: self.userInfo! as AnyObject, key: "dataUser")
         
+        // notify user modification to editUser
         let notificationData = NotificationCenter.default
         notificationData.post(name: NSNotification.Name(rawValue: "editUser"), object: nil, userInfo: nil)
         
         dismiss(animated: true, completion: nil)
     }
     
+    /// back main screen
     func cancel() {
         dismissKeyboard()
         dismiss(animated: true, completion: nil)
     }
     
+    /// dismiss Keyboard when it's visible
     func dismissKeyboard() {
         view.endEditing(true)
     }

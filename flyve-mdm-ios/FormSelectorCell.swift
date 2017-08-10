@@ -26,9 +26,10 @@
  */
 
 import UIKit
-
+/// FormSelectorCell class
 class FormSelectorCell: FormBaseCell {
     
+    /// titleLabel `UILabel`
     lazy var titleLabel: UILabel = {
         
         let label = UILabel()
@@ -38,7 +39,7 @@ class FormSelectorCell: FormBaseCell {
         
         return label
     }()
-    
+    /// valueLabel `UILabel`
     lazy var valueLabel: UILabel = {
         
         let label = UILabel()
@@ -49,7 +50,7 @@ class FormSelectorCell: FormBaseCell {
         
         return label
     }()
-    
+    /// separatorView `UIView`
     let separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +59,7 @@ class FormSelectorCell: FormBaseCell {
         return view
     }()
     
+    /// `override configure()`
     override func configure() {
         super.configure()
 
@@ -84,11 +86,13 @@ class FormSelectorCell: FormBaseCell {
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
+    /// `override update()`
     override func update() {
         super.update()
         
         titleLabel.text = row?.title
         
+        // show value selector option
         var title: String?
         if let multipleValues = row?.value as? [AnyObject] {
             var multipleValuesTitle = ""
@@ -111,6 +115,7 @@ class FormSelectorCell: FormBaseCell {
         }
     }
     
+    /// `override didSelectRow`
     override class func formViewController(_ formViewController: FormViewController, didSelectRow selectedRow: FormBaseCell) {
         guard let row = selectedRow as? FormSelectorCell else { return }
         

@@ -27,55 +27,68 @@
 
 import UIKit
 
+/// FormBaseCell class
 open class FormBaseCell: UITableViewCell {
     
     // MARK: Properties
     
+    /// get a row of the type `FormRow`
     open var row: FormRow? {
         didSet {
             self.update()
         }
     }
     
+    /// instancia a class of the type `FormViewController`
     weak var formViewController: FormViewController?
-    
+    /// customConstraints
     fileprivate var customConstraints: [NSLayoutConstraint] = []
     
     // MARK: Init
-    
+    /// override init method from super class `UITableViewCell`
     public required override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-    
+
+    /// override init method from super class `UITableViewCell`
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     // MARK: Public interface
-    
+    /// `configure()`
     open func configure() {
         /// override
     }
     
+    /// `update()`
     open func update() {
         /// override
     }
     
+    /// `defaultVisualConstraints()`
     open func defaultVisualConstraints() -> [String] {
         /// override
         return []
     }
     
+    /// `constraintsViews()`
     open func constraintsViews() -> [String : UIView] {
         /// override
         return [:]
     }
     
+    /// `firstResponderElement()`
     open func firstResponderElement() -> UIResponder? {
         /// override
         return nil
     }
     
+    /**
+     Show UIToolbar
+     
+     - return: Toolbar
+     */
     open func inputAccesoryView() -> UIToolbar {
         
         let actionBar = UIToolbar()
@@ -91,19 +104,22 @@ open class FormBaseCell: UITableViewCell {
         return actionBar
     }
     
+    /// `handleDoneAction(_: UIBarButtonItem)`
     internal func handleDoneAction(_: UIBarButtonItem) {
         firstResponderElement()?.resignFirstResponder()
     }
     
+    /// `formRowCanBecomeFirstResponder()`
     open class func formRowCanBecomeFirstResponder() -> Bool {
         return false
     }
-    
+
+    /// override `didSelectRow` from `FormViewController`
     class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {
     }
     
     // MARK: Constraints
-    
+    /// update constraints
     open override func updateConstraints() {
         if customConstraints.count > 0 {
             contentView.removeConstraints(customConstraints)

@@ -27,8 +27,12 @@
 
 import UIKit
 
+/// FormTitleCell class
 class FormTitleCell: FormBaseCell {
     
+    // MARK: Cell views
+    
+    /// titleLabel `UILabel`
     lazy var titleLabel: UILabel = {
         
         let label = UILabel()
@@ -39,6 +43,7 @@ class FormTitleCell: FormBaseCell {
         return label
     }()
     
+    /// separatorView `UIView`
     let separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +52,7 @@ class FormTitleCell: FormBaseCell {
         return view
     }()
     
+    /// `override configure()`
     override func configure() {
         super.configure()
 
@@ -65,6 +71,7 @@ class FormTitleCell: FormBaseCell {
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
+    /// `override update()`
     override func update() {
         super.update()
         

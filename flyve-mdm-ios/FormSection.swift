@@ -27,23 +27,28 @@
 
 import UIKit
 
+/// FormSection class
 public class FormSection {
     
     // MARK: Properties
-    
+    /// `rows`
     var rows: [FormRow] = []
-    
+    /// `headerTitle`
     var headerTitle: String?
+    /// `footerTitle`
     var footerTitle: String?
-    
+    /// `headerView`
     var headerView: UIView?
+    /// `footerView`
     var footerView: UIView?
-    
+    /// `headerViewHeight`
     var headerViewHeight: CGFloat = UITableViewAutomaticDimension
+    /// `footerViewHeight`
     var footerViewHeight: CGFloat = UITableViewAutomaticDimension
     
     // MARK: Init
     
+    /// init method
     public init(headerTitle: String?, footerTitle: String?) {
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle

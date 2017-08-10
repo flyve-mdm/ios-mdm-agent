@@ -27,18 +27,43 @@
 
 import UIKit
 import MessageUI
-
+/// UserController class
 class UserController: UIViewController {
-    
+    // MARK: Properties
+    /// `cellIdMain`
     let cellIdMain = "cellIdMain"
+    /// `cellIdInfo`
     let cellIdInfo = "cellIdInfo"
+    /// `userInfo`
     var userInfo = [String: AnyObject]()
     
+    /// `userTableView UITableView`
+    lazy var userTableView: UITableView = {
+        
+        let table = UITableView(frame: .zero, style: .plain)
+        table.delegate = self
+        table.dataSource = self
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .clear
+        table.separatorStyle = .none
+        table.tableFooterView = UIView()
+        table.rowHeight = UITableViewAutomaticDimension
+        table.estimatedRowHeight = 100
+        table.isScrollEnabled = true
+        table.register(SupervisorMainCell.self, forCellReuseIdentifier: self.cellIdMain)
+        table.register(SupervisorInfoCell.self, forCellReuseIdentifier: self.cellIdInfo)
+        
+        return table
+    }()
+    
+    // MARK: Init
+    /// `override viewWillAppear`
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
     
+    /// `override loadView`
     override func loadView() {
         
         if let dataUserObject = getStorage(key: "dataUser") as? [String: AnyObject] {
@@ -50,6 +75,7 @@ class UserController: UIViewController {
         self.addConstraints()
     }
     
+    /// `override setupViews`
     func setupViews() {
         self.view.backgroundColor = .white
         
@@ -69,6 +95,8 @@ class UserController: UIViewController {
         self.view.addSubview(self.userTableView)
     }
     
+    // MARK: Constraints
+    /// `addConstraints()`
     func addConstraints() {
         userTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         userTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -76,56 +104,46 @@ class UserController: UIViewController {
         userTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
     }
     
-    lazy var userTableView: UITableView = {
-        
-        let table = UITableView(frame: .zero, style: .plain)
-        table.delegate = self
-        table.dataSource = self
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.backgroundColor = .clear
-        table.separatorStyle = .none
-        table.tableFooterView = UIView()
-        table.rowHeight = UITableViewAutomaticDimension
-        table.estimatedRowHeight = 100
-        table.isScrollEnabled = true
-        table.register(SupervisorMainCell.self, forCellReuseIdentifier: self.cellIdMain)
-        table.register(SupervisorInfoCell.self, forCellReuseIdentifier: self.cellIdInfo)
-        
-        return table
-    }()
-    
+    // MARK: Methods
+    /// go `UserFormController`
     func edit() {
         let userCntroller = UserFormController(style: .grouped, userInfo: userInfo, edit: true)
 
         navigationController?.pushViewController(userCntroller, animated: true)
     }
     
+    /// back main screen
     func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: MFMailComposeViewControllerDelegate
 extension UserController: MFMailComposeViewControllerDelegate {
     
+    /// implemente delegate `didFinishWith`
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: MFMessageComposeViewControllerDelegate
 extension UserController: MFMessageComposeViewControllerDelegate {
-    
+    /// implemente delegate `didFinishWith`
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: UITableViewDelegate
 extension UserController: UITableViewDelegate {
-    
+    /// tells the delegate that the specified row is now selected.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
 
+// MARK: UITableViewDataSource
 extension UserController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

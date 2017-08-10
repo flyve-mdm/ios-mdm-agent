@@ -28,17 +28,24 @@
 import Foundation
 import CoreLocation
 
+/// LocationDelegate protocol
 protocol LocationDelegate: class {
+    /// current location
     func currentLocation(coordinate: CLLocationCoordinate2D)
 }
 
+/// Location class
 class Location: NSObject {
+    /// location delegate
     weak var delegate: LocationDelegate?
+    /// locationManager
     let locationManager = CLLocationManager()
 }
 
+// MARK: extension
 extension Location: CLLocationManagerDelegate {
-
+    
+    /// request current location
     func getCurrentLocation() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -48,7 +55,8 @@ extension Location: CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         }
     }
-
+    
+    /// update current location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         locationManager.stopUpdatingLocation()

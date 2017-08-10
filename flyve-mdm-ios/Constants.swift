@@ -27,6 +27,9 @@
 
 import Foundation
 
+/// LANGUAGES array
 public let LANGUAGES = ["English", "French", "Spanish"]
+/// EMAILS array
 public let EMAILS = ["work", "home", "iCloud", "other"]
+/// PHONES array
 public let PHONES = ["work", "mobile", "home", "iPhone", "main", "home fax", "work fax", "other fax", "pager", "other"]
