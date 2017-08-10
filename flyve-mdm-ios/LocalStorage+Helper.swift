@@ -18,9 +18,9 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      13/07/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
