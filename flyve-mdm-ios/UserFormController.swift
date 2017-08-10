@@ -101,7 +101,7 @@ class UserFormController: FormViewController {
                 rowPhone.configuration.cell.placeholder = "phone".localized
                 rowPhone.value = phone["phone"] as AnyObject
                 rowPhone.option = phone["type"] as AnyObject
-                rowPhone.configuration.selection.options = (arrPhones as [String]) as [AnyObject]
+                rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
                 rowPhone.configuration.selection.allowsMultipleSelection = false
                 rowPhone.configuration.selection.optionTitleClosure = { value in
                     guard let option = value as? String else { return "" }
@@ -135,7 +135,7 @@ class UserFormController: FormViewController {
                 rowEmail.configuration.cell.placeholder = "email".localized
                 rowEmail.value = email["email"] as AnyObject
                 rowEmail.option = email["type"] as AnyObject
-                rowEmail.configuration.selection.options = (arrEmails as [String]) as [AnyObject]
+                rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
                 rowEmail.configuration.selection.allowsMultipleSelection = false
                 rowEmail.configuration.selection.optionTitleClosure = { value in
                     guard let option = value as? String else { return "" }
@@ -212,8 +212,8 @@ class UserFormController: FormViewController {
         if form.sections[1].rows.count < 3 {
             let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
             rowPhone.configuration.cell.placeholder = "phone".localized
-            rowPhone.option = arrPhones[0] as AnyObject
-            rowPhone.configuration.selection.options = (arrPhones as [String]) as [AnyObject]
+            rowPhone.option = PHONES.first as AnyObject
+            rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
             rowPhone.configuration.selection.allowsMultipleSelection = false
             rowPhone.configuration.selection.optionTitleClosure = { value in
                 guard let option = value as? String else { return "" }
@@ -233,8 +233,8 @@ class UserFormController: FormViewController {
         let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
         rowEmail.configuration.cell.placeholder = "email".localized
         rowEmail.configuration.cell.placeholder = "email".localized
-        rowEmail.option = arrEmails[0] as AnyObject
-        rowEmail.configuration.selection.options = (arrEmails as [String]) as [AnyObject]
+        rowEmail.option = EMAILS.first as AnyObject
+        rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
         rowEmail.configuration.selection.allowsMultipleSelection = false
         rowEmail.configuration.selection.optionTitleClosure = { value in
             guard let option = value as? String else { return "" }

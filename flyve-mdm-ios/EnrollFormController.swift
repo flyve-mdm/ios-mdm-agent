@@ -98,10 +98,10 @@ class EnrollFormController: FormViewController {
         sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
         
         let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
-        if let firstLanguage = arrLaguages.first {
+        if let firstLanguage = LANGUAGES.first {
             rowLanguage.option = firstLanguage as AnyObject
         }
-        rowLanguage.configuration.selection.options = (arrLaguages as [String]) as [AnyObject]
+        rowLanguage.configuration.selection.options = (LANGUAGES as [String]) as [AnyObject]
         rowLanguage.configuration.selection.allowsMultipleSelection = false
         rowLanguage.configuration.selection.optionTitleClosure = { value in
             guard let option = value as? String else { return "" }
@@ -124,8 +124,8 @@ class EnrollFormController: FormViewController {
         if form.sections[1].rows.count < 1 {
             let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
             rowPhone.configuration.cell.placeholder = "phone".localized
-            rowPhone.option = arrPhones[0] as AnyObject
-            rowPhone.configuration.selection.options = (arrPhones as [String]) as [AnyObject]
+            rowPhone.option = PHONES.first as AnyObject
+            rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
             rowPhone.configuration.selection.allowsMultipleSelection = false
             rowPhone.configuration.selection.optionTitleClosure = { value in
                 guard let option = value as? String else { return "" }
@@ -145,8 +145,8 @@ class EnrollFormController: FormViewController {
             let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
             rowEmail.configuration.cell.placeholder = "email".localized
             rowEmail.configuration.cell.placeholder = "email".localized
-            rowEmail.option = arrEmails[0] as AnyObject
-            rowEmail.configuration.selection.options = (arrEmails as [String]) as [AnyObject]
+            rowEmail.option = EMAILS.first as AnyObject
+            rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
             rowEmail.configuration.selection.allowsMultipleSelection = false
             rowEmail.configuration.selection.optionTitleClosure = { value in
                 guard let option = value as? String else { return "" }

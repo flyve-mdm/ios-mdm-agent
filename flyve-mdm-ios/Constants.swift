@@ -27,6 +27,6 @@
 
 import Foundation
 
-public let arrLaguages = ["English", "French", "Spanish"]
-public let arrEmails = ["work", "home", "iCloud", "other"]
-public let arrPhones = ["work", "mobile", "home", "iPhone", "main", "home fax", "work fax", "other fax", "pager", "other"]
+public let LANGUAGES = ["English", "French", "Spanish"]
+public let EMAILS = ["work", "home", "iCloud", "other"]
+public let PHONES = ["work", "mobile", "home", "iPhone", "main", "home fax", "work fax", "other fax", "pager", "other"]
