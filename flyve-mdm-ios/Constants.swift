@@ -27,9 +27,11 @@
 
 import Foundation
 
-/// LANGUAGES array
+/// SESSION_TOKEN value
+public var SESSION_TOKEN = String()
+/// LANGUAGES array Constant
 public let LANGUAGES = ["English", "French", "Spanish"]
-/// EMAILS array
+/// EMAILS array Constant
 public let EMAILS = ["work", "home", "iCloud", "other"]
-/// PHONES array
+/// PHONES array Constant
 public let PHONES = ["work", "mobile", "home", "iPhone", "main", "home fax", "work fax", "other fax", "pager", "other"]
