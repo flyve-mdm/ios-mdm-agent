@@ -27,25 +27,34 @@
 
 import UIKit
 
+/// Form class
 public class Form {
     
     // MARK: Properties
     
+    /// form's title
     var title: String
+    /// this array contain the sections in the form
     var sections: [FormSection] = []
     
     // MARK: Init
     
-    init() {
-        self.title = ""
-    }
-    
-    init(title: String) {
+    /**
+     Init method in the class
+     
+     - parameter delay: form's title (optional)
+     */
+    init(title: String = "") {
         self.title = title
     }
     
     // MARK: Public
     
+    /**
+     Get all values in form
+     
+     - return: All values in form
+     */
     func formValues() -> [String : AnyObject] {
         
         var formValues: [String : AnyObject] = [:]
@@ -62,6 +71,11 @@ public class Form {
         return formValues
     }
     
+    /**
+     Validate required fields
+     
+     - return: `FormRow` when field required and it's nil
+     */
     func validateForm() -> FormRow? {
         for section in sections {
             for row in section.rows {
