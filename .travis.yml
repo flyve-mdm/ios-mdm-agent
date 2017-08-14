@@ -9,6 +9,7 @@ before_install:
 - chmod a+x scripts/remove-key.sh
 - gem update --system
 - gem install fastlane --no-rdoc --no-ri --no-document --quiet
+- npm i -g standard-version
 install: true
 before_script:
 - "./scripts/add-key.sh"
