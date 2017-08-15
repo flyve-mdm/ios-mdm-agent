@@ -88,8 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let mdmAgentData = getStorage(key: "mdmAgent") as? [String: AnyObject] {
             loadMainView(userToken: "", invitationToken: "", mdmAgent: mdmAgentData)
         }
-
-        var invitation = [String: AnyObject]()
+        
         guard let urlEnroll = URLComponents(string: url.absoluteString) else {
             loadMainView(userToken: "", invitationToken: "")
             return true
@@ -99,22 +98,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             loadMainView(userToken: "", invitationToken: "")
             return true
         }
-
-        if let data = query.base64Decoded()?.data(using: .utf8) {
-            do {
-                invitation =  try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] ?? [String: AnyObject]()
-            } catch {
-                print(error.localizedDescription)
+        
+        var invitation = [String]()
+        // CSV comma-separated values format
+        // url; user token; invitation token; support name; support phone, support website; support email
+        if let csv = query.base64Decoded() {
+            invitation = csv.components(separatedBy: "\\;")
+        }
+        
+        if invitation.count > 0 {
+            
+            guard !invitation[0].isEmpty, !invitation[1].isEmpty, !invitation[2].isEmpty else {
+                loadMainView(userToken: "", invitationToken: "")
+                return true
             }
+            
+            var invitationObject = [String: String]()
+            
+            invitationObject["url"] = invitation[0]
+            invitationObject["user_token"] = invitation[1]
+            invitationObject["invitation_token"] = invitation[2]
+            
+            setStorage(value: invitationObject as AnyObject, key: "deeplink")
+            loadMainView(userToken: invitation[1], invitationToken: invitation[2])
         }
-
-        guard invitation["url"] != nil, let user_token: String = invitation["user_token"] as? String, let invitation_token: String = invitation["invitation_token"] as? String else {
-            loadMainView(userToken: "", invitationToken: "")
-            return true
-        }
-
-        setStorage(value: invitation as AnyObject, key: "deeplink")
-        loadMainView(userToken: user_token, invitationToken: invitation_token)
 
         return true
     }
