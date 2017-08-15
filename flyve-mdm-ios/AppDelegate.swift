@@ -114,12 +114,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             var invitationObject = [String: String]()
+            var supervisorObject = [String: String]()
             
             invitationObject["url"] = invitation[0]
             invitationObject["user_token"] = invitation[1]
             invitationObject["invitation_token"] = invitation[2]
             
+            supervisorObject["support_name"] = invitation[3]
+            supervisorObject["support_phone"] = invitation[4]
+            supervisorObject["support_website"] = invitation[5]
+            supervisorObject["support_email"] = invitation[6]
+            
             setStorage(value: invitationObject as AnyObject, key: "deeplink")
+            setStorage(value: supervisorObject as AnyObject, key: "supervisor")
+            
             loadMainView(userToken: invitation[1], invitationToken: invitation[2])
         }
 
