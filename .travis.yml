@@ -6,6 +6,7 @@ podfile: Podfile
 before_install:
 - chmod a+x scripts/add-key.sh
 - chmod a+x scripts/run-build.sh
+- chmod a+x scripts/changelog.sh
 - chmod a+x scripts/remove-key.sh
 - gem update --system
 - gem install fastlane --no-rdoc --no-ri --no-document --quiet
@@ -17,13 +18,10 @@ before_script:
 - echo TELEGRAM_WEBHOOKS=$TELEGRAM_WEBHOOKS >> .env
 - echo GIT_REPO=$TRAVIS_REPO_SLUG >> .env
 - echo GIT_BRANCH=$TRAVIS_BRANCH >> .env
-- git config --global user.email $GH_EMAIL
-- git config --global user.name "Travis CI"
-- git remote rm origin
-- git remote add origin https://$GH_USER:${GH_TOKEN}@github.com/flyve-mdm/flyve-mdm-ios-inventory-agent.git
 script:
 - "./scripts/run-build.sh"
 after_script:
+- "./scripts/changelog.sh"
 - "./scripts/remove-key.sh"
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
