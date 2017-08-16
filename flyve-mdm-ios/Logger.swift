@@ -39,7 +39,7 @@ enum LogEvent {
 
 /// Logger class
 class Logger {
-    
+    // MARK: Properties
     /// date format
     static var dateFormat = "yyyy-MM-dd hh:mm:ssSSS"
     /// date formatter
@@ -51,6 +51,7 @@ class Logger {
         return formatter
     }
     
+    // MARK: Methods
     /**
      Logs a message with a trace severity level.
      
@@ -68,7 +69,7 @@ class Logger {
                    column: Int = #column,
                    funcName: String = #function) {
         
-        print("\(Date().description) \(event.description): \(sourceFileName(filePath: fileName)) \(funcName) line: \(line) column: \(column) -> \(message)")
+        print("\(Date().toString()) \(event.description): \(sourceFileName(filePath: fileName)) \(funcName) line: \(line) column: \(column) -> \(message)")
     }
     
     /**
@@ -79,5 +80,17 @@ class Logger {
     private class func sourceFileName(filePath: String) -> String {
         let components = filePath.components(separatedBy: "/")
         return components.isEmpty ? "" : components.last!
+    }
+}
+
+internal extension Date {
+    /**
+     Get date formatter to string
+     
+     - return: date formatter to string
+     */
+
+    func toString() -> String {
+        return Logger.dateFormatter.string(from: self as Date)
     }
 }
