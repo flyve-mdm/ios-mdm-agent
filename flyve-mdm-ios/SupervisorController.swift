@@ -185,7 +185,7 @@ extension SupervisorController: HttpRequestDelegate {
     
     /// `errorInitSession`
     func errorInitSession(error: [String: String]) {
-        
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
     /// `responseGetFullSession`
     func responseGetFullSession(data: [String: AnyObject]) {
@@ -209,7 +209,7 @@ extension SupervisorController: HttpRequestDelegate {
     
     /// `errorGetFullSession`
     func errorGetFullSession(error: [String: String]) {
-        
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
     
     /// `responseChangeActiveProfile`
@@ -220,7 +220,7 @@ extension SupervisorController: HttpRequestDelegate {
     
     /// `errorChangeActiveProfile`
     func errorChangeActiveProfile(error: [String: String]) {
-        
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
     
     /// `responsePluginFlyvemdmEntityConfig`
@@ -231,7 +231,7 @@ extension SupervisorController: HttpRequestDelegate {
     
     /// `errorPluginFlyvemdmEntityConfig`
     func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
-        
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
 }
 

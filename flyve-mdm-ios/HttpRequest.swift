@@ -180,7 +180,7 @@ class HttpRequest: NSObject {
             .response { response in
                 
                 if let error = response.error {
-                    print(error)
+                    Logger.log(message: error.localizedDescription, type: .error)
                 }
         }
         debugPrint(request)

@@ -399,7 +399,7 @@ extension ViewController: HttpRequestDelegate {
     
     /// `errorPluginFlyvemdmEntityConfig`
     func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
-
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
     
     /// `responseChangeActiveProfile`
@@ -455,6 +455,7 @@ extension ViewController: HttpRequestDelegate {
                 self.httpRequest?.requestPluginFlyvemdmAgent(parameters: dictFromJSON)
             }
         } catch {
+            Logger.log(message: error.localizedDescription, type: .error)
             debugPrint(error.localizedDescription)
             self.loadingIndicatorView.stopAnimating()
         }
@@ -481,6 +482,7 @@ extension ViewController: HttpRequestDelegate {
 
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
 
     /// `responseGetPluginFlyvemdmAgent`
@@ -499,6 +501,7 @@ extension ViewController: HttpRequestDelegate {
 
         self.enrollState(.fail)
         self.statusLabel.text = "\(error["message"] ?? "")"
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
 
     /// go Main screen Controller
