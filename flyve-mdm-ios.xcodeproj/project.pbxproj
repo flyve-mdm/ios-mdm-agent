@@ -41,6 +41,7 @@
 		0ADF289D1F3652760065F8F0 /* FormSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF289B1F3652760065F8F0 /* FormSelector.swift */; };
 		0ADF289E1F3652760065F8F0 /* FormOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF289C1F3652760065F8F0 /* FormOptionsViewController.swift */; };
 		0ADF28A01F3661E30065F8F0 /* FormSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */; };
+		0AFEE2181F44D209005750E3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFEE2171F44D209005750E3 /* Logger.swift */; };
 		0AFF2A801F327D3C001F86BC /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF2A7F1F327D3C001F86BC /* FormViewController.swift */; };
 		7C32A180F0F5DFA060EAC1B1 /* Pods_flyve_mdm_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAC68FF736F900EF009264A /* Pods_flyve_mdm_ios.framework */; };
 		7CEAE2ACFFC6CCDECA155081 /* Pods_flyve_mdm_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */; };
@@ -106,6 +107,7 @@
 		0ADF289B1F3652760065F8F0 /* FormSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelector.swift; sourceTree = "<group>"; };
 		0ADF289C1F3652760065F8F0 /* FormOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormOptionsViewController.swift; sourceTree = "<group>"; };
 		0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelectorCell.swift; sourceTree = "<group>"; };
+		0AFEE2171F44D209005750E3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		0AFF2A7F1F327D3C001F86BC /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosUITests/Pods-flyve-mdm-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		50FF8E40F91DB1B3A504C447 /* Pods_flyve_mdm_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +185,7 @@
 		0AD842761EBA5BF70093AC74 /* flyve-mdm-ios */ = {
 			isa = PBXGroup;
 			children = (
+				0AFEE2161F44D1EB005750E3 /* logger */,
 				0A87B6F01F1817D50038E5C3 /* extensions */,
 				0ADBC44A1F33DE460076024A /* enroll */,
 				0ADBC4491F33DE200076024A /* user */,
@@ -270,6 +273,14 @@
 			isa = PBXGroup;
 			children = (
 				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
+			);
+			name = logger;
+			sourceTree = "<group>";
+		};
+		0AFEE2161F44D1EB005750E3 /* logger */ = {
+			isa = PBXGroup;
+			children = (
+				0AFEE2171F44D209005750E3 /* Logger.swift */,
 			);
 			name = logger;
 			sourceTree = "<group>";
@@ -607,6 +618,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AFEE2181F44D209005750E3 /* Logger.swift in Sources */,
 				0ADBC4421F339DEC0076024A /* FormTextFieldSelectCell.swift in Sources */,
 				0ADF289E1F3652760065F8F0 /* FormOptionsViewController.swift in Sources */,
 				0ADF289D1F3652760065F8F0 /* FormSelector.swift in Sources */,
