@@ -185,11 +185,10 @@
 		0AD842761EBA5BF70093AC74 /* flyve-mdm-ios */ = {
 			isa = PBXGroup;
 			children = (
-				0AFEE2161F44D1EB005750E3 /* logger */,
+				0ADBC44B1F33DE560076024A /* logger */,
 				0A87B6F01F1817D50038E5C3 /* extensions */,
 				0ADBC44A1F33DE460076024A /* enroll */,
 				0ADBC4491F33DE200076024A /* user */,
-				0ADBC44B1F33DE560076024A /* logger */,
 				0ADBC4471F33DDD30076024A /* form */,
 				0AC7632A1F1961C20050F17B /* Location.swift */,
 				0ABBB0491EC20D590018E2EF /* HttpRequest.swift */,
@@ -272,15 +271,8 @@
 		0ADBC44B1F33DE560076024A /* logger */ = {
 			isa = PBXGroup;
 			children = (
-				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
-			);
-			name = logger;
-			sourceTree = "<group>";
-		};
-		0AFEE2161F44D1EB005750E3 /* logger */ = {
-			isa = PBXGroup;
-			children = (
 				0AFEE2171F44D209005750E3 /* Logger.swift */,
+				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
 			);
 			name = logger;
 			sourceTree = "<group>";

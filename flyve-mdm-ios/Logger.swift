@@ -56,20 +56,20 @@ class Logger {
      Logs a message with a trace severity level.
      
      - parameter message: The message to log
-     - parameter event: The the type of Log Types
+     - parameter type: The the type of Log Types
      - parameter file: The file in which the log happens
      - parameter line: The line at which the log happens
      - parameter column: The column at which the log happens
      - parameter function: The function in which the log happens
      */
     class func log(message: String,
-                   event: LogEvent,
+                   type: LogEvent,
                    fileName: String = #file,
                    line: Int = #line,
                    column: Int = #column,
                    funcName: String = #function) {
         
-        print("\(Date().toString()) \(event.description): \(sourceFileName(filePath: fileName)) \(funcName) line: \(line) column: \(column) -> \(message)")
+        Logger.saveLogEvent("\(Date().toString()) \(type.description): \(sourceFileName(fileName)) \(funcName) line: \(line) column: \(column) -> \(message)\n", type: type)
     }
     
     /**
@@ -77,9 +77,45 @@ class Logger {
      
      - parameter filePath: The file path source
      */
-    private class func sourceFileName(filePath: String) -> String {
+    private class func sourceFileName(_ filePath: String) -> String {
         let components = filePath.components(separatedBy: "/")
         return components.isEmpty ? "" : components.last!
+    }
+    
+    /**
+     Save logger event
+     
+     - parameter log: log entry
+     - parameter type: The the type of Log Types
+     */
+    private class func saveLogEvent(_ log: String, type: LogEvent) {
+        
+        var file = String()
+        
+        if type == .error {
+            file = "errors.log"
+        } else {
+            file = "events.log"
+        }
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let path = dir.appendingPathComponent(file)
+            
+            if FileManager.default.fileExists(atPath: path.path) {
+                if let fileHandle = try? FileHandle(forUpdating: path) {
+                    fileHandle.seekToEndOfFile()
+                    fileHandle.write(log.data(using: String.Encoding.utf8)!)
+                    fileHandle.closeFile()
+                    
+                }
+            } else {
+                //writing
+                do {
+                    try log.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+                } catch {/* error handling here */}
+            }
+        }
     }
 }
 
