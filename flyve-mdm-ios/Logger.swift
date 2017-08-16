@@ -68,6 +68,16 @@ class Logger {
                    column: Int = #column,
                    funcName: String = #function) {
         
-        print("\(Date().description) \(event.description): \(fileName) \(funcName) line: \(line) column: \(column) -> \(message)")
+        print("\(Date().description) \(event.description): \(sourceFileName(filePath: fileName)) \(funcName) line: \(line) column: \(column) -> \(message)")
+    }
+    
+    /**
+     Get file name source
+     
+     - parameter filePath: The file path source
+     */
+    private class func sourceFileName(filePath: String) -> String {
+        let components = filePath.components(separatedBy: "/")
+        return components.isEmpty ? "" : components.last!
     }
 }
