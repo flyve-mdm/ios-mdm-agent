@@ -39,6 +39,7 @@ private class Localizator {
         if let path = Bundle.main.path(forResource: "Localizable", ofType: "plist") {
             return NSDictionary(contentsOfFile: path)
         }
+        Logger.log(message: "Localizable file NOT found", type: .error)
         fatalError("Localizable file NOT found")
     }()
 

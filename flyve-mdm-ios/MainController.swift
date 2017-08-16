@@ -588,7 +588,7 @@ extension MainController: HttpRequestDelegate {
     
     /// `errorInitSession`
     func errorInitSession(error: [String: String]) {
-        
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
     
     /// `responseGetFullSession`
@@ -609,7 +609,7 @@ extension MainController: HttpRequestDelegate {
     
     /// `errorGetFullSession`
     func errorGetFullSession(error: [String: String]) {
-        
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
     
     /// `responseChangeActiveProfile`
@@ -627,7 +627,7 @@ extension MainController: HttpRequestDelegate {
     
     /// `errorChangeActiveProfile`
     func errorChangeActiveProfile(error: [String: String]) {
-        
+        Logger.log(message: error["message"] ?? "", type: .error)
     }
 }
 
