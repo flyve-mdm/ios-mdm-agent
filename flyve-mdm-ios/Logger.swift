@@ -36,3 +36,38 @@ enum LogEvent {
         return String(describing: self).uppercased()
     }
 }
+
+/// Logger class
+class Logger {
+    
+    /// date format
+    static var dateFormat = "yyyy-MM-dd hh:mm:ssSSS"
+    /// date formatter
+    static var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = dateFormat
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current
+        return formatter
+    }
+    
+    /**
+     Logs a message with a trace severity level.
+     
+     - parameter message: The message to log
+     - parameter event: The the type of Log Types
+     - parameter file: The file in which the log happens
+     - parameter line: The line at which the log happens
+     - parameter column: The column at which the log happens
+     - parameter function: The function in which the log happens
+     */
+    class func log(message: String,
+                   event: LogEvent,
+                   fileName: String = #file,
+                   line: Int = #line,
+                   column: Int = #column,
+                   funcName: String = #function) {
+        
+        print("\(Date().description) \(event.description): \(fileName) \(funcName) line: \(line) column: \(column) -> \(message)")
+    }
+}
