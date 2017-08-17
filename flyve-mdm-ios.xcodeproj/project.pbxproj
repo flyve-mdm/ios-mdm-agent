@@ -31,6 +31,9 @@
 		0AD842981EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */; };
 		0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842A51EBA5D810093AC74 /* ViewController.swift */; };
 		0AD974391F45E66200211779 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD974381F45E66200211779 /* User.swift */; };
+		0AD9743B1F45ECFC00211779 /* Supervisor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD9743A1F45ECFC00211779 /* Supervisor.swift */; };
+		0AD9743D1F45EF3100211779 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD9743C1F45EF3100211779 /* UserViewModel.swift */; };
+		0AD9743F1F45F1AA00211779 /* SupervisorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD9743E1F45F1AA00211779 /* SupervisorViewModel.swift */; };
 		0ADBC43A1F3355E30076024A /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4391F3355E30076024A /* FormSection.swift */; };
 		0ADBC43C1F33563C0076024A /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43B1F33563C0076024A /* FormRow.swift */; };
 		0ADBC43E1F3366010076024A /* UserFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43D1F3366010076024A /* UserFormController.swift */; };
@@ -98,6 +101,9 @@
 		0AD842991EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842A51EBA5D810093AC74 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0AD974381F45E66200211779 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0AD9743A1F45ECFC00211779 /* Supervisor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Supervisor.swift; sourceTree = "<group>"; };
+		0AD9743C1F45EF3100211779 /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		0AD9743E1F45F1AA00211779 /* SupervisorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupervisorViewModel.swift; sourceTree = "<group>"; };
 		0ADBC4391F3355E30076024A /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		0ADBC43B1F33563C0076024A /* FormRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRow.swift; sourceTree = "<group>"; };
 		0ADBC43D1F3366010076024A /* UserFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFormController.swift; sourceTree = "<group>"; };
@@ -251,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				0AD974381F45E66200211779 /* User.swift */,
+				0AD9743A1F45ECFC00211779 /* Supervisor.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -258,6 +265,8 @@
 		0AD974341F45E47900211779 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				0AD9743C1F45EF3100211779 /* UserViewModel.swift */,
+				0AD9743E1F45F1AA00211779 /* SupervisorViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -681,6 +690,7 @@
 				0ADBC4421F339DEC0076024A /* FormTextFieldSelectCell.swift in Sources */,
 				0ADF289E1F3652760065F8F0 /* FormOptionsViewController.swift in Sources */,
 				0ADF289D1F3652760065F8F0 /* FormSelector.swift in Sources */,
+				0AD9743B1F45ECFC00211779 /* Supervisor.swift in Sources */,
 				0AD974391F45E66200211779 /* User.swift in Sources */,
 				0A884CA71F2FD628009B5925 /* UserController.swift in Sources */,
 				0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */,
@@ -707,8 +717,10 @@
 				0ADBC43C1F33563C0076024A /* FormRow.swift in Sources */,
 				0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */,
 				0AC7632B1F1961C20050F17B /* Location.swift in Sources */,
+				0AD9743D1F45EF3100211779 /* UserViewModel.swift in Sources */,
 				0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */,
 				0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */,
+				0AD9743F1F45F1AA00211779 /* SupervisorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
