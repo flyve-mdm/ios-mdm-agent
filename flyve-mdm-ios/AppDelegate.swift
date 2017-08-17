@@ -125,8 +125,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             supervisorObject["support_website"] = invitation[5]
             supervisorObject["support_email"] = invitation[6]
             
+            let supervisor = SupervisorViewModel(supervisor: Supervisor(data: supervisorObject as [String: AnyObject]))
+            
             setStorage(value: invitationObject as AnyObject, key: "deeplink")
-            setStorage(value: supervisorObject as AnyObject, key: "supervisor")
+            setStorage(value: supervisor as AnyObject, key: "supervisor")
             
             loadMainView(userToken: invitation[1], invitationToken: invitation[2])
         }
