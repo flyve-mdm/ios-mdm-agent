@@ -147,7 +147,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A87B6F01F1817D50038E5C3 /* extensions */ = {
+		0A87B6F01F1817D50038E5C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */,
@@ -156,7 +156,7 @@
 				0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */,
 				0A25A68E1F3A44F900EBAFDD /* Constants.swift */,
 			);
-			name = extensions;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		0AD8426B1EBA5BF70093AC74 = {
@@ -185,20 +185,14 @@
 		0AD842761EBA5BF70093AC74 /* flyve-mdm-ios */ = {
 			isa = PBXGroup;
 			children = (
-				0ADBC44B1F33DE560076024A /* logger */,
-				0A87B6F01F1817D50038E5C3 /* extensions */,
-				0ADBC44A1F33DE460076024A /* enroll */,
-				0ADBC4491F33DE200076024A /* user */,
-				0ADBC4471F33DDD30076024A /* form */,
-				0AC7632A1F1961C20050F17B /* Location.swift */,
-				0ABBB0491EC20D590018E2EF /* HttpRequest.swift */,
-				0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */,
-				0A87B6EC1F17CDD50038E5C3 /* MainController.swift */,
-				0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */,
-				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
+				0AD974301F45E38100211779 /* Common */,
+				0A87B6F01F1817D50038E5C3 /* Extensions */,
+				0AD974311F45E3CD00211779 /* Networking */,
+				0AD974321F45E3F400211779 /* Routes */,
+				0AD974331F45E46C00211779 /* Models */,
+				0AD974341F45E47900211779 /* ViewModels */,
+				0AD974351F45E48900211779 /* Views */,
 				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
-				0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */,
-				0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */,
 				0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
 			);
@@ -224,10 +218,80 @@
 			path = "flyve-mdm-iosUITests";
 			sourceTree = "<group>";
 		};
-		0ADBC4471F33DDD30076024A /* form */ = {
+		0AD974301F45E38100211779 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				0ADBC4481F33DDED0076024A /* cell */,
+				0ADBC4471F33DDD30076024A /* Form */,
+				0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */,
+				0AC7632A1F1961C20050F17B /* Location.swift */,
+				0AFEE2171F44D209005750E3 /* Logger.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		0AD974311F45E3CD00211779 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB0491EC20D590018E2EF /* HttpRequest.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		0AD974321F45E3F400211779 /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */,
+			);
+			name = Routes;
+			sourceTree = "<group>";
+		};
+		0AD974331F45E46C00211779 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0AD974341F45E47900211779 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		0AD974351F45E48900211779 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0AD974361F45E4BB00211779 /* Main */,
+				0ADBC44A1F33DE460076024A /* Enroll */,
+				0ADBC4491F33DE200076024A /* User */,
+				0AD974371F45E4DA00211779 /* Supervisor */,
+				0ADBC44B1F33DE560076024A /* Logger */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0AD974361F45E4BB00211779 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0A87B6EC1F17CDD50038E5C3 /* MainController.swift */,
+				0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		0AD974371F45E4DA00211779 /* Supervisor */ = {
+			isa = PBXGroup;
+			children = (
+				0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */,
+			);
+			name = Supervisor;
+			sourceTree = "<group>";
+		};
+		0ADBC4471F33DDD30076024A /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				0ADBC4481F33DDED0076024A /* Cell */,
 				0AFF2A7F1F327D3C001F86BC /* FormViewController.swift */,
 				0ADF289B1F3652760065F8F0 /* FormSelector.swift */,
 				0ADF289C1F3652760065F8F0 /* FormOptionsViewController.swift */,
@@ -235,10 +299,10 @@
 				0ADBC4391F3355E30076024A /* FormSection.swift */,
 				0ADBC4431F33A14A0076024A /* Form.swift */,
 			);
-			name = form;
+			name = Form;
 			sourceTree = "<group>";
 		};
-		0ADBC4481F33DDED0076024A /* cell */ = {
+		0ADBC4481F33DDED0076024A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				0ADBC43F1F3399640076024A /* FormBaseCell.swift */,
@@ -248,33 +312,33 @@
 				0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */,
 				0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */,
 			);
-			name = cell;
+			name = Cell;
 			sourceTree = "<group>";
 		};
-		0ADBC4491F33DE200076024A /* user */ = {
+		0ADBC4491F33DE200076024A /* User */ = {
 			isa = PBXGroup;
 			children = (
 				0A884CA61F2FD628009B5925 /* UserController.swift */,
 				0ADBC43D1F3366010076024A /* UserFormController.swift */,
 			);
-			name = user;
+			name = User;
 			sourceTree = "<group>";
 		};
-		0ADBC44A1F33DE460076024A /* enroll */ = {
+		0ADBC44A1F33DE460076024A /* Enroll */ = {
 			isa = PBXGroup;
 			children = (
+				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
 				0A7B8D691F3B4B6F00795468 /* EnrollFormController.swift */,
 			);
-			name = enroll;
+			name = Enroll;
 			sourceTree = "<group>";
 		};
-		0ADBC44B1F33DE560076024A /* logger */ = {
+		0ADBC44B1F33DE560076024A /* Logger */ = {
 			isa = PBXGroup;
 			children = (
-				0AFEE2171F44D209005750E3 /* Logger.swift */,
 				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
 			);
-			name = logger;
+			name = Logger;
 			sourceTree = "<group>";
 		};
 		CDDF69B46AF40C6516B2C03F /* Frameworks */ = {
