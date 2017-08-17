@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * Supervisor.swift is part of flyve-mdm-ios
+ * SupervisorModel.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -25,8 +25,8 @@
  * ------------------------------------------------------------------------------
  */
 
-/// Supervisor Class
-class Supervisor {
+/// SupervisorModel Class
+class SupervisorModel {
     var name: String
     var email: String
     var phone: String
@@ -34,11 +34,11 @@ class Supervisor {
     var picture: String
     
     init(data: [String: AnyObject]) {
-
-        self.name = data["name"] as? String ?? ""
-        self.email = data["email"] as? String ?? ""
-        self.phone = data["phone"] as? String ?? ""
-        self.website = data["website"] as? String ?? ""
-        self.picture = data["picture"] as? String ?? ""
+        let defaultValue = "not available"
+        self.name = data["name"] as? String ?? defaultValue
+        self.email = data["email"] as? String ?? defaultValue
+        self.phone = data["phone"] as? String ?? defaultValue
+        self.website = data["website"] as? String ?? defaultValue
+        self.picture = data["picture"] as? String ?? defaultValue
     }
 }

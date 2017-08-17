@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * User.swift is part of flyve-mdm-ios
+ * Email.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -25,28 +25,16 @@
  * ------------------------------------------------------------------------------
  */
 
-/// User Class
-class User {
-    var firstName: String
-    var lastName: String
-    var language: String
-    var emails: [AnyObject]
-    var phone: String
-    var mobilePhone: String
-    var phone2: String
-    var administrativeNumber: String
-    var picture: String
+/// Email class
+class Email {
+    // MARK: Properties
+    var type: String
+    var email: String
     
+    // MARK: Init
+    /// init method
     init(data: [String: AnyObject]) {
-        
-        self.firstName = data["firstname"] as? String ?? ""
-        self.lastName = data["lastname"] as? String ?? ""
-        self.language = data["language"] as? String ?? ""
-        self.emails = data["emails"] as? [AnyObject] ?? [AnyObject]()
-        self.phone = data["phone"] as? String ?? ""
-        self.mobilePhone = data["mobilePhone"] as? String ?? ""
-        self.phone2 = data["phone2"] as? String ?? ""
-        self.administrativeNumber = data["administrativeNumber"] as? String ?? ""
-        self.picture = data["picture"] as? String ?? ""
+        self.type = data["type"] as? String ?? ""
+        self.email = data["email"] as? String ?? ""
     }
 }
