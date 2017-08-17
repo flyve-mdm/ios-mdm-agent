@@ -18,11 +18,27 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      17/08/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+/// Supervisor Class
+class Supervisor {
+    var name: String
+    var email: String
+    var phone: String
+    var website: String
+    var picture: String
+    
+    init(data: [String: AnyObject]) {
+
+        self.name = data["name"] as? String ?? ""
+        self.email = data["email"] as? String ?? ""
+        self.phone = data["phone"] as? String ?? ""
+        self.website = data["website"] as? String ?? ""
+        self.picture = data["picture"] as? String ?? ""
+    }
+}
