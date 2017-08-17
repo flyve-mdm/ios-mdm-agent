@@ -25,10 +25,10 @@
  * ------------------------------------------------------------------------------
  */
 
-import Foundation
+import UIKit
 
 class UserViewModel {
-    private let user: User
+    private let user: UserModel
     
     var firstName: String {
         return user.firstName
@@ -36,6 +36,10 @@ class UserViewModel {
     
     var lastName: String {
         return user.lastName
+    }
+    
+    var fullName: String {
+        return "\(user.firstName) \(user.lastName)"
     }
     
     var language: String {
@@ -62,11 +66,11 @@ class UserViewModel {
         return user.administrativeNumber
     }
     
-    var picture: String {
+    var picture: UIImage {
         return user.picture
     }
     
-    init(user: User) {
+    init(user: UserModel) {
         self.user = user
     }
 }
