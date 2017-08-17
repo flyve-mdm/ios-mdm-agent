@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * Email.swift is part of flyve-mdm-ios
+ * EmailModel.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -25,8 +25,8 @@
  * ------------------------------------------------------------------------------
  */
 
-/// Email class
-class Email {
+/// EmailModel class
+class EmailModel {
     // MARK: Properties
     var type: String
     var email: String
