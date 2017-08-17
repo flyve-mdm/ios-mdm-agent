@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * User.swift is part of flyve-mdm-ios
+ * UserModel.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -27,11 +27,11 @@
 
 import UIKit
 /// User Class
-class User {
+class UserModel {
     var firstName: String
     var lastName: String
     var language: String
-    var emails: [Email]
+    var emails: [EmailModel]
     var phone: String
     var mobilePhone: String
     var phone2: String
@@ -39,15 +39,15 @@ class User {
     var picture: UIImage
     
     init(data: [String: AnyObject]) {
-        
-        self.firstName = data["firstname"] as? String ?? ""
-        self.lastName = data["lastname"] as? String ?? ""
-        self.language = data["language"] as? String ?? ""
-        self.emails = data["emails"] as? [Email] ?? [Email]()
-        self.phone = data["phone"] as? String ?? ""
-        self.mobilePhone = data["mobilePhone"] as? String ?? ""
-        self.phone2 = data["phone2"] as? String ?? ""
-        self.administrativeNumber = data["administrativeNumber"] as? String ?? ""
+        let defaultValue = "not available"
+        self.firstName = data["firstname"] as? String ?? defaultValue
+        self.lastName = data["lastname"] as? String ?? defaultValue
+        self.language = data["language"] as? String ?? defaultValue
+        self.emails = data["emails"] as? [EmailModel] ?? [EmailModel]()
+        self.phone = data["phone"] as? String ?? defaultValue
+        self.mobilePhone = data["mobilePhone"] as? String ?? defaultValue
+        self.phone2 = data["phone2"] as? String ?? defaultValue
+        self.administrativeNumber = data["administrativeNumber"] as? String ?? defaultValue
         self.picture = data["picture"] as? UIImage ?? UIImage(named: "picture")!
     }
 }
