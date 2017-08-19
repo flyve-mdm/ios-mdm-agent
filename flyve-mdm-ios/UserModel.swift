@@ -25,13 +25,15 @@
  * ------------------------------------------------------------------------------
  */
 
+import Foundation
 import UIKit
 /// User Class
-class UserModel {
+class UserModel: NSObject, NSCoding {
     var firstName: String
     var lastName: String
     var language: String
     var emails: [EmailModel]
+    var phones: [AnyObject]
     var phone: String
     var mobilePhone: String
     var phone2: String
@@ -40,14 +42,68 @@ class UserModel {
     
     init(data: [String: AnyObject]) {
         let defaultValue = "not available"
-        self.firstName = data["firstname"] as? String ?? defaultValue
-        self.lastName = data["lastname"] as? String ?? defaultValue
+        self.firstName = data["firstname"]?.trimmingCharacters(in: .whitespacesAndNewlines) ?? defaultValue
+        self.lastName = data["lastname"]?.trimmingCharacters(in: .whitespacesAndNewlines) ?? defaultValue
         self.language = data["language"] as? String ?? defaultValue
-        self.emails = data["emails"] as? [EmailModel] ?? [EmailModel]()
+        self.phones = data["phones"] as? [AnyObject] ?? [AnyObject]()
         self.phone = data["phone"] as? String ?? defaultValue
         self.mobilePhone = data["mobilePhone"] as? String ?? defaultValue
         self.phone2 = data["phone2"] as? String ?? defaultValue
-        self.administrativeNumber = data["administrativeNumber"] as? String ?? defaultValue
+        self.administrativeNumber = data["administrativeNumber"] as? String ?? ""
         self.picture = data["picture"] as? UIImage ?? UIImage(named: "picture")!
+        
+        for (index, item) in self.phones.enumerated() {
+            
+            if index == 0 {
+                self.phone = item["phone"] as? String ?? defaultValue
+            }
+            
+            if index == 1 {
+                self.mobilePhone = item["phone"] as? String ?? defaultValue
+            }
+            
+            if index == 2 {
+                self.phone2 = item["phone"] as? String ?? defaultValue
+            }
+        }
+        
+        var emailModel = [AnyObject]()
+        if let arrEmails = data["emails"] as? [AnyObject] {
+            
+            for item in arrEmails {
+                
+                emailModel.append(EmailModel(data: item as? [String: AnyObject] ?? [String: AnyObject]()))
+            }
+            
+        }
+        
+        self.emails = emailModel as? [EmailModel] ?? []
+        
+        print(self.emails.count)
+    }
+    
+    required init(coder decoder: NSCoder) {
+        self.firstName = decoder.decodeObject(forKey: "firstName") as? String ?? ""
+        self.lastName = decoder.decodeObject(forKey: "lastName") as? String ?? ""
+        self.language = decoder.decodeObject(forKey: "language") as? String ?? ""
+        self.emails = decoder.decodeObject(forKey: "emails") as? [EmailModel] ?? []
+        self.phones = decoder.decodeObject(forKey: "phones") as? [AnyObject] ?? []
+        self.phone = decoder.decodeObject(forKey: "phone") as? String ?? ""
+        self.mobilePhone = decoder.decodeObject(forKey: "mobilePhone") as? String ?? ""
+        self.phone2 = decoder.decodeObject(forKey: "phone2") as? String ?? ""
+        self.administrativeNumber = decoder.decodeObject(forKey: "administrativeNumber") as? String ?? ""
+        self.picture = decoder.decodeObject(forKey: "picture") as? UIImage ?? UIImage(named: "picture")!
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(firstName, forKey: "firstName")
+        coder.encode(lastName, forKey: "lastName")
+        coder.encode(language, forKey: "language")
+        coder.encode(emails, forKey: "emails")
+        coder.encode(phone, forKey: "phone")
+        coder.encode(mobilePhone, forKey: "mobilePhone")
+        coder.encode(phone2, forKey: "phone2")
+        coder.encode(administrativeNumber, forKey: "administrativeNumber")
+        coder.encode(picture, forKey: "picture")
     }
 }
