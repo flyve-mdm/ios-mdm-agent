@@ -30,12 +30,12 @@ import UIKit
 class UserFormController: FormViewController {
     // MARK: Properties
     /// `userInfo`
-    var userInfo: [String: AnyObject]?
+    var userInfo: UserModel!
     /// `edit`
     var edit: Bool?
     
     /// init method
-    init(style: UITableViewStyle, userInfo: [String: AnyObject], edit: Bool) {
+    init(style: UITableViewStyle, userInfo: UserModel, edit: Bool) {
         self.userInfo = userInfo
         self.edit = edit
         super.init(style: style)
@@ -78,9 +78,9 @@ class UserFormController: FormViewController {
         sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
 
         let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
-        let info: [String: AnyObject] = ["photo": userInfo?["photo"] as AnyObject,
-                    "firstname": userInfo?["firstname"] as AnyObject,
-                    "lastname": userInfo?["lastname"] as AnyObject]
+        let info: [String: AnyObject] = ["photo": userInfo.picture as AnyObject,
+                    "firstname": userInfo.firstName as AnyObject,
+                    "lastname": userInfo.lastName as AnyObject]
         rowInfo.value = info as AnyObject
         sectionInfo.rows.append(rowInfo)
         
@@ -100,23 +100,20 @@ class UserFormController: FormViewController {
         sectionPhone.headerViewHeight = 32.0
         sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        if let phones: [AnyObject] = userInfo?["phone"] as? [AnyObject] {
-            
-            for phone in phones {
-                
-                let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
-                rowPhone.configuration.cell.placeholder = "phone".localized
-                rowPhone.value = phone["phone"] as AnyObject
-                rowPhone.option = phone["type"] as AnyObject
-                rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
-                rowPhone.configuration.selection.allowsMultipleSelection = false
-                rowPhone.configuration.selection.optionTitleClosure = { value in
-                    guard let option = value as? String else { return "" }
-                    return option
-                }
-                
-                sectionPhone.rows.append(rowPhone)
+        for phone in userInfo.phones {
+            print(phone)
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
+            rowPhone.configuration.cell.placeholder = "phone".localized
+            rowPhone.value = phone["phone"] as AnyObject
+            rowPhone.option = phone["type"] as AnyObject
+            rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
+            rowPhone.configuration.selection.allowsMultipleSelection = false
+            rowPhone.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? String else { return "" }
+                return option
             }
+            
+            sectionPhone.rows.append(rowPhone)
         }
         
         // Section email address
@@ -135,22 +132,19 @@ class UserFormController: FormViewController {
         sectionEmail.headerViewHeight = 32.0
         sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        if let emails: [AnyObject] = userInfo?["_email"] as? [AnyObject] {
-            
-            for email in emails {
-                let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
-                rowEmail.configuration.cell.placeholder = "email".localized
-                rowEmail.value = email["email"] as AnyObject
-                rowEmail.option = email["type"] as AnyObject
-                rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
-                rowEmail.configuration.selection.allowsMultipleSelection = false
-                rowEmail.configuration.selection.optionTitleClosure = { value in
-                    guard let option = value as? String else { return "" }
-                    return option
-                }
-                
-                sectionEmail.rows.append(rowEmail)
+        for email in userInfo.emails {
+            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
+            rowEmail.configuration.cell.placeholder = "email".localized
+            rowEmail.value = email.email as AnyObject
+            rowEmail.option = email.type as AnyObject
+            rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
+            rowEmail.configuration.selection.allowsMultipleSelection = false
+            rowEmail.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? String else { return "" }
+                return option
             }
+            
+            sectionEmail.rows.append(rowEmail)
         }
         
         // Section Language
@@ -159,10 +153,8 @@ class UserFormController: FormViewController {
         sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
         
         let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
-        if let language: String = userInfo?["language"] as? String {
-            rowLanguage.option = language as AnyObject
-        }
-        rowLanguage.configuration.selection.options = (["English", "French", "Spanish"] as [String]) as [AnyObject]
+        rowLanguage.option = userInfo.language as AnyObject
+        rowLanguage.configuration.selection.options = (LANGUAGES as [String]) as [AnyObject]
         rowLanguage.configuration.selection.allowsMultipleSelection = false
         rowLanguage.configuration.selection.optionTitleClosure = { value in
             guard let option = value as? String else { return "" }
@@ -198,9 +190,8 @@ class UserFormController: FormViewController {
         
         let rowAdminNumber = FormRow(tag: "admin_number", type: .number, edit: .none, title: "admin_number".localized)
         rowAdminNumber.configuration.cell.placeholder = "admin_number".localized
-        if let adminNumber: String = userInfo?["admin_number"] as? String {
-            rowAdminNumber.value = adminNumber as AnyObject
-        }
+        rowAdminNumber.value = userInfo.administrativeNumber as AnyObject
+        
         sectionAdminNumber.rows.append(rowAdminNumber)
         
         // Add sections to form
@@ -262,21 +253,23 @@ class UserFormController: FormViewController {
     func done() {
         dismissKeyboard()
         
+        var user = [String: AnyObject]()
+        
         // get main user information
         if form.sections[0].rows.count > 0 {
             
             if let info = form.sections[0].rows[0].value {
                 
                 if let first = info["firstname"] as? String {
-                    userInfo?["firstname"] = first as AnyObject
+                    user["firstname"] = first as AnyObject
                 }
                 
                 if let last = info["lastname"] as? String {
-                    userInfo?["lastname"] = last as AnyObject
+                    user["lastname"] = last as AnyObject
                 }
                 
                 if let photo = info["photo"] as? UIImage {
-                    userInfo?["photo"] = photo as AnyObject
+                    user["picture"] = photo as AnyObject
                 }
             }
         }
@@ -292,7 +285,9 @@ class UserFormController: FormViewController {
             arrPhone.append(modelPhone as AnyObject)
         }
         
-        userInfo?["phone"] = arrPhone as AnyObject
+        print(arrPhone)
+        
+        user["phones"] = arrPhone as AnyObject
         
         // get email address
         var arrEmail = [AnyObject]()
@@ -302,11 +297,11 @@ class UserFormController: FormViewController {
             
             modelEmail["type"] = email.option as? String ?? ""
             modelEmail["email"] = email.value as? String ?? ""
-            arrEmail.append(modelEmail as AnyObject)
+            arrEmail.append(EmailModel(data: modelEmail as [String : AnyObject]))
         }
         
         if arrEmail.count > 0 {
-            userInfo?["_email"] = arrEmail as AnyObject
+            user["emails"] = arrEmail as AnyObject
         } else {
             return
         }
@@ -314,9 +309,9 @@ class UserFormController: FormViewController {
         // get selected language
         if form.sections[5].rows.count > 0 {
             
-            if let language: AnyObject = form.sections[5].rows[0].option {
+            if let language: String = form.sections[5].rows[0].option as? String {
 
-                userInfo?["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject) as AnyObject
+                user["language"] = (form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject)) as AnyObject
             }
         }
         
@@ -325,14 +320,14 @@ class UserFormController: FormViewController {
             
             if let adminNumber: String = form.sections[7].rows[0].value as? String {
                 
-                userInfo?["admin_number"] = adminNumber as AnyObject
+                user["administrativeNumber"] = adminNumber as AnyObject
             } else {
-                userInfo?["admin_number"] = "" as AnyObject
+                user["administrativeNumber"] = "" as AnyObject
             }
         }
         
         // save userInfo in local storage
-        setStorage(value: self.userInfo! as AnyObject, key: "dataUser")
+        setStorage(value: user as AnyObject, key: "dataUser")
         
         // notify user modification to editUser
         let notificationData = NotificationCenter.default
