@@ -25,8 +25,9 @@
  * ------------------------------------------------------------------------------
  */
 
+import Foundation
 /// EmailModel class
-class EmailModel {
+class EmailModel: NSObject, NSCoding {
     // MARK: Properties
     var type: String
     var email: String
@@ -36,5 +37,15 @@ class EmailModel {
     init(data: [String: AnyObject]) {
         self.type = data["type"] as? String ?? ""
         self.email = data["email"] as? String ?? ""
+    }
+    
+    required init(coder decoder: NSCoder) {
+        self.type = decoder.decodeObject(forKey: "type") as? String ?? ""
+        self.email = decoder.decodeObject(forKey: "email") as? String ?? ""
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(type, forKey: "type")
+        coder.encode(email, forKey: "email")
     }
 }
