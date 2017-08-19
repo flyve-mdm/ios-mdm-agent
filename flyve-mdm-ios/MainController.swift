@@ -40,11 +40,13 @@ class MainController: UIViewController {
     /// `httpRequest`
     var httpRequest: HttpRequest?
     /// `userInfo`
-    var userInfo = [String: AnyObject]()
+    var userInfo: UserModel!
+    /// `enrollInfo`
+    var enrollInfo: EnrollModel!
     /// `mdmAgent`
     var mdmAgent = [String: Any]()
     /// `supervisor`
-    var supervisor = [String: AnyObject]()
+    var supervisor: SupervisorModel!
     /// `topic`
     var topic = ""
     /// `cellId`
@@ -118,16 +120,21 @@ class MainController: UIViewController {
             self.topic = topic
         }
         
+        // get enroll information
+        if let dataEnrollObject = getStorage(key: "enroll") as? EnrollModel {
+            enrollInfo = dataEnrollObject
+        }
+        
         // get user information
-        if let dataUserObject = getStorage(key: "dataUser") as? [String: AnyObject] {
+        if let dataUserObject = getStorage(key: "dataUser") as? UserModel {
             userInfo = dataUserObject
         }
         
         // get supervisor information
-        if let supervisorObject = getStorage(key: "supervisor") as? [String: AnyObject] {
+        if let supervisorObject = getStorage(key: "supervisor") as? SupervisorModel {
             supervisor = supervisorObject
         }
-        
+        print("\(userInfo.firstName), \(userInfo.lastName), \(userInfo.language), \(userInfo.phone), \(userInfo.emails.first?.email ?? "nil"), \(userInfo.firstName)")
         isAdmin = UserDefaults.standard.bool(forKey: "admin")
 
         super.init(nibName: nil, bundle: nil)
@@ -151,11 +158,10 @@ class MainController: UIViewController {
 
         if let broker = mdmAgent["broker"] as? String,
             let port = mdmAgent["port"] as? UInt16,
-            let user = userInfo["_serial"] as? String,
             let password = mdmAgent["mqttpasswd"] as? String,
-            !broker.isEmpty, !user.isEmpty, !password.isEmpty {
+            !broker.isEmpty, !enrollInfo.serial.isEmpty, !password.isEmpty {
 
-            connectBroker(host: broker, port: port, user: user, password: password)
+            connectBroker(host: broker, port: port, user: enrollInfo.serial, password: password)
         }
     }
     
@@ -233,7 +239,7 @@ class MainController: UIViewController {
     /// Receive notification from user edit
     func editUser() {
         
-        if let dataUserObject = getStorage(key: "dataUser") as? [String: AnyObject] {
+        if let dataUserObject = getStorage(key: "dataUser") as? UserModel {
             userInfo = dataUserObject
             
             mainTableView.beginUpdates()
@@ -281,19 +287,17 @@ extension MainController: UITableViewDataSource {
 
         if indexPath.row == 0 {
             cell?.titleLabel.text = "title_ supervised".localized.uppercased()
-            cell?.descriptionLabel.text = "\(supervisor["support_name"] as? String ?? "Support name")"
-            cell?.detailLabel.text = "\(supervisor["support_email"] as? String ?? "Email")"
+            cell?.descriptionLabel.text = supervisor.name
+            cell?.detailLabel.text = supervisor.email
             cell?.openBotton.addTarget(self, action: #selector(self.goSupervisorController), for: .touchUpInside)
 
         } else if indexPath.row == 1 {
-            if let image = userInfo["photo"] as? UIImage {
-                cell?.photoImageView.image = image
-            }
+            cell?.photoImageView.image = userInfo.picture
             cell?.titleLabel.text = "title_user".localized.uppercased()
-            cell?.descriptionLabel.text = "\(userInfo["firstname"] as? String ?? "") \(userInfo["lastname"] as? String ?? "")"
+            cell?.descriptionLabel.text = "\(userInfo.firstName) \(userInfo.lastName)"
             
-            if let email = userInfo["_email"] as? [AnyObject], email.count > 0 {
-                cell?.detailLabel.text = email.first?["email"] as? String ?? "Email"
+            if userInfo.emails.count > 0 {
+                cell?.detailLabel.text = userInfo.emails.first?.email
             }
 
             cell?.openBotton.addTarget(self, action: #selector(self.goUserController), for: .touchUpInside)
@@ -510,9 +514,9 @@ extension MainController: CocoaMQTTDelegate {
         }
         
         if deployFile.count > 0 {
-            if let deeplink = getStorage(key: "deeplink") as? [String: String] {
+            if let deeplink = getStorage(key: "deeplink") as? DeepLinkModel {
                 httpRequest = HttpRequest()
-                httpRequest?.requestInitSession(userToken: deeplink["user_token"] ?? "")
+                httpRequest?.requestInitSession(userToken: deeplink.userToken)
                 httpRequest?.delegate = self
             }
         }
