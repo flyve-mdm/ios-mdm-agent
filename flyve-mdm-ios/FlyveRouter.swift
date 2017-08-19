@@ -107,11 +107,11 @@ enum FlyveRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         var strURL = String()
         
-        if let deeplink = getStorage(key: "deeplink") as? [String: String], !deeplink.isEmpty {
+        if let deeplink = getStorage(key: "deeplink") as? DeepLinkModel {
             if query.isEmpty {
-                strURL = "\(deeplink["url"] ?? "")\(path)"
+                strURL = "\(deeplink.url)\(path)"
             } else {
-                strURL = "\(deeplink["url"] ?? "")\(path)?\(query)"
+                strURL = "\(deeplink.url)\(path)?\(query)"
             }
         }
 
