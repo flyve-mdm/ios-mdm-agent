@@ -35,7 +35,7 @@ class UserController: UIViewController {
     /// `cellIdInfo`
     let cellIdInfo = "cellIdInfo"
     /// `userInfo`
-    var userInfo = [String: AnyObject]()
+    var userInfo: UserModel!
     
     /// `userTableView UITableView`
     lazy var userTableView: UITableView = {
@@ -66,7 +66,7 @@ class UserController: UIViewController {
     /// `override loadView`
     override func loadView() {
         
-        if let dataUserObject = getStorage(key: "dataUser") as? [String: AnyObject] {
+        if let dataUserObject = getStorage(key: "dataUser") as? UserModel {
             userInfo = dataUserObject
         }
         
@@ -154,12 +154,9 @@ extension UserController: UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdMain, for: indexPath) as? SupervisorMainCell
-            
-            if let image = userInfo["photo"] as? UIImage {
-                cell?.photoImageView.image = image
-            }
 
-            cell?.nameLabel.text = "\(userInfo["firstname"] as? String ?? "") \(userInfo["lastname"] as? String ?? "")"
+            cell?.photoImageView.image = userInfo.picture
+            cell?.nameLabel.text = "\(userInfo.firstName) \(userInfo.lastName)"
             cell?.detailLabel.text = ""
             
             return cell!
@@ -170,25 +167,15 @@ extension UserController: UITableViewDataSource {
             
             if indexPath.row == 1 {
                 
-                if let phones: [AnyObject] = userInfo["phone"] as? [AnyObject] {
-                    
-                    if phones.count > 0 {
-                        cell?.nameLabel.text = phones[0]["phone"] as? String ?? "Phone number"
-                        cell?.firstBotton.image = UIImage(named: "call")?.withRenderingMode(.alwaysTemplate)
-                        cell?.secondBotton.image = UIImage(named: "message")?.withRenderingMode(.alwaysTemplate)
-                    }
-                }
+                cell?.nameLabel.text = userInfo.phone
+                cell?.firstBotton.image = UIImage(named: "call")?.withRenderingMode(.alwaysTemplate)
+                cell?.secondBotton.image = UIImage(named: "message")?.withRenderingMode(.alwaysTemplate)
                 
             } else if indexPath.row == 2 {
                 
-                if let emails: [AnyObject] = userInfo["_email"] as? [AnyObject] {
-                    
-                    if emails.count > 0 {
-                        cell?.nameLabel.text = emails[0]["email"] as? String ?? "Email"
-                        cell?.firstBotton.image = UIImage(named: "email")?.withRenderingMode(.alwaysTemplate)
-                        cell?.footerView.isHidden = true
-                    }
-                }
+                cell?.nameLabel.text = userInfo.emails.first?.email ?? "Email"
+                cell?.firstBotton.image = UIImage(named: "email")?.withRenderingMode(.alwaysTemplate)
+                cell?.footerView.isHidden = true
             }
             return cell!
         }
