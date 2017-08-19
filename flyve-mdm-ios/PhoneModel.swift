@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * SupervisorViewModel.swift is part of flyve-mdm-ios
+ * PhoneModel.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
- * @date      17/08/17
+ * @date      18/08/17
  * @copyright   Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios
@@ -26,31 +26,3 @@
  */
 
 import Foundation
-
-class SupervisorViewModel {
-    private let supervisor: SupervisorModel
-    
-    var name: String {
-        return supervisor.name
-    }
-    
-    var email: String {
-        return supervisor.email
-    }
-    
-    var phone: String {
-        return supervisor.phone
-    }
-    
-    var website: String {
-        return supervisor.website
-    }
-    
-    var picture: String {
-        return supervisor.picture
-    }
-
-    init(supervisor: SupervisorModel) {
-        self.supervisor = supervisor
-    }
-}
