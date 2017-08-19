@@ -412,7 +412,7 @@ extension ViewController: HttpRequestDelegate {
 
         var jsonDictionary = [String: AnyObject]()
         var inputDictionary = [String: String]()
-        var storageDictionary = [String: AnyObject]()
+        var userDictionary = [String: AnyObject]()
         
         if let email = (notification.userInfo?["_email"] as? [AnyObject])?.first?["email"] as? String, !email.isEmpty {
             inputDictionary["_email"] = email
@@ -428,6 +428,7 @@ extension ViewController: HttpRequestDelegate {
         inputDictionary["csr"] = ""
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
+        inputDictionary["type"] = "apple"
 
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             inputDictionary["version"] = version
@@ -436,13 +437,18 @@ extension ViewController: HttpRequestDelegate {
         jsonDictionary["input"] = inputDictionary as AnyObject
         
         if let userInfo = notification.userInfo as? [String : AnyObject] {
-            storageDictionary = userInfo
-            storageDictionary["_invitation_token"] = self.invitationToken as AnyObject
-            storageDictionary["_serial"] = UIDevice.current.identifierForVendor?.uuidString as AnyObject
-            storageDictionary["_uuid"] = UIDevice.current.identifierForVendor?.uuidString as AnyObject
+            userDictionary["firstname"] = userInfo["firstname"]
+            userDictionary["lastname"] = userInfo["lastname"]
+            userDictionary["language"] = userInfo["language"]
+            userDictionary["emails"] = userInfo["_email"]
+            userDictionary["phones"] = userInfo["phone"]
         }
-
-        setStorage(value: storageDictionary as AnyObject, key: "dataUser")
+        
+        let enrollInfo = EnrollModel(data: inputDictionary as [String : AnyObject])
+        setStorage(value: enrollInfo as AnyObject, key: "enroll")
+        
+        let user = UserModel(data: userDictionary)
+        setStorage(value: user as AnyObject, key: "dataUser")
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
