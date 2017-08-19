@@ -25,8 +25,9 @@
  * ------------------------------------------------------------------------------
  */
 
+import Foundation
 /// SupervisorModel Class
-class SupervisorModel {
+class SupervisorModel: NSObject, NSCoding {
     var name: String
     var email: String
     var phone: String
@@ -40,5 +41,22 @@ class SupervisorModel {
         self.phone = data["phone"] as? String ?? defaultValue
         self.website = data["website"] as? String ?? defaultValue
         self.picture = data["picture"] as? String ?? defaultValue
+    }
+    
+    required init(coder decoder: NSCoder) {
+        let defaultValue = "not available"
+        self.name = decoder.decodeObject(forKey: "name") as? String ?? defaultValue
+        self.email = decoder.decodeObject(forKey: "email") as? String ?? defaultValue
+        self.phone = decoder.decodeObject(forKey: "phone") as? String ?? defaultValue
+        self.website = decoder.decodeObject(forKey: "website") as? String ?? defaultValue
+        self.picture = decoder.decodeObject(forKey: "picture") as? String ?? defaultValue
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(name, forKey: "name")
+        coder.encode(email, forKey: "email")
+        coder.encode(phone, forKey: "phone")
+        coder.encode(website, forKey: "website")
+        coder.encode(website, forKey: "picture")
     }
 }
