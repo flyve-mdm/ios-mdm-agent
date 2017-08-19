@@ -139,7 +139,7 @@ class FormInfoCell: FormBaseCell {
             lastNameTextField.text = last
         }
         
-        if let photo = row?.value?["photo"] as? UIImage {
+        if let photo = row?.value?["picture"] as? UIImage {
             photoBotton.setBackgroundImage(photo, for: .normal)
         }
     }
@@ -157,17 +157,31 @@ class FormInfoCell: FormBaseCell {
     // MARK: Actions
     /// update data when change UITextField
     internal func editingChanged(_ sender: UITextField) {
-        guard let text = sender.text, text.characters.count > 0 else { row?.value = nil; update(); return }
-        
-        if var rowValue = row?.value as? [String: String] {
-            
+        guard let text = sender.text, text.characters.count > 0 else {
+
             if sender.tag == 0 {
-                rowValue["firstname"] = text
+                var rowValue = [String: AnyObject]()
+                rowValue["firstname"] = "" as AnyObject
+                row?.value = rowValue as AnyObject
+            }
+            if sender.tag == 1 {
+                var rowValue = [String: AnyObject]()
+                rowValue["lastname"] = "" as AnyObject
+                row?.value = rowValue as AnyObject
+            }
+            update()
+            return
+        }
+
+        if var rowValue = row?.value as? [String: AnyObject] {
+        
+            if sender.tag == 0 {
+                rowValue["firstname"] = text as AnyObject
                 row?.value = rowValue as AnyObject
             }
             
             if sender.tag == 1 {
-                rowValue["lastname"] = text
+                rowValue["lastname"] = text as AnyObject
                 row?.value = rowValue as AnyObject
             }
         }
@@ -224,9 +238,9 @@ extension FormInfoCell:  UIImagePickerControllerDelegate, UINavigationController
     /// get `UIImage` from `UIImagePickerController`
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
+
             if var rowValue = row?.value as? [String: AnyObject] {
-                rowValue["photo"] = chosenImage
+                rowValue["picture"] = chosenImage
                 row?.value = rowValue as AnyObject
             }
         }

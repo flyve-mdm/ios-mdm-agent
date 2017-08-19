@@ -230,7 +230,6 @@ class FormViewController: UITableViewController {
         guard let footerView = form.sections[section].footerView, footerView.translatesAutoresizingMaskIntoConstraints else {
             return form.sections[section].footerViewHeight
         }
-        print("\(footerView.frame.size.height) - \(section)")
         return footerView.frame.size.height
     }
     
