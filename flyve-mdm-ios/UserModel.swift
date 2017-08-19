@@ -41,10 +41,11 @@ class UserModel: NSObject, NSCoding {
     var picture: UIImage
     
     init(data: [String: AnyObject]) {
+        
         let defaultValue = "not available"
-        self.firstName = data["firstname"]?.trimmingCharacters(in: .whitespacesAndNewlines) ?? defaultValue
-        self.lastName = data["lastname"]?.trimmingCharacters(in: .whitespacesAndNewlines) ?? defaultValue
-        self.language = data["language"] as? String ?? defaultValue
+        self.firstName = data["firstname"] as? String ?? ""
+        self.lastName = data["lastname"] as? String ?? ""
+        self.language = data["language"] as? String ?? ""
         self.phones = data["phones"] as? [AnyObject] ?? [AnyObject]()
         self.phone = data["phone"] as? String ?? defaultValue
         self.mobilePhone = data["mobilePhone"] as? String ?? defaultValue
@@ -78,8 +79,6 @@ class UserModel: NSObject, NSCoding {
         }
         
         self.emails = emailModel as? [EmailModel] ?? []
-        
-        print(self.emails.count)
     }
     
     required init(coder decoder: NSCoder) {
@@ -100,6 +99,7 @@ class UserModel: NSObject, NSCoding {
         coder.encode(lastName, forKey: "lastName")
         coder.encode(language, forKey: "language")
         coder.encode(emails, forKey: "emails")
+        coder.encode(phones, forKey: "phones")
         coder.encode(phone, forKey: "phone")
         coder.encode(mobilePhone, forKey: "mobilePhone")
         coder.encode(phone2, forKey: "phone2")

@@ -414,11 +414,11 @@ extension ViewController: HttpRequestDelegate {
         var inputDictionary = [String: String]()
         var userDictionary = [String: AnyObject]()
         
-        if let email = (notification.userInfo?["_email"] as? [AnyObject])?.first?["email"] as? String, !email.isEmpty {
+        if let email = (notification.userInfo?["emails"] as? [AnyObject])?.first?["email"] as? String, !email.isEmpty {
             inputDictionary["_email"] = email
         }
         
-        if let phone = (notification.userInfo?["phone"] as? [AnyObject])?.first?["phone"] as? String, !phone.isEmpty {
+        if let phone = (notification.userInfo?["phones"] as? [AnyObject])?.first?["phone"] as? String, !phone.isEmpty {
             inputDictionary["phone"] = phone
         }
 
@@ -440,8 +440,8 @@ extension ViewController: HttpRequestDelegate {
             userDictionary["firstname"] = userInfo["firstname"]
             userDictionary["lastname"] = userInfo["lastname"]
             userDictionary["language"] = userInfo["language"]
-            userDictionary["emails"] = userInfo["_email"]
-            userDictionary["phones"] = userInfo["phone"]
+            userDictionary["emails"] = userInfo["emails"]
+            userDictionary["phones"] = userInfo["phones"]
         }
         
         let enrollInfo = EnrollModel(data: inputDictionary as [String : AnyObject])

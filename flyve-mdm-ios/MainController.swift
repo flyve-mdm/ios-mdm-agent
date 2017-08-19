@@ -134,7 +134,6 @@ class MainController: UIViewController {
         if let supervisorObject = getStorage(key: "supervisor") as? SupervisorModel {
             supervisor = supervisorObject
         }
-        print("\(userInfo.firstName), \(userInfo.lastName), \(userInfo.language), \(userInfo.phone), \(userInfo.emails.first?.email ?? "nil"), \(userInfo.firstName)")
         isAdmin = UserDefaults.standard.bool(forKey: "admin")
 
         super.init(nibName: nil, bundle: nil)

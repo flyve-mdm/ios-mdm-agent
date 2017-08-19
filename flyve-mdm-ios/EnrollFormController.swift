@@ -204,7 +204,7 @@ class EnrollFormController: FormViewController {
         }
         
         if arrPhone.count > 0 {
-            userInfo["phone"] = arrPhone as AnyObject
+            userInfo["phones"] = arrPhone as AnyObject
         } else {
             return
         }
@@ -221,7 +221,7 @@ class EnrollFormController: FormViewController {
         }
         
         if arrEmail.count > 0 {
-            userInfo["_email"] = arrEmail as AnyObject
+            userInfo["emails"] = arrEmail as AnyObject
         } else {
             return
         }

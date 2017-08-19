@@ -78,7 +78,7 @@ class UserFormController: FormViewController {
         sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
 
         let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
-        let info: [String: AnyObject] = ["photo": userInfo.picture as AnyObject,
+        let info: [String: AnyObject] = ["picture": userInfo.picture as AnyObject,
                     "firstname": userInfo.firstName as AnyObject,
                     "lastname": userInfo.lastName as AnyObject]
         rowInfo.value = info as AnyObject
@@ -101,7 +101,6 @@ class UserFormController: FormViewController {
         sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
         
         for phone in userInfo.phones {
-            print(phone)
             let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
             rowPhone.configuration.cell.placeholder = "phone".localized
             rowPhone.value = phone["phone"] as AnyObject
@@ -258,19 +257,31 @@ class UserFormController: FormViewController {
         // get main user information
         if form.sections[0].rows.count > 0 {
             
+            print(form.sections[0].rows[0].value)
+            
             if let info = form.sections[0].rows[0].value {
                 
-                if let first = info["firstname"] as? String {
+                if let picture = info["picture"] as? UIImage {
+                    user["picture"] = picture as AnyObject
+                } else {
+                    user["picture"] = userInfo.picture
+                }
+                
+                if let first = info["firstname"] as? String, !first.isEmpty {
                     user["firstname"] = first as AnyObject
+                } else {
+                    user["firstname"] = userInfo.firstName as AnyObject
                 }
                 
-                if let last = info["lastname"] as? String {
+                if let last = info["lastname"] as? String, !last.isEmpty {
                     user["lastname"] = last as AnyObject
+                } else {
+                    user["lastname"] = userInfo.lastName as AnyObject
                 }
-                
-                if let photo = info["photo"] as? UIImage {
-                    user["picture"] = photo as AnyObject
-                }
+            } else {
+                user["picture"] = userInfo.picture
+                user["firstname"] = userInfo.firstName as AnyObject
+                user["lastname"] = userInfo.lastName as AnyObject
             }
         }
         
@@ -285,9 +296,11 @@ class UserFormController: FormViewController {
             arrPhone.append(modelPhone as AnyObject)
         }
         
-        print(arrPhone)
-        
-        user["phones"] = arrPhone as AnyObject
+        if arrPhone.count > 0 {
+            user["phones"] = arrPhone as AnyObject
+        } else {
+            return
+        }
         
         // get email address
         var arrEmail = [AnyObject]()
@@ -297,7 +310,7 @@ class UserFormController: FormViewController {
             
             modelEmail["type"] = email.option as? String ?? ""
             modelEmail["email"] = email.value as? String ?? ""
-            arrEmail.append(EmailModel(data: modelEmail as [String : AnyObject]))
+            arrEmail.append(modelEmail as AnyObject)
         }
         
         if arrEmail.count > 0 {
@@ -309,9 +322,9 @@ class UserFormController: FormViewController {
         // get selected language
         if form.sections[5].rows.count > 0 {
             
-            if let language: String = form.sections[5].rows[0].option as? String {
-
-                user["language"] = (form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject)) as AnyObject
+            if let language: AnyObject = form.sections[5].rows[0].option {
+                
+                user["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject) as AnyObject
             }
         }
         
@@ -327,7 +340,8 @@ class UserFormController: FormViewController {
         }
         
         // save userInfo in local storage
-        setStorage(value: user as AnyObject, key: "dataUser")
+        let userModel = UserModel(data: user)
+        setStorage(value: userModel as AnyObject, key: "dataUser")
         
         // notify user modification to editUser
         let notificationData = NotificationCenter.default
