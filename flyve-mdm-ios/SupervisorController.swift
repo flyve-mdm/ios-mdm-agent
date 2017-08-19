@@ -76,9 +76,9 @@ class SupervisorController: UIViewController {
             supervisor = supervisorObject
         }
         
-        if let deeplink = getStorage(key: "deeplink") as? [String: String] {
+        if let deeplink = getStorage(key: "deeplink") as? DeepLinkModel {
             httpRequest = HttpRequest()
-            httpRequest?.requestInitSession(userToken: deeplink["user_token"] ?? "")
+            httpRequest?.requestInitSession(userToken: deeplink.userToken)
             httpRequest?.delegate = self
         }
         
