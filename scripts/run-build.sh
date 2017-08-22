@@ -18,5 +18,8 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
   # Update CFBundleShortVersionString
   /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}" ${PWD}/${APPNAME}/Info.plist
 
+  # Rename last commit
+  git commit -a --amend -m "ci(release): generate CHANGELOG.md for version ${GIT_TAG}"
+
   fastlane release
 fi
