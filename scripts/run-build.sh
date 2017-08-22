@@ -4,7 +4,13 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
   fastlane beta
 elif [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "true" ]]; then
   fastlane test
-elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+elif [[ "$TRAVIS_BRANCH" == "feature/version" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+
+  echo ------------------CONFIG--------------------
+  git config --global user.email $GH_EMAIL
+  git config --global user.name "Travis CI"
+  git remote rm origin
+  git remote add origin https://$GH_USER:${GH_TOKEN}@github.com/flyve-mdm/flyve-mdm-ios-agent.git
 
   if GIT_DIR=$PWD/.git git rev-parse "$1^{tag}" >/dev/null 2>&1 
   then
@@ -21,5 +27,5 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
   # Rename last commit
   git commit -a --amend -m "ci(release): generate CHANGELOG.md for version ${GIT_TAG}"
 
-  fastlane release
+  # fastlane release
 fi
