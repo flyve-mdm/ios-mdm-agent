@@ -23,7 +23,7 @@ before_script:
 script:
 - "./scripts/run-build.sh"
 after_script:
-- "./scripts/changelog.sh"
+# - "./scripts/changelog.sh"
 - "./scripts/remove-key.sh"
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
