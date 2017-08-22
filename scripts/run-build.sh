@@ -15,5 +15,8 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
   # Get version number from package
   export GIT_TAG=$(jq -r ".version" package.json)
 
+  # Update CFBundleShortVersionString
+  /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}" ${PWD}/${APPNAME}/Info.plist
+
   fastlane release
 fi
