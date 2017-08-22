@@ -4,9 +4,14 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
   fastlane beta
 elif [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "true" ]]; then
   fastlane test
-elif [[ "$TRAVIS_BRANCH" == "master" ]]; then
+elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+
   if GIT_DIR=$PWD/.git git rev-parse "$1^{tag}" >/dev/null 2>&1 
   then
-    fastlane release
+    npm run release
+  else
+    npm run release -- --first-release
   fi
+
+  fastlane release
 fi
