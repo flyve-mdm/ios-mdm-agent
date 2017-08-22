@@ -27,5 +27,6 @@ elif [[ "$TRAVIS_BRANCH" == "feature/version" && "$TRAVIS_PULL_REQUEST" == "fals
   # Rename last commit
   git commit -a --amend -m "ci(release): generate CHANGELOG.md for version ${GIT_TAG}"
 
+  git push origin -u feature/version
   # fastlane release
 fi
