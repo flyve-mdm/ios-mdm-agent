@@ -12,6 +12,8 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
   else
     npm run release -- --first-release
   fi
+  # Get version number from package
+  export GIT_TAG=$(jq -r ".version" package.json)
 
   fastlane release
 fi
