@@ -4,10 +4,6 @@ xcode_workspace: flyve-mdm-ios.xcworkspace
 xcode_scheme: flyve-mdm-ios
 podfile: Podfile
 before_install:
-- chmod a+x scripts/add-key.sh
-- chmod a+x scripts/run-build.sh
-- chmod a+x scripts/changelog.sh
-- chmod a+x scripts/remove-key.sh
 - gem update --system
 - gem install fastlane --no-rdoc --no-ri --no-document --quiet
 - npm i -g standard-version
