@@ -67,3 +67,7 @@ fastlane/test_output
 # Node.js
 
 node_modules/
+
+# Variables
+
+.env
