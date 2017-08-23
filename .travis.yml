@@ -8,7 +8,10 @@ before_install:
 - gem install fastlane --no-rdoc --no-ri --no-document --quiet
 - npm i -g standard-version
 - brew install jq
+- nvm install stable
+- nvm use stable
 - npm install
+- npm install -g conventional-github-releaser
 install: true
 before_script:
 - "./scripts/add-key.sh"
