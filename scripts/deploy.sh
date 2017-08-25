@@ -8,4 +8,8 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
     git config --global user.name "Flyve MDM"
     git remote remove origin
     git remote add origin https://$GH_USER:$GH_TOKEN@github.com/flyve-mdm/flyve-mdm-ios-agent.git
+
+    git checkout $TRAVIS_BRANCH -f
+    # Generate CHANGELOG.md and increment version
+    npm run release -- -t '' -m "ci(release): generate **CHANGELOG.md** for version %s"
 fi
