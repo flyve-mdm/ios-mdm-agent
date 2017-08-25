@@ -12,4 +12,6 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
     git checkout $TRAVIS_BRANCH -f
     # Generate CHANGELOG.md and increment version
     npm run release -- -t '' -m "ci(release): generate **CHANGELOG.md** for version %s"
+    # Push tag to github
+    conventional-github-releaser -t $GH_TOKEN -r 0
 fi
