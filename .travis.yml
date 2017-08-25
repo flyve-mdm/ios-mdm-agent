@@ -1,29 +1,20 @@
-language: node_js
-# osx_image: xcode8.3
-# xcode_workspace: flyve-mdm-ios.xcworkspace
-# xcode_scheme: flyve-mdm-ios
-# podfile: Podfile
+language: objective-c
+osx_image: xcode8.3
+xcode_workspace: flyve-mdm-ios.xcworkspace
+xcode_scheme: flyve-mdm-ios
+podfile: Podfile
 before_install:
-# - gem update --system
-# - gem install fastlane --no-rdoc --no-ri --no-document --quiet
-# - brew install jq
-- nvm install stable
-- nvm use stable
-- npm i -g standard-version
-- npm install -g conventional-github-releaser
-- npm install
-install: true
+  - "./ci/before_install.sh"
+install:
+  - "./ci/install.sh"
 before_script:
-# - "./scripts/add-key.sh"
-- echo FASTLANE_PASSWORD=$FASTLANE_PASSWORD >> .env
-- echo TELEGRAM_WEBHOOKS=$TELEGRAM_WEBHOOKS >> .env
-- echo GIT_REPO=$TRAVIS_REPO_SLUG >> .env
-- echo GIT_BRANCH=$TRAVIS_BRANCH >> .env
+  - "./ci/before_script.sh"
 script:
-# - "./scripts/run-build.sh"
-- "./scripts/changelog.sh"
+  - "./ci/script.sh"
+after_success:
+  - "./ci/deploy.sh"
 after_script:
-# - "./scripts/remove-key.sh"
+  - "./ci/after_script.sh"
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
 env:
