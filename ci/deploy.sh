@@ -85,6 +85,13 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
         # Remove CHANGELOG_COPY.md
         rm CHANGELOG_COPY.md
 
+        # Add CHANGELOG.md
+        git add CHANGELOG.md
+        # Create commit
+        git commit -m "ci(docs): generate CHANGELOG.md for version ${GIT_TAG}"
+        # Push commit to origin gh-pages branch
+        git push origin gh-pages
+
         fastlane release
     fi
 fi
