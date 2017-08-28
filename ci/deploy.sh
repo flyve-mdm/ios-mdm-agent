@@ -32,23 +32,25 @@ git remote add origin https://$GH_USER:$GH_TOKEN@github.com/flyve-mdm/flyve-mdm-
 
 if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
 
-    git checkout $TRAVIS_BRANCH -f
-    # Generate CHANGELOG.md and increment version
-    npm run release -- -t ''
-    # Get version number from package.json
-    export GIT_TAG=$(jq -r ".version" package.json)
-    # Revert last commit
-    git reset --hard HEAD~1
-    # Update CFBundleShortVersionString
-    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}-beta" ${PWD}/${APPNAME}/Info.plist
-    # Add modified and delete files
-    git add ${APPNAME}/Info.plist
-    # Create commit
-    git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}-beta"
-    # Push commits to origin branch
-    git push origin $TRAVIS_BRANCH
+    if [[ $TRAVIS_COMMIT_MESSAGE != *"**beta**"* ]]; then
+        git checkout $TRAVIS_BRANCH -f
+        # Generate CHANGELOG.md and increment version
+        npm run release -- -t ''
+        # Get version number from package.json
+        export GIT_TAG=$(jq -r ".version" package.json)
+        # Revert last commit
+        git reset --hard HEAD~1
+        # Update CFBundleShortVersionString
+        /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}-beta" ${PWD}/${APPNAME}/Info.plist
+        # Add modified and delete files
+        git add ${APPNAME}/Info.plist
+        # Create commit
+        git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}-beta"
+        # Push commits to origin branch
+        git push origin $TRAVIS_BRANCH
 
-    fastlane beta
+        fastlane beta
+    fi
 
 elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
 
