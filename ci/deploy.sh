@@ -39,7 +39,11 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
     export GIT_TAG=$(jq -r ".version" package.json)
     # Revert last commit
     git reset --hard HEAD~1
-
+    # Update CFBundleShortVersionString
+    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}-beta" ${PWD}/${APPNAME}/Info.plist
+    # Add modified and delete files
+    git add ${APPNAME}/Info.plist
+    
     fastlane beta
 
 elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
