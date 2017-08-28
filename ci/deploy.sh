@@ -76,6 +76,15 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
         git checkout gh-pages
         git checkout $TRAVIS_BRANCH CHANGELOG.md
 
+        # Create header content
+        HEADER="---\nlayout: modal\ntitle: changelog\n---\n"
+        # Duplicate CHANGELOG.md
+        cp CHANGELOG.md CHANGELOG_COPY.md
+        # Add header to CHANGELOG.md
+        (echo $HEADER ; cat CHANGELOG_COPY.md) > CHANGELOG.md
+        # Remove CHANGELOG_COPY.md
+        rm CHANGELOG_COPY.md
+
         fastlane release
     fi
 fi
