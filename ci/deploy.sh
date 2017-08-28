@@ -70,7 +70,12 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
         git commit -m "ci(build): increment **version** ${GIT_TAG}"
         # Push commits and tags to origin branch
         git push --follow-tags origin $TRAVIS_BRANCH
-        
+
+        # Update CHANGELOG.md on gh-pages
+        git fetch origin gh-pages
+        git checkout gh-pages
+        git checkout $TRAVIS_BRANCH CHANGELOG.md
+
         fastlane release
     fi
 fi
