@@ -257,8 +257,6 @@ class UserFormController: FormViewController {
         // get main user information
         if form.sections[0].rows.count > 0 {
             
-            print(form.sections[0].rows[0].value)
-            
             if let info = form.sections[0].rows[0].value {
                 
                 if let picture = info["picture"] as? UIImage {
