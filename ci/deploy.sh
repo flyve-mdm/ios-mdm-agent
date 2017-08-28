@@ -43,7 +43,11 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}-beta" ${PWD}/${APPNAME}/Info.plist
     # Add modified and delete files
     git add ${APPNAME}/Info.plist
-    
+    # Create commit
+    git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}-beta"
+    # Push commits to origin branch
+    git push origin $TRAVIS_BRANCH
+
     fastlane beta
 
 elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
