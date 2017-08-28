@@ -25,10 +25,12 @@
 # @link      https://.flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-git config --global user.email $GH_EMAIL
-git config --global user.name "Flyve MDM"
-git remote remove origin
-git remote add origin https://$GH_USER:$GH_TOKEN@github.com/flyve-mdm/flyve-mdm-ios-agent.git
+if [[ -n $GH_TOKEN ]]; then
+    git config --global user.email $GH_EMAIL
+    git config --global user.name "Flyve MDM"
+    git remote remove origin
+    git remote add origin https://$GH_USER:$GH_TOKEN@github.com/flyve-mdm/flyve-mdm-ios-agent.git
+fi
 
 if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
 
