@@ -45,7 +45,7 @@ platform :ios do
     # Build
     gym(
       scheme: "flyve-mdm-ios",
-      configuration: "Release",
+      configuration: "Beta",
       sdk: "iphoneos10.3",
       clean: true,
       include_bitcode: true,
