@@ -854,7 +854,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C55393FAD1039D7E95375E17 /* Pods-flyve-mdm-ios.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Hector Rondon (CGMTZ2E3ZW)";
@@ -875,7 +875,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 745B6C7BE30D9C3D1F4136C1 /* Pods-flyve-mdm-ios.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1005,7 +1005,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 745B6C7BE30D9C3D1F4136C1 /* Pods-flyve-mdm-ios.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = .beta;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
