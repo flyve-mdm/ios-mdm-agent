@@ -25,19 +25,14 @@
 # @link      https://.flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-git config --global user.email $GH_EMAIL
-git config --global user.name "Flyve MDM"
-git remote remove origin
-git remote add origin https://$GH_USER:$GH_TOKEN@github.com/flyve-mdm/flyve-mdm-ios-agent.git
-
 if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+  fastlane beta
 
-    git checkout $TRAVIS_BRANCH -f
-    # Generate CHANGELOG.md and increment version
-    npm run release -- -t ''
-    fastlane beta
-    
 elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+    git config --global user.email $GH_EMAIL
+    git config --global user.name "Flyve MDM"
+    git remote remove origin
+    git remote add origin https://$GH_USER:$GH_TOKEN@github.com/flyve-mdm/flyve-mdm-ios-agent.git
 
     if [[ $TRAVIS_COMMIT_MESSAGE != *"**version**"* && $TRAVIS_COMMIT_MESSAGE != *"**CHANGELOG.md**"* ]]; then
         git checkout $TRAVIS_BRANCH -f
