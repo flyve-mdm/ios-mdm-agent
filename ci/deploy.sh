@@ -37,9 +37,6 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
     npm run release -- -t ''
     # Get version number from package.json
     export GIT_TAG=$(jq -r ".version" package.json)
-    # Revert last commit
-    git reset --hard HEAD~1
-
     fastlane beta
 
 elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
