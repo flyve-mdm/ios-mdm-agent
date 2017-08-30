@@ -35,10 +35,8 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
     git checkout $TRAVIS_BRANCH -f
     # Generate CHANGELOG.md and increment version
     npm run release -- -t ''
-    # Get version number from package.json
-    export GIT_TAG=$(jq -r ".version" package.json)
     fastlane beta
-
+    
 elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
 
     if [[ $TRAVIS_COMMIT_MESSAGE != *"**version**"* && $TRAVIS_COMMIT_MESSAGE != *"**CHANGELOG.md**"* ]]; then
