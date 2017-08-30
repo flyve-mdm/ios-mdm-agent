@@ -69,7 +69,7 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
         # Add modified and delete files
         git add -u
         # Create commit
-        git commit -m "ci(build): increment **version** ${GIT_TAG}"
+        git commit -m "ci(build): release **version** ${GIT_TAG}"
         # Push commits and tags to origin branch
         git push --follow-tags origin $TRAVIS_BRANCH
 
