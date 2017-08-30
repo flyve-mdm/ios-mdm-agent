@@ -43,11 +43,11 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         # Revert last commit
         git reset --hard HEAD~1
         # Update CFBundleShortVersionString
-        /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}-beta" ${PWD}/${APPNAME}/Info.plist
+        /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}" ${PWD}/${APPNAME}/Info.plist
         # Add modified and delete files
         git add ${APPNAME}/Info.plist
         # Create commit
-        git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}-beta"
+        git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}"
         # Push commits to origin branch
         git push origin $TRAVIS_BRANCH
 
