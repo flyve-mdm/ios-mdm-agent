@@ -25,36 +25,14 @@
 # @link      https://.flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-if [[ -n $GH_TOKEN ]]; then
+if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+  fastlane beta
+
+elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
     git config --global user.email $GH_EMAIL
     git config --global user.name "Flyve MDM"
     git remote remove origin
     git remote add origin https://$GH_USER:$GH_TOKEN@github.com/flyve-mdm/flyve-mdm-ios-agent.git
-fi
-
-if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
-
-    if [[ $TRAVIS_COMMIT_MESSAGE != *"**beta**"* ]]; then
-        git checkout $TRAVIS_BRANCH -f
-        # Generate CHANGELOG.md and increment version
-        npm run release -- -t ''
-        # Get version number from package.json
-        export GIT_TAG=$(jq -r ".version" package.json)
-        # Revert last commit
-        git reset --hard HEAD~1
-        # Update CFBundleShortVersionString
-        /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}-beta" ${PWD}/${APPNAME}/Info.plist
-        # Add modified and delete files
-        git add ${APPNAME}/Info.plist
-        # Create commit
-        git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}-beta"
-        # Push commits to origin branch
-        git push origin $TRAVIS_BRANCH
-
-        fastlane beta
-    fi
-
-elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
 
     if [[ $TRAVIS_COMMIT_MESSAGE != *"**version**"* && $TRAVIS_COMMIT_MESSAGE != *"**CHANGELOG.md**"* ]]; then
         git checkout $TRAVIS_BRANCH -f
@@ -72,28 +50,7 @@ elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; th
         git commit -m "ci(build): increment **version** ${GIT_TAG}"
         # Push commits and tags to origin branch
         git push --follow-tags origin $TRAVIS_BRANCH
-
-        # Update CHANGELOG.md on gh-pages
-        git fetch origin gh-pages
-        git checkout gh-pages
-        git checkout $TRAVIS_BRANCH CHANGELOG.md
-
-        # Create header content
-        HEADER="---\nlayout: modal\ntitle: changelog\n---\n"
-        # Duplicate CHANGELOG.md
-        cp CHANGELOG.md CHANGELOG_COPY.md
-        # Add header to CHANGELOG.md
-        (echo $HEADER ; cat CHANGELOG_COPY.md) > CHANGELOG.md
-        # Remove CHANGELOG_COPY.md
-        rm CHANGELOG_COPY.md
-
-        # Add CHANGELOG.md
-        git add CHANGELOG.md
-        # Create commit
-        git commit -m "ci(docs): generate CHANGELOG.md for version ${GIT_TAG}"
-        # Push commit to origin gh-pages branch
-        git push origin gh-pages
-
+        
         fastlane release
     fi
 fi
