@@ -121,8 +121,11 @@
 		50FF8E40F91DB1B3A504C447 /* Pods_flyve_mdm_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE80DEDFA827F068DE54FDA /* Pods-flyve-mdm-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosTests/Pods-flyve-mdm-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		745B6C7BE30D9C3D1F4136C1 /* Pods-flyve-mdm-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-ios/Pods-flyve-mdm-ios.release.xcconfig"; sourceTree = "<group>"; };
+		A9BFE62C40AB37A167C6EA76 /* Pods-flyve-mdm-iosTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosTests/Pods-flyve-mdm-iosTests.beta.xcconfig"; sourceTree = "<group>"; };
+		AC9DEB94E81531BBD1EBA3E5 /* Pods-flyve-mdm-iosUITests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosUITests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosUITests/Pods-flyve-mdm-iosUITests.beta.xcconfig"; sourceTree = "<group>"; };
 		ADAC68FF736F900EF009264A /* Pods_flyve_mdm_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55393FAD1039D7E95375E17 /* Pods-flyve-mdm-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-ios/Pods-flyve-mdm-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		D216E944B68F326146552F64 /* Pods-flyve-mdm-ios.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-ios.beta.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-ios/Pods-flyve-mdm-ios.beta.xcconfig"; sourceTree = "<group>"; };
 		F27C92C9D703B90352CB27C8 /* Pods-flyve-mdm-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosUITests/Pods-flyve-mdm-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3D6D8AF04109F05087C9D99 /* Pods-flyve-mdm-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosTests/Pods-flyve-mdm-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -372,6 +375,9 @@
 				F3D6D8AF04109F05087C9D99 /* Pods-flyve-mdm-iosTests.release.xcconfig */,
 				F27C92C9D703B90352CB27C8 /* Pods-flyve-mdm-iosUITests.debug.xcconfig */,
 				2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */,
+				D216E944B68F326146552F64 /* Pods-flyve-mdm-ios.beta.xcconfig */,
+				A9BFE62C40AB37A167C6EA76 /* Pods-flyve-mdm-iosTests.beta.xcconfig */,
+				AC9DEB94E81531BBD1EBA3E5 /* Pods-flyve-mdm-iosUITests.beta.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -989,7 +995,7 @@
 		};
 		0AFE0EBF1F5729440045F35B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 745B6C7BE30D9C3D1F4136C1 /* Pods-flyve-mdm-ios.release.xcconfig */;
+			baseConfigurationReference = D216E944B68F326146552F64 /* Pods-flyve-mdm-ios.beta.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1010,7 +1016,7 @@
 		};
 		0AFE0EC01F5729440045F35B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3D6D8AF04109F05087C9D99 /* Pods-flyve-mdm-iosTests.release.xcconfig */;
+			baseConfigurationReference = A9BFE62C40AB37A167C6EA76 /* Pods-flyve-mdm-iosTests.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1026,7 +1032,7 @@
 		};
 		0AFE0EC11F5729440045F35B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */;
+			baseConfigurationReference = AC9DEB94E81531BBD1EBA3E5 /* Pods-flyve-mdm-iosUITests.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
