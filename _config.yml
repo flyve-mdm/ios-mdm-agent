@@ -10,6 +10,11 @@ plugins:
 
 repository: flyve-mdm/flyve-mdm-ios-agent
 
+collections:
+  docs:
+    output: true
+
+
 prose:
 
   rooturl: '_posts' 
