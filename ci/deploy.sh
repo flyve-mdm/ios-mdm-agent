@@ -72,6 +72,13 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         git checkout gh-pages
         git checkout $TRAVIS_BRANCH _docs
 
+        # Add _docs folder
+        git add CHANGELOG.md
+        # Create commit
+        git commit -m "ci(docs): generate documentation with jazzy for version ${GIT_TAG}"
+        # Push commit to origin gh-pages branch
+        git push origin gh-pages
+
         fastlane beta
     fi
 
