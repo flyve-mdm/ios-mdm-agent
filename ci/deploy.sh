@@ -62,6 +62,11 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         --output _docs \
         --theme jazzy/themeFlyve
 
+        # Add _docs folder
+        git add _docs
+        # Create commit, NOTICE: this commit is not sent
+        git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
+
         fastlane beta
     fi
 
