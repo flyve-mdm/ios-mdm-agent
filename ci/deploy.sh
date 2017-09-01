@@ -67,6 +67,11 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         # Create commit, NOTICE: this commit is not sent
         git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 
+        # Update documentation on gh-pages
+        git fetch origin gh-pages
+        git checkout gh-pages
+        git checkout $TRAVIS_BRANCH _docs
+
         fastlane beta
     fi
 
