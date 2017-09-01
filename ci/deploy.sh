@@ -53,6 +53,15 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         # Push commits to origin branch
         git push origin $TRAVIS_BRANCH
 
+        # Generate documentation with jazzy
+        jazzy \
+        --clean \
+        --author Flyve MDM \
+        --author_url https://flyve-mdm.com \
+        --github_url https://github.com/flyve-mdm/flyve-mdm-ios-agent \
+        --output _docs \
+        --theme jazzy/themeFlyve
+
         fastlane beta
     fi
 
