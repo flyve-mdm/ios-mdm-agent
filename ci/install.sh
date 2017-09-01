@@ -35,6 +35,8 @@ nvm use stable
 gem install fastlane --no-rdoc --no-ri --no-document --quiet
 # Install jazzy for generate documentation
 gem install jazzy
+# Install xcov for code coverage reporting
+sudo gem install xcov
 # Install jq for json parse
 brew install jq
 # Install standard-version scope global
