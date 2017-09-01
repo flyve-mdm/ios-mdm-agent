@@ -67,6 +67,19 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         # Create commit, NOTICE: this commit is not sent
         git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 
+        # Generate code coverage reporting with xcov
+        xcov \
+        --workspace flyve-mdm-ios.xcworkspace \
+        --scheme flyve-mdm-ios \
+        --output_directory coverage \
+        --html_report \
+        --only_project_targets
+
+        # Add coverage folder
+        git add coverage
+        # Create commit, NOTICE: this commit is not sent
+        git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
+
         # Update documentation on gh-pages
         git fetch origin gh-pages
         git checkout gh-pages
@@ -76,6 +89,13 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         git add CHANGELOG.md
         # Create commit
         git commit -m "ci(docs): generate documentation with jazzy for version ${GIT_TAG}"
+        # Push commit to origin gh-pages branch
+
+        # Add coverage folder
+        git add coverage
+        # Create commit
+        git commit -m "ci(docs): generate coverage with xcov for version ${GIT_TAG}"
+        
         # Push commit to origin gh-pages branch
         git push origin gh-pages
 
