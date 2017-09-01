@@ -33,6 +33,8 @@ nvm install stable
 nvm use stable
 # Install fastlane last version
 gem install fastlane --no-rdoc --no-ri --no-document --quiet
+# Install jazzy for generate documentation
+gem install jazzy
 # Install jq for json parse
 brew install jq
 # Install standard-version scope global
