@@ -58,7 +58,7 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         --clean \
         --author Flyve MDM \
         --author_url https://flyve-mdm.com \
-        --github_url https://github.com/flyve-mdm/flyve-mdm-ios-agent \
+        --github_url https://github.com/$TRAVIS_REPO_SLUG \
         --output _docs \
         --theme jazzy/themeFlyve
 
@@ -69,8 +69,8 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
 
         # Generate code coverage reporting with xcov
         xcov \
-        --workspace flyve-mdm-ios.xcworkspace \
-        --scheme flyve-mdm-ios \
+        --workspace ${APPNAME}.xcworkspace \
+        --scheme ${APPNAME} \
         --output_directory coverage \
         --html_report \
         --only_project_targets
@@ -91,6 +91,8 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         git commit -m "ci(docs): generate documentation with jazzy for version ${GIT_TAG}"
         # Push commit to origin gh-pages branch
 
+        # Get code coverage from develop branch
+        git checkout $TRAVIS_BRANCH coverage
         # Add coverage folder
         git add coverage
         # Create commit
