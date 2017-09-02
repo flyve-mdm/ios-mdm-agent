@@ -71,3 +71,8 @@ node_modules/
 # Variables
 
 .env
+
+# Documentation 
+
+_docs/
+coverage/
