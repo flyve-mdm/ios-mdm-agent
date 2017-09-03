@@ -63,9 +63,12 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         --theme jazzy/themeFlyve
 
         # Add _docs folder
-        git add _docs
+        git add _docs -f
         # Create commit, NOTICE: this commit is not sent
         git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
+
+        # Run fastlane test
+        fastlane test
 
         # Generate code coverage reporting with xcov
         xcov \
@@ -76,7 +79,7 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
         --only_project_targets
 
         # Add coverage folder
-        git add coverage
+        git add coverage -f
         # Create commit, NOTICE: this commit is not sent
         git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
 
