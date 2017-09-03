@@ -27,12 +27,10 @@
 
 # Update gem
 gem update --system
-# install Node Version Manager
-nvm install stable
-# Use stable version
-nvm use stable
 # Install fastlane last version
 gem install fastlane --no-rdoc --no-ri --no-document --quiet
+# Clean Gem
+gem cleanup
 # Install jazzy for generate documentation
 gem install jazzy
 # Install xcov for code coverage reporting
