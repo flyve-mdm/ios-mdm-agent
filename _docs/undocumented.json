@@ -2,5 +2,9 @@
   "warnings": [
 
   ],
+<<<<<<< HEAD
   "source_directory": "/Users/mac3/Desktop/flyve-mdm-ios-agent"
+=======
+  "source_directory": "/Users/mac3/Desktop/flyve-mdm-ios-agent 1"
+>>>>>>> 3e48470... docs(jazzy): adjust styles for responsive design
 }
