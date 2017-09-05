@@ -11,7 +11,7 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "2.46.1"
+fastlane_version "2.55.0"
 
 default_platform :ios
 
@@ -25,7 +25,8 @@ platform :ios do
     scan(
       workspace: "flyve-mdm-ios.xcworkspace",
       scheme: "flyve-mdm-ios",
-      clean: true
+      clean: true,
+      code_coverage: true
     )
   end
 
