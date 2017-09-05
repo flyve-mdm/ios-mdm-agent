@@ -16,7 +16,6 @@ collections:
   docs:
     output: true
 
-
 prose:
 
   rooturl: '_posts' 
