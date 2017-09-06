@@ -285,14 +285,14 @@ extension MainController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as? MainCell
 
         if indexPath.row == 0 {
-            cell?.titleLabel.text = "title_ supervised".localized.uppercased()
+            cell?.titleLabel.text = NSLocalizedString("title_supervised", comment: "").uppercased()
             cell?.descriptionLabel.text = supervisor.name
             cell?.detailLabel.text = supervisor.email
             cell?.openBotton.addTarget(self, action: #selector(self.goSupervisorController), for: .touchUpInside)
 
         } else if indexPath.row == 1 {
             cell?.photoImageView.image = userInfo.picture
-            cell?.titleLabel.text = "title_user".localized.uppercased()
+            cell?.titleLabel.text = NSLocalizedString("title_user", comment: "").uppercased()
             cell?.descriptionLabel.text = "\(userInfo.firstName) \(userInfo.lastName)"
             
             if userInfo.emails.count > 0 {
@@ -302,11 +302,11 @@ extension MainController: UITableViewDataSource {
             cell?.openBotton.addTarget(self, action: #selector(self.goUserController), for: .touchUpInside)
 
         } else if indexPath.row == 2 {
-            cell?.titleLabel.text = "title_resources".localized.uppercased()
+            cell?.titleLabel.text = NSLocalizedString("title_resources", comment: "").uppercased()
             cell?.openBotton.addTarget(self, action: #selector(self.goFileExplorerController), for: .touchUpInside)
 
         } else if indexPath.row == 3 {
-            cell?.titleLabel.text = "log_report".localized.uppercased()
+            cell?.titleLabel.text = NSLocalizedString("log_report", comment: "").uppercased()
             cell?.openBotton.addTarget(self, action: #selector(self.goLogController), for: .touchUpInside)
         }
 

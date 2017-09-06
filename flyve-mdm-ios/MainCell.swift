@@ -158,7 +158,7 @@ class MainCell: UITableViewCell {
 
         let button = UIButton(type: UIButtonType.system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("open".localized.uppercased(), for: .normal)
+        button.setTitle(NSLocalizedString("open", comment: "").uppercased(), for: .normal)
 
         return button
     }()

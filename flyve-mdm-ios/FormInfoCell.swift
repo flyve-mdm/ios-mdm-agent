@@ -51,7 +51,7 @@ class FormInfoCell: FormBaseCell {
         
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "first_name".localized
+        text.placeholder = NSLocalizedString("first_name", comment: "")
         text.tag = 0
         text.clearButtonMode = UITextFieldViewMode.whileEditing
         text.textColor = .gray
@@ -72,7 +72,7 @@ class FormInfoCell: FormBaseCell {
         
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "last_name".localized
+        text.placeholder = NSLocalizedString("last_name", comment: "")
         text.tag = 1
         text.clearButtonMode = UITextFieldViewMode.whileEditing
         text.textColor = .gray

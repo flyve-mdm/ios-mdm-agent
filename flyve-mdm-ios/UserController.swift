@@ -79,12 +79,12 @@ class UserController: UIViewController {
     func setupViews() {
         self.view.backgroundColor = .white
         
-        let saveButton = UIBarButtonItem(title: "edit".localized,
+        let saveButton = UIBarButtonItem(title: NSLocalizedString("edit", comment: ""),
                                          style: UIBarButtonItemStyle.plain,
                                          target: self,
                                          action: #selector(self.edit))
         
-        let cancelButton = UIBarButtonItem(title: "cancel".localized,
+        let cancelButton = UIBarButtonItem(title: NSLocalizedString("cancel", comment: ""),
                                            style: UIBarButtonItemStyle.plain,
                                            target: self,
                                            action: #selector(self.cancel))

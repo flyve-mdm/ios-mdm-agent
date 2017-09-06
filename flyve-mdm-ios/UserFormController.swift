@@ -57,14 +57,14 @@ class UserFormController: FormViewController {
     /// `setupViews()`
     func setupViews() {
         
-        form.title = "title_user".localized
+        form.title = NSLocalizedString("title_user", comment: "")
         self.view.backgroundColor = .white
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized,
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("cancel", comment: ""),
                                                                 style: UIBarButtonItemStyle.plain,
                                                                 target: self,
                                                                 action: #selector(self.cancel))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done".localized,
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("done", comment: ""),
                                          style: UIBarButtonItemStyle.plain,
                                          target: self,
                                          action: #selector(self.done))
@@ -77,7 +77,7 @@ class UserFormController: FormViewController {
         sectionInfo.headerViewHeight = CGFloat.leastNormalMagnitude
         sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
 
-        let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
+        let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: NSLocalizedString("info", comment: ""))
         let info: [String: AnyObject] = ["picture": userInfo.picture as AnyObject,
                     "firstname": userInfo.firstName as AnyObject,
                     "lastname": userInfo.lastName as AnyObject]
@@ -89,7 +89,7 @@ class UserFormController: FormViewController {
         sectionTitlePhone.headerViewHeight = CGFloat.leastNormalMagnitude
         sectionTitlePhone.footerViewHeight = CGFloat.leastNormalMagnitude
 
-        let rowTitlePhone = FormRow(tag: "titlePhone", type: .title, edit: .insert, title: "add_phone".localized)
+        let rowTitlePhone = FormRow(tag: "titlePhone", type: .title, edit: .insert, title: NSLocalizedString("add_phone", comment: ""))
         rowTitlePhone.configuration.button.didSelectClosure = { _ in
             self.addPhone()
         }
@@ -101,8 +101,8 @@ class UserFormController: FormViewController {
         sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
         
         for phone in userInfo.phones {
-            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
-            rowPhone.configuration.cell.placeholder = "phone".localized
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: NSLocalizedString("phone", comment: ""))
+            rowPhone.configuration.cell.placeholder = NSLocalizedString("phone", comment: "")
             rowPhone.value = phone["phone"] as AnyObject
             rowPhone.option = phone["type"] as AnyObject
             rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
@@ -120,7 +120,7 @@ class UserFormController: FormViewController {
         sectionTitleEmail.headerViewHeight = CGFloat.leastNormalMagnitude
         sectionTitleEmail.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowTitleEmail = FormRow(tag: "titleEmail", type: .title, edit: .insert, title: "add_email".localized)
+        let rowTitleEmail = FormRow(tag: "titleEmail", type: .title, edit: .insert, title: NSLocalizedString("add_email", comment: ""))
         rowTitleEmail.configuration.button.didSelectClosure = { _ in
             self.addEmail()
         }
@@ -132,8 +132,8 @@ class UserFormController: FormViewController {
         sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
         
         for email in userInfo.emails {
-            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
-            rowEmail.configuration.cell.placeholder = "email".localized
+            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: NSLocalizedString("email", comment: ""))
+            rowEmail.configuration.cell.placeholder = NSLocalizedString("email", comment: "")
             rowEmail.value = email.email as AnyObject
             rowEmail.option = email.type as AnyObject
             rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
@@ -151,7 +151,7 @@ class UserFormController: FormViewController {
         sectionLanguage.headerViewHeight = 32.0
         sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
+        let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: NSLocalizedString("language", comment: ""))
         rowLanguage.option = userInfo.language as AnyObject
         rowLanguage.configuration.selection.options = (LANGUAGES as [String]) as [AnyObject]
         rowLanguage.configuration.selection.allowsMultipleSelection = false
@@ -167,18 +167,18 @@ class UserFormController: FormViewController {
         sectionPassword.headerViewHeight = 32.0
         sectionPassword.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowCurrentPassword = FormRow(tag: "current_password", type: .password, edit: .none, title: "current_password".localized)
-        rowCurrentPassword.configuration.cell.placeholder = "current_password".localized
+        let rowCurrentPassword = FormRow(tag: "current_password", type: .password, edit: .none, title: NSLocalizedString("current_password", comment: ""))
+        rowCurrentPassword.configuration.cell.placeholder = NSLocalizedString("current_password", comment: "")
         
         sectionPassword.rows.append(rowCurrentPassword)
         
-        let rowNewPassword = FormRow(tag: "new_password", type: .password, edit: .none, title: "new_password".localized)
-        rowNewPassword.configuration.cell.placeholder = "new_password".localized
+        let rowNewPassword = FormRow(tag: "new_password", type: .password, edit: .none, title: NSLocalizedString("new_password", comment: ""))
+        rowNewPassword.configuration.cell.placeholder = NSLocalizedString("new_password", comment: "")
         
         sectionPassword.rows.append(rowNewPassword)
         
-        let rowConfirmPassword = FormRow(tag: "confirm_password", type: .password, edit: .none, title: "confirm_password".localized)
-        rowConfirmPassword.configuration.cell.placeholder = "confirm_password".localized
+        let rowConfirmPassword = FormRow(tag: "confirm_password", type: .password, edit: .none, title: NSLocalizedString("confirm_password", comment: ""))
+        rowConfirmPassword.configuration.cell.placeholder = NSLocalizedString("confirm_password", comment: "")
         
         sectionPassword.rows.append(rowConfirmPassword)
         
@@ -187,8 +187,8 @@ class UserFormController: FormViewController {
         sectionAdminNumber.headerViewHeight = 32.0
         sectionAdminNumber.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowAdminNumber = FormRow(tag: "admin_number", type: .number, edit: .none, title: "admin_number".localized)
-        rowAdminNumber.configuration.cell.placeholder = "admin_number".localized
+        let rowAdminNumber = FormRow(tag: "admin_number", type: .number, edit: .none, title: NSLocalizedString("admin_number", comment: ""))
+        rowAdminNumber.configuration.cell.placeholder = NSLocalizedString("admin_number", comment: "")
         rowAdminNumber.value = userInfo.administrativeNumber as AnyObject
         
         sectionAdminNumber.rows.append(rowAdminNumber)
@@ -209,8 +209,8 @@ class UserFormController: FormViewController {
     func addPhone() {
         
         if form.sections[1].rows.count < 3 {
-            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
-            rowPhone.configuration.cell.placeholder = "phone".localized
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: NSLocalizedString("phone", comment: ""))
+            rowPhone.configuration.cell.placeholder = NSLocalizedString("phone", comment: "")
             rowPhone.option = PHONES.first as AnyObject
             rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
             rowPhone.configuration.selection.allowsMultipleSelection = false
@@ -230,9 +230,9 @@ class UserFormController: FormViewController {
     /// Add new email number to form
     func addEmail() {
         
-        let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
-        rowEmail.configuration.cell.placeholder = "email".localized
-        rowEmail.configuration.cell.placeholder = "email".localized
+        let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: NSLocalizedString("email", comment: ""))
+        rowEmail.configuration.cell.placeholder = NSLocalizedString("email", comment: "")
+        rowEmail.configuration.cell.placeholder = NSLocalizedString("email", comment: "")
         rowEmail.option = EMAILS.first as AnyObject
         rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
         rowEmail.configuration.selection.allowsMultipleSelection = false

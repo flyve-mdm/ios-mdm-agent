@@ -48,10 +48,10 @@ class EnrollFormController: FormViewController {
     /// Setup initial configuration view
     func setupViews() {
         
-        form.title = "enrollment".localized
+        form.title = NSLocalizedString("enrollment", comment: "")
         self.view.backgroundColor = .white
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done".localized,
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("done", comment: ""),
                                                                  style: UIBarButtonItemStyle.plain,
                                                                  target: self,
                                                                  action: #selector(self.done))
@@ -64,7 +64,7 @@ class EnrollFormController: FormViewController {
         sectionInfo.headerViewHeight = CGFloat.leastNormalMagnitude
         sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
+        let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: NSLocalizedString("info", comment: ""))
         let info = ["firstname": "", "lastname": ""]
         rowInfo.value = info as AnyObject
         sectionInfo.rows.append(rowInfo)
@@ -74,7 +74,7 @@ class EnrollFormController: FormViewController {
         sectionTitlePhone.headerViewHeight = CGFloat.leastNormalMagnitude
         sectionTitlePhone.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowTitlePhone = FormRow(tag: "titlePhone", type: .title, edit: .insert, title: "add_phone".localized)
+        let rowTitlePhone = FormRow(tag: "titlePhone", type: .title, edit: .insert, title: NSLocalizedString("add_phone", comment: ""))
         rowTitlePhone.configuration.button.didSelectClosure = { _ in
             self.addPhone()
         }
@@ -90,7 +90,7 @@ class EnrollFormController: FormViewController {
         sectionTitleEmail.headerViewHeight = CGFloat.leastNormalMagnitude
         sectionTitleEmail.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowTitleEmail = FormRow(tag: "titleEmail", type: .title, edit: .insert, title: "add_email".localized)
+        let rowTitleEmail = FormRow(tag: "titleEmail", type: .title, edit: .insert, title: NSLocalizedString("add_email", comment: ""))
         rowTitleEmail.configuration.button.didSelectClosure = { _ in
             self.addEmail()
         }
@@ -106,7 +106,7 @@ class EnrollFormController: FormViewController {
         sectionLanguage.headerViewHeight = 32.0
         sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
+        let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: NSLocalizedString("language", comment: ""))
         if let firstLanguage = LANGUAGES.first {
             rowLanguage.option = firstLanguage as AnyObject
         }
@@ -133,8 +133,8 @@ class EnrollFormController: FormViewController {
     /// Add new phone number to form
     func addPhone() {
         if form.sections[1].rows.count < 1 {
-            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
-            rowPhone.configuration.cell.placeholder = "phone".localized
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: NSLocalizedString("phone", comment: ""))
+            rowPhone.configuration.cell.placeholder = NSLocalizedString("phone", comment: "")
             rowPhone.option = PHONES.first as AnyObject
             rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
             rowPhone.configuration.selection.allowsMultipleSelection = false
@@ -154,9 +154,9 @@ class EnrollFormController: FormViewController {
     /// Add new email number to form
     func addEmail() {
         if form.sections[3].rows.count < 1 {
-            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
-            rowEmail.configuration.cell.placeholder = "email".localized
-            rowEmail.configuration.cell.placeholder = "email".localized
+            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: NSLocalizedString("email", comment: ""))
+            rowEmail.configuration.cell.placeholder = NSLocalizedString("email", comment: "")
+            rowEmail.configuration.cell.placeholder = NSLocalizedString("email", comment: "")
             rowEmail.option = EMAILS.first as AnyObject
             rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
             rowEmail.configuration.selection.allowsMultipleSelection = false
