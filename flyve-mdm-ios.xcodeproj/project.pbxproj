@@ -12,10 +12,8 @@
 		0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */; };
 		0A5CFDEE1F266F9C00DAB2A1 /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */; };
 		0A5CFDF01F26743500DAB2A1 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */; };
-		0A706D1E1F60731900153BAE /* Localizable.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A706D201F60731900153BAE /* Localizable.plist */; };
-		0A706D291F60889F00153BAE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A706D2B1F60889F00153BAE /* Localizable.strings */; };
+		0A706D2E1F60990F00153BAE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A706D301F60990F00153BAE /* Localizable.strings */; };
 		0A7B8D6A1F3B4B6F00795468 /* EnrollFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B8D691F3B4B6F00795468 /* EnrollFormController.swift */; };
-		0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */; };
 		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
 		0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */; };
 		0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */; };
@@ -77,16 +75,14 @@
 		0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
 		0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
-		0A706D1F1F60731900153BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Localizable.plist; sourceTree = "<group>"; };
-		0A706D211F6075BE00153BAE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/Localizable.plist; sourceTree = "<group>"; };
-		0A706D221F6076EA00153BAE /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ko; path = ko.lproj/Localizable.plist; sourceTree = "<group>"; };
-		0A706D231F60773900153BAE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pt-BR"; path = "pt-BR.lproj/Localizable.plist"; sourceTree = "<group>"; };
-		0A706D241F60775200153BAE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Localizable.plist; sourceTree = "<group>"; };
-		0A706D251F60775D00153BAE /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-MX"; path = "es-MX.lproj/Localizable.plist"; sourceTree = "<group>"; };
-		0A706D261F60776700153BAE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Localizable.plist; sourceTree = "<group>"; };
-		0A706D2A1F60889F00153BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A706D2F1F60990F00153BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A706D311F609B5B00153BAE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A706D321F609B5E00153BAE /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A706D331F609B6000153BAE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0A706D341F609B6300153BAE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A706D351F609B6600153BAE /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0A706D361F609B6900153BAE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0A7B8D691F3B4B6F00795468 /* EnrollFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrollFormController.swift; sourceTree = "<group>"; };
-		0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizator.swift; sourceTree = "<group>"; };
 		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Delay+Helper.swift"; sourceTree = "<group>"; };
 		0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalStorage+Helper.swift"; sourceTree = "<group>"; };
@@ -211,9 +207,8 @@
 				0AD974341F45E47900211779 /* ViewModels */,
 				0AD974351F45E48900211779 /* Views */,
 				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
-				0A706D201F60731900153BAE /* Localizable.plist */,
-				0A706D2B1F60889F00153BAE /* Localizable.strings */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
+				0A706D301F60990F00153BAE /* Localizable.strings */,
 			);
 			path = "flyve-mdm-ios";
 			sourceTree = "<group>";
@@ -242,7 +237,6 @@
 			children = (
 				0ADBC4471F33DDD30076024A /* Form */,
 				0A25A68E1F3A44F900EBAFDD /* Constants.swift */,
-				0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */,
 				0AC7632A1F1961C20050F17B /* Location.swift */,
 				0AFEE2171F44D209005750E3 /* Logger.swift */,
 			);
@@ -517,8 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AD8427F1EBA5BF70093AC74 /* Assets.xcassets in Resources */,
-				0A706D291F60889F00153BAE /* Localizable.strings in Resources */,
-				0A706D1E1F60731900153BAE /* Localizable.plist in Resources */,
+				0A706D2E1F60990F00153BAE /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,7 +719,6 @@
 				0ADBC43C1F33563C0076024A /* FormRow.swift in Sources */,
 				0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */,
 				0AC7632B1F1961C20050F17B /* Location.swift in Sources */,
-				0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */,
 				0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */,
 				0AD974431F460EE800211779 /* Enroll.swift in Sources */,
 			);
@@ -765,27 +757,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0A706D201F60731900153BAE /* Localizable.plist */ = {
+		0A706D301F60990F00153BAE /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0A706D1F1F60731900153BAE /* Base */,
-				0A706D211F6075BE00153BAE /* fr */,
-				0A706D221F6076EA00153BAE /* ko */,
-				0A706D231F60773900153BAE /* pt-BR */,
-				0A706D241F60775200153BAE /* ru */,
-				0A706D251F60775D00153BAE /* es-MX */,
-				0A706D261F60776700153BAE /* es */,
-			);
-			name = Localizable.plist;
-			sourceTree = "<group>";
-		};
-		0A706D2B1F60889F00153BAE /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A706D2A1F60889F00153BAE /* Base */,
+				0A706D2F1F60990F00153BAE /* Base */,
+				0A706D311F609B5B00153BAE /* fr */,
+				0A706D321F609B5E00153BAE /* ko */,
+				0A706D331F609B6000153BAE /* pt-BR */,
+				0A706D341F609B6300153BAE /* ru */,
+				0A706D351F609B6600153BAE /* es-MX */,
+				0A706D361F609B6900153BAE /* es */,
 			);
 			name = Localizable.strings;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
