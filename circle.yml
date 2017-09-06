@@ -1,0 +1,6 @@
+machine:
+  xcode:
+    version: 8.3
+compile:
+  override:
+    - xcodebuild clean build -workspace flyve-mdm-ios.xcworkspace -scheme flyve-mdm-ios CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
