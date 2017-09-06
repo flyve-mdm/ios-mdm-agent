@@ -37,6 +37,9 @@ gem install jazzy
 sudo gem install xcov
 # Install jq for json parse
 brew install jq
+# Install transifex-client
+sudo easy_install pip
+sudo pip install transifex-client
 # Install standard-version scope global
 npm i -g standard-version
 # Install conventional-github-releaser scope global
