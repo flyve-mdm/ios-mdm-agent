@@ -1,6 +1,13 @@
 machine:
+  environment:
+    XCODE_SCHEME: flyve-mdm-ios
+    XCODE_WORKSPACE: flyve-mdm-ios.xcworkspace
+    APPNAME: flyve-mdm-ios
   xcode:
     version: 8.3
 compile:
   override:
     - xcodebuild clean build -workspace flyve-mdm-ios.xcworkspace -scheme flyve-mdm-ios CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+dependencies:
+  override:
+    - brew install node
