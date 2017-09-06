@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "message_init".localized
+        label.text = NSLocalizedString("message_init", comment: "")
         label.sizeToFit()
         label.numberOfLines = 0
         label.minimumScaleFactor = 14.0
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "enroll_device".localized
+        label.text = NSLocalizedString("enroll_device", comment: "")
         label.font = UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightLight)
         label.sizeToFit()
         label.numberOfLines = 0
@@ -306,7 +306,7 @@ class ViewController: UIViewController {
 
         switch state {
         case .initial:
-            self.titleLabel.text = "enroll_device".localized
+            self.titleLabel.text = NSLocalizedString("enroll_device", comment: "")
             self.enrollBotton.backgroundColor = UIColor.main
             self.enrollBotton.isUserInteractionEnabled = true
             self.playImageView.image = UIImage(named: "play")
@@ -315,12 +315,12 @@ class ViewController: UIViewController {
             self.statusLabel.text = ""
 
         case .loading:
-            self.titleLabel.text = "enroll_device".localized
+            self.titleLabel.text = NSLocalizedString("enroll_device", comment: "")
             self.enrollBotton.backgroundColor = UIColor.loading
             self.enrollBotton.isUserInteractionEnabled = false
             self.playImageView.isHidden = true
             self.loadingIndicatorView.startAnimating()
-            self.statusLabel.text = "loading".localized
+            self.statusLabel.text = NSLocalizedString("loading", comment: "")
 
         case .success:
             self.enrollBotton.backgroundColor = UIColor.main
@@ -329,10 +329,10 @@ class ViewController: UIViewController {
             self.playImageView.image = UIImage(named: "success")
             self.playImageView.isHidden = false
             self.loadingIndicatorView.stopAnimating()
-            self.statusLabel.text = "success".localized
+            self.statusLabel.text = NSLocalizedString("success", comment: "")
 
         case .fail:
-            self.titleLabel.text = "enroll_fail".localized
+            self.titleLabel.text = NSLocalizedString("enroll_fail", comment: "")
             self.enrollBotton.backgroundColor = UIColor.fail
             self.enrollBotton.isUserInteractionEnabled = false
             self.playImageView.isHidden = true
@@ -378,10 +378,10 @@ extension ViewController: HttpRequestDelegate {
                 }
 
             } else {
-                self.statusLabel.text = "error_profile".localized
+                self.statusLabel.text = NSLocalizedString("error_profile", comment: "")
             }
         } else {
-            self.statusLabel.text = "error_profile".localized
+            self.statusLabel.text = NSLocalizedString("error_profile", comment: "")
         }
     }
 

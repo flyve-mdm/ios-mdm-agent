@@ -91,12 +91,12 @@ class SupervisorController: UIViewController {
     func setupViews() {
         self.view.backgroundColor = .white
         
-        let saveButton = UIBarButtonItem(title: "share".localized,
+        let saveButton = UIBarButtonItem(title: NSLocalizedString("share", comment: ""),
                                          style: UIBarButtonItemStyle.plain,
                                          target: self,
                                          action: #selector(self.share))
         
-        let cancelButton = UIBarButtonItem(title: "cancel".localized,
+        let cancelButton = UIBarButtonItem(title: NSLocalizedString("cancel", comment: ""),
                                            style: UIBarButtonItemStyle.plain,
                                            target: self,
                                            action: #selector(self.cancel))

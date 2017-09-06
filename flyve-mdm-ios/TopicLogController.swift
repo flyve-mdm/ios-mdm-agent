@@ -83,7 +83,7 @@ class TopicLogController: UIViewController {
     func setupViews() {
 
         self.view.backgroundColor = .white
-        self.navigationItem.title = "log_report".localized
+        self.navigationItem.title = NSLocalizedString("log_report", comment: "")
         self.view.addSubview(self.tableView)
     }
 
