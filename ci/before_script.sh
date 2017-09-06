@@ -25,6 +25,13 @@
 # @link      https://.flyve-mdm.com
 # ------------------------------------------------------------------------------
 
+echo ------------------- Configure Transifex --------------------
+# Configure Transifex
+if [[ ("$TRAVIS_BRANCH" == "develop" || "$TRAVIS_BRANCH" == "master") && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+    # Create config file transifex
+    sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
+fi
+
 echo ----------------- Decrypt custom keychain ------------------
 # Decrypt custom keychain
 openssl aes-256-cbc -k "$KEYCHAIN_PASSWORD" -in $PROFILE_PATH/$PROFILE_UUID.mobileprovision.enc -d -a -out $PROFILE_PATH/$PROFILE_UUID.mobileprovision
