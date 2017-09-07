@@ -1,4 +1,16 @@
 machine:
+  environment:
+    APPNAME: flyve-mdm-ios
+    XCODE_SCHEME: flyve-mdm-ios
+    XCODE_WORKSPACE: flyve-mdm-ios.xcworkspace
+    PROFILE_UUID: XC_iOS_orgflyvemdmagent
+    KEYCHAIN_NAME: ios-app.keychain
+    SCRIPT_PATH: ./ci
+    CERTIFICATES_PATH: ./ci/cert
+    PROFILE_PATH: ./ci/profile
+    GH_USER: flyve-mdm-bot
+    GH_REPO_SLUG: flyve-mdm/flyve-mdm-ios-agent
+    TRANSIFEX_USER: api
   xcode:
     version: 8.3
 dependencies:
