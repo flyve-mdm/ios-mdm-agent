@@ -35,6 +35,8 @@ gem cleanup
 gem install jazzy
 # Install xcov for code coverage reporting
 sudo gem install xcov
+# Install node
+brew install node
 # Install jq for json parse
 brew install jq
 # Install transifex-client
