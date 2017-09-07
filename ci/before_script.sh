@@ -27,12 +27,12 @@
 
 echo ------------------- Configure Transifex --------------------
 # Configure Transifex
-if [[ ("$TRAVIS_BRANCH" == "develop" || "$TRAVIS_BRANCH" == "master") && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+if [[ ("$CIRCLE_BRANCH" == "develop" || "$CIRCLE_BRANCH" == "master") && "$CI_PULL_REQUEST" == "" ]]; then
     # Create config file transifex
     sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
     
     # Move to local branch
-    git checkout $TRAVIS_BRANCH -f
+    git checkout $CIRCLE_BRANCH -f
     # get transifex status
     tx status
     # push local files to transifex
