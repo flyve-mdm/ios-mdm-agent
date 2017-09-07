@@ -18,16 +18,21 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      13/07/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
 import Foundation
 
-public func delay(_ delay: Double = 3.0, closure: @escaping ()->()) {
-    DispatchQueue.main.asyncAfter(
-        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+/**
+ Delay time
+ 
+ - parameter delay: delay time in seconds, default value = 3.0
+ - parameter closure: @escaping () -> Void
+ */
+public func delay(_ delay: Double = 3.0, closure: @escaping () -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }

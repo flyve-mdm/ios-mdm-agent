@@ -30,7 +30,7 @@ TBF
 
 | **Release channel** | **Beta channel** |
 |:---:|:---:|
-| [![Build Status](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/master.svg?style=svg)](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/master) | [![Build Status](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/develop.svg?style=svg)](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/develop)
+| [![Build Status](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/master.svg?style=svg)](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/master) | [![Build Status](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/develop.svg?style=svg)](https://circleci.com/gh/flyve-mdm/flyve-mdm-ios-agent/tree/develop) |
 
 ## Installation
 

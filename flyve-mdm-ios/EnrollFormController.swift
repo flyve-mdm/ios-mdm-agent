@@ -1,7 +1,7 @@
 /*
  *   Copyright © 2017 Teclib. All rights reserved.
  *
- * RegisterFormController.swift is part of flyve-mdm-ios
+ * EnrollFormController.swift is part of flyve-mdm-ios
  *
  * flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
@@ -17,532 +17,233 @@
  * GNU General Public License for more details.
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
- * @date      10/05/17
+ * @date      09/08/17
  * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
- * @link      https://.flyve-mdm.com
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
+ * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
 import UIKit
 
-class EnrollFormController: UIViewController {
+/// EnrollFormController allow get user information for enrollment process
+class EnrollFormController: FormViewController {
     
-    var userInfo = ["firstName": "","lastName": "", "phone": "", "email": ""]
+    // MARK: Properties
     
-    let cellIdMain = "cellIdMain"
-    let cellIdTitle = "cellIdTitle"
-    let cellIdField = "cellIdField"
+    /// user information storage
+    var userInfo = [String: AnyObject]()
     
-    var countPhone = 0
-    var countEmail = 0
+    // MARK: Init
     
+    /// override `loadView()` from `UIViewController`
     override func loadView() {
         super.loadView()
         
-        self.setupViews()
-        self.addConstraints()
+        setupViews()
+        loadForm()
     }
     
+    /// Setup initial configuration view
     func setupViews() {
         
+        form.title = "enrollment".localized
         self.view.backgroundColor = .white
-        
-        self.navigationController?.isNavigationBarHidden = false
-        
-        
-        let saveButton = UIBarButtonItem(title: "Done",
-                                         style: UIBarButtonItemStyle.plain,
-                                         target: self,
-                                         action: #selector(self.done))
-        
-        self.navigationItem.title = "Enrollment"
-        self.navigationItem.rightBarButtonItem = saveButton
-        
-        self.view.addSubview(self.enrollTableView)
-        
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "done".localized,
+                                                                 style: UIBarButtonItemStyle.plain,
+                                                                 target: self,
+                                                                 action: #selector(self.done))
     }
     
-    func addConstraints() {
+    /// Load Form information
+    func loadForm() {
+        // Section info user
+        let sectionInfo = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionInfo.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionInfo.footerViewHeight = CGFloat.leastNormalMagnitude
         
-        self.enrollTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        self.enrollTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        self.enrollTableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.enrollTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        let rowInfo = FormRow(tag: "info", type: .info, edit: .none, title: "info".localized)
+        let info = ["firstname": "", "lastname": ""]
+        rowInfo.value = info as AnyObject
+        sectionInfo.rows.append(rowInfo)
+        
+        // Section phone number
+        let sectionTitlePhone = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionTitlePhone.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionTitlePhone.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowTitlePhone = FormRow(tag: "titlePhone", type: .title, edit: .insert, title: "add_phone".localized)
+        rowTitlePhone.configuration.button.didSelectClosure = { _ in
+            self.addPhone()
+        }
+        
+        sectionTitlePhone.rows.append(rowTitlePhone)
+        
+        let sectionPhone = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionPhone.headerViewHeight = 32.0
+        sectionPhone.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        // Section email address
+        let sectionTitleEmail = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionTitleEmail.headerViewHeight = CGFloat.leastNormalMagnitude
+        sectionTitleEmail.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowTitleEmail = FormRow(tag: "titleEmail", type: .title, edit: .insert, title: "add_email".localized)
+        rowTitleEmail.configuration.button.didSelectClosure = { _ in
+            self.addEmail()
+        }
+        
+        sectionTitleEmail.rows.append(rowTitleEmail)
+        
+        let sectionEmail = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionEmail.headerViewHeight = 32.0
+        sectionEmail.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        // Section Language
+        let sectionLanguage = FormSection(headerTitle: nil, footerTitle: nil)
+        sectionLanguage.headerViewHeight = 32.0
+        sectionLanguage.footerViewHeight = CGFloat.leastNormalMagnitude
+        
+        let rowLanguage = FormRow(tag: "language", type: .multipleSelector, edit: .none, title: "language".localized)
+        if let firstLanguage = LANGUAGES.first {
+            rowLanguage.option = firstLanguage as AnyObject
+        }
+        rowLanguage.configuration.selection.options = (LANGUAGES as [String]) as [AnyObject]
+        rowLanguage.configuration.selection.allowsMultipleSelection = false
+        rowLanguage.configuration.selection.optionTitleClosure = { value in
+            guard let option = value as? String else { return "" }
+            return option
+        }
+        
+        sectionLanguage.rows.append(rowLanguage)
+        
+        // Add sections to form
+        form.sections = [sectionInfo,
+                         sectionPhone,
+                         sectionTitlePhone,
+                         sectionEmail,
+                         sectionTitleEmail,
+                         sectionLanguage]
     }
     
-    lazy var enrollTableView: UITableView = {
-        
-        let table = UITableView(frame: .zero, style: .plain)
-        
-        table.delegate = self
-        table.dataSource = self
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.backgroundColor = .clear
-        table.separatorStyle = .none
-        table.tableFooterView = UIView()
-        table.rowHeight = UITableViewAutomaticDimension
-        table.estimatedRowHeight = 100
-        table.isEditing = true
-        table.allowsSelectionDuringEditing = true
-        table.isScrollEnabled = false
-        
-        table.register(MainInfoCell.self, forCellReuseIdentifier: self.cellIdMain)
-        table.register(TitleInfoCell.self, forCellReuseIdentifier: self.cellIdTitle)
-        table.register(FieldInfoCell.self, forCellReuseIdentifier: self.cellIdField)
-        
-        return table
-        
-    }()
+    // MARK: Methods
     
-    lazy var enrollButton: UIButton = {
-        
-        let button = UIButton(type: .custom)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.backgroundColor = UIColor.init(red: 64.0/255.0, green: 186.0/255.0, blue: 179.0/255.0, alpha: 1.0).cgColor
-        button.setTitle("enroll".localized, for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.addTarget(self, action: #selector(self.enroll), for: .touchUpInside)
-        return button
-    }()
+    /// Add new phone number to form
+    func addPhone() {
+        if form.sections[1].rows.count < 1 {
+            let rowPhone = FormRow(tag: "phone", type: .phone, edit: .delete, title: "phone".localized)
+            rowPhone.configuration.cell.placeholder = "phone".localized
+            rowPhone.option = PHONES.first as AnyObject
+            rowPhone.configuration.selection.options = (PHONES as [String]) as [AnyObject]
+            rowPhone.configuration.selection.allowsMultipleSelection = false
+            rowPhone.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? String else { return "" }
+                return option
+            }
+            
+            form.sections[1].rows.append(rowPhone)
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: form.sections[1].rows.count - 1, section: 1)], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
     
-    func enroll() {
+    /// Add new email number to form
+    func addEmail() {
+        if form.sections[3].rows.count < 1 {
+            let rowEmail = FormRow(tag: "email", type: .email, edit: .delete, title: "email".localized)
+            rowEmail.configuration.cell.placeholder = "email".localized
+            rowEmail.configuration.cell.placeholder = "email".localized
+            rowEmail.option = EMAILS.first as AnyObject
+            rowEmail.configuration.selection.options = (EMAILS as [String]) as [AnyObject]
+            rowEmail.configuration.selection.allowsMultipleSelection = false
+            rowEmail.configuration.selection.optionTitleClosure = { value in
+                guard let option = value as? String else { return "" }
+                return option
+            }
+            
+            form.sections[3].rows.append(rowEmail)
+            
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: form.sections[3].rows.count - 1, section: 3)], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
+    /// Validate user information for after save it
+    func done() {
+        dismissKeyboard()
         
-        guard let email = self.userInfo["email"], let phone = self.userInfo["phone"], let first = self.userInfo["firstName"], let last = self.userInfo["lastName"], !email.isEmpty, !phone.isEmpty, !first.isEmpty, !last.isEmpty else {
+        // get main user information
+        if form.sections[0].rows.count > 0 {
+            
+            if let info = form.sections[0].rows[0].value {
+                
+                if let first = info["firstname"] as? String {
+                    userInfo["firstname"] = first as AnyObject
+                }
+                
+                if let last = info["lastname"] as? String {
+                    userInfo["lastname"] = last as AnyObject
+                }
+            }
+        }
+        
+        // get phone numbers
+        var arrPhone = [AnyObject]()
+        
+        for phone in form.sections[1].rows where phone.value != nil {
+            var modelPhone = [String: String]()
+            
+            modelPhone["type"] = phone.option as? String ?? ""
+            modelPhone["phone"] = phone.value as? String ?? ""
+            arrPhone.append(modelPhone as AnyObject)
+        }
+        
+        if arrPhone.count > 0 {
+            userInfo["phones"] = arrPhone as AnyObject
+        } else {
+            return
+        }
+
+        // get email address
+        var arrEmail = [AnyObject]()
+        
+        for email in form.sections[3].rows where email.value != nil {
+            var modelEmail = [String: String]()
+            
+            modelEmail["type"] = email.option as? String ?? ""
+            modelEmail["email"] = email.value as? String ?? ""
+            arrEmail.append(modelEmail as AnyObject)
+        }
+        
+        if arrEmail.count > 0 {
+            userInfo["emails"] = arrEmail as AnyObject
+        } else {
             return
         }
         
-        let dataUser: [String: String] = ["_email": email, "firstname": first, "lastname": last]
+        // get selected language
+        if form.sections[5].rows.count > 0 {
+            
+            if let language: AnyObject = form.sections[5].rows[0].option {
+                
+                userInfo["language"] = form.sections[5].rows[0].configuration.selection.optionTitleClosure?(language as AnyObject) as AnyObject
+            }
+        }
         
+        // notify user modification to setDataEnroll
         let notificationData = NotificationCenter.default
+        notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: userInfo)
         
-        notificationData.post(name: NSNotification.Name(rawValue: "setDataEnroll"), object: nil, userInfo: dataUser)
-        
-        self.dismiss(animated: true, completion: nil)
-        
+        dismiss(animated: true, completion: nil)
     }
     
-    func done() {
-        
-        dismissKeyboard()
-        
-        let indexPathName: NSIndexPath = NSIndexPath(row: 0, section: 0)
-        let indexPathPhone: NSIndexPath = NSIndexPath(row: 0, section: 1)
-        let indexPathEmail: NSIndexPath = NSIndexPath(row: 0, section: 3)
-        
-        let cellName  = enrollTableView.cellForRow(at: indexPathName as IndexPath) as! MainInfoCell
-        let cellPhone  = enrollTableView.cellForRow(at: indexPathPhone as IndexPath) as? FieldInfoCell
-        let cellEmail  = enrollTableView.cellForRow(at: indexPathEmail as IndexPath) as? FieldInfoCell
-        
-        self.userInfo["firstName"] = cellName.firstNameTextField.text
-        self.userInfo["lastName"] = cellName.lastNameTextField.text
-        self.userInfo["phone"] = cellPhone?.textField.text ?? ""
-        self.userInfo["email"] = cellEmail?.textField.text ?? ""
-        
-        self.enroll()
-    }
-    
+    /// dismiss Keyboard when it's visible
     func dismissKeyboard() {
         view.endEditing(true)
     }
-}
-
-extension EnrollFormController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 2 {
-            
-            if countPhone > 0 { return }
-            
-            countPhone += 1
-            
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath(row: countPhone-1, section: 1)], with: .automatic)
-            tableView.endUpdates()
-            
-        } else if indexPath.section == 4 {
-            
-            if countEmail > 0 { return }
-            
-            countEmail += 1
-            
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath(row: countEmail-1, section: 3)], with: .automatic)
-            tableView.endUpdates()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        
-        return false
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle
-    {
-        if indexPath.section == 1 || indexPath.section == 3 {
-            return .delete
-            
-        } else if indexPath.section == 2 || indexPath.section == 4 {
-            return .insert
-            
-        } else {
-            return .none
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            if indexPath.section == 1 {
-                countPhone = 0
-            } else if indexPath.section == 3 {
-                countEmail = 0
-            }
-            
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        } else if editingStyle == .insert {
-            
-            if indexPath.section == 2 {
-                
-                if countPhone > 0 { return }
-                
-                countPhone += 1
-                
-                tableView.beginUpdates()
-                tableView.insertRows(at: [IndexPath(row: countPhone-1, section: 1)], with: .automatic)
-                tableView.endUpdates()
-                
-            } else if indexPath.section == 4 {
-                
-                if countEmail > 0 { return }
-                
-                countEmail += 1
-                
-                tableView.beginUpdates()
-                tableView.insertRows(at: [IndexPath(row: countEmail-1, section: 3)], with: .automatic)
-                tableView.endUpdates()
-            }
-            
-        }
-    }
-    
-}
-
-extension EnrollFormController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if section == 0 {
-            return 1
-        } else if section == 1 {
-            return countPhone
-        } else if section == 2 {
-            return 1
-        } else if section == 3 {
-            return countEmail
-        } else if section == 4 {
-            return 1
-        } else {
-            return 0
-        }
-        
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
-        if indexPath.row == 0 && indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdMain, for: indexPath) as! MainInfoCell
-            cell.firstNameTextField.tag = 0
-            cell.lastNameTextField.tag = 1
-            return cell
-            
-            
-        } else {
-            
-            if indexPath.section == 2 || indexPath.section == 4 {
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdTitle, for: indexPath) as! TitleInfoCell
-                
-                if indexPath.section == 2 {
-                    cell.titleLabel.text = "add_phone".localized
-                    
-                } else {
-                    cell.titleLabel.text = "add_email".localized
-                    
-                }
-                
-                return cell
-                
-            } else {
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdField, for: indexPath) as! FieldInfoCell
-                
-                if indexPath.section == 1 {
-                    cell.textField.text = ""
-                    cell.textField.placeholder = "phone".localized
-                    cell.textField.tag = 2
-                    cell.textField.keyboardType = .phonePad
-                    
-                } else {
-                    cell.textField.text = ""
-                    cell.textField.placeholder = "Email".localized
-                    cell.textField.tag = 3
-                    cell.textField.keyboardType = .emailAddress
-                }
-                
-                return cell
-            }
-        }
-    }
-}
-
-class MainInfoCell: UITableViewCell {
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
-    {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        self.selectionStyle = UITableViewCellSelectionStyle.none
-        self.contentView.backgroundColor = .clear
-        self.setupView()
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
-    func setupView() {
-        
-        backgroundColor = .white
-        
-        contentView.addSubview(self.photoBotton)
-        contentView.addSubview(self.firstNameTextField)
-        contentView.addSubview(self.lastNameTextField)
-        
-        addConstraints()
-    }
-    
-    func addConstraints() {
-        
-        self.photoBotton.widthAnchor.constraint(equalToConstant: 60.0).isActive = true
-        self.photoBotton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
-        self.photoBotton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16).isActive = true
-        self.photoBotton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -48).isActive = true
-        self.photoBotton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8).isActive = true
-        
-        self.firstNameTextField.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4).isActive = true
-        self.firstNameTextField.bottomAnchor.constraint(equalTo: self.photoBotton.centerYAnchor, constant: -4).isActive = true
-        self.firstNameTextField.leadingAnchor.constraint(equalTo: self.photoBotton.trailingAnchor, constant: 8).isActive = true
-        self.firstNameTextField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
-        
-        self.lastNameTextField.topAnchor.constraint(equalTo: self.photoBotton.centerYAnchor, constant: 4).isActive = true
-        self.lastNameTextField.leadingAnchor.constraint(equalTo: self.photoBotton.trailingAnchor, constant: 8).isActive = true
-        self.lastNameTextField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
-        self.lastNameTextField.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -36).isActive = true
-    }
-    
-    lazy var photoBotton: UIButton = {
-        
-        let button = UIButton(type: UIButtonType.custom)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 30
-        button.backgroundColor = UIColor.background
-        button.addTarget(self, action: #selector(self.selectPhoto), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    let photoImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.autoresizingMask = [.flexibleWidth,
-                                      .flexibleHeight]
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
-    let firstNameTextField: UITextField = {
-        let text = UITextField()
-        
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "first_name".localized
-        text.clearButtonMode = UITextFieldViewMode.whileEditing
-        text.textColor = .gray
-        text.keyboardType = .default
-        
-        text.borderStyle = .none
-        text.layer.backgroundColor = UIColor.white.cgColor
-        
-        text.layer.masksToBounds = false
-        text.layer.shadowColor = UIColor.lightGray.cgColor
-        text.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        text.layer.shadowOpacity = 1.0
-        text.layer.shadowRadius = 0.0
-        
-        return text
-    }()
-    
-    let lastNameTextField: UITextField = {
-        let text = UITextField()
-        
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = "last_name".localized
-        text.clearButtonMode = UITextFieldViewMode.whileEditing
-        text.textColor = .gray
-        text.keyboardType = .default
-        
-        text.borderStyle = .none
-        text.layer.backgroundColor = UIColor.white.cgColor
-        
-        text.layer.masksToBounds = false
-        text.layer.shadowColor = UIColor.lightGray.cgColor
-        text.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
-        text.layer.shadowOpacity = 1.0
-        text.layer.shadowRadius = 0.0
-        
-        return text
-    }()
-    
-    func selectPhoto() {
-        
-    }
-}
-
-class TitleInfoCell: UITableViewCell {
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
-    {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        self.selectionStyle = UITableViewCellSelectionStyle.none
-        self.contentView.backgroundColor = .clear
-        self.setupView()
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
-    func setupView() {
-        
-        backgroundColor = .white
-        
-        contentView.addSubview(self.titleLabel)
-        contentView.addSubview(self.lineView)
-        
-        
-        addConstraints()
-    }
-    
-    func addConstraints() {
-        
-        self.lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        self.lineView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
-        self.lineView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
-        
-        self.titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
-        self.titleLabel.bottomAnchor.constraint(equalTo: self.lineView.topAnchor, constant: -8).isActive = true
-        self.titleLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 8).isActive = true
-        self.titleLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -8).isActive = true
-    }
-    
-    let lineView: UIView = {
-        
-        let line = UIView()
-        
-        line.translatesAutoresizingMaskIntoConstraints = false
-        line.backgroundColor = .gray
-        
-        return line
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
-        
-        return label
-    }()
-}
-
-class FieldInfoCell: UITableViewCell {
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
-    {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        self.selectionStyle = UITableViewCellSelectionStyle.none
-        self.contentView.backgroundColor = .clear
-        self.setupView()
-        self.addConstraints()
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
-    func setupView() {
-        
-        backgroundColor = .white
-        
-        contentView.addSubview(self.textField)
-    }
-    
-    func addConstraints() {
-        
-        self.textField.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
-        self.textField.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
-        self.textField.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8).isActive = true
-        self.textField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8).isActive = true
-    }
-    
-    let textField: UITextField = {
-        let text = UITextField()
-        
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.placeholder = ""
-        text.clearButtonMode = UITextFieldViewMode.whileEditing
-        text.textColor = .gray
-        text.keyboardType = .default
-        text.borderStyle = .none
-        
-        return text
-    }()
 }

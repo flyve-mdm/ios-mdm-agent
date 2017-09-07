@@ -1,0 +1,16 @@
+<a class="btn btn-lightweight no-outline navigation-btn">Index</a>
+    <ul role="navigation" id="sidenav-small" class="nav side-navigation side-navigation-small theme-default">
+        <button type="button" class="close" data-dismiss="side-navigation" aria-label="close">
+            <i class="glyph glyph-cancel"></i>
+        </button>
+        
+        {{#structure}}
+          <li class="active side-nav-c2">
+              <a href="{{path_to_root}}{{section}}.html">{{section}}</a>
+              <ul class="nav collapse in" id="father-john-misty">
+                {{#children}}
+                    <li><a href="{{path_to_root}}{{url}}">{{name}}</a></li>
+                {{/children}}
+              </ul>
+          </li>
+        {{/structure}}

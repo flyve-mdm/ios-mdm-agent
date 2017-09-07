@@ -7,23 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A25A68D1F39FD9200EBAFDD /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */; };
+		0A25A68F1F3A44F900EBAFDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25A68E1F3A44F900EBAFDD /* Constants.swift */; };
+		0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */; };
+		0A5CFDEE1F266F9C00DAB2A1 /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */; };
+		0A5CFDF01F26743500DAB2A1 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */; };
+		0A7B8D6A1F3B4B6F00795468 /* EnrollFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B8D691F3B4B6F00795468 /* EnrollFormController.swift */; };
 		0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */; };
 		0A7F4DB21F1D43FF00976EF4 /* Localizable.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */; };
 		0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EC1F17CDD50038E5C3 /* MainController.swift */; };
 		0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */; };
 		0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */; };
+		0A884CA51F2F7EC0009B5925 /* SupervisorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */; };
+		0A884CA71F2FD628009B5925 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A884CA61F2FD628009B5925 /* UserController.swift */; };
 		0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F8001EC3A840006397EC /* TopicLogController.swift */; };
 		0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */; };
 		0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */; };
 		0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB0491EC20D590018E2EF /* HttpRequest.swift */; };
 		0ABBB04D1EC22BE10018E2EF /* String+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */; };
-		0ABBB04F1EC38CC60018E2EF /* EnrollFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB04E1EC38CC60018E2EF /* EnrollFormController.swift */; };
 		0AC7632B1F1961C20050F17B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC7632A1F1961C20050F17B /* Location.swift */; };
 		0AD842781EBA5BF70093AC74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842771EBA5BF70093AC74 /* AppDelegate.swift */; };
 		0AD8427F1EBA5BF70093AC74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */; };
-		0AD8428D1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */; };
-		0AD842981EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842971EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift */; };
+		0AD842981EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */; };
 		0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD842A51EBA5D810093AC74 /* ViewController.swift */; };
+		0AD974391F45E66200211779 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD974381F45E66200211779 /* UserModel.swift */; };
+		0AD9743B1F45ECFC00211779 /* SupervisorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD9743A1F45ECFC00211779 /* SupervisorModel.swift */; };
+		0AD974411F460DC500211779 /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD974401F460DC500211779 /* EmailModel.swift */; };
+		0AD974431F460EE800211779 /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD974421F460EE700211779 /* Enroll.swift */; };
+		0ADBC43A1F3355E30076024A /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4391F3355E30076024A /* FormSection.swift */; };
+		0ADBC43C1F33563C0076024A /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43B1F33563C0076024A /* FormRow.swift */; };
+		0ADBC43E1F3366010076024A /* UserFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43D1F3366010076024A /* UserFormController.swift */; };
+		0ADBC4401F3399640076024A /* FormBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC43F1F3399640076024A /* FormBaseCell.swift */; };
+		0ADBC4421F339DEC0076024A /* FormTextFieldSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */; };
+		0ADBC4441F33A14A0076024A /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4431F33A14A0076024A /* Form.swift */; };
+		0ADBC4461F33B56A0076024A /* FormTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC4451F33B56A0076024A /* FormTitleCell.swift */; };
+		0ADBC44D1F33E0980076024A /* FormInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC44C1F33E0980076024A /* FormInfoCell.swift */; };
+		0ADF289D1F3652760065F8F0 /* FormSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF289B1F3652760065F8F0 /* FormSelector.swift */; };
+		0ADF289E1F3652760065F8F0 /* FormOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF289C1F3652760065F8F0 /* FormOptionsViewController.swift */; };
+		0ADF28A01F3661E30065F8F0 /* FormSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */; };
+		0AFEE2181F44D209005750E3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFEE2171F44D209005750E3 /* Logger.swift */; };
+		0AFF2A801F327D3C001F86BC /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF2A7F1F327D3C001F86BC /* FormViewController.swift */; };
 		7C32A180F0F5DFA060EAC1B1 /* Pods_flyve_mdm_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAC68FF736F900EF009264A /* Pods_flyve_mdm_ios.framework */; };
 		7CEAE2ACFFC6CCDECA155081 /* Pods_flyve_mdm_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */; };
 		9A71E74ED9754E3176FE358D /* Pods_flyve_mdm_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50FF8E40F91DB1B3A504C447 /* Pods_flyve_mdm_iosTests.framework */; };
@@ -48,35 +71,61 @@
 
 /* Begin PBXFileReference section */
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldCell.swift; sourceTree = "<group>"; };
+		0A25A68E1F3A44F900EBAFDD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
+		0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
+		0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
+		0A7B8D691F3B4B6F00795468 /* EnrollFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrollFormController.swift; sourceTree = "<group>"; };
 		0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizator.swift; sourceTree = "<group>"; };
 		0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Localizable.plist; sourceTree = "<group>"; };
 		0A87B6EC1F17CDD50038E5C3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Delay+Helper.swift"; sourceTree = "<group>"; };
 		0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalStorage+Helper.swift"; sourceTree = "<group>"; };
+		0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupervisorController.swift; sourceTree = "<group>"; };
+		0A884CA61F2FD628009B5925 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		0A92F8001EC3A840006397EC /* TopicLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicLogController.swift; sourceTree = "<group>"; };
 		0AAD05AA1F152C9700EB7372 /* UIColor+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Helper.swift"; sourceTree = "<group>"; };
 		0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlyveRouter.swift; sourceTree = "<group>"; };
 		0ABBB0491EC20D590018E2EF /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helper.swift"; sourceTree = "<group>"; };
-		0ABBB04E1EC38CC60018E2EF /* EnrollFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrollFormController.swift; sourceTree = "<group>"; };
 		0AC7632A1F1961C20050F17B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		0AD842741EBA5BF70093AC74 /* flyve-mdm-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "flyve-mdm-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD842771EBA5BF70093AC74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AD8427E1EBA5BF70093AC74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "flyve-mdm-ios/Assets.xcassets"; sourceTree = "<group>"; };
 		0AD842831EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842881EBA5BF70093AC74 /* flyve-mdm-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "flyve-mdm-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flyve_mdm_iosTests.swift; sourceTree = "<group>"; };
 		0AD8428E1EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842931EBA5BF70093AC74 /* flyve-mdm-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "flyve-mdm-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0AD842971EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flyve_mdm_iosUITests.swift; sourceTree = "<group>"; };
+		0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyveMDMAgentUITests.swift; sourceTree = "<group>"; };
 		0AD842991EBA5BF70093AC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD842A51EBA5D810093AC74 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0AD974381F45E66200211779 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		0AD9743A1F45ECFC00211779 /* SupervisorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupervisorModel.swift; sourceTree = "<group>"; };
+		0AD974401F460DC500211779 /* EmailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
+		0AD974421F460EE700211779 /* Enroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enroll.swift; sourceTree = "<group>"; };
+		0ADBC4391F3355E30076024A /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
+		0ADBC43B1F33563C0076024A /* FormRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRow.swift; sourceTree = "<group>"; };
+		0ADBC43D1F3366010076024A /* UserFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFormController.swift; sourceTree = "<group>"; };
+		0ADBC43F1F3399640076024A /* FormBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormBaseCell.swift; sourceTree = "<group>"; };
+		0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldSelectCell.swift; sourceTree = "<group>"; };
+		0ADBC4431F33A14A0076024A /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		0ADBC4451F33B56A0076024A /* FormTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTitleCell.swift; sourceTree = "<group>"; };
+		0ADBC44C1F33E0980076024A /* FormInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInfoCell.swift; sourceTree = "<group>"; };
+		0ADF289B1F3652760065F8F0 /* FormSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelector.swift; sourceTree = "<group>"; };
+		0ADF289C1F3652760065F8F0 /* FormOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormOptionsViewController.swift; sourceTree = "<group>"; };
+		0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelectorCell.swift; sourceTree = "<group>"; };
+		0AFEE2171F44D209005750E3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		0AFF2A7F1F327D3C001F86BC /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosUITests/Pods-flyve-mdm-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		50FF8E40F91DB1B3A504C447 /* Pods_flyve_mdm_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE80DEDFA827F068DE54FDA /* Pods-flyve-mdm-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosTests/Pods-flyve-mdm-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		745B6C7BE30D9C3D1F4136C1 /* Pods-flyve-mdm-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-ios/Pods-flyve-mdm-ios.release.xcconfig"; sourceTree = "<group>"; };
+		A9BFE62C40AB37A167C6EA76 /* Pods-flyve-mdm-iosTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosTests/Pods-flyve-mdm-iosTests.beta.xcconfig"; sourceTree = "<group>"; };
+		AC9DEB94E81531BBD1EBA3E5 /* Pods-flyve-mdm-iosUITests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosUITests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosUITests/Pods-flyve-mdm-iosUITests.beta.xcconfig"; sourceTree = "<group>"; };
 		ADAC68FF736F900EF009264A /* Pods_flyve_mdm_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55393FAD1039D7E95375E17 /* Pods-flyve-mdm-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-ios/Pods-flyve-mdm-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		D216E944B68F326146552F64 /* Pods-flyve-mdm-ios.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-ios.beta.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-ios/Pods-flyve-mdm-ios.beta.xcconfig"; sourceTree = "<group>"; };
 		F27C92C9D703B90352CB27C8 /* Pods-flyve-mdm-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosUITests/Pods-flyve-mdm-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3D6D8AF04109F05087C9D99 /* Pods-flyve-mdm-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flyve-mdm-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flyve-mdm-iosTests/Pods-flyve-mdm-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,7 +158,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A87B6F01F1817D50038E5C3 /* extensions */ = {
+		0A87B6F01F1817D50038E5C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0ABBB04C1EC22BE10018E2EF /* String+Helper.swift */,
@@ -117,7 +166,7 @@
 				0A87B6EE1F17FDEF0038E5C3 /* Delay+Helper.swift */,
 				0A87B6F11F1818120038E5C3 /* LocalStorage+Helper.swift */,
 			);
-			name = extensions;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		0AD8426B1EBA5BF70093AC74 = {
@@ -146,17 +195,15 @@
 		0AD842761EBA5BF70093AC74 /* flyve-mdm-ios */ = {
 			isa = PBXGroup;
 			children = (
-				0A87B6F01F1817D50038E5C3 /* extensions */,
-				0AC7632A1F1961C20050F17B /* Location.swift */,
-				0ABBB0491EC20D590018E2EF /* HttpRequest.swift */,
-				0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */,
-				0ABBB04E1EC38CC60018E2EF /* EnrollFormController.swift */,
-				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
-				0A87B6EC1F17CDD50038E5C3 /* MainController.swift */,
-				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
-				0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */,
-				0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */,
+				0AD974301F45E38100211779 /* Common */,
+				0A87B6F01F1817D50038E5C3 /* Extensions */,
+				0AD974311F45E3CD00211779 /* Networking */,
+				0AD974321F45E3F400211779 /* Routes */,
+				0AD974331F45E46C00211779 /* Models */,
+				0AD974341F45E47900211779 /* ViewModels */,
+				0AD974351F45E48900211779 /* Views */,
 				0AD842771EBA5BF70093AC74 /* AppDelegate.swift */,
+				0A7F4DB11F1D43FF00976EF4 /* Localizable.plist */,
 				0AD842831EBA5BF70093AC74 /* Info.plist */,
 			);
 			path = "flyve-mdm-ios";
@@ -165,7 +212,8 @@
 		0AD8428B1EBA5BF70093AC74 /* flyve-mdm-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				0AD8428C1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift */,
+				0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */,
+				0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */,
 				0AD8428E1EBA5BF70093AC74 /* Info.plist */,
 			);
 			path = "flyve-mdm-iosTests";
@@ -174,10 +222,138 @@
 		0AD842961EBA5BF70093AC74 /* flyve-mdm-iosUITests */ = {
 			isa = PBXGroup;
 			children = (
-				0AD842971EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift */,
+				0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */,
 				0AD842991EBA5BF70093AC74 /* Info.plist */,
 			);
 			path = "flyve-mdm-iosUITests";
+			sourceTree = "<group>";
+		};
+		0AD974301F45E38100211779 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0ADBC4471F33DDD30076024A /* Form */,
+				0A25A68E1F3A44F900EBAFDD /* Constants.swift */,
+				0A7F4DAF1F1D41A600976EF4 /* Localizator.swift */,
+				0AC7632A1F1961C20050F17B /* Location.swift */,
+				0AFEE2171F44D209005750E3 /* Logger.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		0AD974311F45E3CD00211779 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB0491EC20D590018E2EF /* HttpRequest.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		0AD974321F45E3F400211779 /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB0481EC20D590018E2EF /* FlyveRouter.swift */,
+			);
+			name = Routes;
+			sourceTree = "<group>";
+		};
+		0AD974331F45E46C00211779 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0AD974381F45E66200211779 /* UserModel.swift */,
+				0AD9743A1F45ECFC00211779 /* SupervisorModel.swift */,
+				0AD974401F460DC500211779 /* EmailModel.swift */,
+				0AD974421F460EE700211779 /* Enroll.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0AD974341F45E47900211779 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		0AD974351F45E48900211779 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0AD974361F45E4BB00211779 /* Main */,
+				0ADBC44A1F33DE460076024A /* Enroll */,
+				0ADBC4491F33DE200076024A /* User */,
+				0AD974371F45E4DA00211779 /* Supervisor */,
+				0ADBC44B1F33DE560076024A /* Logger */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0AD974361F45E4BB00211779 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0A87B6EC1F17CDD50038E5C3 /* MainController.swift */,
+				0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		0AD974371F45E4DA00211779 /* Supervisor */ = {
+			isa = PBXGroup;
+			children = (
+				0A884CA41F2F7EC0009B5925 /* SupervisorController.swift */,
+			);
+			name = Supervisor;
+			sourceTree = "<group>";
+		};
+		0ADBC4471F33DDD30076024A /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				0ADBC4481F33DDED0076024A /* Cell */,
+				0AFF2A7F1F327D3C001F86BC /* FormViewController.swift */,
+				0ADF289B1F3652760065F8F0 /* FormSelector.swift */,
+				0ADF289C1F3652760065F8F0 /* FormOptionsViewController.swift */,
+				0ADBC43B1F33563C0076024A /* FormRow.swift */,
+				0ADBC4391F3355E30076024A /* FormSection.swift */,
+				0ADBC4431F33A14A0076024A /* Form.swift */,
+			);
+			name = Form;
+			sourceTree = "<group>";
+		};
+		0ADBC4481F33DDED0076024A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0ADBC43F1F3399640076024A /* FormBaseCell.swift */,
+				0ADBC4451F33B56A0076024A /* FormTitleCell.swift */,
+				0ADBC44C1F33E0980076024A /* FormInfoCell.swift */,
+				0ADBC4411F339DEC0076024A /* FormTextFieldSelectCell.swift */,
+				0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */,
+				0ADF289F1F3661E30065F8F0 /* FormSelectorCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		0ADBC4491F33DE200076024A /* User */ = {
+			isa = PBXGroup;
+			children = (
+				0A884CA61F2FD628009B5925 /* UserController.swift */,
+				0ADBC43D1F3366010076024A /* UserFormController.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		0ADBC44A1F33DE460076024A /* Enroll */ = {
+			isa = PBXGroup;
+			children = (
+				0AD842A51EBA5D810093AC74 /* ViewController.swift */,
+				0A7B8D691F3B4B6F00795468 /* EnrollFormController.swift */,
+			);
+			name = Enroll;
+			sourceTree = "<group>";
+		};
+		0ADBC44B1F33DE560076024A /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				0A92F8001EC3A840006397EC /* TopicLogController.swift */,
+			);
+			name = Logger;
 			sourceTree = "<group>";
 		};
 		CDDF69B46AF40C6516B2C03F /* Frameworks */ = {
@@ -199,6 +375,9 @@
 				F3D6D8AF04109F05087C9D99 /* Pods-flyve-mdm-iosTests.release.xcconfig */,
 				F27C92C9D703B90352CB27C8 /* Pods-flyve-mdm-iosUITests.debug.xcconfig */,
 				2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */,
+				D216E944B68F326146552F64 /* Pods-flyve-mdm-ios.beta.xcconfig */,
+				A9BFE62C40AB37A167C6EA76 /* Pods-flyve-mdm-iosTests.beta.xcconfig */,
+				AC9DEB94E81531BBD1EBA3E5 /* Pods-flyve-mdm-iosUITests.beta.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -216,7 +395,7 @@
 				0AD842721EBA5BF70093AC74 /* Resources */,
 				3FC687D26254588C072242A5 /* [CP] Embed Pods Frameworks */,
 				D64A07C3C30A258797E27EB4 /* [CP] Copy Pods Resources */,
-				0A7959FA1F1CFE0700FB9724 /* ShellScript */,
+				0A5CFDE21F264DF300DAB2A1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -281,18 +460,17 @@
 				TargetAttributes = {
 					0AD842731EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = G3UM9C856M;
+						DevelopmentTeam = H7XJV96LX2;
 						ProvisioningStyle = Manual;
 					};
 					0AD842871EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = G3UM9C856M;
+						DevelopmentTeam = H7XJV96LX2;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0AD842731EBA5BF70093AC74;
 					};
 					0AD842921EBA5BF70093AC74 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = G3UM9C856M;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0AD842731EBA5BF70093AC74;
 					};
@@ -345,7 +523,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A7959FA1F1CFE0700FB9724 /* ShellScript */ = {
+		0A5CFDE21F264DF300DAB2A1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -356,7 +534,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		3BF0081A4AFAC5856E808A44 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -500,19 +678,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AFEE2181F44D209005750E3 /* Logger.swift in Sources */,
+				0ADBC4421F339DEC0076024A /* FormTextFieldSelectCell.swift in Sources */,
+				0ADF289E1F3652760065F8F0 /* FormOptionsViewController.swift in Sources */,
+				0ADF289D1F3652760065F8F0 /* FormSelector.swift in Sources */,
+				0AD9743B1F45ECFC00211779 /* SupervisorModel.swift in Sources */,
+				0AD974391F45E66200211779 /* UserModel.swift in Sources */,
+				0A884CA71F2FD628009B5925 /* UserController.swift in Sources */,
 				0A87B6F21F1818120038E5C3 /* LocalStorage+Helper.swift in Sources */,
+				0ADBC43A1F3355E30076024A /* FormSection.swift in Sources */,
+				0A884CA51F2F7EC0009B5925 /* SupervisorController.swift in Sources */,
+				0ADBC4401F3399640076024A /* FormBaseCell.swift in Sources */,
+				0ADF28A01F3661E30065F8F0 /* FormSelectorCell.swift in Sources */,
+				0ADBC43E1F3366010076024A /* UserFormController.swift in Sources */,
 				0ABBB04A1EC20D590018E2EF /* FlyveRouter.swift in Sources */,
+				0AD974411F460DC500211779 /* EmailModel.swift in Sources */,
+				0ADBC4441F33A14A0076024A /* Form.swift in Sources */,
+				0ADBC4461F33B56A0076024A /* FormTitleCell.swift in Sources */,
 				0ABBB04B1EC20D590018E2EF /* HttpRequest.swift in Sources */,
-				0ABBB04F1EC38CC60018E2EF /* EnrollFormController.swift in Sources */,
+				0A25A68D1F39FD9200EBAFDD /* FormTextFieldCell.swift in Sources */,
 				0AD842A61EBA5D810093AC74 /* ViewController.swift in Sources */,
 				0A87B6ED1F17CDD50038E5C3 /* MainController.swift in Sources */,
 				0AD842781EBA5BF70093AC74 /* AppDelegate.swift in Sources */,
+				0AFF2A801F327D3C001F86BC /* FormViewController.swift in Sources */,
+				0ADBC44D1F33E0980076024A /* FormInfoCell.swift in Sources */,
 				0ABBB04D1EC22BE10018E2EF /* String+Helper.swift in Sources */,
+				0A7B8D6A1F3B4B6F00795468 /* EnrollFormController.swift in Sources */,
+				0A25A68F1F3A44F900EBAFDD /* Constants.swift in Sources */,
+				0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */,
 				0A87B6EF1F17FDEF0038E5C3 /* Delay+Helper.swift in Sources */,
+				0ADBC43C1F33563C0076024A /* FormRow.swift in Sources */,
 				0A92F8011EC3A840006397EC /* TopicLogController.swift in Sources */,
 				0AC7632B1F1961C20050F17B /* Location.swift in Sources */,
 				0A7F4DB01F1D41A600976EF4 /* Localizator.swift in Sources */,
 				0AAD05AB1F152C9700EB7372 /* UIColor+Helper.swift in Sources */,
+				0AD974431F460EE800211779 /* Enroll.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,7 +720,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AD8428D1EBA5BF70093AC74 /* flyve_mdm_iosTests.swift in Sources */,
+				0A5CFDEE1F266F9C00DAB2A1 /* StringHelperTests.swift in Sources */,
+				0A5CFDF01F26743500DAB2A1 /* LocalStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +729,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AD842981EBA5BF70093AC74 /* flyve_mdm_iosUITests.swift in Sources */,
+				0AD842981EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,7 +790,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -633,7 +834,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -645,17 +846,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C55393FAD1039D7E95375E17 /* Pods-flyve-mdm-ios.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				BUNDLE_ID_SUFFIX = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hector Rondon (CGMTZ2E3ZW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hector Rondon (CGMTZ2E3ZW)";
+				DEVELOPMENT_TEAM = H7XJV96LX2;
 				INFOPLIST_FILE = "flyve-mdm-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent.example;
+				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2718c8e-8201-4536-a3d5-b76b6634e350";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent.example";
+				PROVISIONING_PROFILE = "fe69d498-dd35-4cb0-9206-6c86e4a3d7b0";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Development: org.flyve.mdm.agent";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -664,17 +867,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 745B6C7BE30D9C3D1F4136C1 /* Pods-flyve-mdm-ios.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				DEVELOPMENT_TEAM = H7XJV96LX2;
 				INFOPLIST_FILE = "flyve-mdm-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent.example;
+				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2718c8e-8201-4536-a3d5-b76b6634e350";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent.example";
+				PROVISIONING_PROFILE = "8c1204ed-f44e-4c66-8465-116dd1319952";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -685,7 +890,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				DEVELOPMENT_TEAM = H7XJV96LX2;
 				INFOPLIST_FILE = "flyve-mdm-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosTests";
@@ -701,7 +906,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				DEVELOPMENT_TEAM = H7XJV96LX2;
 				INFOPLIST_FILE = "flyve-mdm-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosTests";
@@ -716,11 +921,13 @@
 			baseConfigurationReference = F27C92C9D703B90352CB27C8 /* Pods-flyve-mdm-iosUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "flyve-mdm-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "flyve-mdm-ios";
 			};
@@ -731,15 +938,114 @@
 			baseConfigurationReference = 2B0645AB297D7BB92253E0F7 /* Pods-flyve-mdm-iosUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = G3UM9C856M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "flyve-mdm-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "flyve-mdm-ios";
 			};
 			name = Release;
+		};
+		0AFE0EBE1F5729440045F35B /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Beta;
+		};
+		0AFE0EBF1F5729440045F35B /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D216E944B68F326146552F64 /* Pods-flyve-mdm-ios.beta.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = .beta;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = H7XJV96LX2;
+				INFOPLIST_FILE = "flyve-mdm-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.flyve.mdm.agent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8c1204ed-f44e-4c66-8465-116dd1319952";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: org.flyve.mdm.agent";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Beta;
+		};
+		0AFE0EC01F5729440045F35B /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9BFE62C40AB37A167C6EA76 /* Pods-flyve-mdm-iosTests.beta.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = H7XJV96LX2;
+				INFOPLIST_FILE = "flyve-mdm-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flyve-mdm-ios.app/flyve-mdm-ios";
+			};
+			name = Beta;
+		};
+		0AFE0EC11F5729440045F35B /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC9DEB94E81531BBD1EBA3E5 /* Pods-flyve-mdm-iosUITests.beta.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "flyve-mdm-iosUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teclib.flyve-mdm-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "flyve-mdm-ios";
+			};
+			name = Beta;
 		};
 /* End XCBuildConfiguration section */
 
@@ -749,6 +1055,7 @@
 			buildConfigurations = (
 				0AD8429A1EBA5BF70093AC74 /* Debug */,
 				0AD8429B1EBA5BF70093AC74 /* Release */,
+				0AFE0EBE1F5729440045F35B /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -758,6 +1065,7 @@
 			buildConfigurations = (
 				0AD8429D1EBA5BF70093AC74 /* Debug */,
 				0AD8429E1EBA5BF70093AC74 /* Release */,
+				0AFE0EBF1F5729440045F35B /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -767,6 +1075,7 @@
 			buildConfigurations = (
 				0AD842A01EBA5BF70093AC74 /* Debug */,
 				0AD842A11EBA5BF70093AC74 /* Release */,
+				0AFE0EC01F5729440045F35B /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -776,6 +1085,7 @@
 			buildConfigurations = (
 				0AD842A31EBA5BF70093AC74 /* Debug */,
 				0AD842A41EBA5BF70093AC74 /* Release */,
+				0AFE0EC11F5729440045F35B /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

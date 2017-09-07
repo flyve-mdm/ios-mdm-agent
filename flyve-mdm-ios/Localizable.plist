@@ -5,7 +5,7 @@
 	<key>app_name</key>
 	<string>Flyve MDM Agent</string>
 	<key>message_init</key>
-	<string>FLYVE MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console</string>
+	<string>Flyve MDM is a Mobile management software that enables you to secure and manage all  the mobile devices  of your business or family via a web-based console</string>
 	<key>enroll</key>
 	<string>Enroll</string>
 	<key>enroll_device</key>
@@ -44,5 +44,25 @@
 	<string>First name</string>
 	<key>last_name</key>
 	<string>Last name</string>
+	<key>done</key>
+	<string>Done</string>
+	<key>cancel</key>
+	<string>Cancel</string>
+	<key>edit_user</key>
+	<string>Edit user</string>
+	<key>enrollment</key>
+	<string>Enrollment</string>
+	<key>share</key>
+	<string>Share</string>
+	<key>edit</key>
+	<string>Edit</string>
+	<key>admin_number</key>
+	<string>Administrative number</string>
+	<key>current_password</key>
+	<string>Current password</string>
+	<key>new_password</key>
+	<string>New password</string>
+	<key>confirm_password</key>
+	<string>Confirm password</string>
 </dict>
 </plist>

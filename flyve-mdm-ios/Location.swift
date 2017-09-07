@@ -18,9 +18,9 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      14/07/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
@@ -28,24 +28,26 @@
 import Foundation
 import CoreLocation
 
-protocol LocationDelegate {
-    
+/// LocationDelegate protocol
+protocol LocationDelegate: class {
+    /// current location
     func currentLocation(coordinate: CLLocationCoordinate2D)
 }
 
+/// Location class
 class Location: NSObject {
-    
-    var delegate: LocationDelegate?
+    /// location delegate
+    weak var delegate: LocationDelegate?
+    /// locationManager
     let locationManager = CLLocationManager()
-
 }
 
+// MARK: extension
 extension Location: CLLocationManagerDelegate {
     
+    /// request current location
     func getCurrentLocation() {
-        
         if CLLocationManager.locationServicesEnabled() {
-            
             locationManager.delegate = self
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
@@ -54,13 +56,12 @@ extension Location: CLLocationManagerDelegate {
         }
     }
     
+    /// update current location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations.first?.coordinate.latitude ?? "")
-        print(locations.first?.coordinate.longitude ?? "")
-        
+
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
-        
+
         if let coordinate = locations.first?.coordinate {
             delegate?.currentLocation(coordinate: coordinate)
         }

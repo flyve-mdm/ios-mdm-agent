@@ -18,36 +18,47 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      13/07/17
- * @copyright   Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
 
 import Foundation
 
+/**
+ Get AnyObject from local storage
+ 
+ - parameter key: key value
+ - return: key value as AnyObject stored in UserDefaults
+ */
 public func getStorage(key: String) -> AnyObject? {
-    
+
     if let obj = UserDefaults.standard.object(forKey: key) {
-        
-        return NSKeyedUnarchiver.unarchiveObject(with: obj as! Data) as AnyObject
-        
+        return NSKeyedUnarchiver.unarchiveObject(with: obj as? Data ?? Data()) as AnyObject
+
     } else {
-        
         return nil
     }
 }
 
+/**
+ Save AnyObject in local storage
+ 
+ - parameter key: key value
+ */
 public func setStorage(value: AnyObject, key: String) {
-    
+
     let encodedData = NSKeyedArchiver.archivedData(withRootObject: value)
     UserDefaults.standard.set(encodedData, forKey: key)
     UserDefaults.standard.synchronize()
 }
 
+/**
+ Remove all objects in local storage
+ */
 public func removeAllStorage() {
-    
     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
     UserDefaults.standard.synchronize()
 }

@@ -20,7 +20,7 @@
  * @date      13/07/17
  * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
@@ -28,83 +28,49 @@
 import UIKit
 import CocoaMQTT
 import CoreLocation
+import FlyveMDMInventory
+import FileExplorer
 
+/// MainController class
 class MainController: UIViewController {
     
+    // MARK: Properties
+    /// `mqtt`
     var mqtt: CocoaMQTT?
-    var userInfo = [String: String]()
+    /// `httpRequest`
+    var httpRequest: HttpRequest?
+    /// `userInfo`
+    var userInfo: UserModel!
+    /// `enrollInfo`
+    var enrollInfo: EnrollModel!
+    /// `mdmAgent`
     var mdmAgent = [String: Any]()
+    /// `supervisor`
+    var supervisor: SupervisorModel!
+    /// `topic`
     var topic = ""
+    /// `cellId`
     let cellId = "cellId"
-    var location:Location!
+    /// `location`
+    var location: Location!
+    /// `isAdmin`
+    var isAdmin = false
+    /// `deployFile`
+    var deployFile = [AnyObject]()
+    /// `removeFile`
+    var removeFile = [AnyObject]()
     
-    init(mdmAgent: [String: Any]) {
-        
-        self.mdmAgent = mdmAgent
-        
-        if let topic = mdmAgent["topic"] as? String {
-            self.topic = topic
-        }
-        
-        if let dataUserObject = getStorage(key: "dataUser") as? [String: String] {
-            userInfo = dataUserObject
-        }
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func loadView() {
-        super.loadView()
-
-        setupViews()
-        addConstraints()
-        
-        if let broker = mdmAgent["broker"] as? String,
-            let port = mdmAgent["port"] as? UInt16,
-            let user = userInfo["_serial"],
-            let password = mdmAgent["mqttpasswd"] as? String,
-            !broker.isEmpty, !user.isEmpty, !password.isEmpty {
-            
-            connectBroker(host: broker, port: port, user: user, password: password)
-        
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
-    func setupViews() {
-        
-        view.backgroundColor = .background
-        view.addSubview(logoImageView)
-        view.addSubview(mainTableView)
-
-    }
-    
-    func addConstraints() {
-        
-        logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 72).isActive = true
-        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        mainTableView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48).isActive = true
-        mainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        mainTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        mainTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    }
-    
-    let logoImageView: UIImageView = {
+    lazy var logoImageView: UIImageView = {
         
         let imageView = UIImageView(image: UIImage(named: "logo"))
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        
+        let multiTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showLog))
+        multiTap.numberOfTapsRequired = 10
+        imageView.addGestureRecognizer(multiTap)
         
         return imageView
     }()
@@ -112,7 +78,6 @@ class MainController: UIViewController {
     lazy var mainTableView: UITableView = {
         
         let table = UITableView(frame: .zero, style: .plain)
-        
         table.delegate = self
         table.dataSource = self
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -121,122 +86,339 @@ class MainController: UIViewController {
         table.tableFooterView = UIView()
         table.rowHeight = UITableViewAutomaticDimension
         table.estimatedRowHeight = 100
-        
         table.register(MainCell.self, forCellReuseIdentifier: self.cellId)
         
         return table
-        
     }()
     
+    let loadingIndicatorView: UIActivityIndicatorView = {
+        
+        let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.hidesWhenStopped = true
+        
+        return loading
+    }()
+    
+    let statusView: UIView = {
+        
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 5.0
+        view.backgroundColor = .clear
+        
+        return view
+    }()
+
+    // MARK: Init
+    /// init method
+    init(mdmAgent: [String: Any]) {
+
+        self.mdmAgent = mdmAgent
+
+        if let topic = mdmAgent["topic"] as? String {
+            self.topic = topic
+        }
+        
+        // get enroll information
+        if let dataEnrollObject = getStorage(key: "enroll") as? EnrollModel {
+            enrollInfo = dataEnrollObject
+        }
+        
+        // get user information
+        if let dataUserObject = getStorage(key: "dataUser") as? UserModel {
+            userInfo = dataUserObject
+        }
+        
+        // get supervisor information
+        if let supervisorObject = getStorage(key: "supervisor") as? SupervisorModel {
+            supervisor = supervisorObject
+        }
+        isAdmin = UserDefaults.standard.bool(forKey: "admin")
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    /// init method
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    /// `override loadView()`
+    override func loadView() {
+        super.loadView()
+        
+        // alow receive notify when user edit
+        let notificationData = NotificationCenter.default
+        notificationData.addObserver(self, selector: #selector(self.editUser), name: NSNotification.Name(rawValue: "editUser"), object: nil)
+
+        setupViews()
+        addConstraints()
+
+        if let broker = mdmAgent["broker"] as? String,
+            let port = mdmAgent["port"] as? UInt16,
+            let password = mdmAgent["mqttpasswd"] as? String,
+            !broker.isEmpty, !enrollInfo.serial.isEmpty, !password.isEmpty {
+
+            connectBroker(host: broker, port: port, user: enrollInfo.serial, password: password)
+        }
+    }
+    
+    /// `override viewWillAppear(_ animated: Bool)`
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    /// `setupViews()`
+    func setupViews() {
+
+        view.backgroundColor = .background
+        view.addSubview(statusView)
+        statusView.addSubview(loadingIndicatorView)
+        view.addSubview(logoImageView)
+        view.addSubview(mainTableView)
+    }
+
+    /// `addConstraints()`
+    func addConstraints() {
+
+        statusView.topAnchor.constraint(equalTo: view.topAnchor, constant: 22.0).isActive = true
+        statusView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -14.0).isActive = true
+        statusView.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        statusView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+
+        loadingIndicatorView.centerXAnchor.constraint(equalTo: statusView.centerXAnchor).isActive = true
+        loadingIndicatorView.centerYAnchor.constraint(equalTo: statusView.centerYAnchor).isActive = true
+        loadingIndicatorView.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        loadingIndicatorView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+
+        logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 72).isActive = true
+        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        mainTableView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48).isActive = true
+        mainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        mainTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        mainTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    }
+    
+    // MARK: Methods
+    /// show logger option in list
+    func showLog() {
+        UserDefaults.standard.set(!isAdmin, forKey: "admin")
+        UserDefaults.standard.synchronize()
+        isAdmin = !isAdmin
+        mainTableView.reloadData()
+    }
+    
+    /// Open legger screen
     func goLogController() {
         navigationController?.pushViewController(TopicLogController(), animated: true)
     }
     
+    /// Go to enrollment screen
     func goEnrollmentController() {
         UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: ViewController(userToken: "", invitationToken: ""))
     }
+    
+    /// Open file explorer screen
+    func goFileExplorerController() {
+        let fileExplorer = FileExplorerViewController()
+        fileExplorer.canRemoveFiles = false
+        fileExplorer.canRemoveDirectories = false
+        
+        self.present(fileExplorer, animated: true, completion: nil)
+    }
+    
+    /// Open user information
+    func goUserController() {
+        self.present(UINavigationController(rootViewController: UserController()), animated: true, completion: nil)
+    }
+    
+    /// Receive notification from user edit
+    func editUser() {
+        
+        if let dataUserObject = getStorage(key: "dataUser") as? UserModel {
+            userInfo = dataUserObject
+            
+            mainTableView.beginUpdates()
+            mainTableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            mainTableView.endUpdates()
+        }
+    }
+    
+    /// Open supervisor screen
+    func goSupervisorController() {
+        self.present(UINavigationController(rootViewController: SupervisorController()), animated: true, completion: nil)
+    }
 }
 
+// MARK: UITableViewDelegate
 extension MainController: UITableViewDelegate {
 
 }
 
+// MARK: UITableViewDataSource
 extension MainController: UITableViewDataSource {
 
+    /**
+     override `numberOfRowsInSection` from super class, get number of row in sections
+     
+     - return: number of row in sections
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 4
+
+        if isAdmin {
+            return 4
+        } else {
+            return 3
+        }
     }
 
+    /**
+     override `cellForRowAt` from super class, Asks the data source for a cell to insert in a particular location of the table view
+     
+     - return: `UITableViewCell`
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! MainCell
-        
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as? MainCell
+
         if indexPath.row == 0 {
-            cell.titleLabel.text = "title_ supervised".localized.uppercased()
-            
+            cell?.titleLabel.text = "title_ supervised".localized.uppercased()
+            cell?.descriptionLabel.text = supervisor.name
+            cell?.detailLabel.text = supervisor.email
+            cell?.openBotton.addTarget(self, action: #selector(self.goSupervisorController), for: .touchUpInside)
+
         } else if indexPath.row == 1 {
-            cell.titleLabel.text = "title_user".localized.uppercased()
-            cell.descriptionLabel.text = "\(userInfo["firstname"] ?? "") \(userInfo["lastname"] ?? "")"
-            cell.detailLabel.text = "\(userInfo["_email"] ?? "Email")"
+            cell?.photoImageView.image = userInfo.picture
+            cell?.titleLabel.text = "title_user".localized.uppercased()
+            cell?.descriptionLabel.text = "\(userInfo.firstName) \(userInfo.lastName)"
             
+            if userInfo.emails.count > 0 {
+                cell?.detailLabel.text = userInfo.emails.first?.email
+            }
+
+            cell?.openBotton.addTarget(self, action: #selector(self.goUserController), for: .touchUpInside)
+
         } else if indexPath.row == 2 {
-            cell.titleLabel.text = "title_resources".uppercased()
-            
+            cell?.titleLabel.text = "title_resources".localized.uppercased()
+            cell?.openBotton.addTarget(self, action: #selector(self.goFileExplorerController), for: .touchUpInside)
+
         } else if indexPath.row == 3 {
-            cell.titleLabel.text = "log_report".localized.uppercased()
-            cell.openBotton.addTarget(self, action: #selector(self.goLogController), for: .touchUpInside)
-            
+            cell?.titleLabel.text = "log_report".localized.uppercased()
+            cell?.openBotton.addTarget(self, action: #selector(self.goLogController), for: .touchUpInside)
         }
 
-        return cell
+        return cell!
     }
 }
 
+// MARK: CocoaMQTTDelegate
 extension MainController: CocoaMQTTDelegate {
     
+    /**
+     Connect with MQTT broker
+     
+     - parameter host: hostname
+     - parameter port: port number
+     - parameter username: user of connection
+     - parameter password: password of connection
+     */
     func connectBroker(host: String, port: UInt16, user: String, password: String) {
-        
+
         self.mqttSetting(host: host, port: port, username: user, password: "\(password)")
-        
         self.mqtt!.connect()
+
+        loadingIndicatorView.startAnimating()
+        statusView.backgroundColor = .clear
     }
     
+    /**
+     Setup connection with MQTT broker
+     
+     - parameter host: hostname
+     - parameter port: port number
+     - parameter username: user of connection
+     - parameter password: password of connection
+     */
     func mqttSetting(host: String, port: UInt16, username: String, password: String) {
-
+        
+        let message = "{ online: false }"
+        let willMessage = CocoaMQTTWill(topic: "\(topic)/Status/Online", message: message)
+        willMessage.qos = .qos0
+        willMessage.retained = false
+        
         mqtt = CocoaMQTT(clientID: username, host: host, port: port)
         mqtt!.username = username
         mqtt!.password = password
-        mqtt!.willMessage = CocoaMQTTWill(topic: "/offline", message: "offline")
+        mqtt!.willMessage = willMessage
         mqtt!.keepAlive = 60
         mqtt!.delegate = self
         mqtt!.enableSSL = true
-
+        mqtt!.autoReconnect = true
     }
     
+    /// `completionHandler`
     func mqtt(_ mqtt: CocoaMQTT, didReceive trust: SecTrust, completionHandler: @escaping (Bool) -> Void) {
 
         completionHandler(true)
     }
     
+    /// `didConnect`
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
         print("didConnect \(host):\(port)")
     }
     
+    /// `didConnectAck`
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         print("didConnectAck: \(ack)，rawValue: \(ack.rawValue)")
-        
+
         if ack == .accept {
-            
             mqtt.subscribe("\(topic)/#", qos: CocoaMQTTQOS.qos1)
+            mqtt.subscribe("/FlyvemdmManifest/Status/Version", qos: CocoaMQTTQOS.qos1)
             print("Subscribed to topic \(String(describing: topic))/#")
+        }
+
+        loadingIndicatorView.stopAnimating()
+
+        if mqtt.connState == .connected {
+            statusView.backgroundColor = .green
+
+        } else {
+            statusView.backgroundColor = .red
         }
     }
     
+    /// `didPublishMessage`
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
         print("didPublishMessage with message: \(String(describing: message.string!))")
     }
     
+    /// `didPublishAck`
     func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
         print("didPublishAck with id: \(id)")
     }
-    
+
+    /// `didReceiveMessage`
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
-        
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
         NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
         
-        var messageBroker: [String: String]? = [String: String]()
-        
+        if message.topic == "/FlyvemdmManifest/Status/Version" {
+            setStorage(value: message.string as AnyObject, key: "manifest")
+        }
+
+        var messageBroker: [String: AnyObject]? = [String: AnyObject]()
+
         if let data = message.string?.data(using: .utf8) {
             do {
-                messageBroker = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
-                //(with: data, options: []) as? [String: Any])
+                messageBroker = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
             } catch {
                 print(error.localizedDescription)
             }
-            print(messageBroker ?? "Empty")
-            if let messageQuery: String = messageBroker?["query"] {
+
+            if let messageQuery: String = messageBroker?["query"] as? String {
                 if messageQuery == "Ping" {
                     replyPing()
 
@@ -244,20 +426,37 @@ extension MainController: CocoaMQTTDelegate {
                     location = Location()
                     location.delegate = self
                     location.getCurrentLocation()
+                    
+                } else if messageQuery == "Inventory" {
+                    replyInventory()
                 }
-            } else if let messageUnenroll: String = messageBroker?["unenroll"] {
+            } else if let messageUnenroll: String = messageBroker?["unenroll"] as? String {
                 if messageUnenroll == "now" {
                     replyUnenroll()
+                }
+            } else if let messageSubscribe: [AnyObject] = messageBroker?["subscribe"] as? [AnyObject] {
+                
+                if messageSubscribe.count > 0 {
+                    if let fleet = messageSubscribe[0]["topic"] as? String {
+                        subscribeFleet(fleet)
+                    }
+                }
+            } else if let messageFile: [AnyObject] = messageBroker?["file"] as? [AnyObject] {
+                
+                if messageFile.count > 0 {
+                    fileManage(messageFile)
                 }
             }
         }
     }
     
+    /// Response to ping
     func replyPing() {
         let topicPing = "\(topic)/Status/Ping"
         mqtt?.publish(topicPing, withString: "!")
     }
     
+    /// Response to unenroll device
     func replyUnenroll() {
         let topicUnenroll = "\(topic)/Status/Unenroll"
         let answer = "{\"unenroll\": \"unenrolled\"}"
@@ -267,167 +466,183 @@ extension MainController: CocoaMQTTDelegate {
         goEnrollmentController()
     }
     
+    /// Response the geolacate
     func replyGeolocate(latitude: Double, longitude: Double, datetime: Int) {
         let topicGeolocation = "\(topic)/Status/Geolocation"
         let answer = "{\"latitude\":\(latitude),\"longitude\":\(longitude),\"datetime\":\(datetime)}"
         mqtt?.publish(topicGeolocation, withString: answer)
     }
     
+    /// Send inventory to broker
+    func replyInventory() {
+        let inventory = InventoryTask()
+        inventory.execute(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "") { result in
+            
+            let topicInventory = "\(topic)/Status/Inventory"
+            mqtt?.publish(topicInventory, withString: result)
+        }
+    }
+    
+    /// subscribe agent to fleet
+    func subscribeFleet(_ fleet: String) {
+        mqtt!.subscribe("\(fleet)/#", qos: CocoaMQTTQOS.qos1)
+        print("Subscribed to topic \(String(describing: fleet))/#")
+    }
+    
+    /**
+     Set file manage variables
+     
+     - parameter files: an JSON of files availables
+     */
+    func fileManage(_ files: [AnyObject]) {
+        
+        deployFile = files.filter {
+            if (($0 as? [String: String] ?? [String: String]())["deployFile"]) != nil {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        removeFile = files.filter {
+            if (($0 as? [String: String] ?? [String: String]())["removeFile"]) != nil {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        if deployFile.count > 0 {
+            if let deeplink = getStorage(key: "deeplink") as? DeepLinkModel {
+                httpRequest = HttpRequest()
+                httpRequest?.requestInitSession(userToken: deeplink.userToken)
+                httpRequest?.delegate = self
+            }
+        }
+
+        for file in removeFile {
+            removeFileFleet(file as? [String : String])
+        }
+    }
+    
+    /**
+     Remove file from device
+     
+     - parameter file: object file to remove from device
+     */
+    func removeFileFleet(_ file: [String: String]?) {
+        
+        guard let fileName = file?["removeFile"]?.replacingOccurrences(of: "%DOCUMENTS%/", with: "") else {
+            return
+        }
+        
+        let fileManager = FileManager.default
+        
+        if let documentsPath =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
+            
+            do {
+                let filePathName = "\(documentsPath)/\(fileName)"
+                try fileManager.removeItem(atPath: filePathName)
+                
+            } catch {
+                print("Could not delete file: \(error)")
+            }
+        }
+    }
+
+    /// `didSubscribeTopic`
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
         print("didSubscribeTopic to \(topic)")
     }
-    
+
+    /// `didUnsubscribeTopic`
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
         print("didUnsubscribeTopic to \(topic)")
     }
-    
+
+    /// `mqttDidPing(_ mqtt: CocoaMQTT)`
     func mqttDidPing(_ mqtt: CocoaMQTT) {
         print("didPing")
     }
-    
+
+    /// `mqttDidReceivePong(_ mqtt: CocoaMQTT)`
     func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
         print("didReceivePong")
     }
     
+    /// `mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?)`
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("mqttDidDisconnect")
+        statusView.backgroundColor = .red
     }
 }
 
+// MARK: HttpRequestDelegate
+extension MainController: HttpRequestDelegate {
+    
+    /// `responseInitSession`
+    func responseInitSession(data: [String: AnyObject]) {
+        
+        if let session_token = data["session_token"] as? String {
+            SESSION_TOKEN = session_token
+            httpRequest?.requestGetFullSession()
+        }
+    }
+    
+    /// `errorInitSession`
+    func errorInitSession(error: [String: String]) {
+        Logger.log(message: error["message"] ?? "", type: .error)
+    }
+    
+    /// `responseGetFullSession`
+    func responseGetFullSession(data: [String: AnyObject]) {
+        
+        if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
+            
+            if profiles_id == guest_profiles_id {
+                httpRequest?.requestChangeActiveProfile(profilesID: "\(profiles_id)")
+                
+            } else {
+                print("Error: Change active profile")
+            }
+        } else {
+            print("Error: Change active profile")
+        }
+    }
+    
+    /// `errorGetFullSession`
+    func errorGetFullSession(error: [String: String]) {
+        Logger.log(message: error["message"] ?? "", type: .error)
+    }
+    
+    /// `responseChangeActiveProfile`
+    func responseChangeActiveProfile() {
+        
+        for files in deployFile {
+            
+            if let fileID = files["id"] as? String {
+                DispatchQueue.global(qos: .background).async { [weak self] () -> Void in
+                    self?.httpRequest?.requestPluginFlyvemdmFile(fileID: fileID)
+                }
+            }
+        }
+    }
+    
+    /// `errorChangeActiveProfile`
+    func errorChangeActiveProfile(error: [String: String]) {
+        Logger.log(message: error["message"] ?? "", type: .error)
+    }
+}
+
+// MARK: LocationDelegate
 extension MainController: LocationDelegate {
     
+    /// Response current location
     func currentLocation(coordinate: CLLocationCoordinate2D) {
-        
+
         let date = Date()
         let datetime = Int(date.timeIntervalSince1970/1000)
-        
+
         replyGeolocate(latitude: coordinate.latitude, longitude: coordinate.longitude, datetime: datetime)
     }
-}
-
-class MainCell: UITableViewCell {
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
-    {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        selectionStyle = UITableViewCellSelectionStyle.none
-        backgroundColor = .clear
-        setupView()
-        addConstraints()
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
-    func setupView() {
-        
-        contentView.addSubview(lineView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(photoImageView)
-        contentView.addSubview(descriptionLabel)
-        contentView.addSubview(detailLabel)
-        contentView.addSubview(openBotton)
-    }
-    
-    func addConstraints() {
-        
-        lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        lineView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        lineView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        lineView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
-        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        
-        photoImageView.widthAnchor.constraint(equalToConstant: 80.0).isActive = true
-        photoImageView.heightAnchor.constraint(equalToConstant: 80.0).isActive = true
-        photoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
-        photoImageView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: -16).isActive = true
-        photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32).isActive = true
-        
-        descriptionLabel.bottomAnchor.constraint(equalTo: photoImageView.centerYAnchor).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: 16).isActive = true
-        
-        detailLabel.topAnchor.constraint(equalTo: photoImageView.centerYAnchor).isActive = true
-        detailLabel.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: 16).isActive = true
-        
-        openBotton.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor).isActive = true
-        openBotton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-    }
-    
-    let lineView: UIView = {
-        
-        let line = UIView()
-        
-        line.translatesAutoresizingMaskIntoConstraints = false
-        line.backgroundColor = .gray
-        
-        return line
-    }()
-    
-    let photoImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .white
-        imageView.autoresizingMask = [.flexibleWidth,
-                                      .flexibleHeight]
-        imageView.clipsToBounds = true
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.cornerRadius = 10
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        
-        return imageView
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightRegular)
-        
-        return label
-    }()
-    
-    let descriptionLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)
-        
-        return label
-    }()
-    
-    let detailLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightThin)
-        
-        return label
-    }()
-    
-    lazy var openBotton: UIButton = {
-        
-        let button = UIButton(type: UIButtonType.system)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("open".localized.uppercased(), for: .normal)
-        
-        return button
-    }()
 }

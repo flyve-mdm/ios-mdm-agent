@@ -20,7 +20,7 @@
  * @date      05/05/17
  * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://.flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
@@ -28,29 +28,50 @@
 import Foundation
 import Alamofire
 
+/// HttpRequestDelegate protocol
 @objc protocol HttpRequestDelegate {
+    /// `responseInitSession`
     @objc optional func responseInitSession(data: [String: AnyObject])
+    /// `errorInitSession`
     @objc optional func errorInitSession(error: [String: String])
-    
+
+    /// `responseGetFullSession`
     @objc optional func responseGetFullSession(data: [String: AnyObject])
+    /// `errorGetFullSession`
     @objc optional func errorGetFullSession(error: [String: String])
-    
+
+    /// `responseChangeActiveProfile`
     @objc optional func responseChangeActiveProfile()
+    /// `errorChangeActiveProfile`
     @objc optional func errorChangeActiveProfile(error: [String: String])
-    
+
+    /// `responsePluginFlyvemdmAgent`
     @objc optional func responsePluginFlyvemdmAgent(data: [String: AnyObject])
+    /// `errorPluginFlyvemdmAgent`
     @objc optional func errorPluginFlyvemdmAgent(error: [String: String])
-    
+
+    /// `responseGetPluginFlyvemdmAgent`
     @objc optional func responseGetPluginFlyvemdmAgent(data: [String: AnyObject])
+    /// `errorGetPluginFlyvemdmAgent`
     @objc optional func errorGetPluginFlyvemdmAgent(error: [String: String])
+    
+    /// `responsePluginFlyvemdmEntityConfig`
+    @objc optional func responsePluginFlyvemdmEntityConfig(data: [String: AnyObject])
+    /// `errorPluginFlyvemdmEntityConfig`
+    @objc optional func errorPluginFlyvemdmEntityConfig(error: [String: String])
 }
 
+/// HttpRequest class
 class HttpRequest: NSObject {
+
+    weak var delegate: HttpRequestDelegate?
     
-    var delegate: HttpRequestDelegate?
-    
+    /**
+     Request a session token to uses other api endpoints.
+     - parameter: user token
+     */
     func requestInitSession(userToken: String) {
-        
+
         let request = Alamofire.request(FlyveRouter.initSession(userToken))
             .validate()
             .responseJSON { response in
@@ -58,37 +79,41 @@ class HttpRequest: NSObject {
                 case .success:
                     if let result = response.result.value {
 
-                        self.delegate?.responseInitSession!(data: result as! [String: AnyObject])
+                        self.delegate?.responseInitSession!(data: result as? [String: AnyObject] ?? [String: AnyObject]())
                     }
                 case .failure(_ ):
-                    
                     self.delegate?.errorInitSession!(error: self.handlerError(response))
                 }
         }
         debugPrint(request)
     }
-    
+
+    /**
+     Return the current php $_SESSION
+     */
     func requestGetFullSession() {
-        
+
         let request = Alamofire.request(FlyveRouter.getFullSession())
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success:
                     if let result = response.result.value {
-                        
-                        self.delegate?.responseGetFullSession!(data: result as! [String: AnyObject])
+                        self.delegate?.responseGetFullSession!(data: result as? [String: AnyObject] ?? [String: AnyObject]())
                     }
                 case .failure(_ ):
-                    
                     self.delegate?.errorGetFullSession!(error: self.handlerError(response))
                 }
         }
         debugPrint(request)
     }
-    
+
+    /**
+     Change active profile to the profiles_id one
+     - parameter: ID of the new active profile. Mandatory
+     */
     func requestChangeActiveProfile(profilesID: String) {
-        
+
         let request = Alamofire.request(FlyveRouter.changeActiveProfile(profilesID))
             .validate(statusCode: 200..<300)
             .responseData { response in
@@ -96,67 +121,101 @@ class HttpRequest: NSObject {
                 case .success:
                     self.delegate?.responseChangeActiveProfile!()
                 case .failure(_ ):
-                    
+
                     var errorDescription = String()
-                    
+
                     if let data = response.data {
                         errorDescription = String(data: data, encoding: String.Encoding.utf8) ?? ""
                     }
-                    
+
                     self.delegate?.errorChangeActiveProfile!(error: ["error": response.error as? String ?? "", "message": errorDescription as String])
                 }
         }
         debugPrint(request)
     }
-    
+
+    /// Enroll MDM Agent
     func requestPluginFlyvemdmAgent(parameters: [String : AnyObject]) {
-        
+
         let request = Alamofire.request(FlyveRouter.pluginFlyvemdmAgent(parameters))
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success:
                     if let result = response.result.value {
-                        
-                        self.delegate?.responsePluginFlyvemdmAgent!(data: result as! [String: AnyObject])
+
+                        self.delegate?.responsePluginFlyvemdmAgent!(data: result as? [String: AnyObject] ?? [String: AnyObject]())
                     }
                 case .failure(_ ):
-                    
                     self.delegate?.errorPluginFlyvemdmAgent!(error: self.handlerError(response))
                 }
         }
         debugPrint(request)
     }
     
+    /// Get MDM Agent profile
     func requestGetPluginFlyvemdmAgent(agentID: String) {
-        
+
         let request = Alamofire.request(FlyveRouter.getPluginFlyvemdmAgent(agentID))
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success:
                     if let result = response.result.value {
-                        
-                        self.delegate?.responseGetPluginFlyvemdmAgent!(data: result as! [String: AnyObject])
+                        self.delegate?.responseGetPluginFlyvemdmAgent!(data: result as? [String: AnyObject] ?? [String: AnyObject]())
                     }
                 case .failure(_ ):
-                    
                     self.delegate?.errorGetPluginFlyvemdmAgent!(error: self.handlerError(response))
                 }
         }
         debugPrint(request)
     }
     
-    func handlerError(_ response: DataResponse<Any>) -> [String: String] {
+    /// Download files
+    func requestPluginFlyvemdmFile(fileID: String) {
         
+        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        
+        let request = Alamofire.download(FlyveRouter.pluginFlyvemdmFile(fileID), to: destination)
+            .response { response in
+                
+                if let error = response.error {
+                    Logger.log(message: error.localizedDescription, type: .error)
+                }
+        }
+        debugPrint(request)
+    }
+    
+    /// Get Entity Config
+    func requestPluginFlyvemdmEntityConfig(entityID: String) {
+        let request = Alamofire.request(FlyveRouter.pluginFlyvemdmEntityConfig(entityID))
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let result = response.result.value {
+                        self.delegate?.responsePluginFlyvemdmEntityConfig!(data: result as? [String: AnyObject] ?? [String: AnyObject]())
+                    }
+                case .failure(_ ):
+                    self.delegate?.errorPluginFlyvemdmEntityConfig!(error: self.handlerError(response))
+                }
+        }
+        debugPrint(request)
+    }
+    
+    /**
+     handler Error
+     - return: error message
+     */
+    func handlerError(_ response: DataResponse<Any>) -> [String: String] {
+
         var errorObj = [String]()
         var errorDict = [String: String]()
-        
+
         if let data = response.data {
-            
             errorObj = try! JSONSerialization.jsonObject(with: data) as? [String] ?? [String]()
         }
-        
+
         if errorObj.count == 2 {
             errorDict["error"] = errorObj[0]
             errorDict["message"] = errorObj[1]
@@ -164,7 +223,7 @@ class HttpRequest: NSObject {
             errorDict["error"] = ""
             errorDict["message"] = ""
         }
-        
+
         return errorDict
     }
 }

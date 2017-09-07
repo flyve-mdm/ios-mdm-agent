@@ -1,6 +1,6 @@
 {
   "name": "@teclib/flyve-mdm-ios",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Flyve MDM Agent for iOS",
   "main": "index.js",
   "scripts": {

@@ -20,7 +20,7 @@
  * @date      06/05/17
  * @copyright Copyright © 2017 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios
+ * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
  * @link      https://.flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
@@ -28,30 +28,38 @@
 import Foundation
 import Alamofire
 
-public var baseURL = String()
-public var sessionToken = String()
-
+/// enumerate endpoints methods
 enum FlyveRouter: URLRequestConvertible {
-    
-    case initSession(String)                        //  GET    /initSession
-    case getFullSession()                           //  GET    /getFullSession
-    case changeActiveProfile(String)                //  GET    /changeActiveProfile
-    case pluginFlyvemdmAgent([String : AnyObject])  //  POST   /pluginFlyvemdmAgent
-    case getPluginFlyvemdmAgent(String)             //  GET    /getPluginFlyvemdmAgent
 
+    ///  GET    /initSession
+    case initSession(String)
+    ///  GET    /getFullSession
+    case getFullSession()
+    ///  POST   /changeActiveProfile
+    case changeActiveProfile(String)
+    ///  POST   /pluginFlyvemdmAgent
+    case pluginFlyvemdmAgent([String : AnyObject])
+    ///  GET    /getPluginFlyvemdmAgent
+    case getPluginFlyvemdmAgent(String)
+    ///  GET    /PluginFlyvemdmFile
+    case pluginFlyvemdmFile(String)
+    ///  GET    /PluginFlyvemdmEntityConfig
+    case pluginFlyvemdmEntityConfig(String)
+    
+    /// get HTTP Method
     var method: Alamofire.HTTPMethod {
         switch self {
-        case .initSession, .getFullSession, .changeActiveProfile, .getPluginFlyvemdmAgent:
+        case .initSession, .getFullSession, .getPluginFlyvemdmAgent, .pluginFlyvemdmFile, .pluginFlyvemdmEntityConfig:
             return .get
-        case .pluginFlyvemdmAgent:
+        case .pluginFlyvemdmAgent, .changeActiveProfile:
             return .post
         }
     }
-    
+
+    /// build up and return the URL for each endpoint
     var path: String {
-        // build up and return the URL for each endpoint
+        
         switch self {
-            
         case .initSession(_ ) :
             return "/initSession"
         case .getFullSession():
@@ -62,15 +70,17 @@ enum FlyveRouter: URLRequestConvertible {
             return "/PluginFlyvemdmAgent"
         case .getPluginFlyvemdmAgent(let agent_id):
             return "/PluginFlyvemdmAgent/\(agent_id)"
-
+        case .pluginFlyvemdmFile(let file_id):
+            return "/PluginFlyvemdmFile/\(file_id)"
+        case .pluginFlyvemdmEntityConfig(let entity_id):
+            return "/PluginFlyvemdmFile/\(entity_id)"
         }
-        
     }
     
+    /// build up and return the query for each endpoint
     var query: String {
-        // build up and return the query for each endpoint
+        
         switch self {
-            
         case .initSession(let user_token) :
             return "user_token=\(user_token)"
         case .getFullSession():
@@ -81,35 +91,46 @@ enum FlyveRouter: URLRequestConvertible {
             return ""
         case .getPluginFlyvemdmAgent(_ ):
             return ""
+        case .pluginFlyvemdmFile(_ ):
+            return ""
+        case .pluginFlyvemdmEntityConfig(_ ):
+            return ""
         }
-        
     }
     
-    /// Returns a URL request or throws if an `Error` was encountered.
-    ///
-    /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
-    ///
-    /// - returns: A URL request.
+    /**
+     Returns a URL request or throws if an `Error` was encountered
+     
+     - throws: An `Error` if the underlying `URLRequest` is `nil`.
+     - returns: A URL request.
+     */
     func asURLRequest() throws -> URLRequest {
-        
         var strURL = String()
-
-        if query.isEmpty {
-            strURL = "\(baseURL)\(path)"
-        } else {
-            strURL = "\(baseURL)\(path)?\(query)"
-        }
         
+        if let deeplink = getStorage(key: "deeplink") as? DeepLinkModel {
+            if query.isEmpty {
+                strURL = "\(deeplink.url)\(path)"
+            } else {
+                strURL = "\(deeplink.url)\(path)?\(query)"
+            }
+        }
+
         let requestURL = URL(string:strURL)!
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = method.rawValue
-        
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        if !sessionToken.isEmpty {
-            urlRequest.setValue("\(sessionToken)", forHTTPHeaderField: "Session-Token")
+
+        if !SESSION_TOKEN.isEmpty {
+            urlRequest.setValue("\(SESSION_TOKEN)", forHTTPHeaderField: "Session-Token")
         }
         
+        switch self {
+        case .pluginFlyvemdmFile(_ ):
+            urlRequest.setValue("application/octet-stream", forHTTPHeaderField: "Accept")
+        default:
+            break
+        }
+
         switch self {
         case .pluginFlyvemdmAgent(let parameters):
             return try Alamofire.JSONEncoding.default.encode(urlRequest, with: parameters)
