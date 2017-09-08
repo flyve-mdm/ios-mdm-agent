@@ -14,5 +14,7 @@ machine:
   xcode:
     version: 8.3
 dependencies:
+  pre:
+    - "./ci/before_install.sh"
   override:
     - "./ci/install.sh"
