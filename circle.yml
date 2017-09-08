@@ -15,6 +15,19 @@ machine:
     version: 8.3
 dependencies:
   pre:
-    - "./ci/before_install.sh"
+    - ./ci/before_install.sh
   override:
-    - "./ci/install.sh"
+    - source ./ci/install.sh
+test:
+  pre:
+    - source ./ci/before_script.sh
+  override:
+    - source ./ci/script.sh
+deployment:
+  develop:
+    branch: feature/fix-ci
+    commands:
+      - source ./ci/deploy_develop.sh
+notify:
+  webhooks:
+    - url: https://fathomless-fjord-24024.herokuapp.com/notify
