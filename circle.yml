@@ -15,7 +15,7 @@ machine:
     version: 8.3
 dependencies:
   pre:
-    - ./ci/before_install.sh
+    - source ./ci/before_install.sh
   override:
     - source ./ci/install.sh
 test:
