@@ -63,7 +63,7 @@ security create-keychain -p $KEYCHAIN_PASSWORD $KEYCHAIN_NAME
 security add-certificates -k $KEYCHAIN_NAME $CERTIFICATES_PATH/apple.cer $CERTIFICATES_PATH/dist.cer
 echo ------------ Make the custom keychain default, so xcodebuild will use it for signing -------------
 # Make the custom keychain default, so xcodebuild will use it for signing
-# security list-keychains -d user -s $KEYCHAIN_NAME
+security list-keychains -d user -s $KEYCHAIN_NAME
 security default-keychain -s $KEYCHAIN_NAME
 echo ------------------- Unlock the keychain --------------------
 # Unlock the keychain
