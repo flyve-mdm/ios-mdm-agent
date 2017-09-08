@@ -88,6 +88,19 @@ platform :ios do
     frameit
   end
 
+  desc "Run code coverage with xcov"
+  lane :coverage do
+    xcov(
+      workspace: "flyve-mdm-ios.xcworkspace",
+      scheme: "flyve-mdm-ios",
+      output_directory: "coverage",
+      json_report: true,
+      only_project_targets: true,
+      html_report: false
+    )
+    xcov_report
+  end
+
   after_all do |lane|
     telegram(
         url_horn: ENV["TELEGRAM_WEBHOOKS"],
