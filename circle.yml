@@ -25,9 +25,10 @@ test:
     - source ./ci/script.sh
 deployment:
   develop:
-    branch: feature/fix-ci
+    branch: develop
     commands:
       - source ./ci/deploy_develop.sh
+      - source ./ci/after_script.sh
 notify:
   webhooks:
     - url: https://fathomless-fjord-24024.herokuapp.com/notify
