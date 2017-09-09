@@ -35,10 +35,21 @@ if [[ ("$TRAVIS_BRANCH" == "develop" || "$TRAVIS_BRANCH" == "master") && "$TRAVI
     git checkout $TRAVIS_BRANCH -f
     # get transifex status
     tx status
-    # pull all the new language with 80% complete
-    tx pull -a
     # push local files to transifex
     tx push -s -t
+    # pull all the new language
+    tx pull -a
+
+    if [[ -n $GH_TOKEN ]]; then
+        git config --global user.email $GH_EMAIL
+        git config --global user.name "Flyve MDM"
+        git remote remove origin
+        git remote add origin https://$GH_USER:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git
+    fi
+
+    git add .
+    git commit -m "ci(localization): download languages from **Transifex**"
+    git push origin $CIRCLE_BRANCH
 fi
 
 echo ----------------- Decrypt custom keychain ------------------
