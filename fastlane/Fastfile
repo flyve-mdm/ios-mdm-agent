@@ -16,12 +16,14 @@ fastlane_version "2.55.0"
 default_platform :ios
 
 platform :ios do
+  $lane_active = ""
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
   end
 
   desc "Runs all the tests"
   lane :test do
+    $lane_active = "Test"
     scan(
       workspace: "flyve-mdm-ios.xcworkspace",
       scheme: "flyve-mdm-ios",
@@ -32,6 +34,7 @@ platform :ios do
 
   desc "Run code coverage with xcov"
   lane :coverage do
+    $lane_active = "Coverage"
     xcov(
       workspace: "flyve-mdm-ios.xcworkspace",
       scheme: "flyve-mdm-ios",
@@ -44,6 +47,7 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
+    $lane_active = "Beta"
     # Fetch provisioning profile
     # sigh
     sigh(
@@ -75,6 +79,7 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :release do
+    $lane_active = "Release"
     # Fetch provisioning profile
     # sigh
     sigh(
@@ -100,30 +105,17 @@ platform :ios do
     frameit
   end
 
-  desc "Run code coverage with xcov"
-  lane :coverage do
-    xcov(
-      workspace: "flyve-mdm-ios.xcworkspace",
-      scheme: "flyve-mdm-ios",
-      output_directory: "coverage",
-      json_report: true,
-      only_project_targets: true,
-      html_report: false
-    )
-    xcov_report
-  end
-
   after_all do |lane|
     telegram(
         url_horn: ENV["TELEGRAM_WEBHOOKS"],
-        message: "Fastlane is OK"
+        message: $lane_active + " Fastlane is OK"
     )
   end
 
   error do |lane, exception|
     telegram(
         url_horn: ENV["TELEGRAM_WEBHOOKS"],
-        message: "`ERROR` Fastlane FAIL"
+        message: "`ERROR` " + $lane_active + " Fastlane FAIL"
     )
   end
 end
