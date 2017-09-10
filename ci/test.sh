@@ -2,7 +2,7 @@
 
 #   Copyright © 2017 Teclib. All rights reserved.
 #
-# after_script.sh is part of flyve-mdm-ios
+# test.sh is part of flyve-mdm-ios
 #
 # flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
 # device management software.
@@ -25,6 +25,8 @@
 # @link      https://.flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-# Delete custom keychain
-security delete-keychain $KEYCHAIN_NAME
-rm -f "~/Library/MobileDevice/Provisioning\ Profiles/$PROFILE_UUID.mobileprovision"
+if [[ ("$CIRCLE_BRANCH" == "develop" || "$CIRCLE_BRANCH" == "master") && "$CI_PULL_REQUEST" != "" ]]; then
+    fastlane test
+elif [[ "$CIRCLE_BRANCH" != "develop" && "$CIRCLE_BRANCH" != "master" && "$CI_PULL_REQUEST" == "" ]]; then
+    xcodebuild clean build -workspace ${APPNAME}.xcworkspace -scheme $APPNAME CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+fi
