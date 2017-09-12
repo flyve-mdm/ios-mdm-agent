@@ -44,7 +44,7 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         git config --global user.email $GH_EMAIL
         git config --global user.name "Flyve MDM"
         git remote remove origin
-        git remote add origin https://$GH_USER:$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git
+        git remote add origin https://$GH_USER:$GH_TOKEN@github.com/$GH_REPO_SLUG.git
     fi
 
     git add .
