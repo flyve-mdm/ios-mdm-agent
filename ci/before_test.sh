@@ -49,7 +49,6 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
 
     git add .
     git commit -m "ci(localization): download languages from **Transifex**"
-    git push origin $CIRCLE_BRANCH
 fi
 
 echo ----------------- Decrypt custom keychain ------------------
