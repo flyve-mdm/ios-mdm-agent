@@ -62,7 +62,7 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         --author_url https://flyve-mdm.com \
         --github_url $CIRCLE_REPOSITORY_URL \
         --output _docs \
-        --theme jazzy/themeFlyve
+        --theme jazzy/themeFlyvede
 
         # Add _docs folder
         git add _docs -f
