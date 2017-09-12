@@ -35,13 +35,23 @@ platform :ios do
   desc "Run code coverage with xcov"
   lane :coverage do
     $lane_active = "Coverage"
+    
+    scan(
+      workspace: "flyve-mdm-ios.xcworkspace",
+      scheme: "flyve-mdm-ios",
+      clean: true,
+      code_coverage: true
+    )
+
     xcov(
       workspace: "flyve-mdm-ios.xcworkspace",
       scheme: "flyve-mdm-ios",
       output_directory: "coverage",
+      html_report: false,
       json_report: true,
       only_project_targets: true
     )
+    xcov_report
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
