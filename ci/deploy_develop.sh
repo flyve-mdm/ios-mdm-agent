@@ -53,7 +53,7 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         # Create commit
         git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}"
         # Push commits to origin branch
-        git push origin $CIRCLE_BRANCH
+        # git push origin $CIRCLE_BRANCH
 
         # Generate documentation with jazzy
         jazzy \
