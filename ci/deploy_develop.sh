@@ -56,13 +56,17 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         # git push origin $CIRCLE_BRANCH
 
         # Generate documentation with jazzy
+<<<<<<< HEAD
+        bundler exec jazzy \
+=======
         jazzy \
+>>>>>>> 1bc2c88... ci(deploy): bundle
         --clean \
         --author Flyve MDM \
         --author_url https://flyve-mdm.com \
         --github_url $CIRCLE_REPOSITORY_URL \
         --output _docs \
-        --theme jazzy/themeFlyvede
+        --theme jazzy/themeFlyve
 
         # Add _docs folder
         git add _docs -f
@@ -70,7 +74,7 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 
         # Generate code coverage reporting with xcov
-        fastlane coverage
+        bundler exec fastlane coverage
 
         # Add coverage folder
         git add coverage -f
@@ -99,6 +103,6 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         git push origin gh-pages
 
         git checkout $CIRCLE_BRANCH -f
-        fastlane beta
+        bundler exec fastlane beta
     fi
 fi
