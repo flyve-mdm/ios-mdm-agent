@@ -27,14 +27,8 @@
 
 # Update gem
 gem update --system
-# Install fastlane last version
-gem install fastlane --no-rdoc --no-ri --no-document --quiet
-# Clean Gem
-gem cleanup
-# Install jazzy for generate documentation
-gem install jazzy
-# Install xcov for code coverage reporting
-sudo gem install xcov
+# Install bundler last version
+gem install bundler
 # Install node
 brew install node
 # Install jq for json parse
@@ -48,3 +42,5 @@ npm i -g standard-version
 npm install -g conventional-github-releaser
 # Install libs from package.json
 npm install
+# Install gems from Gemfile
+bundle install --path vendor/bundle
