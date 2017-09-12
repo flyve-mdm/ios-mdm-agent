@@ -26,7 +26,7 @@
 # ------------------------------------------------------------------------------
 
 if [[ ("$CIRCLE_BRANCH" == "develop" || "$CIRCLE_BRANCH" == "master") && "$CI_PULL_REQUEST" != "" ]]; then
-    fastlane test
+    bundle exec fastlane test
 elif [[ "$CIRCLE_BRANCH" != "develop" && "$CIRCLE_BRANCH" != "master" && "$CI_PULL_REQUEST" == "" ]]; then
     xcodebuild clean build -workspace ${APPNAME}.xcworkspace -scheme $APPNAME CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 fi
