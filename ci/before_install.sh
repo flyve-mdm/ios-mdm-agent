@@ -31,3 +31,12 @@ echo FASTLANE_PASSWORD=$FASTLANE_PASSWORD >> .env
 echo TELEGRAM_WEBHOOKS=$TELEGRAM_WEBHOOKS >> .env
 echo GIT_REPO=$GH_REPO_SLUG >> .env
 echo GIT_BRANCH=$CIRCLE_BRANCH >> .env
+
+echo ----------- Configure bundler ------------
+echo :update_sources: true >> ~/.gemrc
+echo :benchmark: false >> ~/.gemrc
+echo :backtrace: true >> ~/.gemrc
+echo :verbose: true >> ~/.gemrc
+echo gem: --no-ri --no-rdoc >> ~/.gemrc
+echo install: --no-rdoc --no-ri >> ~/.gemrc
+echo update: --no-rdoc --no-ri >> ~/.gemrc
