@@ -34,73 +34,64 @@ fi
 
 if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
 
-    GH_COMMIT_MESSAGE=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
+    git checkout $CIRCLE_BRANCH -f
+    # Generate CHANGELOG.md and increment version
+    npm run release -- -t ''
+    # Get version number from package.json
+    export GIT_TAG=$(jq -r ".version" package.json)
+    # Revert last commit
+    git reset --hard HEAD~1
+    # Update CFBundleShortVersionString
+    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}" ${PWD}/${APPNAME}/Info.plist
+    # Update CFBundleVersion
+    /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $CIRCLE_BUILD_NUM" ${PWD}/${APPNAME}/Info.plist
+    # Add modified and delete files
+    git add ${APPNAME}/Info.plist
+    # Create commit
+    git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}"
 
-    if [[ $GH_COMMIT_MESSAGE != *"**beta**"* && $GH_COMMIT_MESSAGE != *"**Transifex**"* ]]; then
-        git checkout $CIRCLE_BRANCH -f
-        # Generate CHANGELOG.md and increment version
-        npm run release -- -t ''
-        # Get version number from package.json
-        export GIT_TAG=$(jq -r ".version" package.json)
-        # Revert last commit
-        git reset --hard HEAD~1
-        # Update CFBundleShortVersionString
-        /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${GIT_TAG}" ${PWD}/${APPNAME}/Info.plist
-        # Update CFBundleVersion
-        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $CIRCLE_BUILD_NUM" ${PWD}/${APPNAME}/Info.plist
-        # Add modified and delete files
-        git add ${APPNAME}/Info.plist
-        # Create commit
-        git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}"
+    # Generate documentation with jazzy
+    jazzy \
+    --clean \
+    --author Flyve MDM \
+    --author_url https://flyve-mdm.com \
+    --github_url $CIRCLE_REPOSITORY_URL \
+    --output _docs \
+    --theme jazzy/themeFlyve
 
-        # Generate documentation with jazzy
-        jazzy \
-        --clean \
-        --author Flyve MDM \
-        --author_url https://flyve-mdm.com \
-        --github_url $CIRCLE_REPOSITORY_URL \
-        --output _docs \
-        --theme jazzy/themeFlyve
+    # Add _docs folder
+    git add _docs -f
+    # Create commit, NOTICE: this commit is not sent
+    git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 
-        # Add _docs folder
-        git add _docs -f
-        # Create commit, NOTICE: this commit is not sent
-        git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
+    # Generate code coverage reporting with xcov
+    bundle exec fastlane coverage
 
-        # Generate code coverage reporting with xcov
-        bundle exec fastlane coverage
+    # Add coverage folder
+    git add coverage -f
+    # Create commit, NOTICE: this commit is not sent
+    git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
 
-        # Add coverage folder
-        git add coverage -f
-        # Create commit, NOTICE: this commit is not sent
-        git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
+    # Update documentation on gh-pages
+    git fetch origin gh-pages
+    git checkout gh-pages
+    git checkout $CIRCLE_BRANCH _docs
 
-        # Update documentation on gh-pages
-        git fetch origin gh-pages
-        git checkout gh-pages
-        git checkout $CIRCLE_BRANCH _docs
+    # Add _docs folder
+    git add CHANGELOG.md
+    # Create commit
+    git commit -m "ci(docs): generate documentation with jazzy for version ${GIT_TAG}"
 
-        # Add _docs folder
-        git add CHANGELOG.md
-        # Create commit
-        git commit -m "ci(docs): generate documentation with jazzy for version ${GIT_TAG}"
-        # Push commit to origin gh-pages branch
+    # Get code coverage from develop branch
+    git checkout $CIRCLE_BRANCH coverage
+    # Add coverage folder
+    git add coverage
+    # Create commit
+    git commit -m "ci(docs): generate coverage with xcov for version ${GIT_TAG}"
+    
+    # Push commit to origin gh-pages branch
+    git push origin gh-pages
 
-        # Get code coverage from develop branch
-        git checkout $CIRCLE_BRANCH coverage
-        # Add coverage folder
-        git add coverage
-        # Create commit
-        git commit -m "ci(docs): generate coverage with xcov for version ${GIT_TAG}"
-        
-        # Push commit to origin gh-pages branch
-        git push origin gh-pages
-
-        git checkout $CIRCLE_BRANCH -f
-<<<<<<< HEAD
-        bundler exec fastlane beta
-=======
-        # bundle exec fastlane beta
->>>>>>> a59913f... ci(deploy): run fastlane from bundler
-    fi
+    git checkout $CIRCLE_BRANCH -f
+    bundle exec fastlane beta
 fi
