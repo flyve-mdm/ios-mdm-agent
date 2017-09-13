@@ -27,6 +27,10 @@
 
 # Update gem
 gem update --system
+# Clean Gem
+gem cleanup
+# Install jazzy for generate documentation
+gem install jazzy
 # Install bundler last version
 gem install bundler
 # Install node
