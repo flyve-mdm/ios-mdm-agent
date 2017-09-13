@@ -36,9 +36,9 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
     # get transifex status
     tx status
     # push local files to transifex
-    tx push -s -t
+    tx push --source --no-interactive
     # pull all the new language
-    tx pull -a
+    tx pull --all --force
 
     if [[ -n $GH_TOKEN ]]; then
         git config --global user.email $GH_EMAIL
@@ -47,7 +47,7 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         git remote add origin https://$GH_USER:$GH_TOKEN@github.com/$GH_REPO_SLUG.git
     fi
 
-    git add .
+    git add -u
     git commit -m "ci(localization): download languages from **Transifex**"
 fi
 
