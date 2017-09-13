@@ -48,3 +48,5 @@ npm install -g conventional-github-releaser
 npm install
 # Install gems from Gemfile
 bundle install --path vendor/bundle
+# Update fastlane plugin
+bundle exec fastlane update_plugins
