@@ -52,15 +52,9 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         git add ${APPNAME}/Info.plist
         # Create commit
         git commit -m "ci(beta): generate **beta** for version ${GIT_TAG}"
-        # Push commits to origin branch
-        # git push origin $CIRCLE_BRANCH
 
         # Generate documentation with jazzy
-<<<<<<< HEAD
-        bundler exec jazzy \
-=======
         jazzy \
->>>>>>> 1bc2c88... ci(deploy): bundle
         --clean \
         --author Flyve MDM \
         --author_url https://flyve-mdm.com \
@@ -74,7 +68,7 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 
         # Generate code coverage reporting with xcov
-        bundler exec fastlane coverage
+        bundle exec fastlane coverage
 
         # Add coverage folder
         git add coverage -f
@@ -103,6 +97,10 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
         git push origin gh-pages
 
         git checkout $CIRCLE_BRANCH -f
+<<<<<<< HEAD
         bundler exec fastlane beta
+=======
+        # bundle exec fastlane beta
+>>>>>>> a59913f... ci(deploy): run fastlane from bundler
     fi
 fi
