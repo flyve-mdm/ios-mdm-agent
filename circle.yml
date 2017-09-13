@@ -36,4 +36,4 @@ deployment:
       - source ./ci/after_deploy.sh
 notify:
   webhooks:
-    - url: https://fathomless-fjord-24024.herokuapp.com/notify
+    - url: https://payload.webhooks.stream/aethonanbot
