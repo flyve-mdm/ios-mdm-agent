@@ -39,12 +39,5 @@ tx push --source --no-interactive
 # pull all the new language
 tx pull --all --force
 
-if [[ -n $GH_TOKEN ]]; then
-    git config --global user.email $GH_EMAIL
-    git config --global user.name "Flyve MDM"
-    git remote remove origin
-    git remote add origin https://$GH_USER:$GH_TOKEN@github.com/$GH_REPO_SLUG.git
-fi
-
 git add -u
 git commit -m "ci(localization): download languages from **Transifex**"
