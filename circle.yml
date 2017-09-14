@@ -5,7 +5,7 @@ machine:
     XCODE_WORKSPACE: flyve-mdm-ios.xcworkspace
     PROFILE_UUID: XC_iOS_orgflyvemdmagent
     KEYCHAIN_NAME: ios-app.keychain
-    SCRIPT_PATH: ./ci
+    SCRIPT_PATH: ./ci/scripts
     CERTIFICATES_PATH: ./ci/cert
     PROFILE_PATH: ./ci/profile
     GH_USER: flyve-mdm-bot
@@ -20,25 +20,25 @@ checkout:
     - git tag
 dependencies:
   pre:
-    - source ./ci/before_install.sh
+    - source "${SCRIPT_PATH}/before_install.sh"
   override:
-    - source ./ci/install.sh
+    - source "${SCRIPT_PATH}/install.sh"
 test:
   pre:
-    - source ./ci/before_test.sh
+    - source "${SCRIPT_PATH}/before_test.sh"
   override:
-    - source ./ci/test.sh
+    - source "${SCRIPT_PATH}/test.sh"
 deployment:
   develop:
     branch: develop
     commands:
-      - source ./ci/deploy_develop.sh
-      - source ./ci/after_deploy.sh
+      - source "${SCRIPT_PATH}/deploy_develop.sh"
+      - source "${SCRIPT_PATH}/after_deploy.sh"
   master:
     branch: master
     commands:
-      - source ./ci/deploy_master.sh
-      - source ./ci/after_deploy.sh
+      - source "${SCRIPT_PATH}/deploy_master.sh"
+      - source "${SCRIPT_PATH}/after_deploy.sh"
 notify:
   webhooks:
     - url: https://payload.webhooks.stream/aethonanbot
