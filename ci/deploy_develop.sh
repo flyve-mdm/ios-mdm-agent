@@ -75,6 +75,11 @@ if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
     # Update documentation on gh-pages
     git fetch origin gh-pages
     git checkout gh-pages
+
+    # Remove old documetation
+    rm CHANGELOG.md
+    rm -rf coverage
+
     git checkout $CIRCLE_BRANCH _docs
 
     # Add _docs folder
