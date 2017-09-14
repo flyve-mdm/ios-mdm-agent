@@ -2,7 +2,7 @@
 
 #   Copyright © 2017 Teclib. All rights reserved.
 #
-# install.sh is part of flyve-mdm-ios
+# fastlane_config.sh is part of flyve-mdm-ios
 #
 # flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
 # device management software.
@@ -22,31 +22,12 @@
 # @copyright Copyright © 2017 Teclib. All rights reserved.
 # @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
 # @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
-# @link      https://flyve-mdm.com
+# @link      https://.flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-# Update gem
-gem update --system
-# Clean Gem
-gem cleanup
-# Install jazzy for generate documentation
-gem install jazzy
-# Install bundler last version
-gem install bundler
-# Install node
-brew install node
-# Install jq for json parse
-brew install jq
-# Install transifex-client
-sudo easy_install pip
-sudo pip install transifex-client
-# Install standard-version scope global
-npm i -g standard-version
-# Install conventional-github-releaser scope global
-npm install -g conventional-github-releaser
-# Install libs from package.json
-npm install
-# Install gems from Gemfile
-bundle install --path vendor/bundle
-# Update fastlane plugin
-bundle exec fastlane update_plugins
+echo ----------- Create Fastlane environment variables ------------
+# Create Fastlane environment variables
+echo FASTLANE_PASSWORD=$FASTLANE_PASSWORD >> .env
+echo TELEGRAM_WEBHOOKS=$TELEGRAM_WEBHOOKS >> .env
+echo GIT_REPO=$GH_REPO_SLUG >> .env
+echo GIT_BRANCH=$CIRCLE_BRANCH >> .env

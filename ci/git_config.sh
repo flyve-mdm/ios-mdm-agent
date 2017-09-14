@@ -2,7 +2,7 @@
 
 #   Copyright © 2017 Teclib. All rights reserved.
 #
-# after_deploy.sh is part of flyve-mdm-ios
+# git_config.sh is part of flyve-mdm-ios
 #
 # flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
 # device management software.
@@ -18,13 +18,16 @@
 # GNU General Public License for more details.
 # ------------------------------------------------------------------------------
 # @author    Hector Rondon
-# @date      25/08/17
+# @date      08/09/17
 # @copyright Copyright © 2017 Teclib. All rights reserved.
 # @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
 # @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
-# @link      https://.flyve-mdm.com
+# @link      https://flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-# Delete custom keychain
-security delete-keychain $KEYCHAIN_NAME
-rm -f "~/Library/MobileDevice/Provisioning\ Profiles/$PROFILE_UUID.mobileprovision"
+if [[ -n $GH_TOKEN ]]; then
+    git config --global user.email $GH_EMAIL
+    git config --global user.name "Flyve MDM"
+    git remote remove origin
+    git remote add origin https://$GH_USER:$GH_TOKEN@github.com/$GH_REPO_SLUG.git
+fi

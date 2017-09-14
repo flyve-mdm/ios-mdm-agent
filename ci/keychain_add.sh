@@ -2,7 +2,7 @@
 
 #   Copyright © 2017 Teclib. All rights reserved.
 #
-# before_test.sh is part of flyve-mdm-ios
+# keychain_add.sh is part of flyve-mdm-ios
 #
 # flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
 # device management software.
@@ -22,34 +22,8 @@
 # @copyright Copyright © 2017 Teclib. All rights reserved.
 # @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
 # @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
-# @link      https://.flyve-mdm.com
+# @link      https://flyve-mdm.com
 # ------------------------------------------------------------------------------
-
-echo ------------------- Configure Transifex --------------------
-# Configure Transifex
-if [[ "$CIRCLE_BRANCH" == "develop" && "$CI_PULL_REQUEST" == "" ]]; then
-    # Create config file transifex
-    sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
-    
-    # Move to local branch
-    git checkout $CIRCLE_BRANCH -f
-    # get transifex status
-    tx status
-    # push local files to transifex
-    tx push --source --no-interactive
-    # pull all the new language
-    tx pull --all --force
-
-    if [[ -n $GH_TOKEN ]]; then
-        git config --global user.email $GH_EMAIL
-        git config --global user.name "Flyve MDM"
-        git remote remove origin
-        git remote add origin https://$GH_USER:$GH_TOKEN@github.com/$GH_REPO_SLUG.git
-    fi
-
-    git add -u
-    git commit -m "ci(localization): download languages from **Transifex**"
-fi
 
 echo ----------------- Decrypt custom keychain ------------------
 # Decrypt custom keychain

@@ -2,7 +2,7 @@
 
 #   Copyright © 2017 Teclib. All rights reserved.
 #
-# install.sh is part of flyve-mdm-ios
+# keychain_remove.sh is part of flyve-mdm-ios
 #
 # flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
 # device management software.
@@ -25,28 +25,6 @@
 # @link      https://flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-# Update gem
-gem update --system
-# Clean Gem
-gem cleanup
-# Install jazzy for generate documentation
-gem install jazzy
-# Install bundler last version
-gem install bundler
-# Install node
-brew install node
-# Install jq for json parse
-brew install jq
-# Install transifex-client
-sudo easy_install pip
-sudo pip install transifex-client
-# Install standard-version scope global
-npm i -g standard-version
-# Install conventional-github-releaser scope global
-npm install -g conventional-github-releaser
-# Install libs from package.json
-npm install
-# Install gems from Gemfile
-bundle install --path vendor/bundle
-# Update fastlane plugin
-bundle exec fastlane update_plugins
+# Delete custom keychain
+security delete-keychain $KEYCHAIN_NAME
+rm -f "~/Library/MobileDevice/Provisioning\ Profiles/$PROFILE_UUID.mobileprovision"
