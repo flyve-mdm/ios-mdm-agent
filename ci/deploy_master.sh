@@ -36,10 +36,10 @@ if [[ "$CIRCLE_BRANCH" == "master" && "$CI_PULL_REQUEST" == "" ]]; then
 
     GH_COMMIT_MESSAGE=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
 
-    if [[ $GH_COMMIT_MESSAGE != *"**version**"* && $GH_COMMIT_MESSAGE != *"**CHANGELOG.md**"* ]]; then
+    if [[ $GH_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version"* && $GH_COMMIT_MESSAGE != *"ci(build): release version"* ]]; then
         git checkout $CIRCLE_BRANCH -f
         # Generate CHANGELOG.md and increment version
-        npm run release -- -t '' -m "ci(release): generate **CHANGELOG.md** for version %s"
+        npm run release -- -t '' -m "ci(release): generate CHANGELOG.md for version %s"
         # Push tag to github
         conventional-github-releaser -t $GH_TOKEN -r 0
         # Get version number from package.json
@@ -51,7 +51,7 @@ if [[ "$CIRCLE_BRANCH" == "master" && "$CI_PULL_REQUEST" == "" ]]; then
         # Add modified and delete files
         git add -u
         # Create commit
-        git commit -m "ci(build): release **version** ${GIT_TAG}"
+        git commit -m "ci(build): release version ${GIT_TAG}"
         # Push commits and tags to origin branch
         git push --follow-tags origin $CIRCLE_BRANCH
 
