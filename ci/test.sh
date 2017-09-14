@@ -22,11 +22,11 @@
 # @copyright Copyright © 2017 Teclib. All rights reserved.
 # @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
 # @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
-# @link      https://.flyve-mdm.com
+# @link      https://flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-if [[ ("$CIRCLE_BRANCH" == "develop" || "$CIRCLE_BRANCH" == "master") && "$CI_PULL_REQUEST" != "" ]]; then
+if [[ "$CIRCLE_BRANCH" == "develop" || "$CIRCLE_BRANCH" == "master" ]]; then
     bundle exec fastlane test
-elif [[ "$CIRCLE_BRANCH" != "develop" && "$CIRCLE_BRANCH" != "master" && "$CI_PULL_REQUEST" == "" ]]; then
+else
     xcodebuild clean build -workspace ${APPNAME}.xcworkspace -scheme $APPNAME CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 fi
