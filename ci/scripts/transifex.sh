@@ -38,6 +38,10 @@ tx status
 tx push --source --no-interactive
 # pull all the new language
 tx pull --all --force
-
-git add -u
-git commit -m "ci(localization): download languages from **Transifex**"
+# if there are changes in lenguages
+if [[ -z $(git status -s) ]]; then
+    echo "tree is clean"
+else
+    git add -u
+    git commit -m "ci(localization): download languages from **Transifex**"
+fi
