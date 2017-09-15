@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A25A68D1F39FD9200EBAFDD /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */; };
 		0A25A68F1F3A44F900EBAFDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25A68E1F3A44F900EBAFDD /* Constants.swift */; };
+		0A5AC7811F6B477E00B23345 /* SnapshotHelperXcode8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5AC7801F6B477E00B23345 /* SnapshotHelperXcode8.swift */; };
 		0A5CFDE41F265EAB00DAB2A1 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */; };
 		0A5CFDEE1F266F9C00DAB2A1 /* StringHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */; };
 		0A5CFDF01F26743500DAB2A1 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */; };
@@ -72,6 +73,7 @@
 		061464F0A31A3290BE6DCB63 /* Pods_flyve_mdm_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flyve_mdm_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A25A68C1F39FD9200EBAFDD /* FormTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldCell.swift; sourceTree = "<group>"; };
 		0A25A68E1F3A44F900EBAFDD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0A5AC7801F6B477E00B23345 /* SnapshotHelperXcode8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelperXcode8.swift; sourceTree = "<group>"; };
 		0A5CFDE31F265EAB00DAB2A1 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		0A5CFDED1F266F9C00DAB2A1 /* StringHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTests.swift; sourceTree = "<group>"; };
 		0A5CFDEF1F26743500DAB2A1 /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		0AD842961EBA5BF70093AC74 /* flyve-mdm-iosUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0A5AC7801F6B477E00B23345 /* SnapshotHelperXcode8.swift */,
 				0AD842971EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift */,
 				0AD842991EBA5BF70093AC74 /* Info.plist */,
 			);
@@ -737,6 +740,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5AC7811F6B477E00B23345 /* SnapshotHelperXcode8.swift in Sources */,
 				0AD842981EBA5BF70093AC74 /* FlyveMDMAgentUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
