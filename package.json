@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/flyve-mdm/flyve-mdm-ios#readme",
   "devDependencies": {
-    "standard-version": "^4.0.0"
+    "standard-version": "^4.2.0"
   },
   "dependencies": {
-    "conventional-github-releaser": "^1.1.10"
+    "conventional-github-releaser": "^1.1.12"
   }
 }
