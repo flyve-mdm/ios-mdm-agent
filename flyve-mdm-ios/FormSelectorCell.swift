@@ -88,7 +88,7 @@ class FormSelectorCell: FormBaseCell {
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
-    /// `override update()`
+    /// Updates the view
     override func update() {
         super.update()
         
