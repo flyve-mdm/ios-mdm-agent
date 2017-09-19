@@ -62,7 +62,7 @@ class MainCell: UITableViewCell {
         contentView.addSubview(openBotton)
     }
 
-    /// `addConstraints()`
+    /// Add the constraints of the view
     func addConstraints() {
 
         lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
