@@ -127,7 +127,7 @@ class FormInfoCell: FormBaseCell {
         lastNameTextField.addTarget(self, action: #selector(FormInfoCell.editingChanged(_:)), for: .editingChanged)
     }
     
-    /// `override update()`
+    /// Updates the views
     override func update() {
         super.update()
         
