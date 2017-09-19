@@ -39,7 +39,7 @@ open class FormBaseCell: UITableViewCell {
         }
     }
     
-    /// instancia a class of the type `FormViewController`
+    /// instantiate a class of the type `FormViewController`
     weak var formViewController: FormViewController?
     /// customConstraints
     fileprivate var customConstraints: [NSLayoutConstraint] = []
