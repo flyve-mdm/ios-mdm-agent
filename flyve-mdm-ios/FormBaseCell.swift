@@ -45,7 +45,14 @@ open class FormBaseCell: UITableViewCell {
     fileprivate var customConstraints: [NSLayoutConstraint] = []
     
     // MARK: Init
-    /// override init method from super class `UITableViewCell`
+    /**
+        override init method from super class `UITableViewCell`
+     
+        - Parameter style: a constant defining the cell style
+        - Parameter reuseIdentifier: an string that identifies the cell object
+ 
+        - Returns: an initialized `UITableViewCell`
+     */
     public required override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
