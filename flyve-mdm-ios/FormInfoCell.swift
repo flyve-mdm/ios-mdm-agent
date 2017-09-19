@@ -115,7 +115,7 @@ class FormInfoCell: FormBaseCell {
         lastNameTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
     }
     
-    /// `override configure()`
+    /// Configures the views of the cell
     override func configure() {
         super.configure()
         
