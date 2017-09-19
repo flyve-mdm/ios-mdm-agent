@@ -29,7 +29,7 @@ import UIKit
 /// FormSelectorCell class
 class FormSelectorCell: FormBaseCell {
     
-    /// titleLabel `UILabel`
+    /// This property contains the configuration of the title label
     lazy var titleLabel: UILabel = {
         
         let label = UILabel()
