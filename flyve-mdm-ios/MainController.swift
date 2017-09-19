@@ -60,6 +60,7 @@ class MainController: UIViewController {
     /// `removeFile`
     var removeFile = [AnyObject]()
     
+    /// This property contains the configuration of the logo image view
     lazy var logoImageView: UIImageView = {
         
         let imageView = UIImageView(image: UIImage(named: "logo"))
