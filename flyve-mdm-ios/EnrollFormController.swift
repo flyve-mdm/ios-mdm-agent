@@ -37,7 +37,7 @@ class EnrollFormController: FormViewController {
     
     // MARK: Init
     
-    /// override `loadView()` from `UIViewController`
+    /// Load the customized view that the controller manages
     override func loadView() {
         super.loadView()
         
