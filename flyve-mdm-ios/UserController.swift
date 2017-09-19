@@ -96,7 +96,7 @@ class UserController: UIViewController {
     }
     
     // MARK: Constraints
-    /// `addConstraints()`
+    /// Add the constraints to the user table view of the controller
     func addConstraints() {
         userTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         userTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
