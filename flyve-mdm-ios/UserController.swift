@@ -157,7 +157,15 @@ extension UserController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-    
+
+    /**
+        Asks the data source for a cell to insert in a particular location of the table view
+
+        - Parameter tableView: the UITableView object requesting the cell
+        - Parameter indexPath: an index path locating the row in the tableView
+
+        - Returns: a previously created `UITableViewCell` object that the table view can use for the specified row
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
