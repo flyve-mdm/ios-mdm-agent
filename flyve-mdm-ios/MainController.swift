@@ -92,7 +92,8 @@ class MainController: UIViewController {
         
         return table
     }()
-    
+
+    /// This property contains the configuration of the loading indicator view
     let loadingIndicatorView: UIActivityIndicatorView = {
         
         let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
