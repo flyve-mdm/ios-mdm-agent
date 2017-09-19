@@ -103,6 +103,7 @@ class MainController: UIViewController {
         return loading
     }()
     
+    /// This property contains the configuration of the status view
     let statusView: UIView = {
         
         let view = UIView()
