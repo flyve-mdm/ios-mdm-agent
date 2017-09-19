@@ -22,6 +22,7 @@ class StringHelperTests: XCTestCase {
         super.tearDown()
     }
 
+    /// Test if the base64 encoded string is valid
     func testBase64Encoded() {
         XCTAssertEqual("flyve".base64Encoded(), "Zmx5dmU=", "Base64 Encoded not valid")
     }
