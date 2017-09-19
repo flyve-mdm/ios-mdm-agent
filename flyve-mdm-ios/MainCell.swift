@@ -141,7 +141,7 @@ class MainCell: UITableViewCell {
         return label
     }()
     
-    /// detailLabel `UILabel`
+    /// This property contains the configurations for the detail label
     let detailLabel: UILabel = {
 
         let label = UILabel()
