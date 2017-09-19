@@ -152,7 +152,7 @@ class MainController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        // alow receive notify when user edit
+        // allow receive notify when user edit
         let notificationData = NotificationCenter.default
         notificationData.addObserver(self, selector: #selector(self.editUser), name: NSNotification.Name(rawValue: "editUser"), object: nil)
 
