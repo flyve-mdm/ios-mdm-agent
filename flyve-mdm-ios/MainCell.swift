@@ -51,7 +51,7 @@ class MainCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    /// `setupView()`
+    /// Set up the initial configuration of the cell view
     func setupView() {
 
         contentView.addSubview(lineView)
