@@ -37,7 +37,7 @@ class UserController: UIViewController {
     /// `userInfo`
     var userInfo: UserModel!
     
-    /// `userTableView UITableView`
+    /// This property contains the configuration for the user table view
     lazy var userTableView: UITableView = {
         
         let table = UITableView(frame: .zero, style: .plain)
