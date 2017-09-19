@@ -174,7 +174,7 @@ class MainController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    /// `setupViews()`
+    /// Set up the initial configuration of the controller
     func setupViews() {
 
         view.backgroundColor = .background
