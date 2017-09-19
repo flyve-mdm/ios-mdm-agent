@@ -120,7 +120,11 @@ open class FormBaseCell: UITableViewCell {
         firstResponderElement()?.resignFirstResponder()
     }
     
-    /// `formRowCanBecomeFirstResponder()`
+    /** 
+       Asks if the form row can become first responder
+
+       - Returns: boolean, cannot become firts responder
+    */
     open class func formRowCanBecomeFirstResponder() -> Bool {
         return false
     }
