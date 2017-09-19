@@ -63,7 +63,7 @@ class UserController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
-    /// `override loadView`
+    /// Load the customized view that the controller manages
     override func loadView() {
         
         if let dataUserObject = getStorage(key: "dataUser") as? UserModel {
