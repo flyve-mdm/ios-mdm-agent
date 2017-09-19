@@ -215,7 +215,7 @@ class MainController: UIViewController {
         mainTableView.reloadData()
     }
     
-    /// Open legger screen
+    /// Open logger screen
     func goLogController() {
         navigationController?.pushViewController(TopicLogController(), animated: true)
     }
