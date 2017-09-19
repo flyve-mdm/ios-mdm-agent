@@ -168,7 +168,7 @@ class MainController: UIViewController {
         }
     }
     
-    /// `override viewWillAppear(_ animated: Bool)`
+    /// Hides the navigation bar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
