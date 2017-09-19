@@ -91,7 +91,7 @@ class MainCell: UITableViewCell {
     }
 
     // MARK: Properties
-    /// lineView `UIView`
+    /// This property contains the configurations for the line view
     let lineView: UIView = {
 
         let line = UIView()
