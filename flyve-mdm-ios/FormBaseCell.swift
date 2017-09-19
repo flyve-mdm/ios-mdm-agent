@@ -111,7 +111,11 @@ open class FormBaseCell: UITableViewCell {
         return actionBar
     }
     
-    /// `handleDoneAction(_: UIBarButtonItem)`
+    /**
+        Asks if the current first responder is ready to resign its status
+
+        - Returns: boolean, true resigning first responder status
+     */
     internal func handleDoneAction(_: UIBarButtonItem) {
         firstResponderElement()?.resignFirstResponder()
     }
