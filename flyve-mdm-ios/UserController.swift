@@ -146,6 +146,14 @@ extension UserController: UITableViewDelegate {
 // MARK: UITableViewDataSource
 extension UserController: UITableViewDataSource {
     
+    /** 
+        Returns the number of rows in the given section of the table view
+
+        - Parameter tableView: the UITableView object requesting the number of rows
+        - Parameter int: an index number identifying the section of the table view
+
+        - Returns: the number of rows
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
