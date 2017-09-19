@@ -22,6 +22,7 @@ class LocalStorageTests: XCTestCase {
         super.tearDown()
     }
     
+    /// Test if the local storage is set and retrieved correctly
     func testLocalStorage() {
         let valueTest = ["name": "MDM Agent"]
         setStorage(value: valueTest as AnyObject, key: "testName")
