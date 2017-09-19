@@ -153,7 +153,7 @@ class MainCell: UITableViewCell {
         return label
     }()
     
-    /// openBotton `UIButton`
+    /// This property contains the configurations for the open button
     lazy var openBotton: UIButton = {
 
         let button = UIButton(type: UIButtonType.system)
