@@ -184,7 +184,7 @@ class MainController: UIViewController {
         view.addSubview(mainTableView)
     }
 
-    /// `addConstraints()`
+    /// Add the constraints to the views
     func addConstraints() {
 
         statusView.topAnchor.constraint(equalTo: view.topAnchor, constant: 22.0).isActive = true
