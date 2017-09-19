@@ -76,6 +76,7 @@ class MainController: UIViewController {
         return imageView
     }()
     
+    /// This property contains the configuration of the main table view
     lazy var mainTableView: UITableView = {
         
         let table = UITableView(frame: .zero, style: .plain)
