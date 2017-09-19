@@ -39,7 +39,8 @@ class FormSelectorCell: FormBaseCell {
         
         return label
     }()
-    /// valueLabel `UILabel`
+    
+    /// This property contains the configuration of the value label
     lazy var valueLabel: UILabel = {
         
         let label = UILabel()
