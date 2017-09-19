@@ -54,7 +54,7 @@ class UserFormController: FormViewController {
         loadForm()
     }
     
-    /// `setupViews()`
+    /// Set up the initial configuration of the controller's view
     func setupViews() {
         
         form.title = NSLocalizedString("title_user", comment: "")
