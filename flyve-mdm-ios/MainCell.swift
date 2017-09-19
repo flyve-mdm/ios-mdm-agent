@@ -118,7 +118,7 @@ class MainCell: UITableViewCell {
         return imageView
     }()
 
-    /// titleLabel `UILabel`
+    /// This property contains the configurations for the title label
     let titleLabel: UILabel = {
 
         let label = UILabel()
