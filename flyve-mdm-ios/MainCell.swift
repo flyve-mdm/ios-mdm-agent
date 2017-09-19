@@ -101,7 +101,7 @@ class MainCell: UITableViewCell {
         return line
     }()
 
-    /// photoImageView `UIImageView`
+    /// This property contains the configurations for the photo image view
     let photoImageView: UIImageView = {
 
         let imageView = UIImageView()
