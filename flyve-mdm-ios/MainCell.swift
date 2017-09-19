@@ -129,7 +129,7 @@ class MainCell: UITableViewCell {
         return label
     }()
 
-    /// descriptionLabel `UILabel`
+    /// This property contains the configurations for the description label
     let descriptionLabel: UILabel = {
 
         let label = UILabel()
