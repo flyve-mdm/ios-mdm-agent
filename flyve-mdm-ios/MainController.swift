@@ -148,7 +148,7 @@ class MainController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// `override loadView()`
+    /// Load the customized view that the controller manages
     override func loadView() {
         super.loadView()
         
