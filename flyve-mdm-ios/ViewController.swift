@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    /// UIButton `UIButton`
+    /// This property contains the configuration of the url botton
     lazy var urlBotton: UIButton = {
         
         let button = UIButton(type: UIButtonType.system)
