@@ -251,7 +251,7 @@ class ViewController: UIViewController {
         self.statusLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8).isActive = true
     }
 
-    /// `setupViewsEmpty()`
+    /// Set up the initial configuration of the view when it is empty
     func setupViewsEmpty() {
 
         self.view.backgroundColor = UIColor.background
