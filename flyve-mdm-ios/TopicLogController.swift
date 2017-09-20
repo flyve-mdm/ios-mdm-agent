@@ -45,7 +45,7 @@ class TopicLogController: UIViewController {
         }
     }
     
-    /// tableView `UITableView`
+    /// This property contains the configuration of the table view
     lazy var tableView: UITableView = {
 
         let table = UITableView(frame: .zero, style: .plain)
