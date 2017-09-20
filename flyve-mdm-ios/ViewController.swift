@@ -362,7 +362,11 @@ extension ViewController: HttpRequestDelegate {
         }
     }
     
-    /// `errorInitSession`
+    /**
+        If the state of the enroll is fail, show in the status label the error message
+
+        - Parameter string: the error message
+     */
     func errorInitSession(error: [String: String]) {
 
         self.enrollState(.fail)
