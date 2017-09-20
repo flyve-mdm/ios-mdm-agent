@@ -453,7 +453,7 @@ class SupervisorInfoCell: UITableViewCell {
         return imageView
     }()
     
-    /// nameLabel `UILabel`
+    /// This property contains the configuration of the name label
     let nameLabel: UILabel = {
         
         let label = UILabel()
