@@ -185,7 +185,7 @@ class LogCell: UITableViewCell {
         addConstraintsView()
     }
 
-    /// `addConstraintsView()`
+    /// Add the constraints to the view of the message text view
     func addConstraintsView() {
 
         self.messageTextView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
