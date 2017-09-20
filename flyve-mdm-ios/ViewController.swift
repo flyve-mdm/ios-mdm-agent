@@ -200,7 +200,7 @@ class ViewController: UIViewController {
         }
     }
 
-    /// `setupViews()`
+    /// Set up the initial configuration of the cell views
     func setupViews() {
 
         self.view.backgroundColor = UIColor.background
