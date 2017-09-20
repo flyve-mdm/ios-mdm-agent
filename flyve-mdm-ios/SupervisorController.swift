@@ -506,7 +506,7 @@ class SupervisorInfoCell: UITableViewCell {
         addConstraints()
     }
     
-    /// `addConstraints()`
+    /// Add the constraints to the properties of the SupervisorInfoCell class 
     func addConstraints() {
         
         nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
