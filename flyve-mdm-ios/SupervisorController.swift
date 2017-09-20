@@ -247,7 +247,7 @@ extension SupervisorController: MFMailComposeViewControllerDelegate {
 // MARK: MFMessageComposeViewControllerDelegate
 extension SupervisorController: MFMessageComposeViewControllerDelegate {
     
-    /// implemente delegate `didFinishWith`
+    /// implement delegate `didFinishWith`
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
     }
