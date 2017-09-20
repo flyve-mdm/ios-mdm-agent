@@ -60,7 +60,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         return view
     }()
     
-    /// textField `UITextField`
+    /// This property contains the configuration of the text field
     let textField: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
