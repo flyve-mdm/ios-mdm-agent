@@ -493,7 +493,7 @@ class SupervisorInfoCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    /// `setupView()`
+    /// Set up the initial configuration of the cell's views
     func setupView() {
         
         backgroundColor = .clear
