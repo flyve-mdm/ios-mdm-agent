@@ -147,7 +147,7 @@ class ViewController: UIViewController {
         return imageView
     }()
     
-    /// loadingIndicatorView `UIActivityIndicatorView`
+    /// This property contains the configuration of the loading indicator view
     let loadingIndicatorView: UIActivityIndicatorView = {
         
         let loading = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
