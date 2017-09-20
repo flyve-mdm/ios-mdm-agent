@@ -333,7 +333,7 @@ extension SupervisorController: UITableViewDataSource {
 class SupervisorMainCell: UITableViewCell {
     
     // MARK: Properties
-    /// photoImageView `UIImageView`
+    /// This property contains the configuration of the photo image view
     let photoImageView: UIImageView = {
         
         let imageView = UIImageView()
