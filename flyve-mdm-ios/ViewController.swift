@@ -123,7 +123,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    /// enrollBotton `UIButton`
+    /// This property contains the configuration of the enroll botton
     lazy var enrollBotton: UIButton = {
         
         let button = UIButton(type: UIButtonType.custom)
