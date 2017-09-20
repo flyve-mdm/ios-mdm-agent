@@ -71,7 +71,7 @@ class UserFormController: FormViewController {
                                          action: #selector(self.done))
     }
     
-    /// `loadForm()`
+    /// Load form information
     func loadForm() {
         // Section info user
         let sectionInfo = FormSection(headerTitle: nil, footerTitle: nil)
