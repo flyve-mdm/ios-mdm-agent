@@ -117,7 +117,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         typeButton.addTarget(self, action: #selector(showOptions(_:)), for: .touchUpInside)
     }
     
-    /// `override update()`
+    /// Update the view of the cell
     override func update() {
         super.update()
         
