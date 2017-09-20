@@ -54,7 +54,7 @@ class ViewController: UIViewController {
     /// `topic`
     var topic: String?
     
-    /// logoImageView `UIImageView`
+    /// This property contains the configuration of the logo image view
     let logoImageView: UIImageView = {
         
         let imageView = UIImageView(image: UIImage(named: "logo"))
