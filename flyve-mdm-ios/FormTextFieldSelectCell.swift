@@ -35,7 +35,7 @@ class FormTextFieldSelectCell: FormBaseCell {
     fileprivate var customConstraints: [AnyObject] = []
     
     // MARK: Cell views
-    /// typeButton `UIButton`
+    /// This property contains the configuration of the type button
     let typeButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
