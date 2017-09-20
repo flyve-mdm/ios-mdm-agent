@@ -43,7 +43,7 @@ class SupervisorController: UIViewController {
     /// `cellIentitydMain`
     var entity = ""
     
-    /// supervisorTableView `UITableView`
+    /// This property contains the configuration of the supervisor table view
     lazy var supervisorTableView: UITableView = {
         
         let table = UITableView(frame: .zero, style: .plain)
