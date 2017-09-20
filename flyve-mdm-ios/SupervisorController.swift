@@ -423,7 +423,7 @@ class SupervisorMainCell: UITableViewCell {
 class SupervisorInfoCell: UITableViewCell {
     
     // MARK: Properties
-    /// firstBotton `UIImageView`
+    /// This property contains the configuration of the first botton view
     lazy var firstBotton: UIImageView = {
         
         let imageView = UIImageView()
