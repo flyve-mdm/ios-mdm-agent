@@ -388,7 +388,7 @@ class SupervisorMainCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    /// `setupView()`
+    /// Set up the initial configuration of the controller's views
     func setupView() {
         
         backgroundColor = .white
