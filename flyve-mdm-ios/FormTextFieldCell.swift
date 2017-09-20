@@ -56,7 +56,7 @@ class FormTextFieldCell: FormBaseCell {
         return text
     }()
     
-    /// `setupViews(0`
+    /// Set up the initial configuration of the cell's view
     func setupViews() {
         
         selectionStyle = .none
