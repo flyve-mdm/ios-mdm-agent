@@ -62,7 +62,7 @@ class TopicLogController: UIViewController {
     }()
     
     // MARK: Init
-    /// `override viewWillAppear`
+    /// The navigation bar is set to be shown in view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
