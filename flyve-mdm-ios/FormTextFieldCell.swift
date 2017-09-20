@@ -65,7 +65,7 @@ class FormTextFieldCell: FormBaseCell {
         contentView.addSubview(separatorView)
     }
     
-    /// `addConstraints()`
+    /// Add the constraints to the view of the cell
     func addConstraints() {
 
         textField.heightAnchor.constraint(equalToConstant: 44).isActive = true
