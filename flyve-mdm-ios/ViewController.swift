@@ -511,7 +511,7 @@ extension ViewController: HttpRequestDelegate {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
 
-    /// `responseGetPluginFlyvemdmAgent`
+    /// Set in storage the data with the given key
     func responseGetPluginFlyvemdmAgent(data: [String: AnyObject]) {
 
         setStorage(value: data as AnyObject, key: "mdmAgent")
