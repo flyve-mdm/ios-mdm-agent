@@ -97,7 +97,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    /// statusLabel `UILabel`
+    /// This property contains the configuration of the status label
     let statusLabel: UILabel = {
         
         let label = UILabel()
