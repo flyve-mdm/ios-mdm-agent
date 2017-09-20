@@ -216,7 +216,7 @@ class ViewController: UIViewController {
         self.addConstraints()
     }
 
-    /// `addConstraints()`
+    /// Add the constraints of the view
     func addConstraints() {
 
         self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
