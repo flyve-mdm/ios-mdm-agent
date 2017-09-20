@@ -107,7 +107,7 @@ class SupervisorController: UIViewController {
         self.view.addSubview(self.supervisorTableView)
     }
     
-    /// `addConstraints()`
+    /// Add the constraints to the supervisor table view
     func addConstraints() {
         supervisorTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         supervisorTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
