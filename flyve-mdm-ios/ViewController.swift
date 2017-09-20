@@ -185,7 +185,7 @@ class ViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    /// `override loadView()`
+    /// Load the customized view that the controller manages
     override func loadView() {
         super.loadView()
 
