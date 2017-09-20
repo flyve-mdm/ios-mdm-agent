@@ -90,7 +90,7 @@ class FormTextFieldCell: FormBaseCell {
 
     }
     
-    /// `override update()`
+    /// Updates the view of the cell
     override func update() {
         super.update()
         
