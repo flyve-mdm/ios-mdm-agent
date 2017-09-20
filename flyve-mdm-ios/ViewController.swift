@@ -81,7 +81,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    /// titleLabel `UILabel`
+    /// This property contains the configuration of the title label
     let titleLabel: UILabel = {
         
         let label = UILabel()
