@@ -63,7 +63,7 @@ class SupervisorController: UIViewController {
     }()
     
     // MARK: Init
-    /// `override viewWillAppear(_ animated: Bool)`
+    /// The navigation bar is set to be shown in view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
