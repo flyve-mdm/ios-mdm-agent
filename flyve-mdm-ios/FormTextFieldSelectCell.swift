@@ -107,7 +107,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive =  true
     }
     
-    /// `override configure()`
+    /// Configures the view of the cell
     override func configure() {
         super.configure()
         setupViews()
