@@ -463,7 +463,7 @@ class SupervisorInfoCell: UITableViewCell {
         return label
     }()
     
-    /// footerView `UIView`
+    /// This property contains the configuration of the footer view
     let footerView: UIView = {
         
         let view = UIView()
