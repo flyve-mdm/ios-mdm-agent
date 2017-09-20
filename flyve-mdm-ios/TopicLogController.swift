@@ -79,7 +79,7 @@ class TopicLogController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.receivedMessage(notification:)), name: name, object: nil)
     }
     
-    /// `setupViews()`
+    /// Set up the initial configuration of the controller's view
     func setupViews() {
 
         self.view.backgroundColor = .white
