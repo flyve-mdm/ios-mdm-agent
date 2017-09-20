@@ -179,7 +179,7 @@ class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// `override viewWillAppear(_ animated: Bool) `
+    /// Hides the navigation bar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
