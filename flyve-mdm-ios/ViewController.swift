@@ -404,7 +404,7 @@ extension ViewController: HttpRequestDelegate {
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
-    /// `responsePluginFlyvemdmEntityConfig`
+    /// Set in the storage the data with the given key
     func responsePluginFlyvemdmEntityConfig(data: [String : AnyObject]) {
         setStorage(value: data as AnyObject, key: "supervisor")
     }
