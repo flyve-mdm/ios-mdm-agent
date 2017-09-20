@@ -263,7 +263,7 @@ class ViewController: UIViewController {
         self.addConstraintsEmpty()
     }
 
-    /// `addConstraintsEmpty()`
+    /// Add the constraints to the view when it is empty
     func addConstraintsEmpty() {
 
         self.logoImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 72).isActive = true
