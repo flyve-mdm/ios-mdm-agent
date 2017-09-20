@@ -115,7 +115,7 @@ class FormTextFieldCell: FormBaseCell {
         }
     }
     
-    /// `override firstResponderElement()`
+    /// Returns the first responder element
     open override func firstResponderElement() -> UIResponder? {
         return textField
     }
