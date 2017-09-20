@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         return imageView
     }()
     
-    /// messageLabel `UILabel`
+    /// This property contains the configuration of the message label
     let messageLabel: UILabel = {
         
         let label = UILabel()
