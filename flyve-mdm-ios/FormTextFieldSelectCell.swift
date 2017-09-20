@@ -164,7 +164,7 @@ class FormTextFieldSelectCell: FormBaseCell {
     }
     
     // MARK: Actions
-    /// `editingChanged(_ sender: UITextField)`
+    /// Update data when change the UITextField
     internal func editingChanged(_ sender: UITextField) {
         guard let text = sender.text, text.characters.count > 0 else { row?.value = nil; update(); return }
         row?.value = text as AnyObject
