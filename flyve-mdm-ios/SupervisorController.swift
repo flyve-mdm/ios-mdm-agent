@@ -87,7 +87,7 @@ class SupervisorController: UIViewController {
         self.addConstraints()
     }
     
-    /// `setupViews()`
+    /// Set up the initial configuration of the controller's view
     func setupViews() {
         self.view.backgroundColor = .white
         
