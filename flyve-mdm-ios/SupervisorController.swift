@@ -383,7 +383,7 @@ class SupervisorMainCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// `override layoutSubviews()`
+    /// `override layoutSubviews()`, uses the constraints to determine the size and position of any subviews
     override func layoutSubviews() {
         super.layoutSubviews()
     }
