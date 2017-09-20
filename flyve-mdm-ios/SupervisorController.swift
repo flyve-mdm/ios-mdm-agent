@@ -238,7 +238,7 @@ extension SupervisorController: HttpRequestDelegate {
 // MARK: MFMailComposeViewControllerDelegate
 extension SupervisorController: MFMailComposeViewControllerDelegate {
     
-    /// implemente delegate `didFinishWith`
+    /// implement delegate `didFinishWith`
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)
     }
