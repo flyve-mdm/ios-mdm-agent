@@ -409,7 +409,7 @@ extension ViewController: HttpRequestDelegate {
         setStorage(value: data as AnyObject, key: "supervisor")
     }
     
-    /// `errorPluginFlyvemdmEntityConfig`
+    /// If there is an error with the entity configuration logs the error message
     func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
