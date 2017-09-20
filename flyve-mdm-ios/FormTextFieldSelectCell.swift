@@ -42,7 +42,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         return button
     }()
     
-    /// verticalView `UIView`
+    /// This property contains the configuration of the vertical view
     let verticalView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
