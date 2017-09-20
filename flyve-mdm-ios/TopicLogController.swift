@@ -87,7 +87,7 @@ class TopicLogController: UIViewController {
         self.view.addSubview(self.tableView)
     }
 
-    /// `addConstraints()`
+    /// Add the constraints to the table view
     func addConstraints() {
 
         self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
