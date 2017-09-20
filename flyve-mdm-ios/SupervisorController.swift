@@ -69,7 +69,7 @@ class SupervisorController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
-    /// `override loadView()`
+    /// Load the customized view that the controller manages
     override func loadView() {
         
         if let supervisorObject = getStorage(key: "supervisor") as? [String: AnyObject] {
