@@ -177,7 +177,7 @@ class LogCell: UITableViewCell {
         return textView
     }()
 
-    /// `setupViews()`
+    /// Set up the initial configuration of the class view
     func setupViews() {
 
         self.contentView.addSubview(self.messageTextView)
