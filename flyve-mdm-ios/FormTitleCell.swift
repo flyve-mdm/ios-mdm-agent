@@ -52,7 +52,7 @@ class FormTitleCell: FormBaseCell {
         return view
     }()
     
-    /// `override configure()`
+    /// Configures the view of the cell
     override func configure() {
         super.configure()
 
