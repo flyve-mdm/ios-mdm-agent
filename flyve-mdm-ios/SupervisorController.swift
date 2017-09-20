@@ -438,7 +438,7 @@ class SupervisorInfoCell: UITableViewCell {
         return imageView
     }()
     
-    /// secondBotton `UIImageView`
+    /// This property contains the configuration of the second botton view
     lazy var secondBotton: UIImageView = {
         
         let imageView = UIImageView()
