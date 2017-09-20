@@ -479,7 +479,11 @@ extension ViewController: HttpRequestDelegate {
         }
     }
     
-    /// `errorChangeActiveProfile`
+    /**
+        If the state of the enroll is fail, show in the status label the error message
+
+        - Parameter string: the error message
+     */
     func errorChangeActiveProfile(error: [String: String]) {
 
         UserDefaults.standard.set(nil, forKey: "dataUser")
