@@ -163,7 +163,7 @@ class LogCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// messageTextView `UITextView`
+    /// This property contains the configuration of the message text view
     let messageTextView: UITextView = {
 
         let textView = UITextView()
