@@ -136,7 +136,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    /// playImageView `UIImageView`
+    /// This property contains the configuration of the play image view
     let playImageView: UIImageView = {
         
         let imageView = UIImageView(image: UIImage(named: "play"))
