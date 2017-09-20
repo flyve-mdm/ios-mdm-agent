@@ -51,7 +51,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         return view
     }()
     
-    /// separatorView `UIView`
+    /// This property contains the configuration of the separator view
     let separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
