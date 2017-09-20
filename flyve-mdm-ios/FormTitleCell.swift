@@ -32,7 +32,7 @@ class FormTitleCell: FormBaseCell {
     
     // MARK: Cell views
     
-    /// titleLabel `UILabel`
+    /// This property contains the configuration of the title label
     lazy var titleLabel: UILabel = {
         
         let label = UILabel()
