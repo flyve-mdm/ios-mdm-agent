@@ -35,7 +35,7 @@ class FormTextFieldCell: FormBaseCell {
     fileprivate var customConstraints: [AnyObject] = []
     
     // MARK: Cell views
-    /// separatorView `UIView`
+    /// This property contains the configuration of the separtor view
     let separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
