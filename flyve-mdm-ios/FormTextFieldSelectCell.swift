@@ -154,7 +154,11 @@ class FormTextFieldSelectCell: FormBaseCell {
         return textField
     }
     
-    /// `override formRowCanBecomeFirstResponder()`
+    /** 
+        Asks if the form row can become first responder
+ 
+        - Returns: boolean, true can become first responder
+     */
     open override class func formRowCanBecomeFirstResponder() -> Bool {
         return true
     }
