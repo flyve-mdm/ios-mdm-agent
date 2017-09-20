@@ -83,7 +83,7 @@ class FormTextFieldSelectCell: FormBaseCell {
         contentView.addSubview(separatorView)
     }
     
-    /// `addConstraints()`
+    /// Add the constraints to the view of the cell
     func addConstraints() {
         
         typeButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
