@@ -499,7 +499,11 @@ extension ViewController: HttpRequestDelegate {
         }
     }
     
-    /// `errorPluginFlyvemdmAgent`
+    /**
+        If the state of the enroll is fail, show in the status label the error message and logs it
+
+        - Parameter string: the error message
+     */
     func errorPluginFlyvemdmAgent(error: [String: String]) {
 
         self.enrollState(.fail)
