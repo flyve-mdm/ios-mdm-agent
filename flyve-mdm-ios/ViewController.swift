@@ -349,7 +349,11 @@ class ViewController: UIViewController {
 // MARK: HttpRequestDelegate
 extension ViewController: HttpRequestDelegate {
 
-    /// `responseInitSession`
+    /** 
+        Get the current session
+
+        - Parameter data: a string with the session token
+     */
     func responseInitSession(data: [String: AnyObject]) {
 
         if let session_token = data["session_token"] as? String {
