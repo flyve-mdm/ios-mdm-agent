@@ -373,7 +373,7 @@ extension ViewController: HttpRequestDelegate {
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
 
-    /// `responseGetFullSession`
+    /// Change the active profile to the profile id indicated
     func responseGetFullSession(data: [String: AnyObject]) {
 
         if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
