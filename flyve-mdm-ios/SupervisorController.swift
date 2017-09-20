@@ -400,7 +400,7 @@ class SupervisorMainCell: UITableViewCell {
         addConstraints()
     }
     
-    /// `addConstraints()`
+    /// Add the constraints to the properties of the SupervisorMainCell class
     func addConstraints() {
         
         photoImageView.widthAnchor.constraint(equalToConstant: 60.0).isActive = true
