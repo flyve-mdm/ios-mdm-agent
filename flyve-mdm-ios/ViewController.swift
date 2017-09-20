@@ -491,7 +491,7 @@ extension ViewController: HttpRequestDelegate {
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
-    /// `responsePluginFlyvemdmAgent`
+    /// Get the MDM agent profile according to the id
     func responsePluginFlyvemdmAgent(data: [String: AnyObject]) {
 
         if let id = data["id"] as? Int {
