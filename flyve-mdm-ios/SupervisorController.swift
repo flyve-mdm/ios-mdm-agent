@@ -246,7 +246,11 @@ extension SupervisorController: HttpRequestDelegate {
         setStorage(value: data as AnyObject, key: "supervisor")
     }
     
-    /// `errorPluginFlyvemdmEntityConfig`
+    /** 
+        If there is an error regarding the PluginFlyvemdmEntityConfig, logs the message
+
+        -Parameter string: the error message
+     */
     func errorPluginFlyvemdmEntityConfig(error: [String : String]) {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
