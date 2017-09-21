@@ -174,7 +174,11 @@ class SupervisorController: UIViewController {
 // MARK: HttpRequestDelegate
 extension SupervisorController: HttpRequestDelegate {
     
-    /// `responseInitSession`
+    /** 
+        Get the current session in response to the InitSession
+
+        - Parameter data: a string with the session token
+     */
     func responseInitSession(data: [String: AnyObject]) {
         
         if let session_token = data["session_token"] as? String {
