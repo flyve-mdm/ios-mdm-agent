@@ -644,7 +644,11 @@ extension MainController: HttpRequestDelegate {
         }
     }
     
-    /// `errorChangeActiveProfile`
+    /** 
+        If there is an error regarding the ChangeActiveProfile, logs the message
+
+        -Parameter string: the error message
+     */
     func errorChangeActiveProfile(error: [String: String]) {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
