@@ -187,7 +187,11 @@ extension SupervisorController: HttpRequestDelegate {
         }
     }
     
-    /// `errorInitSession`
+    /** 
+        If there is an error regarding the InitSession, logs the message
+
+        -Parameter string: the error message
+     */
     func errorInitSession(error: [String: String]) {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
