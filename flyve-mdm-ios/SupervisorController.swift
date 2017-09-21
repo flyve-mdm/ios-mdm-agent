@@ -225,7 +225,7 @@ extension SupervisorController: HttpRequestDelegate {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
     
-    /// `responseChangeActiveProfile`
+    /// Get the Entity Config in response to ChangeActiveProfile
     func responseChangeActiveProfile() {
         
         self.httpRequest?.requestPluginFlyvemdmEntityConfig(entityID: entity)
