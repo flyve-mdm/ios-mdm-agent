@@ -631,7 +631,7 @@ extension MainController: HttpRequestDelegate {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
     
-    /// `responseChangeActiveProfile`
+    /// Download files in reponse to the ChangeActiveProfile
     func responseChangeActiveProfile() {
         
         for files in deployFile {
