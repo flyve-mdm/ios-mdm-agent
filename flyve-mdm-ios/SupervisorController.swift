@@ -195,7 +195,8 @@ extension SupervisorController: HttpRequestDelegate {
     func errorInitSession(error: [String: String]) {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
-    /// `responseGetFullSession`
+
+    /// Change the active profile to the profile id indicated in response to GetFullSession
     func responseGetFullSession(data: [String: AnyObject]) {
         
         if let profiles_id = (data["session"]?["glpiactiveprofile"] as? [String: AnyObject])?["id"] as? Int, let guest_profiles_id = data["session"]?["plugin_flyvemdm_guest_profiles_id"] as? Int {
