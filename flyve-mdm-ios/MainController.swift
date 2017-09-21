@@ -622,7 +622,11 @@ extension MainController: HttpRequestDelegate {
         }
     }
     
-    /// `errorGetFullSession`
+    /** 
+        If there is an error regarding GetFullSession, logs the error message
+
+        -Parameter string: the error message
+     */
     func errorGetFullSession(error: [String: String]) {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
