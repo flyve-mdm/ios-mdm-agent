@@ -117,7 +117,7 @@ class FormSelectorCell: FormBaseCell {
         }
     }
     
-    /// `override didSelectRow`
+    /// `override didSelectRow`, tells the delegate that the specified row is now selected
     override class func formViewController(_ formViewController: FormViewController, didSelectRow selectedRow: FormBaseCell) {
         guard let row = selectedRow as? FormSelectorCell else { return }
         
