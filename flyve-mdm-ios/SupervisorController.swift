@@ -240,7 +240,7 @@ extension SupervisorController: HttpRequestDelegate {
         Logger.log(message: error["message"] ?? "", type: .error)
     }
     
-    /// `responsePluginFlyvemdmEntityConfig`
+    /// Set in local storage the data with the given key in response to the PluginFlyvemdmEntityConfig
     func responsePluginFlyvemdmEntityConfig(data: [String : AnyObject]) {
 
         setStorage(value: data as AnyObject, key: "supervisor")
