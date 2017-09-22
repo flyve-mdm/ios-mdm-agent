@@ -559,7 +559,7 @@ extension MainController: CocoaMQTTDelegate {
         print("didSubscribeTopic to \(topic)")
     }
 
-    /// `didUnsubscribeTopic`
+    /// Implements the CocoaMQTT Library, prints a message when the MQTT client unsubscribed from a topic succesfully
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
         print("didUnsubscribeTopic to \(topic)")
     }
