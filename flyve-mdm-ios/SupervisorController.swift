@@ -495,7 +495,7 @@ class SupervisorInfoCell: UITableViewCell {
     }()
     
     // MARK: Init
-    /// `override init`
+    /// init method
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
