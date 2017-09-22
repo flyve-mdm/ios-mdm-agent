@@ -574,7 +574,7 @@ extension MainController: CocoaMQTTDelegate {
         print("didReceivePong")
     }
     
-    /// `mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?)`
+    /// Implements the CocoaMQTT Library, prints a message when the MQTT client disconnected
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("mqttDidDisconnect")
         statusView.backgroundColor = .red
