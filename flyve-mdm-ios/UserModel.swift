@@ -95,7 +95,8 @@ class UserModel: NSObject, NSCoding {
         self.administrativeNumber = decoder.decodeObject(forKey: "administrativeNumber") as? String ?? ""
         self.picture = decoder.decodeObject(forKey: "picture") as? UIImage ?? UIImage(named: "picture")!
     }
-    
+
+    /// Codifies the object
     func encode(with coder: NSCoder) {
         coder.encode(firstName, forKey: "firstName")
         coder.encode(lastName, forKey: "lastName")
