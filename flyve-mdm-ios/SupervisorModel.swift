@@ -44,6 +44,7 @@ class SupervisorModel: NSObject, NSCoding {
         self.picture = data["picture"] as? String ?? defaultValue
     }
     
+    /// Decodifies the object
     required init(coder decoder: NSCoder) {
         let defaultValue = "not available"
         self.name = decoder.decodeObject(forKey: "name") as? String ?? defaultValue
