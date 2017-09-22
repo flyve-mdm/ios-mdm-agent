@@ -54,6 +54,7 @@ class SupervisorModel: NSObject, NSCoding {
         self.picture = decoder.decodeObject(forKey: "picture") as? String ?? defaultValue
     }
     
+    /// Codifies the object
     func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")
         coder.encode(email, forKey: "email")
