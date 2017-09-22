@@ -95,7 +95,8 @@ class DeepLinkModel: NSObject, NSCoding {
         self.userToken = decoder.decodeObject(forKey: "userToken") as? String ?? ""
         self.invitationToken = decoder.decodeObject(forKey: "invitationToken") as? String ?? ""
     }
-    
+
+    /// Codifies the object
     func encode(with coder: NSCoder) {
         coder.encode(url, forKey: "url")
         coder.encode(userToken, forKey: "userToken")
