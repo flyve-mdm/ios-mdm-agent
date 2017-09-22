@@ -569,7 +569,7 @@ extension MainController: CocoaMQTTDelegate {
         print("didPing")
     }
 
-    /// `mqttDidReceivePong(_ mqtt: CocoaMQTT)`
+    /// Implements the CocoaMQTT Library, prints a message when the pong is received
     func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
         print("didReceivePong")
     }
