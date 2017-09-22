@@ -41,7 +41,7 @@ class MainCell: UITableViewCell {
         addConstraints()
     }
 
-    /// `overrride init`
+    /// Decodifies the object
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
