@@ -40,6 +40,7 @@ class UserModel: NSObject, NSCoding {
     var administrativeNumber: String
     var picture: UIImage
     
+    /// init method
     init(data: [String: AnyObject]) {
         
         let defaultValue = "not available"
