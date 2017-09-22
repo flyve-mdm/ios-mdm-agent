@@ -369,7 +369,7 @@ extension MainController: CocoaMQTTDelegate {
         completionHandler(true)
     }
     
-    /// `didConnect`
+    /// Implements the CocoaMQTT Library, prints a message when connected succesfully
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
         print("didConnect \(host):\(port)")
     }
