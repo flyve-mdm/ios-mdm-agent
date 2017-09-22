@@ -82,6 +82,7 @@ class UserModel: NSObject, NSCoding {
         self.emails = emailModel as? [EmailModel] ?? []
     }
     
+    /// Decodifies the object
     required init(coder decoder: NSCoder) {
         self.firstName = decoder.decodeObject(forKey: "firstName") as? String ?? ""
         self.lastName = decoder.decodeObject(forKey: "lastName") as? String ?? ""
