@@ -564,7 +564,7 @@ extension MainController: CocoaMQTTDelegate {
         print("didUnsubscribeTopic to \(topic)")
     }
 
-    /// `mqttDidPing(_ mqtt: CocoaMQTT)`
+    /// Implements the CocoaMQTT Library, prints a message when it determines if the broker and client are alive and reachable
     func mqttDidPing(_ mqtt: CocoaMQTT) {
         print("didPing")
     }
