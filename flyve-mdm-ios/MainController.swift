@@ -374,7 +374,7 @@ extension MainController: CocoaMQTTDelegate {
         print("didConnect \(host):\(port)")
     }
     
-    /// `didConnectAck`
+    /// Implements the CocoaMQTT Library, prints a message when connected succesfully to the server
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         print("didConnectAck: \(ack)，rawValue: \(ack.rawValue)")
 
