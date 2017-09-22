@@ -31,7 +31,7 @@ import UIKit
 class MainCell: UITableViewCell {
     
     // MARK: Init
-    /// `overrride init`
+    /// init method
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
