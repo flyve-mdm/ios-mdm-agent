@@ -390,7 +390,7 @@ class SupervisorMainCell: UITableViewCell {
     }()
     
     // MARK: Init
-    /// `override init method`
+    /// init method
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
