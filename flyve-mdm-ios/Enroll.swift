@@ -89,6 +89,7 @@ class DeepLinkModel: NSObject, NSCoding {
         self.invitationToken = data["invitation_token"] as? String ?? ""
     }
     
+    /// Decodifies the object
     required init(coder decoder: NSCoder) {
         self.url = decoder.decodeObject(forKey: "url") as? String ?? ""
         self.userToken = decoder.decodeObject(forKey: "userToken") as? String ?? ""
