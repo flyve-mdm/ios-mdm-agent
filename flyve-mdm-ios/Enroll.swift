@@ -36,7 +36,8 @@ class EnrollModel: NSObject, NSCoding {
     var lastname: String
     var version: String
     var type: String
-    
+
+    /// init method
     init(data: [String: AnyObject]) {
         
         self.invitationToken = data["_invitation_token"] as? String ?? ""
