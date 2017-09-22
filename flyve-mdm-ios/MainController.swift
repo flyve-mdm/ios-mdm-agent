@@ -394,7 +394,7 @@ extension MainController: CocoaMQTTDelegate {
         }
     }
     
-    /// `didPublishMessage`
+    /// Implements the CocoaMQTT Library, prints a message when the MQTT client published succesfully
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
         print("didPublishMessage with message: \(String(describing: message.string!))")
     }
