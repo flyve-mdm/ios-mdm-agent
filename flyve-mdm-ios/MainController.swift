@@ -404,7 +404,7 @@ extension MainController: CocoaMQTTDelegate {
         print("didPublishAck with id: \(id)")
     }
 
-    /// `didReceiveMessage`
+    /// Implements the CocoaMQTT Library, this method is called when the message is received
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
         NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic])
