@@ -34,6 +34,7 @@ class SupervisorModel: NSObject, NSCoding {
     var website: String
     var picture: String
     
+    /// init method
     init(data: [String: AnyObject]) {
         let defaultValue = "not available"
         self.name = data["name"] as? String ?? defaultValue
