@@ -554,7 +554,7 @@ extension MainController: CocoaMQTTDelegate {
         }
     }
 
-    /// `didSubscribeTopic`
+    /// Implements the CocoaMQTT Library, prints a message when the MQTT client subscribed to a topic succesfully
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
         print("didSubscribeTopic to \(topic)")
     }
