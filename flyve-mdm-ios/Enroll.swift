@@ -62,6 +62,7 @@ class EnrollModel: NSObject, NSCoding {
         self.type = decoder.decodeObject(forKey: "type") as? String ?? "apple"
     }
     
+    /// Codifies the object    
     func encode(with coder: NSCoder) {
         coder.encode(invitationToken, forKey: "invitationToken")
         coder.encode(serial, forKey: "serial")
