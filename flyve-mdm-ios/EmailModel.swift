@@ -39,6 +39,7 @@ class EmailModel: NSObject, NSCoding {
         self.email = data["email"] as? String ?? ""
     }
     
+    /// Decodifies the object
     required init(coder decoder: NSCoder) {
         self.type = decoder.decodeObject(forKey: "type") as? String ?? ""
         self.email = decoder.decodeObject(forKey: "email") as? String ?? ""
