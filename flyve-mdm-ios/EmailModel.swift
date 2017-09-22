@@ -45,6 +45,7 @@ class EmailModel: NSObject, NSCoding {
         self.email = decoder.decodeObject(forKey: "email") as? String ?? ""
     }
     
+    /// Codifies the object
     func encode(with coder: NSCoder) {
         coder.encode(type, forKey: "type")
         coder.encode(email, forKey: "email")
