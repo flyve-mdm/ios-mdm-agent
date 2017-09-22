@@ -399,7 +399,7 @@ extension MainController: CocoaMQTTDelegate {
         print("didPublishMessage with message: \(String(describing: message.string!))")
     }
     
-    /// `didPublishAck`
+    /// Implements the CocoaMQTT Library, prints a message when the MQTT client published succesfully
     func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
         print("didPublishAck with id: \(id)")
     }
