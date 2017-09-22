@@ -50,6 +50,7 @@ class EnrollModel: NSObject, NSCoding {
         self.type = data["type"] as? String ?? "apple"
     }
     
+    /// Decodifies the object
     required init(coder decoder: NSCoder) {
         self.invitationToken = decoder.decodeObject(forKey: "invitationToken") as? String ?? ""
         self.serial = decoder.decodeObject(forKey: "serial") as? String ?? ""
