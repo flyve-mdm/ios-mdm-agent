@@ -81,6 +81,7 @@ class DeepLinkModel: NSObject, NSCoding {
     var userToken: String
     var invitationToken: String
     
+    /// init method
     init(data: [String: AnyObject]) {
         
         self.url = data["url"] as? String ?? ""
