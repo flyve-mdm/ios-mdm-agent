@@ -1,6 +1,9 @@
+title: ios agent
 email: ml-flyvemdm@teclib.com
-baseurl: "/flyve-mdm-ios-agent" 
-url: "http://flyve.org"
+twitter: flyvemdm
+baseurl: "/flyve-mdm-ios-agent"
+url: "http://flyve.org"   
+image: http://flyve.org/flyve-mdm-ios-agent/images/logo2.png
 
 # Build settings
 markdown: kramdown
