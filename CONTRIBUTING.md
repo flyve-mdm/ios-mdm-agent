@@ -48,7 +48,7 @@ You can _**request**_ a new feature by submitting an issue, and if you would lik
 
 ### Submit an Issue
 
-Before submitting the issue please check the [issue tracker](https://github.com/flyve-mdm/flyve-mdm-ios-agent/issues), there exists the possibility that the bug was already reported by other contributor. 
+Before submitting the issue please check the [issue tracker](https://github.com/flyve-mdm/flyve-mdm-ios-agent/issues), there exists the possibility that the bug was already reported by other contributor.
 
 This way you help us to maximize the effort we can spend fixing issues and adding new features, by not reporting duplicate issues.
 
@@ -56,7 +56,7 @@ We'll work very hard to fix all the issues without delay, but before fixing it w
 
 - Overview of the Issue - if an error is being thrown a description of the problem is extremely helpful
 - Motivation for or Use Case - explain why this is a bug for you
-- Inventory Agent Version(s)
+- Agent Version(s)
 - Device Operating System & Model - is this a problem with all devices or only specific ones?
 - Reproduce the Error - provide a live example or an unambiguous set of steps.
 - Related Issues - has a similar issue been reported before?
@@ -131,5 +131,3 @@ Here is a detailed guide of [Testing with Xcode](https://developer.apple.com/lib
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' \
   test
-
-
