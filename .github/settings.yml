@@ -1,7 +1,7 @@
 repository:
-  name: flyve-mdm-ios-agent
+  name: ios-mdm-agent
   description: Flyve MDM Agent for iOS
-  homepage: http://flyve.org/flyve-mdm-ios-agent/
+  homepage: http://flyve.org/ios-mdm-agent/
   topics: flyve-mdm, ios, agent
   private: false
   has_issues: true
