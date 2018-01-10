@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.5.0)
+  - Alamofire (4.6.0)
   - CocoaAsyncSocket (7.5.1):
     - CocoaAsyncSocket/GCD (= 7.5.1)
   - CocoaAsyncSocket/GCD (7.5.1)
@@ -7,23 +7,23 @@ PODS:
     - CocoaAsyncSocket (~> 7.5.1)
     - SwiftyTimer (~> 2.0.0)
   - FileExplorer (1.0.4)
-  - FlyveMDMInventory (1.2.0)
+  - FlyveMDMInventory (1.3.1)
   - SwiftyTimer (2.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5)
+  - Alamofire (~> 4.6)
   - CocoaMQTT
   - FileExplorer (~> 1.0.4)
-  - FlyveMDMInventory (~> 1.2)
+  - FlyveMDMInventory (~> 1.3)
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaMQTT: 014fd1f0793d376b207073ebb5b92a0c8bf8eb2e
   FileExplorer: 1f7fbfa839ac391f0fb57b07eb289daa7c090a31
-  FlyveMDMInventory: d3a8e0391d8f2996d8aa9ab79ea03f211637aab7
+  FlyveMDMInventory: 8627ceb65e869737a80a0d4a271bb3a55ee7de8f
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
-PODFILE CHECKSUM: 573604fca983b3c72ab9ad49afcca18984ea7378
+PODFILE CHECKSUM: d433f7e6a59bcb7b68edbb90310c62d52c427686
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

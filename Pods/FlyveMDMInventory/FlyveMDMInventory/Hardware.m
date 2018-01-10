@@ -6,20 +6,22 @@
  * FlyveMDMInventory is a subproject of Flyve MDM. Flyve MDM is a mobile
  * device management software.
  *
- * FlyveMDMInventory is free software: you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 3
- * of the License, or (at your option) any later version.
+ * FlyveMDMInventory is Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * FlyveMDMInventory is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      13/06/17
  * @copyright Copyright © 2017 Teclib. All rights reserved.
- * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @license   Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  * @link      https://github.com/flyve-mdm/flyve-mdm-ios-inventory
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
@@ -246,7 +248,7 @@
     AVCaptureDevice *captureDevice = [self cameraWithPosition:AVCaptureDevicePositionFront];
     
     NSArray* availFormat=captureDevice.formats;
-    AVCaptureDeviceFormat *format = [[AVCaptureDeviceFormat alloc] init];
+    AVCaptureDeviceFormat *format = [AVCaptureDeviceFormat alloc];
     format = availFormat[availFormat.count-1];
 
     return [NSString stringWithFormat:@"%dx%d", format.highResolutionStillImageDimensions.width, format.highResolutionStillImageDimensions.height];
@@ -262,30 +264,54 @@
     AVCaptureDevice *captureDevice = [self cameraWithPosition:AVCaptureDevicePositionBack];
 
     NSArray* availFormat=captureDevice.formats;
-    AVCaptureDeviceFormat *format = [[AVCaptureDeviceFormat alloc] init];
+    AVCaptureDeviceFormat *format = [AVCaptureDeviceFormat alloc];
     format = availFormat[availFormat.count-1];
     
     return [NSString stringWithFormat:@"%dx%d", format.highResolutionStillImageDimensions.width, format.highResolutionStillImageDimensions.height];
 }
 
-- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition) position
-{
-    NSArray *captureDeviceType = @[AVCaptureDeviceTypeBuiltInWideAngleCamera,
-                                   AVCaptureDeviceTypeBuiltInTelephotoCamera,
-                                   AVCaptureDeviceTypeBuiltInDualCamera];
-    
-    AVCaptureDeviceDiscoverySession *captureDevice = [AVCaptureDeviceDiscoverySession
-                                                      discoverySessionWithDeviceTypes:captureDeviceType
-                                                      mediaType:AVMediaTypeVideo
-                                                      position:AVCaptureDevicePositionUnspecified];
-    
-    NSArray *devices = captureDevice.devices;
+- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition) position {
 
-    for (AVCaptureDevice *device in devices) {
-        if ([device position] == position) {
-            return device;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_2
+
+    @try {
+        NSArray *captureDeviceType = @[AVCaptureDeviceTypeBuiltInWideAngleCamera,
+                                       AVCaptureDeviceTypeBuiltInTelephotoCamera,
+                                       AVCaptureDeviceTypeBuiltInDualCamera];
+        AVCaptureDeviceDiscoverySession *captureDevice = [AVCaptureDeviceDiscoverySession
+                                                          discoverySessionWithDeviceTypes:captureDeviceType
+                                                          mediaType:AVMediaTypeVideo
+                                                          position:AVCaptureDevicePositionUnspecified];
+        
+        NSArray *devices = captureDevice.devices;
+        
+        for (AVCaptureDevice *device in devices) {
+            if ([device position] == position) {
+                return device;
+            }
         }
+    } @catch (NSException *exception) {
+        // Error
+        return nil;
     }
+
+#else
+    
+    @try {
+        NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+        for (AVCaptureDevice *device in devices) {
+            if ([device position] == position) {
+                return device;
+            }
+        }
+    
+    } @catch (NSException *exception) {
+        // Error
+        return nil;
+    }
+
+#endif
+
     return nil;
 }
 
