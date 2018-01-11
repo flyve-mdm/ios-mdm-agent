@@ -94,14 +94,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        guard let query = urlEnroll.queryItems?.first(where: { $0.name == "data" })?.value else {
+        guard var query = urlEnroll.queryItems?.first(where: { $0.name == "data" })?.value else {
             loadMainView(userToken: "", invitationToken: "")
             return true
         }
         
+        query += "="
+        
         var invitation = [String]()
         // CSV comma-separated values format
         // url; user token; invitation token; support name; support phone, support website; support email
+        
         if let csv = query.base64Decoded() {
             invitation = csv.components(separatedBy: "\\;")
         }
