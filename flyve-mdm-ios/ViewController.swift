@@ -27,6 +27,7 @@
 
 import Foundation
 import UIKit
+import FlyveMDMInventory
 
 /// enumerate states enrollment
 enum EnrollmentState {
@@ -446,37 +447,43 @@ extension ViewController: HttpRequestDelegate {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             inputDictionary["version"] = version
         }
-
-        jsonDictionary["input"] = inputDictionary as AnyObject
         
-        if let userInfo = notification.userInfo as? [String : AnyObject] {
-            userDictionary["firstname"] = userInfo["firstname"]
-            userDictionary["lastname"] = userInfo["lastname"]
-            userDictionary["language"] = userInfo["language"]
-            userDictionary["emails"] = userInfo["emails"]
-            userDictionary["phones"] = userInfo["phones"]
-        }
-        
-        let enrollInfo = EnrollModel(data: inputDictionary as [String : AnyObject])
-        setStorage(value: enrollInfo as AnyObject, key: "enroll")
-        
-        let user = UserModel(data: userDictionary)
-        setStorage(value: user as AnyObject, key: "dataUser")
-
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
-            // here "jsonData" is the dictionary encoded in JSON data
-            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
-            // here "decoded" is of type `Any`, decoded from JSON data
-            // you can now cast it with the right type
-            if let dictFromJSON = decoded as? [String : AnyObject] {
-                // use dictFromJSON
-                self.httpRequest?.requestPluginFlyvemdmAgent(parameters: dictFromJSON)
+        let inventory = InventoryTask()
+        inventory.execute(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "") { result in
+    
+            inputDictionary["inventory"] = result.base64Encoded()
+            
+            jsonDictionary["input"] = inputDictionary as AnyObject
+            
+            if let userInfo = notification.userInfo as? [String : AnyObject] {
+                userDictionary["firstname"] = userInfo["firstname"]
+                userDictionary["lastname"] = userInfo["lastname"]
+                userDictionary["language"] = userInfo["language"]
+                userDictionary["emails"] = userInfo["emails"]
+                userDictionary["phones"] = userInfo["phones"]
             }
-        } catch {
-            Logger.log(message: error.localizedDescription, type: .error)
-            debugPrint(error.localizedDescription)
-            self.loadingIndicatorView.stopAnimating()
+            
+            let enrollInfo = EnrollModel(data: inputDictionary as [String : AnyObject])
+            setStorage(value: enrollInfo as AnyObject, key: "enroll")
+            
+            let user = UserModel(data: userDictionary)
+            setStorage(value: user as AnyObject, key: "dataUser")
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
+                // here "jsonData" is the dictionary encoded in JSON data
+                let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
+                // here "decoded" is of type `Any`, decoded from JSON data
+                // you can now cast it with the right type
+                if let dictFromJSON = decoded as? [String : AnyObject] {
+                    // use dictFromJSON
+                    self.httpRequest?.requestPluginFlyvemdmAgent(parameters: dictFromJSON)
+                }
+            } catch {
+                Logger.log(message: error.localizedDescription, type: .error)
+                debugPrint(error.localizedDescription)
+                self.loadingIndicatorView.stopAnimating()
+            }
         }
     }
     
@@ -489,6 +496,7 @@ extension ViewController: HttpRequestDelegate {
 
         UserDefaults.standard.set(nil, forKey: "dataUser")
         self.enrollState(.fail)
+        print(error["message"] ?? "")
         self.statusLabel.text = "\(error["message"] ?? "")"
     }
     
