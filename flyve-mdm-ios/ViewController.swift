@@ -442,6 +442,7 @@ extension ViewController: HttpRequestDelegate {
         inputDictionary["firstname"] = notification.userInfo?["firstname"] as? String ?? ""
         inputDictionary["lastname"] = notification.userInfo?["lastname"] as? String ?? ""
         inputDictionary["type"] = "apple"
+        inputDictionary["has_system_permission"] = "0"
 
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             inputDictionary["version"] = version
