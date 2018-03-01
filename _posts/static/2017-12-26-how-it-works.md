@@ -6,13 +6,16 @@ title: How it works
 permalink: howtos/how-it-works
 description: What you need to know
 ---
-The Agent will take control of the iOS devices of your fleet allowing you to manage all the terminals by implementing the commands given through the dashboard.
 
-Therefore the Agent must be installed in the devices of your IT Infrastructure, you send an invitation to enroll and after the process is finished, you will be able to control the fleet through the dashboard.
+Flyve MDM Agent works with the [Web MDM Dashboard](http://flyve.org/web-mdm-dashboard/) and [Flyve MDM Plugin](http://flyve.org/glpi-plugin/) for GLPI.
 
-Thanks to the MQTT, a Machine to Machine protocol, the Agent is capable of maintaining a connection with the backend, which gives you remote control of your fleet.
+The Agent takes control of the iOS devices of your fleet and applies the policies and commands given from the Web Dashboard or GLPI interface.
 
-The Agent counts with an intuitive and simple User Interface which will help you through the enrollment process.
+To be able to implement this, both device and backend communicate with MQTT, a machine to machine protocol, which maintains the remote connectivity for management.
+
+### Process
+
+The user who owns the iOS device receives an invitation to his email account, the invitation contains a deeplink with it the App can start the enrollment, the user introduces his information and with the information provided by the Agent, the device is registered in the GLPI DB along with the user.
 
 <br>
 
@@ -22,7 +25,9 @@ The Agent counts with an intuitive and simple User Interface which will help you
 <img src="https://github.com/Naylin15/Screenshots/blob/master/ios-agent/enrollment.png?raw=true" alt="Enrollment" width="300">
 </div>
 
-It will also provide you information of the user and supervisor of the infrastructure.
+A fleet is created with the policies required by the Administrator, later the device is assigned to it, then the Agent applies immediately the commands sent through MQTT.
+
+The Agent provides the information of the supervisor of the device.
 
 <img src="https://github.com/Naylin15/Screenshots/blob/master/ios-agent/information.png?raw=true" alt="User information" width="300">
 
