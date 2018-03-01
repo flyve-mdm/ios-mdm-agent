@@ -4,7 +4,7 @@ howtos: true
 published: true
 title: How it works
 permalink: howtos/how-it-works
-description: A brief introduction
+description: What you need to know
 ---
 The Agent will take control of the iOS devices of your fleet allowing you to manage all the terminals by implementing the commands given through the dashboard.
 
