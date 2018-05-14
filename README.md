@@ -4,7 +4,9 @@
 
 [![License](https://img.shields.io/badge/license-LGPL_v3.0-blue.svg)](https://github.com/flyve-mdm/ios-mdm-agent/blob/develop/LICENSE.md)
 [![Follow twitter](https://img.shields.io/twitter/follow/FlyveMDM.svg?style=social&label=Twitter&style=flat-square)](https://twitter.com/FlyveMDM)
+[![Project Status: WIP](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-blue.svg)](https://t.me/flyvemdm)
+[![IRC Chat](https://img.shields.io/badge/IRC-%23flyvemdm-green.svg)](http://webchat.freenode.net/?channels=flyve-mdm)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Greenkeeper badge](https://badges.greenkeeper.io/flyve-mdm/ios-mdm-agent.svg)](https://greenkeeper.io/)
 [![GitHub release](https://img.shields.io/github/release/flyve-mdm/ios-mdm-agent.svg)](https://github.com/flyve-mdm/ios-mdm-agent/releases)
@@ -21,6 +23,7 @@ To get started, check out [Flyve MDM Website](https://flyve-mdm.com/)!
 * [Documentation](#documentation)
 * [Versioning](#versioning)
 * [Contact](#contact)
+* [Professional Services](#professional-services)
 * [Contribute](#contribute)
 * [Copying](#copying)
 
@@ -38,17 +41,17 @@ The iOS Agent will help you to:
 * Delete, partially or totally, your data in case of loss or theft
 * Create an inventory of all of your company terminals
 * Keep control and protect yourself from cyber-attacks:
-    * Set the level of complexity of your passwords
-    * Activate mobile device encryption
-    * Lock the mobile device remotely
-    * Control the authorisation for the use of the camera
-    * Erase all data from the remote terminal (reset)
+  * Set the level of complexity of your passwords
+  * Activate mobile device encryption
+  * Lock the mobile device remotely
+  * Control the authorisation for the use of the camera
+  * Erase all data from the remote terminal (reset)
 
 For more information visit our [Official Website](http://flyve.org/ios-mdm-agent/).
 
 ## Build Status
 
-| **Release channel** | **Beta channel** |
+| **LTS** | **Bleeding Edge** |
 |:---:|:---:|
 | [![Build Status](https://circleci.com/gh/flyve-mdm/ios-mdm-agent/tree/master.svg?style=svg)](https://circleci.com/gh/flyve-mdm/ios-mdm-agent/tree/master) | [![Build Status](https://circleci.com/gh/flyve-mdm/ios-mdm-agent/tree/develop.svg?style=svg)](https://circleci.com/gh/flyve-mdm/ios-mdm-agent/tree/develop) |
 
@@ -63,7 +66,7 @@ Download the latest IPA, from GitHub releases, TestFlight or Apple Store.
 
 ## Documentation
 
-We share long-form content about the project on the [website](http://flyve.org/ios-mdm-agent/).
+We maintain a detailed documentation of the project on the website, check the [How-tos](http://flyve.org/ios-mdm-agent/howtos/) and [Development](http://flyve.org/ios-mdm-agent/) section.
 
 ## Versioning
 
@@ -74,8 +77,14 @@ See [the tags section of our GitHub project](https://github.com/flyve-mdm/ios-md
 ## Contact
 
 For notices about major changes and general discussion of Flyve MDM development, subscribe to the [/r/FlyveMDM](http://www.reddit.com/r/FlyveMDM) subreddit.
-You can also chat with us via IRC in [#flyve-mdm on freenode](http://webchat.freenode.net/?channels=flyve-mdm) or [@flyvemdmdev on Telegram](https://t.me/flyvemdmdev).
+You can also chat with us via IRC in [#flyve-mdm on freenode](http://webchat.freenode.net/?channels=flyve-mdm) or [@flyvemdm on Telegram](https://t.me/flyvemdm).
 Ping me @hectorerb if you get stuck.
+
+## Professional Services
+
+The Flyve MDM and GLPI Network services are available through our [Partner's Network](http://www.teclib-edition.com/en/partners/). We provide special training, bug fixes with editor subscription, contributions for new features, and more.
+
+Obtain a personalized service experience, associated with benefits and opportunities.
 
 ## Contribute
 
