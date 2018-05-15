@@ -5,6 +5,8 @@ published: true
 title: Getting started
 permalink: howtos/getting-started
 description: Welcome to Flyve MDM
+category: user
+date: 2018-01-14
 ---
 The Flyve MDM Agent for iOS allows you to manage the iOS devices belonging to your company's IT infrastructure, everything from the [Web Dashboard](http://flyve.org/web-mdm-dashboard/) or [plugin for GLPI](http://flyve.org/glpi-plugin/), the later ideal for those who already work with this IT and asset management software.
 

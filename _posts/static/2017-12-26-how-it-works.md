@@ -5,6 +5,8 @@ published: true
 title: How it works
 permalink: howtos/how-it-works
 description: What you need to know
+category: user
+date: 2018-01-13
 ---
 
 Flyve MDM Agent works with the [Web MDM Dashboard](http://flyve.org/web-mdm-dashboard/) and [Flyve MDM Plugin](http://flyve.org/glpi-plugin/) for GLPI.
