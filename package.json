@@ -4,8 +4,7 @@
   "description": "Flyve MDM Agent for iOS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
-    "release": "standard-version"
+    "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",
@@ -27,9 +26,9 @@
   },
   "homepage": "https://github.com/flyve-mdm/flyve-mdm-ios#readme",
   "devDependencies": {
-    "standard-version": "^4.2.0"
-  },
-  "dependencies": {
-    "conventional-github-releaser": "^3.0.0"
+    "conventional-github-releaser": "^3.1.2",
+    "gh-pages": "^1.2.0",
+    "node-github-release": "^0.2.1",
+    "standard-version": "^4.4.0"
   }
 }
