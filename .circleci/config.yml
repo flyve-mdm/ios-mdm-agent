@@ -1,0 +1,44 @@
+version: 2
+jobs:
+  build:
+    macos:
+      xcode: "9.2.0"
+    steps:
+      - checkout
+      - run:
+          name: Build and Test project
+          command: source ./ci/scripts/build.sh
+
+  test:
+    macos:
+      xcode: "9.2.0"
+    steps:
+      - checkout
+      - run:
+          name: Configure bundler
+          command: source ./ci/scripts/bundler_config.sh
+      - run:
+          name: Configure Ruby dependencies
+          command: source ./ci/scripts/install_ruby.sh
+      - run:
+          name: Configure utf-8 locate
+          command: source ./ci/scripts/set_locate.sh
+      - run:
+          name: Configure Fastlane environment variables
+          command: source ./ci/scripts/fastlane_config.sh
+      - run:
+          name: Create keychain & Add certificates
+          command: source ./ci/scripts/keychain_add.sh
+          environment:
+            CERTIFICATES_PATH: ./ci/cert
+            KEYCHAIN_NAME: ios-app.keychain
+      - run:
+          name: Build and Test project
+          command: source ./ci/scripts/test.sh
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - test
