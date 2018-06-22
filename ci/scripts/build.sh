@@ -2,7 +2,7 @@
 
 #   Copyright © 2017 Teclib. All rights reserved.
 #
-# test.sh is part of flyve-mdm-ios
+# build.sh is part of flyve-mdm-ios
 #
 # flyve-mdm-ios is a subproject of Flyve MDM. Flyve MDM is a mobile
 # device management software.
@@ -18,11 +18,11 @@
 # GNU General Public License for more details.
 # ------------------------------------------------------------------------------
 # @author    Hector Rondon
-# @date      25/08/17
+# @date      22/06/18
 # @copyright Copyright © 2017 Teclib. All rights reserved.
 # @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
 # @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
 # @link      https://flyve-mdm.com
 # ------------------------------------------------------------------------------
 
-bundle exec fastlane test
+xcodebuild clean build -workspace ${APPNAME}.xcworkspace -scheme $APPNAME CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO

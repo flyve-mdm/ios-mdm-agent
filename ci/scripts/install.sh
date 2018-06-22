@@ -25,27 +25,21 @@
 # @link      https://flyve-mdm.com
 # ------------------------------------------------------------------------------
 
+# update ruby
+brew install ruby
 # Update gem
 gem update --system
 # Clean Gem
 gem cleanup
 # Install jazzy for generate documentation
 gem install jazzy
-# Install bundler last version
-gem install bundler
-# Install node
-brew install node
 # Install jq for json parse
 brew install jq
 # Install transifex-client
-sudo easy_install pip
-sudo pip install transifex-client
-# Install standard-version scope global
-npm i -g standard-version
-# Install conventional-github-releaser scope global
-npm install -g conventional-github-releaser
+easy_install pip
+pip install transifex-client
 # Install libs from package.json
-npm install
+yarn install
 # Install gems from Gemfile
 bundle install --path vendor/bundle
 # Update fastlane plugin
