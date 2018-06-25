@@ -17,11 +17,12 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # ------------------------------------------------------------------------------
-# @author    Hector Rondon
+# @author    Hector Rondon <hrondon@teclib.com>
 # @date      22/06/18
 # @copyright Copyright © 2017-2018 Teclib. All rights reserved.
 # @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
 # @link      https://github.com/flyve-mdm/ios-mdm-agent
+# @link      http://flyve.org/ios-mdm-agent
 # @link      https://flyve-mdm.com
 # ------------------------------------------------------------------------------
 
