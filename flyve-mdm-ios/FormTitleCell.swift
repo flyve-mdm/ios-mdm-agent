@@ -1,5 +1,5 @@
 /*
- *   Copyright © 2017 Teclib. All rights reserved.
+ * LICENSE
  *
  * FormTitleCell.swift is part of flyve-mdm-ios
  *
@@ -18,9 +18,10 @@
  * ------------------------------------------------------------------------------
  * @author    Hector Rondon
  * @date      03/08/17
- * @copyright Copyright © 2017 Teclib. All rights reserved.
+ * @copyright Copyright © 2017-2018 Teclib. All rights reserved.
  * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link      https://github.com/flyve-mdm/flyve-mdm-ios-agent
+ * @link      https://github.com/flyve-mdm/ios-mdm-agent
+ * @link      http://flyve.org/ios-mdm-agent
  * @link      https://flyve-mdm.com
  * ------------------------------------------------------------------------------
  */
