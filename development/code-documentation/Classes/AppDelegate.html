@@ -2,8 +2,8 @@
 layout: jazzy
 ---
 
-<a name="//apple_ref/swift/Class/FormSection" class="dashAnchor"></a>
-<a title="FormSection Class Reference"></a>
+<a name="//apple_ref/swift/Class/AppDelegate" class="dashAnchor"></a>
+<a title="AppDelegate Class Reference"></a>
 <header>
   <div class="content-wrapper">
     <p><a href="../index.html"> Docs</a> (93% documented)</p>
@@ -14,7 +14,7 @@ layout: jazzy
   <p id="breadcrumbs">
     <a href="../index.html"> Reference</a>
     <img id="carat" src="../img/carat.png" />
-    FormSection Class Reference
+    AppDelegate Class Reference
   </p>
 </div>
 <div class="row">
@@ -116,14 +116,15 @@ layout: jazzy
     <article class="main-content">
       <section>
         <section class="">
-          <h2>FormSection</h2>
+          <h2>AppDelegate</h2>
             <div class="declaration">
               <div class="language">
-                <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FormSection</span></code></pre>
+                <pre class="highlight swift"><code><span class="kd">@UIApplicationMain</span>
+<span class="kd">class</span> <span class="kt">AppDelegate</span> <span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span></code></pre>
 
               </div>
             </div>
-          <p>FormSection class</p>
+          <p>class starting point of the application</p>
 
         </section>
         <section class="section task-group-section">
@@ -139,9 +140,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC4rowsSayAA0D3RowCGv"></a>
-                  <a name="//apple_ref/swift/Property/rows" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC4rowsSayAA0D3RowCGv">rows</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(py)window"></a>
+                  <a name="//apple_ref/swift/Property/window" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(py)window">window</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -149,14 +150,14 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>rows</code></p>
+                      <p>This property contains the window used to present the app’s visual content on the device’s main screen.</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">rows</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/FormRow.html">FormRow</a></span><span class="p">]</span></code></pre>
+                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">window</span><span class="p">:</span> <span class="kt">UIWindow</span><span class="p">?</span></code></pre>
 
                       </div>
                     </div>
@@ -166,9 +167,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC11headerTitleSSSgv"></a>
-                  <a name="//apple_ref/swift/Property/headerTitle" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC11headerTitleSSSgv">headerTitle</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(py)manager"></a>
+                  <a name="//apple_ref/swift/Property/manager" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(py)manager">manager</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -176,149 +177,17 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>headerTitle</code></p>
+                      <p>CLLocationManager</p>
+
+<p>Discussion:
+  The CLLocationManager object is your entry point to the location service.</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC11footerTitleSSSgv"></a>
-                  <a name="//apple_ref/swift/Property/footerTitle" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC11footerTitleSSSgv">footerTitle</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>footerTitle</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC10headerViewSo6UIViewCSgv"></a>
-                  <a name="//apple_ref/swift/Property/headerView" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC10headerViewSo6UIViewCSgv">headerView</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>headerView</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC10footerViewSo6UIViewCSgv"></a>
-                  <a name="//apple_ref/swift/Property/footerView" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC10footerViewSo6UIViewCSgv">footerView</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>footerView</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC16headerViewHeight12CoreGraphics7CGFloatVv"></a>
-                  <a name="//apple_ref/swift/Property/headerViewHeight" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC16headerViewHeight12CoreGraphics7CGFloatVv">headerViewHeight</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>headerViewHeight</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC16footerViewHeight12CoreGraphics7CGFloatVv"></a>
-                  <a name="//apple_ref/swift/Property/footerViewHeight" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC16footerViewHeight12CoreGraphics7CGFloatVv">footerViewHeight</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>footerViewHeight</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                        <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">manager</span><span class="p">:</span> <span class="kt">CLLocationManager</span></code></pre>
 
                       </div>
                     </div>
@@ -329,19 +198,19 @@ layout: jazzy
           </div>
           <div class="task-group">
             <div class="task-name-container">
-              <a name="/Init"></a>
-              <a name="//apple_ref/swift/Section/Init" class="dashAnchor"></a>
-              <a href="#/Init">
-                <h3 class="section-name">Init</h3>
+              <a name="/Methods"></a>
+              <a name="//apple_ref/swift/Section/Methods" class="dashAnchor"></a>
+              <a href="#/Methods">
+                <h3 class="section-name">Methods</h3>
               </a>
             </div>
             <ul>
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionCACSSSg11headerTitle_AD06footerG0tcfc"></a>
-                  <a name="//apple_ref/swift/Method/init(headerTitle:footerTitle:)" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionCACSSSg11headerTitle_AD06footerG0tcfc">init(headerTitle:footerTitle:)</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)application:didFinishLaunchingWithOptions:"></a>
+                  <a name="//apple_ref/swift/Method/application(_:didFinishLaunchingWithOptions:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)application:didFinishLaunchingWithOptions:">application(_:didFinishLaunchingWithOptions:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -349,14 +218,205 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p>init method</p>
+                      <p>Starting point of the application</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">headerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">footerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationLaunchOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)loadMainViewWithUserToken:invitationToken:mdmAgent:"></a>
+                  <a name="//apple_ref/swift/Method/loadMainView(userToken:invitationToken:mdmAgent:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)loadMainViewWithUserToken:invitationToken:mdmAgent:">loadMainView(userToken:invitationToken:mdmAgent:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>If the user is not registered, start the sign up screen otherwise go to the main screen</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">loadMainView</span><span class="p">(</span><span class="nv">userToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">invitationToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">mdmAgent</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]())</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)application:openURL:sourceApplication:annotation:"></a>
+                  <a name="//apple_ref/swift/Method/application(_:open:sourceApplication:annotation:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)application:openURL:sourceApplication:annotation:">application(_:open:sourceApplication:annotation:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>Called when open the application from deeplink call</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">sourceApplication</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">annotation</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationWillResignActive:"></a>
+                  <a name="//apple_ref/swift/Method/applicationWillResignActive(_:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationWillResignActive:">applicationWillResignActive(_:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationWillResignActive</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationDidEnterBackground:"></a>
+                  <a name="//apple_ref/swift/Method/applicationDidEnterBackground(_:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationDidEnterBackground:">applicationDidEnterBackground(_:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationDidEnterBackground</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationWillEnterForeground:"></a>
+                  <a name="//apple_ref/swift/Method/applicationWillEnterForeground(_:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationWillEnterForeground:">applicationWillEnterForeground(_:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationWillEnterForeground</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationDidBecomeActive:"></a>
+                  <a name="//apple_ref/swift/Method/applicationDidBecomeActive(_:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationDidBecomeActive:">applicationDidBecomeActive(_:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationDidBecomeActive</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationWillTerminate:"></a>
+                  <a name="//apple_ref/swift/Method/applicationWillTerminate(_:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)AppDelegate(im)applicationWillTerminate:">applicationWillTerminate(_:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationWillTerminate</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
 
                       </div>
                     </div>

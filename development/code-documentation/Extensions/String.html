@@ -2,8 +2,8 @@
 layout: jazzy
 ---
 
-<a name="//apple_ref/swift/Protocol/FormSelector" class="dashAnchor"></a>
-<a title="FormSelector Protocol Reference"></a>
+<a name="//apple_ref/swift/Extension/String" class="dashAnchor"></a>
+<a title="String Extension Reference"></a>
 <header>
   <div class="content-wrapper">
     <p><a href="../index.html"> Docs</a> (93% documented)</p>
@@ -14,7 +14,7 @@ layout: jazzy
   <p id="breadcrumbs">
     <a href="../index.html"> Reference</a>
     <img id="carat" src="../img/carat.png" />
-    FormSelector Protocol Reference
+    String Extension Reference
   </p>
 </div>
 <div class="row">
@@ -116,16 +116,14 @@ layout: jazzy
     <article class="main-content">
       <section>
         <section class="">
-          <h2>FormSelector</h2>
+          <h2>String</h2>
             <div class="declaration">
               <div class="language">
-                <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">FormSelector</span> <span class="p">:</span> <span class="kt">NSObjectProtocol</span></code></pre>
+                <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">String</span></code></pre>
 
               </div>
             </div>
-          <p>FormSelector protocol</p>
-
+          
         </section>
         <section class="section task-group-section">
           <div class="task-group">
@@ -133,9 +131,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/c:@M@flyve_mdm_ios@objc(pl)FormSelector(py)formCell"></a>
-                  <a name="//apple_ref/swift/Property/formCell" class="dashAnchor"></a>
-                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)FormSelector(py)formCell">formCell</a>
+                  <a name="/s:SS13flyve_mdm_iosE13base64EncodedSSSgyF"></a>
+                  <a name="//apple_ref/swift/Method/base64Encoded()" class="dashAnchor"></a>
+                  <a class="token" href="#/s:SS13flyve_mdm_iosE13base64EncodedSSSgyF">base64Encoded()</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -143,16 +141,51 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code><a href="../Classes/FormBaseCell.html">FormBaseCell</a></code></p>
+                      <p>Convert from string to Base64 encoding</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">formCell</span><span class="p">:</span> <span class="kt"><a href="../Classes/FormBaseCell.html">FormBaseCell</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">base64Encoded</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                       </div>
+                    </div>
+                    <div>
+                      <h4>Return Value</h4>
+                      <p>string in Base64 encoding</p>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/s:SS13flyve_mdm_iosE13base64DecodedSSSgyF"></a>
+                  <a name="//apple_ref/swift/Method/base64Decoded()" class="dashAnchor"></a>
+                  <a class="token" href="#/s:SS13flyve_mdm_iosE13base64DecodedSSSgyF">base64Decoded()</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p>Convert from Base64 to string encoding</p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">base64Decoded</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                      </div>
+                    </div>
+                    <div>
+                      <h4>Return Value</h4>
+                      <p>string from Base64 encoding</p>
                     </div>
                   </section>
                 </div>

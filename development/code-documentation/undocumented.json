@@ -1,6 +1,250 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/EmailModel.swift",
+      "line": 33,
+      "symbol": "EmailModel.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/EmailModel.swift",
+      "line": 34,
+      "symbol": "EmailModel.email",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 32,
+      "symbol": "EnrollModel.invitationToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 33,
+      "symbol": "EnrollModel.serial",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 34,
+      "symbol": "EnrollModel.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 35,
+      "symbol": "EnrollModel.csr",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 36,
+      "symbol": "EnrollModel.firstname",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 37,
+      "symbol": "EnrollModel.lastname",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 38,
+      "symbol": "EnrollModel.version",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 39,
+      "symbol": "EnrollModel.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 81,
+      "symbol": "DeepLinkModel.url",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 82,
+      "symbol": "DeepLinkModel.userToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Enroll.swift",
+      "line": 83,
+      "symbol": "DeepLinkModel.invitationToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/HttpRequest.swift",
+      "line": 68,
+      "symbol": "HttpRequest.delegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Logger.swift",
+      "line": 34,
+      "symbol": "LogEvent.debug",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Logger.swift",
+      "line": 34,
+      "symbol": "LogEvent.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Logger.swift",
+      "line": 34,
+      "symbol": "LogEvent.info",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Logger.swift",
+      "line": 34,
+      "symbol": "LogEvent.trace",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Logger.swift",
+      "line": 34,
+      "symbol": "LogEvent.warning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/Logger.swift",
+      "line": 36,
+      "symbol": "LogEvent.description",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/SupervisorModel.swift",
+      "line": 32,
+      "symbol": "SupervisorModel.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/SupervisorModel.swift",
+      "line": 33,
+      "symbol": "SupervisorModel.email",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/SupervisorModel.swift",
+      "line": 34,
+      "symbol": "SupervisorModel.phone",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/SupervisorModel.swift",
+      "line": 35,
+      "symbol": "SupervisorModel.website",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/SupervisorModel.swift",
+      "line": 36,
+      "symbol": "SupervisorModel.picture",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 33,
+      "symbol": "UserModel.firstName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 34,
+      "symbol": "UserModel.lastName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 35,
+      "symbol": "UserModel.language",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 36,
+      "symbol": "UserModel.emails",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 37,
+      "symbol": "UserModel.phones",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 38,
+      "symbol": "UserModel.phone",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 39,
+      "symbol": "UserModel.mobilePhone",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 40,
+      "symbol": "UserModel.phone2",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 41,
+      "symbol": "UserModel.administrativeNumber",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/distiller/project/flyve-mdm-ios/UserModel.swift",
+      "line": 42,
+      "symbol": "UserModel.picture",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
   ],
-  "source_directory": "/Users/distiller/flyve-mdm-ios-agent"
+  "source_directory": "/Users/distiller/project"
 }

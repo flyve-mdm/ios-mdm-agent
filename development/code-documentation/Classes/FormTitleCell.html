@@ -2,8 +2,8 @@
 layout: jazzy
 ---
 
-<a name="//apple_ref/swift/Class/FormSection" class="dashAnchor"></a>
-<a title="FormSection Class Reference"></a>
+<a name="//apple_ref/swift/Class/FormTitleCell" class="dashAnchor"></a>
+<a title="FormTitleCell Class Reference"></a>
 <header>
   <div class="content-wrapper">
     <p><a href="../index.html"> Docs</a> (93% documented)</p>
@@ -14,7 +14,7 @@ layout: jazzy
   <p id="breadcrumbs">
     <a href="../index.html"> Reference</a>
     <img id="carat" src="../img/carat.png" />
-    FormSection Class Reference
+    FormTitleCell Class Reference
   </p>
 </div>
 <div class="row">
@@ -116,32 +116,32 @@ layout: jazzy
     <article class="main-content">
       <section>
         <section class="">
-          <h2>FormSection</h2>
+          <h2>FormTitleCell</h2>
             <div class="declaration">
               <div class="language">
-                <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FormSection</span></code></pre>
+                <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">FormTitleCell</span> <span class="p">:</span> <span class="kt"><a href="../Classes/FormBaseCell.html">FormBaseCell</a></span></code></pre>
 
               </div>
             </div>
-          <p>FormSection class</p>
+          <p>FormTitleCell class</p>
 
         </section>
         <section class="section task-group-section">
           <div class="task-group">
             <div class="task-name-container">
-              <a name="/Properties"></a>
-              <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
-              <a href="#/Properties">
-                <h3 class="section-name">Properties</h3>
+              <a name="/Cell%20views"></a>
+              <a name="//apple_ref/swift/Section/Cell views" class="dashAnchor"></a>
+              <a href="#/Cell%20views">
+                <h3 class="section-name">Cell views</h3>
               </a>
             </div>
             <ul>
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC4rowsSayAA0D3RowCGv"></a>
-                  <a name="//apple_ref/swift/Property/rows" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC4rowsSayAA0D3RowCGv">rows</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(py)titleLabel"></a>
+                  <a name="//apple_ref/swift/Property/titleLabel" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(py)titleLabel">titleLabel</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -149,14 +149,14 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>rows</code></p>
+                      <p>This property contains the configuration of the title label</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">rows</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/FormRow.html">FormRow</a></span><span class="p">]</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="k">var</span> <span class="nv">titleLabel</span><span class="p">:</span> <span class="kt">UILabel</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                       </div>
                     </div>
@@ -166,9 +166,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC11headerTitleSSSgv"></a>
-                  <a name="//apple_ref/swift/Property/headerTitle" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC11headerTitleSSSgv">headerTitle</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(py)separatorView"></a>
+                  <a name="//apple_ref/swift/Property/separatorView" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(py)separatorView">separatorView</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -176,14 +176,14 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>headerTitle</code></p>
+                      <p>This property contains the configuration of the separator view</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                        <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">separatorView</span><span class="p">:</span> <span class="kt">UIView</span></code></pre>
 
                       </div>
                     </div>
@@ -193,9 +193,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC11footerTitleSSSgv"></a>
-                  <a name="//apple_ref/swift/Property/footerTitle" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC11footerTitleSSSgv">footerTitle</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(im)configure"></a>
+                  <a name="//apple_ref/swift/Method/configure()" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(im)configure">configure()</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -203,14 +203,14 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>footerTitle</code></p>
+                      <p>Configures the view of the cell</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                        <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span></code></pre>
 
                       </div>
                     </div>
@@ -220,9 +220,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC10headerViewSo6UIViewCSgv"></a>
-                  <a name="//apple_ref/swift/Property/headerView" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC10headerViewSo6UIViewCSgv">headerView</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(im)update"></a>
+                  <a name="//apple_ref/swift/Method/update()" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(cs)FormTitleCell(im)update">update()</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -230,133 +230,14 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>headerView</code></p>
+                      <p>Update the view of the cell</p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC10footerViewSo6UIViewCSgv"></a>
-                  <a name="//apple_ref/swift/Property/footerView" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC10footerViewSo6UIViewCSgv">footerView</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>footerView</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC16headerViewHeight12CoreGraphics7CGFloatVv"></a>
-                  <a name="//apple_ref/swift/Property/headerViewHeight" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC16headerViewHeight12CoreGraphics7CGFloatVv">headerViewHeight</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>headerViewHeight</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC16footerViewHeight12CoreGraphics7CGFloatVv"></a>
-                  <a name="//apple_ref/swift/Property/footerViewHeight" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC16footerViewHeight12CoreGraphics7CGFloatVv">footerViewHeight</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p><code>footerViewHeight</code></p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="task-group">
-            <div class="task-name-container">
-              <a name="/Init"></a>
-              <a name="//apple_ref/swift/Section/Init" class="dashAnchor"></a>
-              <a href="#/Init">
-                <h3 class="section-name">Init</h3>
-              </a>
-            </div>
-            <ul>
-              <li class="item">
-                <div>
-                  <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionCACSSSg11headerTitle_AD06footerG0tcfc"></a>
-                  <a name="//apple_ref/swift/Method/init(headerTitle:footerTitle:)" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionCACSSSg11headerTitle_AD06footerG0tcfc">init(headerTitle:footerTitle:)</a>
-                  </code>
-                </div>
-                <div class="height-container">
-                  <div class="pointer-container"></div>
-                  <section class="section">
-                    <div class="pointer"></div>
-                    <div class="abstract">
-                      <p>init method</p>
-
-                    </div>
-                    <div class="declaration">
-                      <h4>Declaration</h4>
-                      <div class="language">
-                        <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">headerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">footerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+                        <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">()</span></code></pre>
 
                       </div>
                     </div>

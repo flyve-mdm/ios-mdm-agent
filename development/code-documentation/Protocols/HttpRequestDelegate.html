@@ -2,8 +2,8 @@
 layout: jazzy
 ---
 
-<a name="//apple_ref/swift/Class/FormSection" class="dashAnchor"></a>
-<a title="FormSection Class Reference"></a>
+<a name="//apple_ref/swift/Protocol/HttpRequestDelegate" class="dashAnchor"></a>
+<a title="HttpRequestDelegate Protocol Reference"></a>
 <header>
   <div class="content-wrapper">
     <p><a href="../index.html"> Docs</a> (93% documented)</p>
@@ -14,7 +14,7 @@ layout: jazzy
   <p id="breadcrumbs">
     <a href="../index.html"> Reference</a>
     <img id="carat" src="../img/carat.png" />
-    FormSection Class Reference
+    HttpRequestDelegate Protocol Reference
   </p>
 </div>
 <div class="row">
@@ -116,32 +116,26 @@ layout: jazzy
     <article class="main-content">
       <section>
         <section class="">
-          <h2>FormSection</h2>
+          <h2>HttpRequestDelegate</h2>
             <div class="declaration">
               <div class="language">
-                <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FormSection</span></code></pre>
+                <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">protocol</span> <span class="kt">HttpRequestDelegate</span></code></pre>
 
               </div>
             </div>
-          <p>FormSection class</p>
+          <p>HttpRequestDelegate protocol</p>
 
         </section>
         <section class="section task-group-section">
           <div class="task-group">
-            <div class="task-name-container">
-              <a name="/Properties"></a>
-              <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
-              <a href="#/Properties">
-                <h3 class="section-name">Properties</h3>
-              </a>
-            </div>
             <ul>
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC4rowsSayAA0D3RowCGv"></a>
-                  <a name="//apple_ref/swift/Property/rows" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC4rowsSayAA0D3RowCGv">rows</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseInitSessionWithData:"></a>
+                  <a name="//apple_ref/swift/Method/responseInitSession(data:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseInitSessionWithData:">responseInitSession(data:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -149,14 +143,15 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>rows</code></p>
+                      <p><code>responseInitSession</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">rows</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/FormRow.html">FormRow</a></span><span class="p">]</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">responseInitSession</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">])</span></code></pre>
 
                       </div>
                     </div>
@@ -166,9 +161,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC11headerTitleSSSgv"></a>
-                  <a name="//apple_ref/swift/Property/headerTitle" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC11headerTitleSSSgv">headerTitle</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorInitSessionWithError:"></a>
+                  <a name="//apple_ref/swift/Method/errorInitSession(error:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorInitSessionWithError:">errorInitSession(error:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -176,14 +171,15 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>headerTitle</code></p>
+                      <p><code>errorInitSession</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">errorInitSession</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">])</span></code></pre>
 
                       </div>
                     </div>
@@ -193,9 +189,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC11footerTitleSSSgv"></a>
-                  <a name="//apple_ref/swift/Property/footerTitle" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC11footerTitleSSSgv">footerTitle</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseGetFullSessionWithData:"></a>
+                  <a name="//apple_ref/swift/Method/responseGetFullSession(data:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseGetFullSessionWithData:">responseGetFullSession(data:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -203,14 +199,15 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>footerTitle</code></p>
+                      <p><code>responseGetFullSession</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">responseGetFullSession</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">])</span></code></pre>
 
                       </div>
                     </div>
@@ -220,9 +217,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC10headerViewSo6UIViewCSgv"></a>
-                  <a name="//apple_ref/swift/Property/headerView" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC10headerViewSo6UIViewCSgv">headerView</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorGetFullSessionWithError:"></a>
+                  <a name="//apple_ref/swift/Method/errorGetFullSession(error:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorGetFullSessionWithError:">errorGetFullSession(error:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -230,14 +227,15 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>headerView</code></p>
+                      <p><code>errorGetFullSession</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">errorGetFullSession</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">])</span></code></pre>
 
                       </div>
                     </div>
@@ -247,9 +245,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC10footerViewSo6UIViewCSgv"></a>
-                  <a name="//apple_ref/swift/Property/footerView" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC10footerViewSo6UIViewCSgv">footerView</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseChangeActiveProfile"></a>
+                  <a name="//apple_ref/swift/Method/responseChangeActiveProfile()" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseChangeActiveProfile">responseChangeActiveProfile()</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -257,14 +255,15 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>footerView</code></p>
+                      <p><code>responseChangeActiveProfile</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">responseChangeActiveProfile</span><span class="p">()</span></code></pre>
 
                       </div>
                     </div>
@@ -274,9 +273,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC16headerViewHeight12CoreGraphics7CGFloatVv"></a>
-                  <a name="//apple_ref/swift/Property/headerViewHeight" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC16headerViewHeight12CoreGraphics7CGFloatVv">headerViewHeight</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorChangeActiveProfileWithError:"></a>
+                  <a name="//apple_ref/swift/Method/errorChangeActiveProfile(error:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorChangeActiveProfileWithError:">errorChangeActiveProfile(error:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -284,14 +283,15 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>headerViewHeight</code></p>
+                      <p><code>errorChangeActiveProfile</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">headerViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">errorChangeActiveProfile</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">])</span></code></pre>
 
                       </div>
                     </div>
@@ -301,9 +301,9 @@ layout: jazzy
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionC16footerViewHeight12CoreGraphics7CGFloatVv"></a>
-                  <a name="//apple_ref/swift/Property/footerViewHeight" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionC16footerViewHeight12CoreGraphics7CGFloatVv">footerViewHeight</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responsePluginFlyvemdmAgentWithData:"></a>
+                  <a name="//apple_ref/swift/Method/responsePluginFlyvemdmAgent(data:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responsePluginFlyvemdmAgentWithData:">responsePluginFlyvemdmAgent(data:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -311,37 +311,27 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p><code>footerViewHeight</code></p>
+                      <p><code>responsePluginFlyvemdmAgent</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">footerViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">responsePluginFlyvemdmAgent</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">])</span></code></pre>
 
                       </div>
                     </div>
                   </section>
                 </div>
               </li>
-            </ul>
-          </div>
-          <div class="task-group">
-            <div class="task-name-container">
-              <a name="/Init"></a>
-              <a name="//apple_ref/swift/Section/Init" class="dashAnchor"></a>
-              <a href="#/Init">
-                <h3 class="section-name">Init</h3>
-              </a>
-            </div>
-            <ul>
               <li class="item">
                 <div>
                   <code>
-                  <a name="/s:13flyve_mdm_ios11FormSectionCACSSSg11headerTitle_AD06footerG0tcfc"></a>
-                  <a name="//apple_ref/swift/Method/init(headerTitle:footerTitle:)" class="dashAnchor"></a>
-                  <a class="token" href="#/s:13flyve_mdm_ios11FormSectionCACSSSg11headerTitle_AD06footerG0tcfc">init(headerTitle:footerTitle:)</a>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorPluginFlyvemdmAgentWithError:"></a>
+                  <a name="//apple_ref/swift/Method/errorPluginFlyvemdmAgent(error:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorPluginFlyvemdmAgentWithError:">errorPluginFlyvemdmAgent(error:)</a>
                   </code>
                 </div>
                 <div class="height-container">
@@ -349,14 +339,127 @@ layout: jazzy
                   <section class="section">
                     <div class="pointer"></div>
                     <div class="abstract">
-                      <p>init method</p>
+                      <p><code>errorPluginFlyvemdmAgent</code></p>
 
                     </div>
                     <div class="declaration">
                       <h4>Declaration</h4>
                       <div class="language">
                         <p class="aside-title">Swift</p>
-                        <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">headerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">footerTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">errorPluginFlyvemdmAgent</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">])</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseGetPluginFlyvemdmAgentWithData:"></a>
+                  <a name="//apple_ref/swift/Method/responseGetPluginFlyvemdmAgent(data:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responseGetPluginFlyvemdmAgentWithData:">responseGetPluginFlyvemdmAgent(data:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p><code>responseGetPluginFlyvemdmAgent</code></p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">responseGetPluginFlyvemdmAgent</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">])</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorGetPluginFlyvemdmAgentWithError:"></a>
+                  <a name="//apple_ref/swift/Method/errorGetPluginFlyvemdmAgent(error:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorGetPluginFlyvemdmAgentWithError:">errorGetPluginFlyvemdmAgent(error:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p><code>errorGetPluginFlyvemdmAgent</code></p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">errorGetPluginFlyvemdmAgent</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">])</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responsePluginFlyvemdmEntityConfigWithData:"></a>
+                  <a name="//apple_ref/swift/Method/responsePluginFlyvemdmEntityConfig(data:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)responsePluginFlyvemdmEntityConfigWithData:">responsePluginFlyvemdmEntityConfig(data:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p><code>responsePluginFlyvemdmEntityConfig</code></p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">responsePluginFlyvemdmEntityConfig</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">])</span></code></pre>
+
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </li>
+              <li class="item">
+                <div>
+                  <code>
+                  <a name="/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorPluginFlyvemdmEntityConfigWithError:"></a>
+                  <a name="//apple_ref/swift/Method/errorPluginFlyvemdmEntityConfig(error:)" class="dashAnchor"></a>
+                  <a class="token" href="#/c:@M@flyve_mdm_ios@objc(pl)HttpRequestDelegate(im)errorPluginFlyvemdmEntityConfigWithError:">errorPluginFlyvemdmEntityConfig(error:)</a>
+                  </code>
+                </div>
+                <div class="height-container">
+                  <div class="pointer-container"></div>
+                  <section class="section">
+                    <div class="pointer"></div>
+                    <div class="abstract">
+                      <p><code>errorPluginFlyvemdmEntityConfig</code></p>
+
+                    </div>
+                    <div class="declaration">
+                      <h4>Declaration</h4>
+                      <div class="language">
+                        <p class="aside-title">Swift</p>
+                        <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">errorPluginFlyvemdmEntityConfig</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">])</span></code></pre>
 
                       </div>
                     </div>
