@@ -22,15 +22,15 @@ The user who owns the iOS device receives an invitation to his email account, th
 <br>
 
 <div>
-<img src="https://github.com/Naylin15/Screenshots/blob/master/ios-agent/enroll.png?raw=true" alt="Start Enrollment" width="300">
+<img src="{{ '/images/howtos/enroll.png' | absolute_url }}" alt="Start Enrollment" width="300">
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/ios-agent/enrollment.png?raw=true" alt="Enrollment" width="300">
+<img src="{{ '/images/howtos/enrollment.png' | absolute_url }}" alt="Enrollment" width="300">
 </div>
 
 A fleet is created with the policies required by the Administrator, later the device is assigned to it, then the Agent applies immediately the commands sent through MQTT.
 
 The Agent provides the information of the supervisor of the device.
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/ios-agent/information.png?raw=true" alt="User information" width="300">
+<img src="{{ '/images/howtos/information.png' | absolute_url }}" alt="Status Online" width="300">
 
 Flyve MDM Agent for iOS is running on iOS 9.3 and higher.
