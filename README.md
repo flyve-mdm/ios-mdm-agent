@@ -21,6 +21,7 @@ To get started, check out [Flyve MDM Website](https://flyve-mdm.com/)!
 * [Build Status](#build-status)
 * [Installation](#installation)
 * [Documentation](#documentation)
+* [Compatibility Charts](#compatibility-charts)
 * [Versioning](#versioning)
 * [Contact](#contact)
 * [Professional Services](#professional-services)
@@ -67,6 +68,45 @@ Download the latest IPA, from GitHub releases, TestFlight or Apple Store.
 ## Documentation
 
 We maintain a detailed documentation of the project on the website, check the [How-tos](http://flyve.org/ios-mdm-agent/howtos/) and [Development](http://flyve.org/ios-mdm-agent/) section.
+
+## Compatibility Charts
+
+### iPhones
+
+| | iOS 9.3 | iOS 10+ | iOS 11+ | iOS 12+ |
+|:-----:|:-----:|:-----:|:-----:|:-----:|
+|**iPhone 4s**|✔︎||||
+|**iPhone 5**|✔︎|✔︎|||
+|**iPhone 5C**|✔︎|✔︎|||
+|**iPhone 5S**|✔︎|✔︎|✔︎|✘|
+|**iPhone 6 / 6+**|✔︎|✔︎|✔︎|✘|
+|**iPhone 6S / 6S+**|✔︎|✔︎|✔︎|✘|
+|**iPhone SE**|✔︎|✔︎|✔︎|✘|
+|**iPhone 7 / 7+**||✔︎|✔︎|✘|
+|**iPhone 8 / 8+**|||✔︎|✘|
+|**iPhone X**|||✔︎|✘|
+|**iPhone XS / XS Max**||||✘|
+|**iPhone XR**||||✘|
+
+### iPads
+
+| | iOS 9.3 | iOS 10+ | iOS 11+ | iOS 12+ |
+|:-----:|:-----:|:-----:|:-----:|:-----:|
+|**iPad 2**|✔︎||||
+|**iPad (3rd)**|✔︎|✔︎|||
+|**iPad mini**|✔︎|✔︎|||
+|**iPad (4th)**|✔︎|✔︎|✔︎|✘|
+|**iPad Air**|✔︎|✔︎|✔︎|✘|
+|**iPad mini 2**|✔︎|✔︎|✔︎|✘|
+|**iPad Air 2**|✔︎|✔︎|✔︎|✘|
+|**iPad mini 3**|✔︎|✔︎|✔︎|✘|
+|**iPad mini 4**|✔︎|✔︎|✔︎|✘|
+|**iPad Pro 9.7" (1st)**|✔︎|✔︎|✔︎|✘|
+|**iPad Pro 12.9" (1st)**|✔︎|✔︎|✔︎|✘|
+|**iPad (2017)**||✔︎|✔︎|✘|
+|**iPad Pro 9.7" (2nd)**||✔︎|✔︎|✘|
+|**iPad Pro 12.9" (2nd)**||✔︎|✔︎|✘|
+|**iPad (2018)**|||✔︎|✘|
 
 ## Versioning
 
