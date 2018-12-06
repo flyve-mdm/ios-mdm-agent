@@ -1,0 +1,23 @@
+<<<<<<< HEAD:_sass/_404.scss
+$light-grey: #eee;
+=======
+$border-bottom: #eee;
+>>>>>>> c2c3d1d... docs(sass): add new styles:_sass/5_level_components/_404.scss
+
+.page-not-found {
+  text-align: center;
+
+  h1 {
+    font-size: 12rem;
+  }
+
+  p {
+<<<<<<< HEAD:_sass/_404.scss
+    border-bottom: 1px solid $light-grey;
+=======
+    border-bottom: 1px solid $border-bottom;
+>>>>>>> c2c3d1d... docs(sass): add new styles:_sass/5_level_components/_404.scss
+    display: inline-block;
+    padding-bottom: 20px;
+  }
+}
