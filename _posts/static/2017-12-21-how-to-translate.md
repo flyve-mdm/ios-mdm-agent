@@ -1,10 +1,8 @@
 ---
-layout: post
-howtos: true
+layout: howtos
 published: true
 title: Contribute Translating
 permalink: howtos/contribute-translating
-description: We Translate with Transifex
 category: contributing
 date: 2017-12-20
 ---

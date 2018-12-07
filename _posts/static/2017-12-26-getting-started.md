@@ -1,10 +1,8 @@
 ---
-layout: post
-howtos: true
+layout: howtos
 published: true
 title: Getting started
 permalink: howtos/getting-started
-description: Welcome to Flyve MDM
 category: user
 date: 2018-01-14
 ---
@@ -12,7 +10,7 @@ The Flyve MDM Agent for iOS allows you to manage the iOS devices belonging to yo
 
 Flyve MDM is a Mobile device management software that enables you to secure and manage all the mobile devices of your business or family.
 
-## 1. Invite the user
+### 1. Invite the user
 
 The invitation is sent to the email account of the user, the invitation has a deeplink, once it is opened from the device...
 
@@ -22,7 +20,7 @@ The invitation is sent to the email account of the user, the invitation has a de
 
 * If it isn't installed, it will take the user to the App Store.
 
-## 2. Enrollment
+### 2. Enrollment
 
 The Agent counts with an intuitive and simple User Interface through all the enrollment process
 
@@ -34,7 +32,7 @@ The Agent counts with an intuitive and simple User Interface through all the enr
 <img src="{{ '/images/howtos/enrollment.png' | absolute_url }}" alt="Enrollment" width="300">
 </div>
 
-## 3. Manage your fleet
+### 3. Manage your fleet
 
 From there on the Agent will allow to implement in the device the following features from the Dashboard:
 
@@ -44,11 +42,11 @@ From there on the Agent will allow to implement in the device the following feat
 * Mobile Fleet Inventory
 * Applications management
 
-### MQ Telemetry Transport
+#### MQ Telemetry Transport
 
 We implemented the MQTT, useful machine to machine protocol, for connections with remote locations since it was designed as an extremely lightweight message transport. It is also ideal for mobile applications due to its small size, low power usage, minimised data packets, and efficient distribution of information to one or many receivers. Thanks to it, the Agent is capable of maintaining a connection with the backend
 
-### Information
+#### Information
 
 The Agent will display the relevant information, the user will be able to see the Supervisor information and edit his own
 
